@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
+import { sendMessage, subscribeToMessages } from '../../api';
+import * as Styles from './styles';
 
-import { sendMessage, subscribeToMessages } from '../api';
 
 const useMessages = () => {
   const [messages, setMessages] = useState([]);
@@ -36,8 +37,10 @@ export const App = () => {
   }
 
   return (
-    <div>
-      <p>Hello from the Client!</p>
+    <Styles.Root>
+      <header>
+        <h1>Hello, commander.</h1>
+      </header>
       <ul>
         { messages.map((msg, index) => <li key = { index }>{ msg }</li>) }
       </ul>
@@ -50,6 +53,6 @@ export const App = () => {
         disabled = { isSubmitDisabled() } 
         onClick = { handleSubmit }
       >Send Message</button>
-    </div>
+    </Styles.Root>
   );
 };

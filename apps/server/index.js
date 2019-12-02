@@ -1,15 +1,18 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+import express from 'express';
+import http from 'http';
+import socketIO from 'socket.io';
+const { onboardSocket } = require('./api');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', socket => {
-  console.log('a user connected');
-});
+io.on('connection', onboardSocket);
 
-http.listen(8000, () => {
+server.listen(8000, () => {
   console.log('listening on *:8000');
 });

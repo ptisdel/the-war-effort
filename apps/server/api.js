@@ -1,41 +1,41 @@
-const _ = require('lodash');
-const socket = require('socket.io');
+class Store {
+  constructor() {
+    this._hostId = null;
+  } 
 
-const emitMessage = ({ message, clients = null }) => {
-  if (clients === null) return;
-
-  if (_.isArray(clients)) {
-    _.forEach(clients, c => c.emit('message', message));
+  getHost() {
+    return this._hostId;
   }
 
-  clients.emit('message', message);
+  setHost(hostId) {
+    this._hostId = hostId;
+  }
 };
 
-const subscribeToMessages = client => {
-  client.on('message', msg => {
-    client.emit('message', 'Thanks for your message!');
+const store = new Store();
+
+const initializeHostSubscriptions = socket => {
+  /* any broadcast sent from host should be repeated to clients */
+  socket.on('broadcast', msg => socket.broadcast.emit('broadcast', msg));
+};
+
+const initializeClientSubscriptions = socket => {
+  /* any message sent from clients should be repeated to host */
+  socket.on('message', msg => {
+    const hostId = store.getHost();
+    if (hostId) socket.broadcast.to(hostId).emit('message', msg);
   });
 };
 
-const initializeSubscriptions = server => {
-  socket.on('connection', client => {
-    emitMessage({ 
-      message: 'Welcome, traveler!',
-      clients: client,
-    });
-    
-    subscribeToMessages(client);    
-  });
+export const onboardSocket = socket => {
+  const role = socket.handshake.query.role || 'mystery person';
+  console.log(`A ${role} connected.`);
 
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-};
+  if (role === 'host') {
+    store.setHost(socket.id);
+    initializeHostSubscriptions(socket);
+  };
+  if (role === 'client') initializeClientSubscriptions(socket);
 
-export const startServer = ({ port }) => {
-  const socket = socketIO();
-  socket.listen(port);
-  initializeSubscriptions(socket);
-
-  return socket;
+  socket.on('disconnect', () => console.log(`A ${role} disconnected.`));
 }

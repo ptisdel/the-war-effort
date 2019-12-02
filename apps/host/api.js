@@ -1,12 +1,16 @@
-import openSocket from 'socket.io-client';
+import io from 'socket.io-client';
 
-const socket = openSocket('http://localhost:8000');
+const socket = io('http://localhost:8000?role=host');
 
 export const subscribeToMessages = (cb) => {
-  socket.on('message', msg => cb(msg));
+  socket.on('message', msg => {
+    cb(msg);
+    console.log('incoming: ', msg);
+  });
 } 
 
 export const sendMessage = (msg) => {
-  socket.emit('message', msg);
+  socket.emit('broadcast', msg);
+  console.log('outgoing: ', msg);
 } 
 
