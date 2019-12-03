@@ -6,8 +6,10 @@
   "dependencies": {
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1"
   },

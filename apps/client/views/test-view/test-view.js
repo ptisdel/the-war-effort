@@ -1,14 +1,13 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { sendMessage, subscribeToMessages } from '../../api';
+import api from '../../api';
 import * as Styles from './styles';
-
 
 const useMessages = () => {
   const [messages, setMessages] = useState([]);
   
   useEffect(() => {
-    subscribeToMessages(msg => {
+    api.subscribeToMessages(msg => {
       setMessages(currentMessages => [...currentMessages, msg]);
     });
   }, []);
@@ -16,8 +15,7 @@ const useMessages = () => {
   return messages;
 }
 
-export const App = () => {
-
+export const TestView = () => {
   const [inputText, setInputText] = useState('');
   const messages = useMessages();
 
@@ -27,7 +25,7 @@ export const App = () => {
   }
 
   const handleSubmit = () => {
-    sendMessage(inputText);
+    api.sendMessage(inputText);
     setInputText('');
   };
 
@@ -39,7 +37,7 @@ export const App = () => {
   return (
     <Styles.Root>
       <header>
-        <h1>Hello, commander.</h1>
+        <h1>Hello, client.</h1>
       </header>
       <ul>
         { messages.map((msg, index) => <li key = { index }>{ msg }</li>) }
@@ -51,8 +49,8 @@ export const App = () => {
       ></input>
       <button 
         disabled = { isSubmitDisabled() } 
-        onClick = { handleSubmit }
-      >Send Message</button>
+        onClick = { handleSubmit }>
+        Send Message</button>
     </Styles.Root>
   );
 };

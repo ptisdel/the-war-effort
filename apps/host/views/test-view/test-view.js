@@ -1,13 +1,14 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { sendMessage, subscribeToMessages } from '../../api';
+import api from '../../api';
 import * as Styles from './styles';
+import { store } from '../../store';
 
 const useMessages = () => {
   const [messages, setMessages] = useState([]);
   
   useEffect(() => {
-    subscribeToMessages(msg => {
+    api.subscribeToMessages(msg => {
       setMessages(currentMessages => [...currentMessages, msg]);
     });
   }, []);
@@ -15,11 +16,9 @@ const useMessages = () => {
   return messages;
 }
 
-export const App = () => {
-
+export const TestView = () => {
   const [inputText, setInputText] = useState('');
   const messages = useMessages();
-
   
   const handleInputChange = e => {
     const value = _.get(e, 'target.value');
@@ -27,7 +26,7 @@ export const App = () => {
   }
 
   const handleSubmit = () => {
-    sendMessage(inputText);
+    api.sendMessage(inputText);
     setInputText('');
   };
 
@@ -53,6 +52,9 @@ export const App = () => {
         disabled = { isSubmitDisabled() } 
         onClick = { handleSubmit }
       >Send Message</button>
+      <ul>
+        { store.getGameData().players.map((p, index) => <li key = { index }>{ p }</li>) }
+      </ul>
     </Styles.Root>
   )
 };
