@@ -1,24 +1,15 @@
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import api from '../../api';
 import * as Styles from './styles';
-import { store } from '../../store';
-
-const useMessages = () => {
-  const [messages, setMessages] = useState([]);
-  
-  useEffect(() => {
-    api.subscribeToMessages(msg => {
-      setMessages(currentMessages => [...currentMessages, msg]);
-    });
-  }, []);
-
-  return messages;
-}
+import useGlobal from '../../state/store';
 
 export const TestView = () => {
+  const [globalState] = useGlobal();
   const [inputText, setInputText] = useState('');
-  const messages = useMessages();
+
+  const { messages } = globalState;
+  const { players } = globalState.gameState;
   
   const handleInputChange = e => {
     const value = _.get(e, 'target.value');
@@ -41,7 +32,7 @@ export const TestView = () => {
         <h1>Hello, host.</h1>
       </header>
       <ul>
-        { messages.map((msg, index) => <li key = { index }>{ msg }</li>) }
+        { _.map(messages, (msg, index) => <li key = { index }>{ msg }</li>) }
       </ul>
       <input 
         onChange = { handleInputChange } 
@@ -52,9 +43,11 @@ export const TestView = () => {
         disabled = { isSubmitDisabled() } 
         onClick = { handleSubmit }
       >Send Message</button>
-      <ul>
-        { store.getGameData().players.map((p, index) => <li key = { index }>{ p }</li>) }
-      </ul>
+      <div>
+  { _.map(players, (value, key) => 
+    <li key = { key }>{ key } : { value || 'null' }</li>
+  )}
+      </div>
     </Styles.Root>
   )
 };

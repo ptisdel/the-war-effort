@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socketIO from 'socket.io';
-const { onboardSocket } = require('./api');
+import api from './api';
 
 const app = express();
 const server = http.createServer(app);
@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', onboardSocket);
+io.on('connection', api.onboardSocket);
 
 server.listen(8000, () => {
   console.log('listening on *:8000');

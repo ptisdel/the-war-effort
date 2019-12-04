@@ -3,38 +3,19 @@ import React, { useState } from 'react';
 import * as Styles from './styles';
 import { RoleSelector } from '../../components';
 import api from '../../api';
-
-const initialRoles = [
-  {
-    name: 'Commander',
-    available: true,
-  },
-  {
-    name: 'Logistics Officer',
-    available: true,
-  },
-  {
-    name: 'Air Support Officer',
-    available: false,
-  },
-  {
-    name: 'Public Affairs Officer',
-    available: true,
-  },
-];
+import useGlobal from '../../state/store';
 
 export const RolesView = () => {
-  const [roles, setRoles] = useState(initialRoles);
+  const [globalState, globalActions] = useGlobal();
+  const { players, roles } = globalState.gameState;
+
+  const roleData = _.map(roles, r => ({
+    name: r,
+    available: !_.includes(players, r),
+  }));
 
   const handleSelectRole = role => {
-    const roleIndex = _.indexOf(roles, role);
-    const newRole = {
-      ...role,
-      available: false,
-    };
-
-    setRoles(currentRoles => Object.assign([], currentRoles, { [roleIndex]: newRole }));
-    api.chooseRole(_.get(role, 'name'));
+    api.chooseRole(role.name);
   };
 
   return (
@@ -44,7 +25,7 @@ export const RolesView = () => {
       </header>
       <RoleSelector 
         onSelectRole = { handleSelectRole }
-        roles = { roles }
+        roles = { roleData }
       />
     </Styles.Root>
   );

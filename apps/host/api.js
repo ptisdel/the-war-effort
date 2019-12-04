@@ -1,35 +1,26 @@
 import io from 'socket.io-client';
-import { store } from './store';
 
+// new socket connection to server
 const socket = io('http://localhost:8000?role=host');
 
-const subscribeToRegistration = () => {
-  socket.on('register-player', ({ playerId, role = null }) => {
-    store.addPlayer({ playerId, role });
-    console.log('incoming:', playerId);
-  });
-}
+const subscribeToPlayerRegistration = callback => 
+  socket.on('register-player', ({ playerId, role = null }) =>
+  callback({ playerId, role }));
 
-const subscribeToMessages = cb => {
-  socket.on('message', msg => {
-    cb(msg);
-    console.log('incoming:', msg);
-  });
-} 
+const subscribeToPlayerDeregistration = callback => 
+  socket.on('deregister-player', playerId =>
+  callback(playerId));
 
-const sendMessage = msg => {
-  socket.emit('broadcast', msg);
-  console.log('outgoing:', msg);
-}
+const subscribeToMessages = callback => socket.on('message', msg => callback(msg));
 
-const sendGameState = gameState => {
-  socket.emit('game-state', gameState);
-  console.log('outgoing:', gameState);
-} 
+const sendMessage = msg => socket.emit('broadcast', msg);
+
+const sendGameState = gameState => socket.emit('game-state', gameState);
 
 export default {
   sendGameState,
   sendMessage,
+  subscribeToPlayerDeregistration,
+  subscribeToPlayerRegistration,
   subscribeToMessages,
-  subscribeToRegistration,
 };

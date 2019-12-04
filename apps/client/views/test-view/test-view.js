@@ -1,23 +1,14 @@
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import api from '../../api';
 import * as Styles from './styles';
-
-const useMessages = () => {
-  const [messages, setMessages] = useState([]);
-  
-  useEffect(() => {
-    api.subscribeToMessages(msg => {
-      setMessages(currentMessages => [...currentMessages, msg]);
-    });
-  }, []);
-
-  return messages;
-}
+import useGlobal from '../../state/store';
 
 export const TestView = () => {
   const [inputText, setInputText] = useState('');
-  const messages = useMessages();
+  const [globalState] = useGlobal();
+
+  const { messages } = globalState;
 
   const handleInputChange = e => {
     const value = _.get(e, 'target.value');
