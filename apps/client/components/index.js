@@ -1,5 +1,5 @@
 import { RoleSelector } from './role-selector/role-selector';
 
-export {
+export default {
   RoleSelector
 };

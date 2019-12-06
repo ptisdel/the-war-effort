@@ -1,21 +1,29 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
-import * as Styles from './styles';
-import { RoleSelector } from '../../components';
+import React from 'react';
+import components from '../../components';
 import api from '../../api';
-import useGlobal from '../../state/store';
+import { constants } from '../../../shared';
+import state from '../../state';
+import * as Styles from './styles';
+import { Role } from '../../../shared/models';
+
+const { allRoles } = constants;
+
+const { RoleSelector } = components;
+const { store } = state;
 
 export const RolesView = () => {
-  const [globalState, globalActions] = useGlobal();
-  const { players, roles } = globalState.gameState;
+  const [globalState] = store();
+  const { roles } = globalState.gameState;
+  console.log(roles);
 
-  const roleData = _.map(roles, r => ({
-    name: r,
-    available: !_.includes(players, r),
+  const roleData = _.map(allRoles, roleName => ({
+    name: roleName,
+    isAvailable: !_.has(roles, roleName),
   }));
 
-  const handleSelectRole = role => {
-    api.chooseRole(role.name);
+  const handleSelectRole = roleName => {
+    api.chooseRole(roleName);
   };
 
   return (

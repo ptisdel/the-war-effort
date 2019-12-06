@@ -18,13 +18,13 @@ const initializeClientSubscriptions = socket => {
 
   socket.on('request-registration', () => {
     socket.emit('register-player', socketId);
-    emitToHost({ emissionType: 'register-player', data: { playerId: socketId, roleName: null} })
+    emitToHost({ emissionType: 'add-player', data: socketId })
   });
 
   /* any message sent from clients should be repeated to host */
   socket.on('message', msg => emitToHost({ emissionType: 'message', data: msg }));
-  socket.on('choose-role', role => emitToHost({ emissionType: 'register-player', data: { playerId: socketId, role } }));
-  socket.on('disconnect', () => emitToHost({ emissionType: 'deregister-player', data: socketId }));
+  socket.on('choose-role', role => emitToHost({ emissionType: 'hire-for-role', data: { playerId: socketId, role } }));
+  socket.on('disconnect', () => emitToHost({ emissionType: 'delete-player', data: socketId }));
 };
 
 const onboardSocket = socket => {

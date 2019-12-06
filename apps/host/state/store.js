@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import useGlobalHook from 'use-global-hook';
 import * as actions from './actions';
@@ -7,15 +8,11 @@ const initialState = {
   messages: [],
   gameState: {
     players: [],
-    roles: [
-      'Commander',
-      'Logistics Officer',
-      'Air Support Officer',
-      'Public Affairs Officer',
-    ],
+    roles: {},
+    budget: 2000000,
   },
 };
 
-const useGlobal = useGlobalHook(React, initialState, actions);
+const store = useGlobalHook(React, initialState, actions);
 
-export default useGlobal;
+export default store;

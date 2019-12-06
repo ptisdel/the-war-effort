@@ -7,14 +7,14 @@ export const RoleSelector = ({
   onSelectRole,
   roles,
 }) => {
-
+console.log(roles);
   return (
     <Styles.Root>
       { roles.map((role, i) => 
         <Styles.Button 
-          disabled = { !role.available }
+          disabled = { !role.isAvailable }
           key = { i }
-          onClick = { () => onSelectRole(role) }
+          onClick = { () => onSelectRole(role.name) }
         >
           { role.name }
         </Styles.Button>

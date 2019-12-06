@@ -1,12 +1,14 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import api from '../../api';
+import state from '../../state';
 import * as Styles from './styles';
-import useGlobal from '../../state/store';
+
+const { store } = state;
 
 export const TestView = () => {
   const [inputText, setInputText] = useState('');
-  const [globalState] = useGlobal();
+  const [globalState] = store();
 
   const { messages } = globalState;
 

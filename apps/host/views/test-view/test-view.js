@@ -1,15 +1,20 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import api from '../../api';
+import state from '../../state';
+import { models } from '../../../shared';
 import * as Styles from './styles';
-import useGlobal from '../../state/store';
+
+const { Role } = models;
+const { store } = state;
 
 export const TestView = () => {
-  const [globalState] = useGlobal();
+  const [globalState] = store();
   const [inputText, setInputText] = useState('');
 
   const { messages } = globalState;
-  const { players } = globalState.gameState;
+  const { roles } = globalState.gameState;
+  console.log(roles);
   
   const handleInputChange = e => {
     const value = _.get(e, 'target.value');
@@ -44,8 +49,8 @@ export const TestView = () => {
         onClick = { handleSubmit }
       >Send Message</button>
       <div>
-  { _.map(players, (value, key) => 
-    <li key = { key }>{ key } : { value || 'null' }</li>
+  { _.map(roles, (r, key) => 
+    <li key = { key }>{ key } : { Role.getPlayer(r) } / { Role.getBudget(r) || '$0' } }</li>
   )}
       </div>
     </Styles.Root>
