@@ -3,10 +3,15 @@ import * as helpers from './helpers';
 
 const { formatMoney } = helpers;
 
-export const Role = ({
-  getPlayer: role => _.get(role, 'player'),
-  getBudget: role => {
-    const budget = _.get(role, 'budget') || 0;
-    return formatMoney(budget);
+export const Budget = ({
+  getFormattedTotal: budget => {
+    return formatMoney(budget || 0);
   },
+});
+
+export const Role = ({
+  getBudget: role => _.get(role, 'budget'),
+  getFormattedBudget: role => Budget.getFormattedTotal(Role.getBudget(role)),
+  getPlayer: role => _.get(role, 'player'),
+  getName: role => _.get(role, 'name'),
 });

@@ -1,7 +1,14 @@
 import _ from 'lodash';
 import { models } from '../../shared';
+import roleActions from './role-actions';
 
 const { Role } = models;
+
+export const roleAction = (store, { type, payload }) => {
+  const { commanderActions } = roleActions;
+  if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
+  if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
+};
 
 export const setHostId = (store, hostId) => {
   store.setState({ hostId });
@@ -24,8 +31,6 @@ export const addPlayer = (store, playerId) => {
     players: newPlayers,
   };
 
-  console.log(newGameState);
-
   store.setState({ gameState: newGameState })
 };
 
@@ -33,11 +38,8 @@ export const deletePlayer = (store, playerId) => {
   const { gameState } = store.state;
   const roles = gameState.roles;
 
-  const currentPlayerRole = _.findKey(roles, r => Role.getPlayer(r) === playerId);
-
-  const newPlayers = _.pull(gameState.players, playerId);
-  
-  const newRoles = _.omit(roles, currentPlayerRole);
+  const newPlayers = _.without(gameState.players, playerId);  
+  const newRoles = _.filter(roles, r => Role.getPlayer(r) === playerId);
 
   const newGameState = {
     ...gameState,
@@ -48,52 +50,49 @@ export const deletePlayer = (store, playerId) => {
   store.setState({ gameState: newGameState })
 }
 
-export const hireRole = (store, { playerId, role }) => { 
+export const hireRole = (store, { playerId, roleName }) => { 
   const { gameState } = store.state;
   const { players, roles } = gameState;
 
-  // if player is not registered, or no role sent, player cannot be hired
-  if (!_.includes(players, playerId) || !role) return;
+  if (!roleName) return;
 
   // if role is already occupied, player cannot be hired for that role
-  const roleAlreadyOccupied = _.has(roles, role);
+  const roleAlreadyOccupied = _.some(roles, r => Role.getName(r) === roleName);
   if (roleAlreadyOccupied) return;
 
-  const newRoles = {
-    ..._.omitBy(roles, r => Role.getPlayer(r) === playerId),
-    [role]: {
+  const newRoles = [
+    // if player occupies other role, remove him from previous role
+    ..._.filter(roles, r => Role.getPlayer(r) !== playerId),
+    {
+      name: roleName,
       player: playerId,
       budget: 0,
     },
-  };
+  ];
+
+  
+  const playerExists = _.some(players, p => p === playerId);
+  const newPlayers = [
+    ...(playerExists ? players : [ ...players, playerId ]),
+  ];
 
   const newGameState = {
     ...gameState,
     roles: newRoles,
+    players: newPlayers,
   }
-
-  console.log(newGameState);
 
   store.setState({ gameState: newGameState });
 };
 
-export const fireRole = (store, role) => {
+export const fireRole = (store, roleName) => {
   const { gameState } = store.state;
   const { roles } = gameState;
 
   const newGameState = {
     ...gameState,
-    roles: _.omit(roles, role),
+    roles: _.filter(roles, r => Role.getName(r) === roleName),
   };
 
   store.setState({ gameState: newGameState });
 }
-
-export const addMessage = (store, msg) => {
-  const messages = [
-    ...store.state.messages,
-    msg,
-  ];
-
-  store.setState({ messages });
-};

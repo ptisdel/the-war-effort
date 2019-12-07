@@ -5,10 +5,9 @@ import * as actions from './actions';
 
 const initialState = {
   hostId: null,
-  messages: [],
   gameState: {
     players: [],
-    roles: {},
+    roles: [],
     budget: 2000000,
   },
 };

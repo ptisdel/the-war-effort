@@ -4,7 +4,6 @@ import actions from './actions';
 
 const initialState = {
   playerId: null,
-  messages: [],
   gameState: {},
 };
 

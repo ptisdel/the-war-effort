@@ -8,29 +8,27 @@ const subscribeToPlayerAddition = callback =>
   callback(playerId));
 
 const subscribeToRoleHire = callback => 
-  socket.on('hire-for-role', ({ playerId, role }) =>
-  callback({ playerId, role }));
+  socket.on('hire-for-role', ({ playerId, roleName }) =>
+  callback({ playerId, roleName }));
 
   const subscribeToRoleFire = callback => 
-  socket.on('fire-from-role', role =>
-  callback(role));
+  socket.on('fire-from-role', roleName =>
+  callback(roleName));
 
 const subscribeToPlayerDeletion = callback => 
   socket.on('delete-player', playerId =>
   callback(playerId));
 
-const subscribeToMessages = callback => socket.on('message', msg => callback(msg));
-
-const sendMessage = msg => socket.emit('broadcast', msg);
+const subscribeToRoleAction = callback =>
+  socket.on('role-action', ({type, payload}) => callback(({type, payload})));
 
 const sendGameState = gameState => socket.emit('game-state', gameState);
 
 export default {
   sendGameState,
-  sendMessage,
   subscribeToPlayerDeletion,
   subscribeToPlayerAddition,
+  subscribeToRoleAction,
   subscribeToRoleHire,
   subscribeToRoleFire,
-  subscribeToMessages,
 };

@@ -3,23 +3,21 @@ import React from 'react';
 import components from '../../components';
 import api from '../../api';
 import { constants } from '../../../shared';
-import state from '../../state';
-import * as Styles from './styles';
 import { Role } from '../../../shared/models';
+import state from '../../state';
+import * as Styles from './roles-view.styles';
 
-const { allRoles } = constants;
-
-const { RoleSelector } = components;
 const { store } = state;
+const { allRoleNames } = constants;
+const { RoleSelector } = components;
 
 export const RolesView = () => {
   const [globalState] = store();
   const { roles } = globalState.gameState;
-  console.log(roles);
 
-  const roleData = _.map(allRoles, roleName => ({
-    name: roleName,
-    isAvailable: !_.has(roles, roleName),
+  const roleData = _.map(allRoleNames, rn => ({
+    name: rn,
+    isAvailable: !_.some(roles, r => Role.getName(r) === rn),
   }));
 
   const handleSelectRole = roleName => {

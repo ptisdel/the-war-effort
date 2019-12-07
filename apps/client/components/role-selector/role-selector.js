@@ -1,24 +1,26 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
-import * as Styles from './styles';
+import * as Styles from './role-selector.styles';
 
-export const RoleSelector = ({
+const RoleSelector = ({
   onSelectRole,
   roles,
 }) => {
-console.log(roles);
+  const renderRoleButtons = () => {
+    return roles.map((role, i) => 
+      <Styles.Button 
+        disabled = { !role.isAvailable }
+        key = { i }
+        onClick = { () => onSelectRole(role.name) }>
+        { role.name }
+      </Styles.Button>
+    );
+  };
+
   return (
     <Styles.Root>
-      { roles.map((role, i) => 
-        <Styles.Button 
-          disabled = { !role.isAvailable }
-          key = { i }
-          onClick = { () => onSelectRole(role.name) }
-        >
-          { role.name }
-        </Styles.Button>
-      )}
+      { renderRoleButtons() }
     </Styles.Root>
   );
 };
@@ -27,3 +29,5 @@ RoleSelector.propTypes = ({
   onSelectRole: PropTypes.func.isRequired,
   roles: PropTypes.array.isRequired,
 });
+
+export default RoleSelector;

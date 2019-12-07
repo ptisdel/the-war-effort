@@ -1,7 +1,7 @@
+import { CommanderView } from './commander-view/commander-view';
 import { RolesView } from './roles-view/roles-view';
-import { TestView } from './test-view/test-view';
 
 export {
+  CommanderView,
   RolesView,
-  TestView,
 };

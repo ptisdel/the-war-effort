@@ -10,7 +10,7 @@ const store = {
       "players": [
         "fTgjKkRCXjdkqtrDAADK",
       ],
-      "roles": {},
+      "roles": [],
       "budget": 2000000
     }
   },
@@ -24,7 +24,7 @@ const resultStore = {
         "fTgjKkRCXjdkqtrDAADK",
         "012345",
       ],
-      "roles": {},
+      "roles": [],
       "budget": 2000000
     }
   },

@@ -11,28 +11,24 @@ const subscribeToGameState = cb => {
   socket.on('game-state', gameState => cb(gameState));
 }
 
-const subscribeToMessages = cb => {
-  socket.on('broadcast', msg => cb(msg));
+const chooseRole = roleName => {
+  socket.emit('choose-role', roleName);
 }
-
-const chooseRole = role => {
-  socket.emit('choose-role', role);
-}
-
-const sendMessage = msg => {
-  socket.emit('message', msg);
-} 
 
 const sendRegistrationRequest = () => {
   socket.emit('request-registration');
 } 
 
+const commanderActions = ({
+  decreaseRoleBudget: roleName => socket.emit('role-action', { type: 'commander/decreaseRoleBudget', payload: roleName }),
+  increaseRoleBudget: roleName => socket.emit('role-action', { type: 'commander/increaseRoleBudget', payload: roleName }),
+});
+  
 
 export default {
   chooseRole,
-  sendMessage,
+  commanderActions,
   sendRegistrationRequest,
   subscribeToRegistration,
   subscribeToGameState,
-  subscribeToMessages,
 };

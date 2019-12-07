@@ -22,8 +22,8 @@ const initializeClientSubscriptions = socket => {
   });
 
   /* any message sent from clients should be repeated to host */
-  socket.on('message', msg => emitToHost({ emissionType: 'message', data: msg }));
-  socket.on('choose-role', role => emitToHost({ emissionType: 'hire-for-role', data: { playerId: socketId, role } }));
+  socket.on('role-action', ({ type, payload }) => emitToHost({ emissionType: 'role-action', data: { type, payload } }));
+  socket.on('choose-role', roleName => emitToHost({ emissionType: 'hire-for-role', data: { playerId: socketId, roleName } }));
   socket.on('disconnect', () => emitToHost({ emissionType: 'delete-player', data: socketId }));
 };
 

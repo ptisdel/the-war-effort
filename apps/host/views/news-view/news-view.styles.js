@@ -2,10 +2,13 @@ import styled from 'styled-components';
 
 export const Root = styled.div(() => ({
   background: 'gray',
-  bottom: 0,
+  height: '100%',
+  width: '100%',
+}));
+
+export const PlayerList = styled.div(() => ({
   left: 0,
   padding: '40px',
   position: 'absolute',
-  right: 0,
   top: 0,
 }));

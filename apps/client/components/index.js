@@ -1,5 +1,9 @@
-import { RoleSelector } from './role-selector/role-selector';
+import RoleSelector from './role-selector/role-selector';
+import Layout from './layout/layout';
+import Swiper from './swiper/swiper';
 
 export default {
-  RoleSelector
+  Layout,
+  RoleSelector,
+  Swiper,
 };
