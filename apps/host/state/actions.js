@@ -16,8 +16,8 @@ export const setHostId = (store, hostId) => {
 
 export const addPlayer = (store, playerId) => {
   const { gameState } = store.state;
-  const players = gameState.players;
-  
+  const { players } = gameState;
+
   const playerAlreadyExists = playerId && _.includes(players, playerId);
   if (!playerId || playerAlreadyExists) return;
 
@@ -31,14 +31,14 @@ export const addPlayer = (store, playerId) => {
     players: newPlayers,
   };
 
-  store.setState({ gameState: newGameState })
+  store.setState({ gameState: newGameState });
 };
 
 export const deletePlayer = (store, playerId) => {
   const { gameState } = store.state;
-  const roles = gameState.roles;
+  const { roles } = gameState;
 
-  const newPlayers = _.without(gameState.players, playerId);  
+  const newPlayers = _.without(gameState.players, playerId);
   const newRoles = _.filter(roles, r => Role.getPlayer(r) === playerId);
 
   const newGameState = {
@@ -46,11 +46,11 @@ export const deletePlayer = (store, playerId) => {
     players: newPlayers,
     roles: newRoles,
   };
-  
-  store.setState({ gameState: newGameState })
-}
 
-export const hireRole = (store, { playerId, roleName }) => { 
+  store.setState({ gameState: newGameState });
+};
+
+export const hireRole = (store, { playerId, roleName }) => {
   const { gameState } = store.state;
   const { players, roles } = gameState;
 
@@ -70,17 +70,17 @@ export const hireRole = (store, { playerId, roleName }) => {
     },
   ];
 
-  
+
   const playerExists = _.some(players, p => p === playerId);
   const newPlayers = [
-    ...(playerExists ? players : [ ...players, playerId ]),
+    ...(playerExists ? players : [...players, playerId]),
   ];
 
   const newGameState = {
     ...gameState,
     roles: newRoles,
     players: newPlayers,
-  }
+  };
 
   store.setState({ gameState: newGameState });
 };
@@ -95,4 +95,4 @@ export const fireRole = (store, roleName) => {
   };
 
   store.setState({ gameState: newGameState });
-}
+};

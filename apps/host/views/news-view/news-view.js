@@ -16,14 +16,12 @@ export const NewsView = () => {
   const { players, roles } = globalState.gameState;
 
   const getPlayerRole = player => _.find(roles, r => Role.getPlayer(r) === player);
-  
-  const renderPlayerList = () => {
-    return _.map(players, (p, key) => {
-      const role = getPlayerRole(p);
-      const roleName = Role.getName(role) || defaultRole;
-      return <li key = { key }>{ roleName } : { Role.getFormattedBudget(role) || '$0' }</li>
-    });
-  };
+
+  const renderPlayerList = () => _.map(players, (p, key) => {
+    const role = getPlayerRole(p);
+    const roleName = Role.getName(role) || defaultRole;
+    return <li key = { key }>{ roleName } : { Role.getFormattedBudget(role) || '$0' }</li>;
+  });
 
   return (
     <Styles.Root>
@@ -32,8 +30,6 @@ export const NewsView = () => {
       <Styles.PlayerList>
         { renderPlayerList() }
       </Styles.PlayerList>
-      
-      
     </Styles.Root>
-  )
+  );
 };

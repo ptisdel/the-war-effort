@@ -11,8 +11,8 @@ export const PagesContainer = styled.div(({ xShift }) => ({
   display: 'flex',
   height: '100%',
   position: 'absolute',
-  transform: `translateX(${ xShift * -100 }vw)`,
-  transition: '0.3s ease'
+  transform: `translateX(${xShift * -100}vw)`,
+  transition: '0.3s ease',
 }));
 
 export const Page = styled.div(() => ({
@@ -38,4 +38,3 @@ export const PaginationDot = styled.div(({ current }) => ({
   transition: '0.3s ease',
   width: '12px',
 }));
-

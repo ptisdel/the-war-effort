@@ -6,7 +6,7 @@ export const Root = styled.div(() => ({
   maxWidth: '600px',
 }));
 
-export const Button = styled.button(({ theme }) => ({
+export const Button = styled.button(() => ({
   marginBottom: '20px',
   padding: '10px',
 }));

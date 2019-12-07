@@ -1,6 +1,7 @@
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { useSwipeable } from 'react-swipeable'
+import { useSwipeable } from 'react-swipeable';
 import * as Styles from './swiper.styles';
 
 const Swiper = (props) => {
@@ -10,17 +11,17 @@ const Swiper = (props) => {
 
   const handleSwipeRight = () => {
     if (currentPage <= 0) return;
-    setCurrentPage(currentPage => (currentPage - 1));
+    setCurrentPage(cp => (cp - 1));
   };
 
   const handleSwipeLeft = () => {
     if (currentPage >= pageCount) return;
-    setCurrentPage(currentPage => (currentPage + 1));
+    setCurrentPage(cp => (cp + 1));
   };
 
-  const swipingHandlers = useSwipeable({ 
-    onSwipedLeft: handleSwipeLeft, 
-    onSwipedRight: handleSwipeRight, 
+  const swipingHandlers = useSwipeable({
+    onSwipedLeft: handleSwipeLeft,
+    onSwipedRight: handleSwipeRight,
   });
 
   const renderPages = () => {
@@ -32,12 +33,14 @@ const Swiper = (props) => {
     );
   };
 
-  const renderPagination = () => 
+  const renderPagination = () => (
     <Styles.Pagination>
-      { _.times(pageCount, n => 
-        <Styles.PaginationDot key = { n }  current = { n === currentPage } />) 
-      }
+      { _.times(pageCount, n => <Styles.PaginationDot
+        key = { n }
+        current = { n === currentPage }
+      />) }
     </Styles.Pagination>
+  );
 
   return (
     <Styles.Root>
@@ -46,5 +49,9 @@ const Swiper = (props) => {
     </Styles.Root>
   );
 };
+
+Swiper.propTypes = ({
+  children: PropTypes.node,
+});
 
 export default Swiper;
