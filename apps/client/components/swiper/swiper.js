@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import * as Styles from './swiper.styles';
 
@@ -8,6 +8,15 @@ const Swiper = (props) => {
   const { children } = props;
   const pageCount = children.length;
   const [currentPage, setCurrentPage] = useState(0);
+  const [shouldAnimatePagination, setShouldAnimatePagination] = useState(false);
+
+  useEffect(() => {
+    setShouldAnimatePagination(true);
+  }, [currentPage]);
+
+  const resetAnimation = () => {
+    setShouldAnimatePagination(false);
+  };
 
   const handleSwipeRight = () => {
     if (currentPage <= 0) return;
@@ -15,8 +24,12 @@ const Swiper = (props) => {
   };
 
   const handleSwipeLeft = () => {
-    if (currentPage >= pageCount) return;
+    if (currentPage >= pageCount - 1) return;
     setCurrentPage(cp => (cp + 1));
+  };
+
+  const handlePaginationDotClick = pageIndex => {
+    setCurrentPage(pageIndex);
   };
 
   const swipingHandlers = useSwipeable({
@@ -24,20 +37,22 @@ const Swiper = (props) => {
     onSwipedRight: handleSwipeRight,
   });
 
-  const renderPages = () => {
-    console.log(children);
-    return (
-      <Styles.PagesContainer { ...swipingHandlers } xShift = { currentPage }>
-        { _.map(children, (c, i) => <Styles.Page key = { i } >{ c }</Styles.Page>) }
-      </Styles.PagesContainer>
-    );
-  };
+  const renderPages = () => (
+    <Styles.PagesContainer { ...swipingHandlers } xShift = { currentPage }>
+      { _.map(children, (c, i) => <Styles.Page key = { i } >{ c }</Styles.Page>) }
+    </Styles.PagesContainer>
+  );
 
   const renderPagination = () => (
     <Styles.Pagination>
+      <Styles.PaginationDotCurrent
+        onAnimationEnd={ resetAnimation }
+        shouldAnimate = { shouldAnimatePagination }
+        xShift = { currentPage} />
       { _.times(pageCount, n => <Styles.PaginationDot
-        key = { n }
         current = { n === currentPage }
+        key = { n }
+        onClick = { () => handlePaginationDotClick(n) }
       />) }
     </Styles.Pagination>
   );

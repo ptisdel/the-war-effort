@@ -15,3 +15,12 @@ export const Role = ({
   getPlayer: role => _.get(role, 'player'),
   getName: role => _.get(role, 'name'),
 });
+
+export const Location = ({
+  getName: location => _.get(location, 'name'),
+  getResources: location => _.get(location, 'resources'),
+});
+
+export const Resource = ({
+  getType: resource => _.get(resource, 'type'),
+});

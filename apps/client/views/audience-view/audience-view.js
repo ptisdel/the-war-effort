@@ -1,23 +1,23 @@
 import _ from 'lodash';
 import React from 'react';
-import components from '../../components';
+import components from './components';
 import api from '../../api';
 import { constants } from '../../../shared';
 import { Role } from '../../../shared/models';
 import state from '../../state';
-import * as Styles from './roles-view.styles';
+import * as Styles from './audience-view.styles';
 
 const { store } = state;
-const { allRoleNames } = constants;
+const { allRoles } = constants;
 const { RoleSelector } = components;
 
-export const RolesView = () => {
+export const AudienceView = () => {
   const [globalState] = store();
   const { roles } = globalState.gameState;
 
-  const roleData = _.map(allRoleNames, rn => ({
-    name: rn,
-    isAvailable: !_.some(roles, r => Role.getName(r) === rn),
+  const roleData = _.map(allRoles, ar => ({
+    name: ar,
+    isAvailable: !_.some(roles, r => Role.getName(r) === ar),
   }));
 
   const handleSelectRole = roleName => {
@@ -29,7 +29,7 @@ export const RolesView = () => {
       <header>
         <h1>Select your role.</h1>
       </header>
-      <RoleSelector 
+      <RoleSelector
         onSelectRole = { handleSelectRole }
         roles = { roleData }
       />
