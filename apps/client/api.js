@@ -29,8 +29,8 @@ export const commanderActions = ({
 });
 
 export const logisticsActions = ({
-  sendResource: ({ contents, from, to }) => socket.emit('role-action', {
-    type: 'logistics/sendResource',
-    payload: { contents, from, to },
+  createTravelGroup: travelInfo => socket.emit('role-action', {
+    type: 'logistics/createTravelGroup',
+    payload: travelInfo,
   }),
 });

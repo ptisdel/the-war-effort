@@ -14,13 +14,23 @@ const initialState = {
     locations: [
       {
         name: defaultLocations.HOME,
-        resources: [{ type: 'tank' }],
+        heavyTransports: [
+          {
+            id: '1234',
+            name: 'C-17 Globemaster III',
+            capacity: 6,
+            cargo: [],
+          },
+        ],
+        resources: [{ id: '14J4', size: 2, type: 'tank' }],
       },
       {
         name: defaultLocations.FOB,
+        heavyTransports: [],
         resources: [],
       },
     ],
+    travelGroups: [],
   },
 };
 

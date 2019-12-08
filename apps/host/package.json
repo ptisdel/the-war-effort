@@ -10,7 +10,8 @@
     "react-router-dom": "^5.1.2",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1",
-    "use-global-hook": "^0.1.12"
+    "use-global-hook": "^0.1.12",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

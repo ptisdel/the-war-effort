@@ -5,9 +5,10 @@ import roleActions from './role-actions';
 const { Role } = models;
 
 export const roleAction = (store, { type, payload }) => {
-  const { commanderActions } = roleActions;
+  const { commanderActions, logisticsActions } = roleActions;
   if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
+  if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
 };
 
 export const setHostId = (store, hostId) => {

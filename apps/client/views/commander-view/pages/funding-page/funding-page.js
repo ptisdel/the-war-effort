@@ -26,18 +26,20 @@ const FundingPage = () => {
 
     if (filteredRoles.length === 0) return 'No roles available to fund';
 
-    return _.map(filteredRoles, (r, i) => <Styles.Role as = 'li' key = { i }>
-      <Styles.RoleTitle>{ Role.getName(r) }</Styles.RoleTitle>
-      <Styles.RoleBudget>
-        <Styles.RoleBudgetButton onClick = { () => decreaseBudget(Role.getName(r)) }>
-          -
-        </Styles.RoleBudgetButton>
-        <Styles.RoleBudgetTotal>{Role.getFormattedBudget(r)}</Styles.RoleBudgetTotal>
-        <Styles.RoleBudgetButton onClick = { () => increaseBudget(Role.getName(r)) }>
-          +
-        </Styles.RoleBudgetButton>
-      </Styles.RoleBudget>
-    </Styles.Role>);
+    return _.map(filteredRoles, (r, i) => (
+      <Styles.Role as = 'li' key = { i }>
+        <Styles.RoleTitle>{ Role.getName(r) }</Styles.RoleTitle>
+        <Styles.RoleBudget>
+          <Styles.RoleBudgetButton onClick = { () => decreaseBudget(Role.getName(r)) }>
+            -
+          </Styles.RoleBudgetButton>
+          <Styles.RoleBudgetTotal>{Role.getFormattedBudget(r)}</Styles.RoleBudgetTotal>
+          <Styles.RoleBudgetButton onClick = { () => increaseBudget(Role.getName(r)) }>
+            +
+          </Styles.RoleBudgetButton>
+        </Styles.RoleBudget>
+      </Styles.Role>
+    ));
   };
 
   return (
