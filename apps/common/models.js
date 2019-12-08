@@ -24,3 +24,7 @@ export const Location = ({
 export const Resource = ({
   getType: resource => _.get(resource, 'type'),
 });
+
+export const Theme = ({
+  getColor: (theme, shade) => _.get(theme, ['colors', shade]),
+})

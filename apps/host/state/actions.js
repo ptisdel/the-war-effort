@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { models } from '../../shared';
+import { models } from '../../common';
 import roleActions from './role-actions';
 
 const { Role } = models;
@@ -85,7 +85,7 @@ export const hireRole = (store, { playerId, roleName }) => {
   store.setState({ gameState: newGameState });
 };
 
-export const fireRole = (store, roleName) => {
+export const removePlayerFromRole = (store, roleName) => {
   const { gameState } = store.state;
   const { roles } = gameState;
 

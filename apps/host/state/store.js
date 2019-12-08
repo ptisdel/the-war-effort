@@ -1,6 +1,6 @@
 import React from 'react';
 import useGlobalHook from 'use-global-hook';
-import { constants } from '../../shared';
+import { constants } from '../../common';
 import * as actions from './actions';
 
 const { defaultLocations } = constants;

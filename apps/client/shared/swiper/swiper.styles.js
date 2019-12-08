@@ -1,23 +1,28 @@
 import styled, { css, keyframes } from 'styled-components';
+import { models } from '../../../common';
 
-const animationSpeed = '0.25s';
+const { Theme } = models;
+
+const animationSpeed = '0.15s';
 
 const stretchOnHorizontalMovement = keyframes`
   0% {
     transform: scaleX(1);
+    filter: blur(0px);
   }
 
   50% {
     transform: scaleX(2);
-    filter: blur(0.5px);
+    filter: blur(0.75px);
   }
 
   100% {
     transform: scaleX(1);
+    filter: blur(0px);
   }
 `;
 
-const transition = `${animationSpeed} cubic-bezier(0.000, 0.655, 0.650, 1.005)`;
+const transition = `${animationSpeed} ease-out`;
 
 export const Root = styled.div(() => ({
   height: '100%',
@@ -46,9 +51,9 @@ export const Pagination = styled.div(() => ({
   transform: 'translateX(-50%)',
 }));
 
-export const PaginationDotCurrent = styled.div(({ shouldAnimate, xShift }) => css`
+export const PaginationDotCurrent = styled.div(({ shouldAnimate, theme, xShift }) => css`
   animation: ${shouldAnimate ? stretchOnHorizontalMovement : null} ${animationSpeed} ease;
-  background: grey;
+  background: ${Theme.getColor(theme, 'action')};
   border-radius: 100%;
   height: 12px;
   margin: 5px 10px 5px 10px;
@@ -59,8 +64,8 @@ export const PaginationDotCurrent = styled.div(({ shouldAnimate, xShift }) => cs
   width: 12px;
 `);
 
-export const PaginationDot = styled.div(() => ({
-  border: '2px solid grey',
+export const PaginationDot = styled.div(({ theme }) => ({
+  border: `2px solid ${Theme.getColor(theme, 'action')}`,
   borderRadius: '100%',
   cursor: 'pointer',
   display: 'inline-block',

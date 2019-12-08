@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import * as Styles from './swiper.styles';
 
@@ -8,9 +8,15 @@ const Swiper = (props) => {
   const { children } = props;
   const pageCount = children.length;
   const [currentPage, setCurrentPage] = useState(0);
+
+  const didMountRef = useRef(false);
   const [shouldAnimatePagination, setShouldAnimatePagination] = useState(false);
 
   useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
     setShouldAnimatePagination(true);
   }, [currentPage]);
 

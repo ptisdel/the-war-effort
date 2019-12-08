@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styles from './layout.styles';
 
-const Layout = (props) => {
-  const { children } = props;
-
-  return (
-    <Styles.Root>
+const Layout = ({
+  children,
+}) => (
+  <Styles.Root>
+    <Styles.Main as = 'main'>
       { children }
-    </Styles.Root>
-  );
-};
+    </Styles.Main>
+  </Styles.Root>
+);
 
 Layout.propTypes = ({
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 });
 
 export default Layout;

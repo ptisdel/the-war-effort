@@ -3,10 +3,10 @@ import React from 'react';
 import * as Styles from './news-view.styles';
 import components from '../../components';
 import state from '../../state';
-import { constants, models } from '../../../shared';
+import { constants, models } from '../../../common';
 
 const { GameEngine } = components;
-const { defaultRole } = constants;
+const { allRoles } = constants;
 const { Role } = models;
 const { store } = state;
 
@@ -19,7 +19,7 @@ export const NewsView = () => {
 
   const renderPlayerList = () => _.map(players, (p, key) => {
     const role = getPlayerRole(p);
-    const roleName = Role.getName(role) || defaultRole;
+    const roleName = Role.getName(role) || allRoles.AUDIENCE;
     return <li key = { key }>{ roleName } : { Role.getFormattedBudget(role) || '$0' }</li>;
   });
 

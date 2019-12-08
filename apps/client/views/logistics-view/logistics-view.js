@@ -1,23 +1,22 @@
 // import _ from 'lodash';
 import React from 'react';
-import api from '../../api';
-import components from '../../components';
-import { models } from '../../../shared';
-import state from '../../state';
+import * as api from '../../api';
+import components from '../../shared';
+import { constants } from '../../../common';
 import * as Styles from './logistics-view.styles';
 
-const { logisticsActions } = api;
-const { Budget } = models;
-const { store } = state;
-const { Swiper } = components;
+const { allRoles } = constants;
+const { resignFromRole } = api;
+const { RoleHeader, Swiper } = components;
 
 export const LogisticsView = () => {
-  const [globalState] = store();
-
-  const { gameState } = globalState;
+  const handleOnResign = () => {
+    resignFromRole(allRoles.LOGISTICS);
+  };
 
   return (
     <Styles.Root>
+      <RoleHeader title = { allRoles.LOGISTICS } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <div>
           <p>First page</p>

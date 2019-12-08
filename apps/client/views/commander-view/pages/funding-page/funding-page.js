@@ -1,9 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
-import api from '../../../../api';
-import { constants, models } from '../../../../../shared';
+import * as api from '../../../../api';
+import { constants, models } from '../../../../../common';
 import state from '../../../../state';
 import * as Styles from './funding-page.styles';
+
+// TODO getting a memory leak here when resigning as commander from ONLY funding page, not sure why
 
 const { commanderActions } = api;
 const { Budget, Role } = models;

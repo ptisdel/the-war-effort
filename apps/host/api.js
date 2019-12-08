@@ -3,32 +3,23 @@ import io from 'socket.io-client';
 // new socket connection to server
 const socket = io('http://localhost:8000?role=host');
 
-const subscribeToPlayerAddition = callback => 
+export const subscribeToPlayerAddition = callback =>
   socket.on('add-player', playerId =>
-  callback(playerId));
+    callback(playerId));
 
-const subscribeToRoleHire = callback => 
+export const subscribeToRoleHire = callback =>
   socket.on('hire-for-role', ({ playerId, roleName }) =>
-  callback({ playerId, roleName }));
+    callback({ playerId, roleName }));
 
-  const subscribeToRoleFire = callback => 
-  socket.on('fire-from-role', roleName =>
-  callback(roleName));
+export const subscribeToRemovePlayerFromRole = callback =>
+  socket.on('remove-player-from-role', roleName =>
+    callback(roleName));
 
-const subscribeToPlayerDeletion = callback => 
+export const subscribeToPlayerDeletion = callback =>
   socket.on('delete-player', playerId =>
-  callback(playerId));
+    callback(playerId));
 
-const subscribeToRoleAction = callback =>
-  socket.on('role-action', ({type, payload}) => callback(({type, payload})));
+export const subscribeToRoleAction = callback =>
+  socket.on('role-action', ({ type, payload }) => callback(({ type, payload })));
 
-const sendGameState = gameState => socket.emit('game-state', gameState);
-
-export default {
-  sendGameState,
-  subscribeToPlayerDeletion,
-  subscribeToPlayerAddition,
-  subscribeToRoleAction,
-  subscribeToRoleHire,
-  subscribeToRoleFire,
-};
+export const sendGameState = gameState => socket.emit('game-state', gameState);

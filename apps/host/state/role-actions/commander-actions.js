@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { constants, models } from '../../../shared';
+import { constants, models } from '../../../common';
 
 const { Role } = models;
 

@@ -1,5 +1,3 @@
-export const defaultRole = 'Audience';
-
 export const allRoles = ({
   AIRSUPPORT: 'Air Support Officer',
   AUDIENCE: 'Audience Member',

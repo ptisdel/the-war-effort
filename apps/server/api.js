@@ -24,6 +24,7 @@ const initializeClientSubscriptions = socket => {
   /* any message sent from clients should be repeated to host */
   socket.on('role-action', ({ type, payload }) => emitToHost({ emissionType: 'role-action', data: { type, payload } }));
   socket.on('choose-role', roleName => emitToHost({ emissionType: 'hire-for-role', data: { playerId: socketId, roleName } }));
+  socket.on('resign-from-role', roleName => emitToHost({ emissionType: 'remove-player-from-role', data: { roleName } }));
   socket.on('disconnect', () => emitToHost({ emissionType: 'delete-player', data: socketId }));
 };
 
