@@ -6,7 +6,6 @@ import * as actions from './actions';
 const { defaultLocations } = constants;
 
 const initialState = {
-  hostId: null,
   gameState: {
     players: [],
     roles: [],

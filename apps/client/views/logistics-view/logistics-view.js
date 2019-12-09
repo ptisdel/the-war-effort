@@ -7,6 +7,7 @@ import * as Styles from './logistics-view.styles';
 import pages from './pages';
 
 const {
+  FobResourcesPage,
   HomeResourcesPage,
   TravelGroupsPage,
 } = pages;
@@ -22,9 +23,7 @@ export const LogisticsView = () => {
       <RoleHeader title = { allRoles.LOGISTICS } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <HomeResourcesPage/>
-        <div>
-          <p>Second page</p>
-        </div>
+        <FobResourcesPage/>
         <TravelGroupsPage/>
       </Swiper>
     </Styles.Root>

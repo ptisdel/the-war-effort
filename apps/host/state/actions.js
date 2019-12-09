@@ -2,17 +2,19 @@ import _ from 'lodash';
 import { models } from '../../common';
 import roleActions from './role-actions';
 
-const { Role } = models;
+const {
+  GameState,
+  Location,
+  Role,
+  Transport,
+  TravelGroup,
+} = models;
 
 export const roleAction = (store, { type, payload }) => {
   const { commanderActions, logisticsActions } = roleActions;
   if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
-};
-
-export const setHostId = (store, hostId) => {
-  store.setState({ hostId });
 };
 
 export const addPlayer = (store, playerId) => {
@@ -71,7 +73,6 @@ export const hireRole = (store, { playerId, roleName }) => {
     },
   ];
 
-
   const playerExists = _.some(players, p => p === playerId);
   const newPlayers = [
     ...(playerExists ? players : [...players, playerId]),
@@ -93,6 +94,60 @@ export const removePlayerFromRole = (store, roleName) => {
   const newGameState = {
     ...gameState,
     roles: _.filter(roles, r => Role.getName(r) === roleName),
+  };
+
+  store.setState({ gameState: newGameState });
+};
+
+export const travelGroupArrival = (store, { gameState, travelGroup }) => {
+  const destinationName = TravelGroup.getDestinationName(travelGroup);
+  const destination = GameState.getLocationByName(gameState, destinationName);
+  const transports = TravelGroup.getTransports(travelGroup);
+
+  const allSentResources = _.reduce(
+    transports,
+    (acc, transport) => [...acc, ...Transport.getCargo(transport)],
+    [],
+  );
+
+  const destinationResources = Location.getResources(destination);
+  const newDestinationResources = [
+    ...destinationResources,
+    ...allSentResources,
+  ];
+
+
+  const allSentHeavyTransports = _.map(transports, t => ({
+    ...t,
+    cargo: [],
+  }));
+
+  const destinationHeavyTransports = Location.getHeavyTransports(destination);
+  const newDestinationHeavyTransports = [
+    ...destinationHeavyTransports,
+    ...allSentHeavyTransports,
+  ];
+
+  const newDestination = {
+    ...destination,
+    heavyTransports: newDestinationHeavyTransports,
+    resources: newDestinationResources,
+  };
+
+  const newTravelGroups = _.differenceWith(
+    GameState.getTravelGroups(gameState),
+    [travelGroup],
+    _.isEqual,
+  );
+
+  const locations = GameState.getLocations(gameState);
+  const newGameState = {
+    ...gameState,
+    travelGroups: newTravelGroups,
+    locations: [
+      ..._.differenceWith(locations, [destination], _.isEqual),
+      newDestination,
+    ],
   };
 
   store.setState({ gameState: newGameState });

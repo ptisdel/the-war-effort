@@ -1,9 +1,7 @@
 import _ from 'lodash';
-import * as constants from './constants';
 import * as helpers from './helpers';
 
 const { formatMoney } = helpers;
-const { defaultLocations } = constants;
 
 export const GameState = ({
   getHeavyTransports: gameState => _.get(gameState, 'heavyTransports'),

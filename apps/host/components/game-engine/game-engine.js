@@ -1,19 +1,16 @@
-import { useEffect } from 'react';
-// import state from '../../state';
+import state from '../../state';
+import { engineTick } from './engine-tick';
+import * as helpers from '../../helpers';
 
-// const { store } = state;
+const { store } = state;
+const { useInterval } = helpers;
 
 export const GameEngine = () => {
-  // const [globalState, globalActions] = store();
+  // eslint-disable-next-line
+  const [globalState, globalActions] = store();
+  const { gameState } = globalState;
 
-  const tick = () => {
+  useInterval(() => engineTick({ globalActions, gameState }), 1000);
 
-  };
-
-  useEffect(() => {
-    const timer = setInterval(tick, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return [];
+  return null;
 };

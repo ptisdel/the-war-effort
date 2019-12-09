@@ -14,7 +14,10 @@
         [
           "@babel/preset-env", 
           {
-            "modules": "commonjs"
+            "modules": "auto",
+            "targets": {
+              "node": "current"
+            }
           }
         ],
         "@babel/preset-react"

@@ -28,11 +28,11 @@ export const createTravelGroup = (store, payload) => {
     [],
   );
 
-  const newOriginResources = _.difference(originResources, allSentResources);
+  const newOriginResources = _.differenceWith(originResources, allSentResources, _.isEqual);
   const newOriginHeavyTransports = _.reject(originHeavyTransports, t =>
     _.includes(allSentHeavyTransports, Transport.getId(t)));
 
-  const origin = GameState.getLocationByName(originName);
+  const origin = GameState.getLocationByName(gameState, originName);
   const newOrigin = {
     ...origin,
     heavyTransports: newOriginHeavyTransports,
@@ -59,7 +59,7 @@ export const createTravelGroup = (store, payload) => {
   const newGameState = {
     ...gameState,
     locations: [
-      ..._.reject(locations, l => Location.getName(l) === originName),
+      ..._.differenceWith(locations, [origin], _.isEqual),
       newOrigin,
     ],
     travelGroups: [

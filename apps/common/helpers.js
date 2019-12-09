@@ -5,3 +5,4 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 export const formatMoney = amount => formatter.format(amount);
+
