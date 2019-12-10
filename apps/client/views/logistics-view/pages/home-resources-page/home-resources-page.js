@@ -33,7 +33,7 @@ const HomeResourcesPage = () => {
   };
 
   const handleRemoveResource = resource => {
-    setSelectedResources(_.without(selectedResources, resource));
+    setSelectedResources(_.differenceWith(selectedResources, resource, _.isEqual));
   };
 
   const handleSendTransports = () => {
@@ -58,7 +58,7 @@ const HomeResourcesPage = () => {
     return _.map(unselectedHomeResources, (r, i) => (
       <Styles.Resource as = 'li' key = { i }>
         <Styles.ResourceTitle onClick = { () => handleAddResource(r) }>
-          { Resource.getType(r) }
+          { Resource.getName(r) }
         </Styles.ResourceTitle>
       </Styles.Resource>
     ));
@@ -70,7 +70,7 @@ const HomeResourcesPage = () => {
     return _.map(selectedResources, (r, i) => (
       <Styles.Resource as = 'li' key = { i }>
         <Styles.ResourceTitle onClick = { () => handleRemoveResource(r) }>
-          { Resource.getType(r) }
+          { Resource.getName(r) }
         </Styles.ResourceTitle>
       </Styles.Resource>
     ));

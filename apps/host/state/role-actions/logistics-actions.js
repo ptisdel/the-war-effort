@@ -2,7 +2,7 @@ import _ from 'lodash';
 import uuid from 'uuid';
 import { models } from '../../../common';
 
-const { GameState, Location, Transport } = models;
+const { GameState, Transport } = models;
 
 export const createTravelGroup = (store, payload) => {
   const { gameState } = store.state;
@@ -43,7 +43,7 @@ export const createTravelGroup = (store, payload) => {
   const distance = 10;
   const travelTime = distance * 0.5;
   const departureTime = now;
-  const ETA = (new Date(now))
+  const ETA = new Date(new Date())
     .setSeconds(departureTime.getSeconds() + travelTime);
 
   const newTravelGroup = ({

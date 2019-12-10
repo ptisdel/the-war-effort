@@ -1,4 +1,12 @@
 import { useEffect, useRef } from 'react';
+import uuid from 'uuid';
+
+export const createResource = (faction, type, modifiers = []) => ({
+  ...type,
+  ...modifiers,
+  id: uuid(),
+  faction,
+});
 
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();

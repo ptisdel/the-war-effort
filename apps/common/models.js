@@ -31,29 +31,40 @@ export const Role = ({
 export const Location = ({
   getHeavyTransports: location => _.get(location, 'heavyTransports'),
   getName: location => _.get(location, 'name'),
+  getFeatures: location => _.get(location, 'features'),
+  getFeatureByName: (location, featureName) => _.get(Location.getFeatures(location), featureName),
   getResources: location => _.get(location, 'resources'),
 });
 
+export const Feature = ({
+  getName: feature => _.get(feature, 'name'),
+  getFaction: feature => _.get(feature, 'faction'),
+})
+
 export const Resource = ({
   getId: resource => _.get(resource, 'id'),
-  getType: resource => _.get(resource, 'type'),
+  getFaction: resource => _.get(resource, 'faction'),
+  getName: resource => _.get(resource, 'name'),
   getSize: resource => _.get(resource, 'size'),
+  getSkills: resource => _.get(resource, "skills"),
 });
 
 export const Transport = ({
-  getId: location => _.get(location, 'id'),
-  getName: location => _.get(location, 'name'),
-  getCargo: location => _.get(location, 'cargo'),
-  getCapacity: location => _.get(location, 'capacity'),
+  getCapacity: transport => _.get(transport, 'capacity'),
+  getCargo: transport => _.get(transport, 'cargo'),
+  getId: transport => _.get(transport, 'id'),
+  getFaction: transport => _.get(transport, 'faction'),
+  getName: transport => _.get(transport, 'name'),
 })
 
 export const TravelGroup = ({
-  getDepartureTime: travel => _.get(travel, 'departureTime'),
-  getDestinationName: travel => _.get(travel, 'destinationName'),
-  getEscorts: travel => _.get(travel, 'escorts'),
-  getETA: travel => _.get(travel, 'ETA'),
-  getOriginName: travel => _.get(travel, 'originName'),
-  getTransports: travel => _.get(travel, 'transports'),
+  getDepartureTime: travelGroup => _.get(travelGroup, 'departureTime'),
+  getDestinationName: travelGroup => _.get(travelGroup, 'destinationName'),
+  getEscorts: travelGroup => _.get(travelGroup, 'escorts'),
+  getETA: travelGroup => _.get(travelGroup, 'ETA'),
+  getFaction: travelGroup => _.get(travelGroup, 'faction'),
+  getOriginName: travelGroup => _.get(travelGroup, 'originName'),
+  getTransports: travelGroup => _.get(travelGroup, 'transports'),
 });
 
 export const Theme = ({

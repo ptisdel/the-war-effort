@@ -19,11 +19,11 @@ const TravelGroupsPage = () => {
   const travelGroups = GameState.getTravelGroups(gameState) || [];
 
   const renderTransport = (transport, key) => (
-      <Styles.Transport key>
+      <Styles.Transport key = { key }>
         <Styles.TransportName>{ Transport.getName(transport) }</Styles.TransportName>
         {
           _.map(Transport.getCargo(transport), (c, i) => (
-            <Styles.TransportCargo key = { i }>{ Resource.getType(c) }</Styles.TransportCargo>
+            <Styles.TransportCargo key = { i }>{ Resource.getName(c) }</Styles.TransportCargo>
           ))
         }
       </Styles.Transport>
