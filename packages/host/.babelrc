@@ -1,0 +1,36 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        "@babel/preset-env", 
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        [
+          "babel-plugin-styled-components",
+          {
+            "fileName": true
+          }
+        ]
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env", 
+          {
+            "modules": "auto",
+            "targets": {
+              "node": "current"
+            }
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread"
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@the-war-effort/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "author": "Patrick Tisdel",
+  "license": "UNLICENSED"
+}
