@@ -1,12 +1,12 @@
-import { store } from './store';
+import store from './store';
 
 const emitToHost = ({ emissionType, data = null }) => {
-  const host = store.getHost();
+  const host = store.hostSocket;
   if (host) host.emit(emissionType, data);
-}
+};
 
 const initializeHostSubscriptions = socket => {
-  store.setHost(socket);
+  store.hostSocket = socket;
 
   /* any broadcast sent from host should be repeated to clients */
   socket.on('broadcast', msg => socket.broadcast.emit('broadcast', msg));
@@ -18,7 +18,7 @@ const initializeClientSubscriptions = socket => {
 
   socket.on('request-registration', () => {
     socket.emit('register-player', socketId);
-    emitToHost({ emissionType: 'add-player', data: socketId })
+    emitToHost({ emissionType: 'add-player', data: socketId });
   });
 
   /* any message sent from clients should be repeated to host */
@@ -36,7 +36,7 @@ const onboardSocket = socket => {
   if (role === 'client') initializeClientSubscriptions(socket);
 
   socket.on('disconnect', () => console.log(`A ${role} disconnected.`));
-}
+};
 
 export default {
   onboardSocket,

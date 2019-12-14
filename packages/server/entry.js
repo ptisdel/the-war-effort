@@ -1,3 +1,4 @@
 // necessary to read ES6
-require = require("esm")(module /*, options*/);
-module.exports = require("./index.js");
+const esmRequire = require('esm')(module);
+
+module.exports = esmRequire('./index.js');

@@ -4,7 +4,7 @@ import common from '@the-war-effort/common';
 
 const { models } = common;
 
-const { GameState, Transport } = models;
+const { GameState, Location, Transport } = models;
 
 export const createTravelGroup = (store, payload) => {
   const { gameState } = store.state;

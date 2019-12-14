@@ -1,15 +1,5 @@
-class Store {
-  constructor() {
-    this._hostId = null;
-  } 
-
-  getHost() {
-    return this._hostId;
-  }
-
-  setHost(hostId) {
-    this._hostId = hostId;
-  }
+const store = {
+  hostId: null,
 };
 
-export const store = new Store();
+export default store;

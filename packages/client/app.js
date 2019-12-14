@@ -7,7 +7,7 @@ import {
   AudienceView,
 } from './views/index';
 import * as api from './api';
-import components from './shared';
+import components from './components';
 import state from './state';
 
 const { constants, models } = common;

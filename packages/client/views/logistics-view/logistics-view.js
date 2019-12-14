@@ -2,7 +2,7 @@
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../api';
-import components from '../../shared';
+import components from '../../components';
 import * as Styles from './logistics-view.styles';
 import pages from './pages';
 

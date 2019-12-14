@@ -35,6 +35,7 @@ module.exports = {
     'linebreak-style': 0,
     'arrow-parens': 0,
     'import/prefer-default-export': 0,
+    'no-console': 0,
     quotes: ['error', 'single'],
     'jsx-quotes': ['error', 'prefer-single'],
     'react/jsx-filename-extension': 'off',

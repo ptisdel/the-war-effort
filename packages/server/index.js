@@ -1,5 +1,6 @@
 import express from 'express';
 import http from 'http';
+import path from 'path';
 import socketIO from 'socket.io';
 import api from './api';
 
@@ -8,7 +9,7 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 io.on('connection', api.onboardSocket);

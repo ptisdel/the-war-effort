@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import common from '@the-war-effort/common';
 import components from './components';
-import shared from '../../shared';
+import shared from '../../components';
 import * as api from '../../api';
 import state from '../../state';
 import * as Styles from './audience-view.styles';

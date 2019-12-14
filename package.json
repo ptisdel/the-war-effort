@@ -6,7 +6,7 @@
   "scripts": {
     "commit": "npx git-cz",
     "dev": "lerna run dev",
-    "lint": "eslint",
+    "lint": "lerna run lint",
     "test": "lerna run test --scope={@the-war-effort/server,@the-war-effort/client,@the-war-effort/host}"
   },
   "repository": {

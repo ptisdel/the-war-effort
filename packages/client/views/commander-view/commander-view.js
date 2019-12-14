@@ -1,7 +1,7 @@
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../api';
-import shared from '../../shared';
+import shared from '../../components';
 import * as Styles from './commander-view.styles';
 import { FundingPage } from './pages';
 
