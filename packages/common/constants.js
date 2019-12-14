@@ -24,8 +24,9 @@ export const allResourceTypes = ({
       units: 10,
       size: 1,
       stats: {
-        attack: 1,
-        defense: 0,
+        accuracy: 0.8,
+        attack: 2,
+        defense: 1,
       },
     },
     TANK: {
@@ -34,6 +35,7 @@ export const allResourceTypes = ({
       units: 1,
       size: 2,
       stats: {
+        accuracy: 0.6,
         attack: 5,
         defense: 5,
       },

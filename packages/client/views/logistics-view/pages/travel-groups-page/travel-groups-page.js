@@ -43,7 +43,7 @@ const TravelGroupsPage = () => {
           To: { TravelGroup.getDestinationName(tg) }
         </Styles.TravelGroupDestination>
         <Styles.TravelGroupTransports>
-          { _.map(TravelGroup.getTransports(tg), (t, i) => renderTransport(t, i)) }
+          { _.map(TravelGroup.getTransports(tg), (t, ti) => renderTransport(t, ti)) }
         </Styles.TravelGroupTransports>
       </Styles.TravelGroup>
     ));

@@ -3,17 +3,8 @@ import * as helpers from './helpers';
 
 const { formatMoney } = helpers;
 
-export const GameState = ({
-  getLocations: gameState => _.get(gameState, 'locations'),
-  getLocationByName: (gameState, locationName) =>
-    _.find(GameState.getLocations(gameState), l => Location.getName(l) === locationName),
-  getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
-});
-
 export const Budget = ({
-  getFormattedTotal: budget => {
-    return formatMoney(budget || 0);
-  },
+  getFormattedTotal: budget => formatMoney(budget || 0),
 });
 
 export const Role = ({
@@ -22,21 +13,6 @@ export const Role = ({
   getPlayer: role => _.get(role, 'player'),
   getName: role => _.get(role, 'name'),
 });
-
-export const Location = ({
-  getHeavyTransports: location => _.get(location, 'heavyTransports'),
-  getName: location => _.get(location, 'name'),
-  getFeatures: location => _.get(location, 'features'),
-  getFeatureByName: (location, featureName) => _.get(Location.getFeatures(location), featureName),
-  getResources: location => _.get(location, 'resources'),
-  getResourcesByFaction: (location, factionName) =>
-    _.filter(Location.getResources(location), r => Resource.getFaction(r) === factionName),
-});
-
-export const Feature = ({
-  getName: feature => _.get(feature, 'name'),
-  getFaction: feature => _.get(feature, 'faction'),
-})
 
 export const Resource = ({
   getId: resource => _.get(resource, 'id'),
@@ -49,13 +25,39 @@ export const Resource = ({
   getStatByName: (resource, statName) => _.get(Resource.getStats(resource), statName),
 });
 
+export const Location = ({
+  getHeavyTransports: location => _.get(location, 'heavyTransports'),
+  getName: location => _.get(location, 'name'),
+  getFeatures: location => _.get(location, 'features'),
+  getFeatureByName: (location, featureName) => _.get(Location.getFeatures(location), featureName),
+  getResources: location => _.get(location, 'resources'),
+  getResourcesByFaction: (location, factionName) => _.filter(
+    Location.getResources(location),
+    r => Resource.getFaction(r) === factionName,
+  ),
+});
+
+export const GameState = ({
+  getLocations: gameState => _.get(gameState, 'locations'),
+  getLocationByName: (gameState, locationName) => _.find(
+    GameState.getLocations(gameState),
+    l => Location.getName(l) === locationName,
+  ),
+  getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
+});
+
+export const Feature = ({
+  getName: feature => _.get(feature, 'name'),
+  getFaction: feature => _.get(feature, 'faction'),
+});
+
 export const Transport = ({
   getCapacity: transport => _.get(transport, 'capacity'),
   getCargo: transport => _.get(transport, 'cargo'),
   getId: transport => _.get(transport, 'id'),
   getFaction: transport => _.get(transport, 'faction'),
   getName: transport => _.get(transport, 'name'),
-})
+});
 
 export const TravelGroup = ({
   getDepartureTime: travelGroup => _.get(travelGroup, 'departureTime'),
@@ -69,4 +71,4 @@ export const TravelGroup = ({
 
 export const Theme = ({
   getColor: (theme, shade) => _.get(theme, ['colors', shade]),
-})
+});
