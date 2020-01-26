@@ -71,7 +71,7 @@ export const NewsView = () => {
         { renderPlayerList() }
       </Styles.PlayerList>
       <Styles.Locations>
-        { _.map(locations, (l, key) => renderLocation(l, key)) }
+        {_.map(_.sortBy(locations, l => Location.getName(l)), (l, key) => renderLocation(l, key)) }
       </Styles.Locations>
     </Styles.Root>
   );

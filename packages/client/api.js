@@ -34,3 +34,10 @@ export const logisticsActions = ({
     payload: travelInfo,
   }),
 });
+
+export const trainingActions = ({
+  changeTrainingSlotCount: trainingInfo => socket.emit('role-action', {
+    type: 'training/changeTrainingSlotCount',
+    payload: trainingInfo,
+  }),
+});

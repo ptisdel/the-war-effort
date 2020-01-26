@@ -2,9 +2,10 @@ import _ from 'lodash';
 import React, { useEffect } from 'react';
 import common from '@the-war-effort/common';
 import {
+  AudienceView,
   CommanderView,
   LogisticsView,
-  AudienceView,
+  TrainingView,
 } from './views/index';
 import * as api from './api';
 import components from './components';
@@ -47,6 +48,7 @@ export const App = () => {
   const getViewFromRole = () => {
     if (playerRoleName === allRoles.COMMANDER) return <CommanderView/>;
     if (playerRoleName === allRoles.LOGISTICS) return <LogisticsView/>;
+    if (playerRoleName === allRoles.TRAINING) return <TrainingView/>;
     return <AudienceView/>;
   };
 

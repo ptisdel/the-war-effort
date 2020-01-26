@@ -6,7 +6,7 @@ import * as helpers from '../helpers';
 
 const { constants } = common;
 
-const { createResource } = helpers;
+const { createResource, createFeature } = helpers;
 const {
   allFactions, allFeatures, allResourceTypes, defaultLocations,
 } = constants;
@@ -22,42 +22,57 @@ const initialState = {
         name: 'Fightastan',
         features: [],
         resources: [
-          createResource(
-            allFactions.PLAYERS,
-            allResourceTypes.COMBAT.TANK,
-          ),
-          createResource(
-            allFactions.PLAYERS,
-            allResourceTypes.COMBAT.SQUAD,
-          ),
-          createResource(
-            allFactions.ENEMY,
-            allResourceTypes.COMBAT.SQUAD,
-          ),
-          createResource(
-            allFactions.ENEMY,
-            allResourceTypes.COMBAT.SQUAD,
-          ),
-          createResource(
-            allFactions.ENEMY,
-            allResourceTypes.COMBAT.SQUAD,
-          ),
-          createResource(
-            allFactions.ENEMY,
-            allResourceTypes.COMBAT.SQUAD,
-          ),
+          createResource({
+            faction: allFactions.PLAYERS,
+            type: allResourceTypes.COMBAT.TANK,
+          }),
+          createResource({
+            faction: allFactions.PLAYERS,
+            type: allResourceTypes.COMBAT.SQUAD,
+          }),
+          createResource({
+            faction: allFactions.ENEMY,
+            type: allResourceTypes.COMBAT.SQUAD,
+          }),
+          createResource({
+            faction: allFactions.ENEMY,
+            type: allResourceTypes.COMBAT.SQUAD,
+          }),
+          createResource({
+            faction: allFactions.ENEMY,
+            type: allResourceTypes.COMBAT.SQUAD,
+          }),
+          createResource({
+            faction: allFactions.ENEMY,
+            type: allResourceTypes.COMBAT.SQUAD,
+          }),
         ],
       },
       {
         features: [
-          {
+          createFeature({
             faction: allFactions.PLAYERS,
-            name: allFeatures.AIRPORT,
-          },
-          {
+            type: allFeatures.AIRPORT,
+          }),
+          createFeature({
             faction: allFactions.PLAYERS,
-            name: allFeatures.ANTIAIR,
-          },
+            type: allFeatures.ANTI_AIR_BATTERY,
+          }),
+          createFeature({
+            faction: allFactions.PLAYERS,
+            type: allFeatures.BASIC_TRAINING,
+            modifiers: {
+              traineeCount: 20,
+            },
+          }),
+          createFeature({
+            faction: allFactions.PLAYERS,
+            type: allFeatures.INFANTRY_COMBAT_TRAINING_CENTER,
+          }),
+          createFeature({
+            faction: allFactions.PLAYERS,
+            type: allFeatures.AIR_FORCE_ACADEMY,
+          }),
         ],
         name: defaultLocations.HOME,
         heavyTransports: [
@@ -70,23 +85,23 @@ const initialState = {
           },
         ],
         resources: [
-          helpers.createResource(
-            allFactions.PLAYERS,
-            allResourceTypes.COMBAT.TANK,
-          ),
+          createResource({
+            faction: allFactions.PLAYERS,
+            type: allResourceTypes.COMBAT.TANK,
+          }),
         ],
       },
       {
         name: defaultLocations.FOB,
         features: [
-          {
+          createFeature({
             faction: allFactions.PLAYERS,
-            name: allFeatures.AIRPORT,
-          },
-          {
+            type: allFeatures.AIRPORT,
+          }),
+          createFeature({
             faction: allFactions.PLAYERS,
-            name: allFeatures.ANTIAIR,
-          },
+            type: allFeatures.ANTI_AIR_BATTERY,
+          }),
         ],
         heavyTransports: [],
         resources: [],

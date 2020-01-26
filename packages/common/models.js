@@ -25,11 +25,19 @@ export const Resource = ({
   getStatByName: (resource, statName) => _.get(Resource.getStats(resource), statName),
 });
 
+export const Feature = ({
+  getName: feature => _.get(feature, 'name'),
+  getFaction: feature => _.get(feature, 'faction'),
+});
+
 export const Location = ({
   getHeavyTransports: location => _.get(location, 'heavyTransports'),
   getName: location => _.get(location, 'name'),
   getFeatures: location => _.get(location, 'features'),
-  getFeatureByName: (location, featureName) => _.get(Location.getFeatures(location), featureName),
+  getFeaturesByName: (location, featureName) => _.filter(
+    Location.getFeatures(location),
+    f => Feature.getName(f) === featureName,
+  ),
   getResources: location => _.get(location, 'resources'),
   getResourcesByFaction: (location, factionName) => _.filter(
     Location.getResources(location),
@@ -46,17 +54,20 @@ export const GameState = ({
   getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
 });
 
-export const Feature = ({
-  getName: feature => _.get(feature, 'name'),
-  getFaction: feature => _.get(feature, 'faction'),
-});
-
 export const Transport = ({
   getCapacity: transport => _.get(transport, 'capacity'),
   getCargo: transport => _.get(transport, 'cargo'),
   getId: transport => _.get(transport, 'id'),
   getFaction: transport => _.get(transport, 'faction'),
   getName: transport => _.get(transport, 'name'),
+});
+
+export const TrainingPath = ({
+  getGraduateType: trainingPath => _.get(trainingPath, 'graduateType'),
+  getHostFeatureName: trainingPath => _.get(trainingPath, 'hostFeatureName'),
+  getLength: trainingPath => _.get(trainingPath, 'length'),
+  getName: trainingPath => _.get(trainingPath, 'name'),
+  getTraineeType: trainingPath => _.get(trainingPath, 'traineeType'),
 });
 
 export const TravelGroup = ({
