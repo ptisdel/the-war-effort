@@ -1,23 +1,26 @@
 import _ from 'lodash';
 import common from '@the-war-effort/common';
+import { TrainingGroup } from '@the-war-effort/common/models';
 
-const { models } = common;
+const { constants, models } = common;
+
+const { allUnitTypes } = constants;
 
 const {
   GameState,
-  Resource,
   Location,
   TravelGroup,
+  Unit,
 } = models;
 
 const checkLocationsForCombat = ({ globalActions, gameState }) => {
   _.forEach(GameState.getLocations(gameState), location => {
     const combatants = _.filter(
-      Location.getResources(location),
-      r => Resource.getIsCombatant(r) === true,
+      Location.getUnits(location),
+      u => Unit.getType(u) === allUnitTypes.ACTIVE_COMBATANT,
     );
 
-    const combatantsGroupedByFaction = _.groupBy(combatants, r => Resource.getFaction(r));
+    const combatantsGroupedByFaction = _.groupBy(combatants, u => Unit.getFaction(u));
     if (_.keys(combatantsGroupedByFaction).length < 2) return;
 
     console.log('Going into battle and here is the lineup:');
@@ -38,7 +41,19 @@ const checkTravelGroups = ({ globalActions, gameState }) => {
   });
 };
 
+const checkTrainingGroups = ({ globalActions, gameState }) => {
+  const trainingGroups = GameState.getTrainingGroups(gameState);
+  const now = new Date();
+
+  _.forEach(trainingGroups, tg => {
+    if (TrainingGroup.getEnd(tg) < now) {
+      globalActions.trainingGroupGraduation({ gameState, trainingGroup: tg });
+    }
+  });
+};
+
 export const engineTick = ({ globalActions, gameState }) => {
+  checkTrainingGroups({ globalActions, gameState });
   checkTravelGroups({ globalActions, gameState });
   checkLocationsForCombat({ globalActions, gameState });
 };

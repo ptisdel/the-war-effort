@@ -43,16 +43,14 @@ export const createTravelGroup = (store, payload) => {
     resources: newOriginResources,
   };
 
-  const now = new Date();
   const distance = 10;
   const travelTime = distance * 0.5;
-  const departureTime = now;
-  const ETA = new Date(new Date())
-    .setSeconds(departureTime.getSeconds() + travelTime);
+  const departureTime = new Date();
+  const ETA = new Date((new Date()).getTime() + travelTime * 1000);
 
   const newTravelGroup = ({
     id: uuid(),
-    departureTime: now,
+    departureTime,
     destinationName,
     ETA,
     originName,

@@ -36,8 +36,8 @@ export const logisticsActions = ({
 });
 
 export const trainingActions = ({
-  changeTrainingSlotCount: trainingInfo => socket.emit('role-action', {
-    type: 'training/changeTrainingSlotCount',
+  createTrainingGroup: trainingInfo => socket.emit('role-action', {
+    type: 'training/createTrainingGroup',
     payload: trainingInfo,
   }),
 });

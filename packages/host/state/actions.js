@@ -1,23 +1,31 @@
 import _ from 'lodash';
 import common from '@the-war-effort/common';
 import roleActions from './role-actions';
+import * as helpers from '../helpers';
 
-const { models } = common;
+const { constants, models } = common;
+const { createResources } = helpers;
 
+const {
+  allFactions,
+  defaultLocations,
+} = constants;
 const {
   GameState,
   Location,
-  Resource,
   Role,
+  TrainingGroup,
   Transport,
   TravelGroup,
+  Unit,
 } = models;
 
 export const roleAction = (store, { type, payload }) => {
-  const { commanderActions, logisticsActions } = roleActions;
+  const { commanderActions, logisticsActions, trainingActions } = roleActions;
   if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
+  if (type === 'training/createTrainingGroup') trainingActions.createTrainingGroup(store, payload);
 };
 
 export const addPlayer = (store, playerId) => {
@@ -117,23 +125,23 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
   const getCasualtiesFromSingleFactionAttack = (attackers, defenders) => _.reduce(
     attackers,
     (acc, attacker) => {
-      const attackStrength = Resource.getStatByName(attacker, 'attack');
-      const doesAttackLand = _.random(0, 1, true) <= Resource.getStatByName(attacker, 'accuracy');
+      const attackStrength = Unit.getStatByName(attacker, 'attack');
+      const doesAttackLand = _.random(0, 1, true) <= Unit.getStatByName(attacker, 'accuracy');
       const attackDamage = doesAttackLand ? attackStrength : 0;
 
       // if (!attackDamage) return acc;
 
       const unluckyDefender = _.get(defenders, _.random(0, defenders.length - 1));
-      const unluckyDefenderId = Resource.getId(unluckyDefender);
+      const unluckyDefenderId = Unit.getId(unluckyDefender);
       const previousDamage = _.get(acc, unluckyDefenderId) || 0;
       const newDamage = previousDamage + attackDamage;
       console.log(
-        Resource.getFaction(attacker),
-        Resource.getName(attacker),
-        `(${Resource.getId(attacker)})`,
+        Unit.getFaction(attacker),
+        Unit.getName(attacker),
+        `(${Unit.getId(attacker)})`,
         'attacks',
-        Resource.getFaction(unluckyDefender),
-        Resource.getName(unluckyDefender),
+        Unit.getFaction(unluckyDefender),
+        Unit.getName(unluckyDefender),
         `(${unluckyDefenderId})`,
         `and ${doesAttackLand ? `hits for ${attackDamage} damage!` : 'misses!'}`,
       );
@@ -164,49 +172,49 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
 
   console.log('Here come the casualty reports.');
 
-  const newLocationResources = _.reduce(
-    Location.getResources(location),
-    (acc, r) => {
-      const resourceId = Resource.getId(r);
+  const newLocationUnits = _.reduce(
+    Location.getUnits(location),
+    (acc, u) => {
+      const unitId = Unit.getId(u);
 
-      if (!_.has(damageByCombatant, resourceId)) return [...acc, r];
+      if (!_.has(damageByCombatant, unitId)) return [...acc, u];
 
-      const defense = Resource.getStatByName(r, 'defense');
-      const previousUnits = Resource.getUnits(r);
-      const damage = _.get(damageByCombatant, resourceId);
-      const newUnits = previousUnits - _.floor(damage / defense);
-      const wasKilled = newUnits < 1;
+      const defense = Unit.getStatByName(u, 'defense');
+      const previousCount = Unit.getCount(u);
+      const damage = _.get(damageByCombatant, unitId);
+      const newCount = previousCount - _.floor(damage / defense);
+      const wasKilled = newCount < 1;
 
       console.log(
-        Resource.getFaction(r),
-        Resource.getName(r),
-        `(${Resource.getId(r)})`,
+        Unit.getFaction(u),
+        Unit.getName(u),
+        `(${Unit.getId(u)})`,
         'took',
         damage,
-        'damage, and their units drop from',
-        previousUnits,
+        'damage, and their unit count drops from',
+        previousCount,
         'to',
-        `${newUnits}.`,
+        `${newCount}.`,
       );
 
       if (wasKilled) {
         console.log(
-          Resource.getFaction(r),
-          Resource.getName(r),
-          `(${Resource.getId(r)})`,
+          Unit.getFaction(u),
+          Unit.getName(u),
+          `(${Unit.getId(u)})`,
           'has been eliminated!',
         );
         return acc;
       }
 
-      const newResource = ({
-        ...r,
-        units: newUnits,
+      const newUnit = ({
+        ...u,
+        count: newCount,
       });
 
       return [
         ...acc,
-        newResource,
+        newUnit,
       ];
     },
     [],
@@ -214,7 +222,7 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
 
   const newLocation = {
     ...location,
-    resources: newLocationResources,
+    units: newLocationUnits,
   };
 
   const newGameState = {
@@ -275,6 +283,36 @@ export const travelGroupArrival = (store, { gameState, travelGroup }) => {
     locations: [
       ..._.differenceWith(locations, [destination], _.isEqual),
       newDestination,
+    ],
+  };
+
+  store.setState({ gameState: newGameState });
+};
+
+
+export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => {
+  const trainingGroups = GameState.getTrainingGroups(gameState);
+  const location = GameState.getLocationByName(gameState, defaultLocations.HOME);
+
+  const newLocation = {
+    ...location,
+    resources: [
+      ...Location.getResources(location),
+      ...createResources({
+        count: TrainingGroup.getTraineeCount(trainingGroup),
+        faction: allFactions.PLAYERS,
+        type: TrainingGroup.getGraduateType(trainingGroup),
+      }),
+    ],
+  };
+
+  const locations = GameState.getLocations(gameState);
+  const newGameState = {
+    ...gameState,
+    trainingGroups: _.without(trainingGroups, trainingGroup),
+    locations: [
+      ..._.differenceWith(locations, [location], _.isEqual),
+      newLocation,
     ],
   };
 

@@ -15,43 +15,58 @@ export const Role = ({
 });
 
 export const Resource = ({
-  getId: resource => _.get(resource, 'id'),
-  getIsCombatant: resource => _.get(resource, 'isCombatant'),
+  getType: resource => _.get(resource, 'type'),
   getFaction: resource => _.get(resource, 'faction'),
   getName: resource => _.get(resource, 'name'),
-  getUnits: resource => _.get(resource, 'units'),
-  getSize: resource => _.get(resource, 'size'),
-  getStats: resource => _.get(resource, 'stats'),
-  getStatByName: (resource, statName) => _.get(Resource.getStats(resource), statName),
+});
+
+export const Unit = ({
+  getId: unit => _.get(unit, 'id'),
+  getType: unit => _.get(unit, 'type'),
+  getFaction: unit => _.get(unit, 'faction'),
+  getName: unit => _.get(unit, 'name'),
+  getNumber: unit => _.get(unit, 'number'),
+  getSize: unit => _.get(unit, 'size'),
+  getStats: unit => _.get(unit, 'stats'),
+  getStatByName: (unit, statName) => _.get(Unit.getStats(unit), statName),
 });
 
 export const Feature = ({
+  getId: feature => _.get(feature, 'id'),
   getName: feature => _.get(feature, 'name'),
   getFaction: feature => _.get(feature, 'faction'),
+  getType: feature => _.get(feature, 'type'),
+  getMaxTraineeCount: feature => _.get(feature, 'maxTraineeCount'),
+  getTraineeCount: feature => _.get(feature, 'traineeCount'),
+  getTrainingOffered: feature => _.get(feature, 'trainingOffered'),
 });
 
 export const Location = ({
   getHeavyTransports: location => _.get(location, 'heavyTransports'),
   getName: location => _.get(location, 'name'),
   getFeatures: location => _.get(location, 'features'),
-  getFeaturesByName: (location, featureName) => _.filter(
+  getFeatureById: (location, featureId) => _.find(
     Location.getFeatures(location),
-    f => Feature.getName(f) === featureName,
+    f => Feature.getId(f) === featureId,
+  ),
+  getFactionFeaturesByName: (location, factionName, featureName) => _.filter(
+    Location.getFeatures(location),
+    f => Feature.getName(f) === featureName && Feature.getFaction(f) === factionName,
+  ),
+  getFactionFeaturesByType: (location, factionName, featureType) => _.filter(
+    Location.getFeatures(location),
+    f => Feature.getType(f) === featureType && Feature.getFaction(f) === factionName,
   ),
   getResources: location => _.get(location, 'resources'),
   getResourcesByFaction: (location, factionName) => _.filter(
     Location.getResources(location),
     r => Resource.getFaction(r) === factionName,
   ),
-});
-
-export const GameState = ({
-  getLocations: gameState => _.get(gameState, 'locations'),
-  getLocationByName: (gameState, locationName) => _.find(
-    GameState.getLocations(gameState),
-    l => Location.getName(l) === locationName,
+  getUnits: location => _.get(location, 'units'),
+  getUnitsByFaction: (location, factionName) => _.filter(
+    Location.getUnits(location),
+    u => Unit.getFaction(u) === factionName,
   ),
-  getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
 });
 
 export const Transport = ({
@@ -64,10 +79,17 @@ export const Transport = ({
 
 export const TrainingPath = ({
   getGraduateType: trainingPath => _.get(trainingPath, 'graduateType'),
-  getHostFeatureName: trainingPath => _.get(trainingPath, 'hostFeatureName'),
   getLength: trainingPath => _.get(trainingPath, 'length'),
   getName: trainingPath => _.get(trainingPath, 'name'),
   getTraineeType: trainingPath => _.get(trainingPath, 'traineeType'),
+});
+
+export const TrainingGroup = ({
+  getEnd: trainingGroup => _.get(trainingGroup, 'end'),
+  getFeatureId: trainingGroup => _.get(trainingGroup, 'featureId'),
+  getGraduateType: trainingGroup => _.get(trainingGroup, 'graduateType'),
+  getStart: trainingGroup => _.get(trainingGroup, 'start'),
+  getTraineeCount: trainingGroup => _.get(trainingGroup, 'traineeCount'),
 });
 
 export const TravelGroup = ({
@@ -78,6 +100,20 @@ export const TravelGroup = ({
   getFaction: travelGroup => _.get(travelGroup, 'faction'),
   getOriginName: travelGroup => _.get(travelGroup, 'originName'),
   getTransports: travelGroup => _.get(travelGroup, 'transports'),
+});
+
+export const GameState = ({
+  getLocations: gameState => _.get(gameState, 'locations'),
+  getLocationByName: (gameState, locationName) => _.find(
+    GameState.getLocations(gameState),
+    l => Location.getName(l) === locationName,
+  ),
+  getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
+  getTravelGroupAtFeatureId: (gameState, featureId) => _.find(
+    GameState.getTravelGroups(gameState),
+    tg => TravelGroup.getFeatureId(tg) === featureId,
+  ),
+  getTrainingGroups: gameState => _.get(gameState, 'trainingGroups'),
 });
 
 export const Theme = ({

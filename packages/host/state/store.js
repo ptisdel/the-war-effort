@@ -6,9 +6,9 @@ import * as helpers from '../helpers';
 
 const { constants } = common;
 
-const { createResource, createFeature } = helpers;
+const { createUnit, createFeature, createResources } = helpers;
 const {
-  allFactions, allFeatures, allResourceTypes, defaultLocations,
+  allFactions, allFeatures, allResources, allUnits, defaultLocations,
 } = constants;
 
 const initialState = {
@@ -21,30 +21,31 @@ const initialState = {
         heavyTransports: [],
         name: 'Fightastan',
         features: [],
-        resources: [
-          createResource({
+        resources: [],
+        units: [
+          createUnit({
             faction: allFactions.PLAYERS,
-            type: allResourceTypes.COMBAT.TANK,
+            type: allUnits.TANK,
           }),
-          createResource({
+          createUnit({
             faction: allFactions.PLAYERS,
-            type: allResourceTypes.COMBAT.SQUAD,
+            type: allUnits.SQUAD,
           }),
-          createResource({
+          createUnit({
             faction: allFactions.ENEMY,
-            type: allResourceTypes.COMBAT.SQUAD,
+            type: allUnits.SQUAD,
           }),
-          createResource({
+          createUnit({
             faction: allFactions.ENEMY,
-            type: allResourceTypes.COMBAT.SQUAD,
+            type: allUnits.SQUAD,
           }),
-          createResource({
+          createUnit({
             faction: allFactions.ENEMY,
-            type: allResourceTypes.COMBAT.SQUAD,
+            type: allUnits.SQUAD,
           }),
-          createResource({
+          createUnit({
             faction: allFactions.ENEMY,
-            type: allResourceTypes.COMBAT.SQUAD,
+            type: allUnits.SQUAD,
           }),
         ],
       },
@@ -62,7 +63,7 @@ const initialState = {
             faction: allFactions.PLAYERS,
             type: allFeatures.BASIC_TRAINING,
             modifiers: {
-              traineeCount: 20,
+              id: '142241',
             },
           }),
           createFeature({
@@ -85,9 +86,16 @@ const initialState = {
           },
         ],
         resources: [
-          createResource({
+          ...createResources({
+            count: 10,
             faction: allFactions.PLAYERS,
-            type: allResourceTypes.COMBAT.TANK,
+            type: allResources.MRES,
+          }),
+        ],
+        units: [
+          createUnit({
+            faction: allFactions.PLAYERS,
+            type: allUnits.TANK,
           }),
         ],
       },
@@ -105,9 +113,11 @@ const initialState = {
         ],
         heavyTransports: [],
         resources: [],
+        unit: [],
       },
     ],
     travelGroups: [],
+    trainingGroups: [],
   },
 };
 

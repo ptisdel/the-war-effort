@@ -12,145 +12,229 @@ export const allRoles = ({
   TRAINING: 'Training Officer',
 });
 
+export const allResourceTypes = ({
+  HUMAN_RESOURCE: 'Human Resource',
+  AMMUNITION: 'Ammunition',
+  FOOD: 'Food',
+});
+
+export const allResources = ({
+  MRES: {
+    count: 0,
+    name: 'MREs',
+    type: allResourceTypes.FOOD,
+  },
+  RECRUIT: {
+    count: 0,
+    name: 'Recruits',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  PRIVATE: {
+    count: 0,
+    name: 'Privates',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  RIFLEMAN: {
+    count: 0,
+    name: 'Riflemen',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  ARMOR_CREWMAN: {
+    count: 0,
+    name: 'Armor Crewmen',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  SPECIAL_OPERATOR: {
+    count: 0,
+    name: 'Special Operators',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  CADET: {
+    count: 0,
+    name: 'Cadets',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  FIGHTER_PILOT: {
+    count: 0,
+    name: 'Fighter Pilots',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  HEAVY_TRANSPORT_PILOT: {
+    count: 0,
+    name: 'Heavy Transport Pilots',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  HELICOPTER_PILOT: {
+    count: 0,
+    name: 'Helicopter Pilots',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  UAV_PILOT: {
+    count: 0,
+    name: 'UAV Pilots',
+    type: allResourceTypes.HUMAN_RESOURCE,
+  },
+});
+
+export const allUnitTypes = ({
+  MILITARY: 'Military',
+  CIVILIAN: 'Civilian',
+});
+
+export const allUnits = ({
+  SQUAD: {
+    type: allUnitTypes.MILITARY,
+    name: 'Squad',
+    number: 10,
+    size: 1,
+    stats: {
+      accuracy: 0.8,
+      attack: 2,
+      defense: 1,
+    },
+  },
+  TANK: {
+    type: allUnitTypes.MILITARY,
+    name: 'Tank',
+    number: 1,
+    size: 2,
+    stats: {
+      accuracy: 0.6,
+      attack: 5,
+      defense: 5,
+    },
+  },
+});
+
+export const allTrainingPaths = {
+  BASIC_TRAINING: {
+    name: 'Basic Training',
+    traineeType: allResources.RECRUIT,
+    graduateType: allResources.PRIVATE,
+    length: 10,
+  },
+  COMBAT_TRAINING: {
+    name: 'Combat Training',
+    traineeType: allResources.PRIVATE,
+    graduateType: allResources.RIFLEMAN,
+    length: 10,
+  },
+  ARMOR_TRAINING: {
+    name: 'Armor Training',
+    traineeType: allResources.PRIVATE,
+    graduateType: allResources.ARMOR_CREWMAN,
+    length: 20,
+  },
+  SPECIAL_FORCES_TRAINING: {
+    name: 'Special Forces Training',
+    traineeType: allResources.RIFLEMAN,
+    graduateType: allResources.SPECIAL_OPERATOR,
+    length: 30,
+  },
+  CADET_TRAINING: {
+    name: 'Air Force Academy',
+    traineeType: allResources.RECRUIT,
+    graduateType: allResources.CADET,
+    length: 10,
+  },
+  FIGHTER_PILOT_TRAINING: {
+    name: 'Fighter Pilot Training',
+    traineeType: allResources.CADET,
+    graduateType: allResources.FIGHTER_PILOT,
+    length: 30,
+  },
+  HEAVY_TRANSPORT_PILOT_TRAINING: {
+    name: 'Heavy Transport Pilot Training',
+    traineeType: allResources.CADET,
+    graduateType: allResources.HEAVY_TRANSPORT_PILOT,
+    length: 30,
+  },
+  HELICOPTER_PILOT_TRAINING: {
+    name: 'Helicopter Pilot Training',
+    traineeType: allResources.CADET,
+    graduateType: allResources.HELICOPTER_PILOT,
+    length: 30,
+  },
+  UAV_PILOT_TRAINING: {
+    name: 'UAV Pilot Training',
+    traineeType: allResources.CADET,
+    graduateType: allResources.UAV_PILOT,
+    length: 30,
+  },
+};
+
+export const allFeatureTypes = ({
+  TRAINING: 'Training',
+  AIRPORT: 'Airport',
+  AIR_DEFENSE: 'Air Defense',
+});
+
 export const allFeatures = ({
   AIRPORT: {
     name: 'Airport',
+    type: allFeatureTypes.AIRPORT,
   },
   ANTI_AIR_BATTERY: {
     name: 'Anti-air Battery',
+    type: allFeatureTypes.AIR_DEFENSE,
   },
   AIR_FORCE_ACADEMY: {
     name: 'Air Force Academy',
     maxTraineeCount: 20,
     traineeCount: 0,
+    trainingOffered: allTrainingPaths.CADET_TRAINING,
+    type: allFeatureTypes.TRAINING,
   },
   BASIC_TRAINING: {
     name: 'Basic Training',
     maxTraineeCount: 40,
     traineeCount: 0,
+    trainingOffered: allTrainingPaths.BASIC_TRAINING,
+    type: allFeatureTypes.TRAINING,
   },
   INFANTRY_COMBAT_TRAINING_CENTER: {
     name: 'Infantry Combat Training Center',
     maxTraineeCount: 20,
     traineeCount: 0,
+    trainingOffered: allTrainingPaths.COMBAT_TRAINING,
+    type: allFeatureTypes.TRAINING,
   },
   ARMOR_SCHOOL: {
     name: 'Armor School',
     maxTraineeCount: 5,
     traineeCount: 0,
+    trainingOffered: allTrainingPaths.ARMOR_TRAINING,
+    type: allFeatureTypes.TRAINING,
   },
   SPECIAL_FORCES_TRAINING_CENTER: {
     name: 'Special Forces Training Center',
     maxTraineeCount: 5,
     traineeCount: 0,
+    trainingOffered: allTrainingPaths.SPECIAL_FORCES_TRAINING,
+    type: allFeatureTypes.TRAINING,
   },
-  FLIGHT_SCHOOL: {
-    name: 'Flight School',
+  UAV_FLIGHT_SCHOOL: {
+    name: 'UAV Flight School',
     maxTraineeCount: 15,
     traineeCount: 0,
+    trainingOffered: allTrainingPaths.UAV_PILOT_TRAINING,
+    type: allFeatureTypes.TRAINING,
+  },
+  HEAVY_TRANSPORT_FLIGHT_SCHOOL: {
+    name: 'Heavy Transport Flight School',
+    maxTraineeCount: 15,
+    traineeCount: 0,
+    trainingOffered: allTrainingPaths.HEAVY_TRANSPORT_PILOT_TRAINING,
+    type: allFeatureTypes.TRAINING,
+  },
+  FIGHTER_JET_FLIGHT_SCHOOL: {
+    name: 'Fighter Jet Flight School',
+    maxTraineeCount: 15,
+    traineeCount: 0,
+    trainingOffered: allTrainingPaths.FIGHTER_PILOT_TRAINING,
+    type: allFeatureTypes.TRAINING,
   },
 });
-
-export const allResourceTypes = ({
-  HUMAN_RESOURCES: {
-    HEAVY_TRANSPORT_PILOT: 'Heavy Transport Pilot',
-    CADET: 'Air Force Cadet',
-    ARMOR_CREWMAN: 'Armor Crewman',
-    PRIVATE: 'Private',
-    FIGHTER_PILOT: 'Fighter Pilot',
-    HELICOPTER_PILOT: 'Helicopter Pilot',
-    RECRUIT: 'Recruit',
-    RIFLEMAN: 'Rifleman',
-    SPECIAL_OPERATOR: 'Special Operator',
-    UAV_PILOT: 'UAV Pilot',
-  },
-  COMBAT: {
-    SQUAD: {
-      isCombatant: true,
-      name: 'Squad',
-      units: 10,
-      size: 1,
-      stats: {
-        accuracy: 0.8,
-        attack: 2,
-        defense: 1,
-      },
-    },
-    TANK: {
-      isCombatant: true,
-      name: 'Tank',
-      units: 1,
-      size: 2,
-      stats: {
-        accuracy: 0.6,
-        attack: 5,
-        defense: 5,
-      },
-    },
-  },
-});
-
-export const armyTrainingPaths = [
-  {
-    hostFeatureName: allFeatures.BASIC_TRAINING.name,
-    name: 'Basic Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.RECRUIT,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.PRIVATE,
-    length: 10,
-  }, {
-    hostFeatureName: allFeatures.INFANTRY_COMBAT_TRAINING_CENTER.name,
-    name: 'Combat Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.PRIVATE,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.RIFLEMAN,
-    length: 10,
-  }, {
-    hostFeatureName: allFeatures.ARMOR_SCHOOL.name,
-    name: 'Armor Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.PRIVATE,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.ARMOR_CREWMAN,
-    length: 20,
-  }, {
-    hostFeatureName: allFeatures.SPECIAL_FORCES_TRAINING_CENTER.name,
-    name: 'Special Forces Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.RIFLEMAN,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.SPECIAL_OPERATOR,
-    length: 30,
-  },
-];
-
-export const airForceTrainingPaths = [
-  {
-    hostFeatureName: allFeatures.AIR_FORCE_ACADEMY.name,
-    name: 'Air Force Academy',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.RECRUIT,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.CADET,
-    length: 10,
-  }, {
-    hostFeatureName: allFeatures.FLIGHT_SCHOOL.name,
-    name: 'Fighter Pilot Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.CADET,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.FIGHTER_PILOT,
-    length: 30,
-  }, {
-    hostFeatureName: allFeatures.FLIGHT_SCHOOL.name,
-    name: 'Heavy Transport Pilot Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.CADET,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.HEAVY_TRANSPORT_PILOT,
-    length: 30,
-  }, {
-    hostFeatureName: allFeatures.FLIGHT_SCHOOL.name,
-    name: 'Helicopter Pilot Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.CADET,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.HELICOPTER_PILOT,
-    length: 30,
-  }, {
-    hostFeatureName: allFeatures.FLIGHT_SCHOOL.name,
-    name: 'UAV Pilot Training',
-    traineeType: allResourceTypes.HUMAN_RESOURCES.CADET,
-    graduateType: allResourceTypes.HUMAN_RESOURCES.UAV_PILOT,
-    length: 30,
-  },
-];
 
 export const defaultLocations = ({
   HOME: 'Home Base',

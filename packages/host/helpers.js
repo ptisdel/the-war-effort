@@ -3,9 +3,9 @@ import { useEffect, useRef } from 'react';
 import uuid from 'uuid';
 
 export const createFeature = ({ faction, type, modifiers = {} }) => ({
+  id: uuid(),
   ...type,
   ...modifiers,
-  id: uuid(),
   faction,
 });
 
@@ -15,28 +15,38 @@ export const createFeatures = ({
   modifiers = {},
   type,
 }) => _.times(count, () => ({
+  id: uuid(),
   ...type,
   ...modifiers,
-  id: uuid(),
   faction,
 }));
 
-export const createResource = ({ faction, modifiers = {}, type }) => ({
+export const createResources = ({
+  count = 1,
+  faction,
+  type,
+}) => _.times(count, () => ({
+  id: uuid(),
+  ...type,
+  faction,
+}));
+
+export const createUnit = ({ faction, modifiers = {}, type }) => ({
+  id: uuid(),
   ...type,
   ...modifiers,
-  id: uuid(),
   faction,
 });
 
-export const createResources = ({
+export const createUnits = ({
   count = 1,
   faction,
   modifiers = {},
   type,
 }) => _.times(count, () => ({
+  id: uuid(),
   ...type,
   ...modifiers,
-  id: uuid(),
   faction,
 }));
 

@@ -18,7 +18,7 @@ export const PlayerList = styled.div(() => ({
 export const Locations = styled.div(() => ({
   display: 'grid',
   columnGap: '20px',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(5, 1fr)',
   gridTemplateRows: 'auto',
   rowGap: '60px',
 }));
@@ -44,6 +44,27 @@ export const Resource = styled.div(() => ({
 }));
 
 export const ResourceName = styled.div(() => ({
+
+}));
+
+
+export const Units = styled.div(() => ({
+
+}));
+
+export const UnitsTitle = styled.div(() => ({
+  fontWeight: 'bold',
+}));
+
+export const UnitsList = styled.div(() => ({
+
+}));
+
+export const Unit = styled.div(() => ({
+
+}));
+
+export const UnitName = styled.div(() => ({
 
 }));
 

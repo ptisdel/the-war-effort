@@ -15,6 +15,7 @@ const {
   Resource,
   Role,
   Transport,
+  Unit,
 } = models;
 const { store } = state;
 
@@ -38,6 +39,16 @@ export const NewsView = () => {
             )) }
           </Styles.ResourcesList>
       </Styles.Resources>
+      <Styles.Units>
+        <Styles.UnitsTitle>Units</Styles.UnitsTitle>
+          <Styles.UnitsList>
+            { _.map(Location.getUnits(location), (u, ukey) => (
+              <Styles.Unit key = { ukey }>
+                { `${Unit.getFaction(u)} ${Unit.getName(u)}` }
+              </Styles.Unit>
+            )) }
+          </Styles.UnitsList>
+      </Styles.Units>
       <Styles.Transports>
         <Styles.TransportsTitle>Transports</Styles.TransportsTitle>
           <Styles.TransportsList>
