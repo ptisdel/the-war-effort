@@ -232,3 +232,10 @@ export const defaultLocations = {
 
 export const budgetIncrementAmount = 100000;
 export const roleBudgetIncrementAmount = 10000;
+
+export const LOGGING = {
+  battle: false,
+  commander: true,
+  gameStateChange: true,
+  logistics: true,
+};

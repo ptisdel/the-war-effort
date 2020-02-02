@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import common from '@the-war-effort/common';
 
-const { constants, models } = common;
+const { constants, helpers, models } = common;
+const { log } = helpers;
 const { GameState, Role } = models;
 const { budgetIncrementAmount, roleBudgetIncrementAmount } = constants;
 
@@ -70,7 +71,7 @@ export const increaseRoleBudget = (store, payload) => {
 };
 
 
-export const requestBudgetIncrease = (store) => {
+export const requestBudgetIncrease = store => {
   const { gameState } = store.state;
 
   const currentBudget = GameState.getBudget(gameState);
@@ -89,5 +90,20 @@ export const requestBudgetIncrease = (store) => {
     budget: newBudget,
     parliament: newParliament,
   };
+  store.setState({ gameState: newGameState });
+};
+
+export const fireRole = (store, payload) => {
+  const roleName = payload;
+  log('commander', 'firing', roleName);
+
+  const { gameState } = store.state;
+  const roles = GameState.getRoles(gameState);
+
+  const newGameState = {
+    ...gameState,
+    roles: _.reject(roles, r => Role.getName(r) === roleName),
+  };
+
   store.setState({ gameState: newGameState });
 };

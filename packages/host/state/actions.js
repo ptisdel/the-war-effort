@@ -1,15 +1,16 @@
 import _ from 'lodash';
 import common from '@the-war-effort/common';
 import roleActions from './role-actions';
-import * as helpers from '../helpers';
+import * as hostHelpers from '../helpers';
 
-const { constants, models } = common;
-const { createResource } = helpers;
+const { constants, helpers, models } = common;
+const { createResource } = hostHelpers;
 
 const {
   allFactions,
   defaultLocations,
 } = constants;
+const { log } = helpers;
 const {
   GameState,
   Location,
@@ -22,8 +23,9 @@ const {
 
 export const roleAction = (store, { type, payload }) => {
   const { commanderActions, logisticsActions, trainingActions } = roleActions;
-  if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
+  if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
+  if (type === 'commander/fireRole') commanderActions.fireRole(store, payload);
   if (type === 'commander/requestBudgetIncrease') commanderActions.requestBudgetIncrease(store);
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
   if (type === 'training/createTrainingGroup') trainingActions.createTrainingGroup(store, payload);
@@ -105,15 +107,15 @@ export const removePlayerFromRole = (store, roleName) => {
 
   const newGameState = {
     ...gameState,
-    roles: _.filter(roles, r => Role.getName(r) === roleName),
+    roles: _.reject(roles, r => Role.getName(r) === roleName),
   };
 
   store.setState({ gameState: newGameState });
 };
 
 export const battle = (store, { gameState, location, combatantsGroupedByFaction }) => {
-  console.log(`A battle rages in ${Location.getName(location)}!`);
-  console.log(combatantsGroupedByFaction);
+  log('battle', `A battle rages in ${Location.getName(location)}!`);
+  log('battle', combatantsGroupedByFaction);
 
   const getCombatantsDefendingAgainst = attackingFactionName => _.reduce(
     combatantsGroupedByFaction,
@@ -136,7 +138,8 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
       const unluckyDefenderId = Unit.getId(unluckyDefender);
       const previousDamage = _.get(acc, unluckyDefenderId) || 0;
       const newDamage = previousDamage + attackDamage;
-      console.log(
+      log(
+        'battle',
         Unit.getFaction(attacker),
         Unit.getName(attacker),
         `(${Unit.getId(attacker)})`,
@@ -171,7 +174,7 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
 
   const damageByCombatant = getCasualtiesFromAllFactionAttacks();
 
-  console.log('Here come the casualty reports.');
+  log('battle', 'Here come the casualty reports.');
 
   const newLocationUnits = _.reduce(
     Location.getUnits(location),
@@ -186,7 +189,8 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
       const newNumber = previousNumber - _.floor(damage / defense);
       const wasKilled = newNumber < 1;
 
-      console.log(
+      log(
+        'battle',
         Unit.getFaction(u),
         Unit.getName(u),
         `(${Unit.getId(u)})`,
@@ -199,7 +203,8 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
       );
 
       if (wasKilled) {
-        console.log(
+        log(
+          'battle',
           Unit.getFaction(u),
           Unit.getName(u),
           `(${Unit.getId(u)})`,

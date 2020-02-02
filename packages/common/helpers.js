@@ -1,3 +1,8 @@
+import _ from 'lodash';
+import * as constants from './constants';
+
+const { LOGGING } = constants;
+
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -5,3 +10,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 export const formatMoney = amount => formatter.format(amount);
+
+export const log = (tag, ...message) => {
+  if (_.get(LOGGING, tag)) console.log(...message);
+};

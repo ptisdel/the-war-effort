@@ -112,6 +112,12 @@ export const GameState = ({
   getParliament: gameState => _.get(gameState, 'parliament'),
   getParliamentTotalMemberCount: gameState => _.get(gameState, ['parliament', 'totalMemberCount']),
   getParliamentSupportingMemberCount: gameState => _.get(gameState, ['parliament', 'supportingMemberCount']),
+  getPlayerByRoleName: (gameState, roleName) => Role.getPlayer(
+    _.find(
+      GameState.getRoles(gameState),
+      r => Role.getName(r) === roleName,
+    ),
+  ),
   getPublicSupport: gameState => _.get(gameState, 'publicSupport'),
   getRoles: gameState => _.get(gameState, 'roles'),
   getTravelGroups: gameState => _.get(gameState, 'travelGroups'),

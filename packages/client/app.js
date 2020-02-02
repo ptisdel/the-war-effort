@@ -11,9 +11,10 @@ import * as api from './api';
 import components from './components';
 import state from './state';
 
-const { constants, models } = common;
+const { constants, helpers, models } = common;
 
 const { Layout } = components;
+const { log } = helpers;
 const { Role } = models;
 const { allRoles } = constants;
 
@@ -42,7 +43,7 @@ export const App = () => {
 
   useEffect(() => {
     // eslint-disable-next-line
-    console.log('Game State:', globalState.gameState);
+    log('gameStateChange', 'Game State:', globalState.gameState);
   }, [globalState]);
 
   const getViewFromRole = () => {

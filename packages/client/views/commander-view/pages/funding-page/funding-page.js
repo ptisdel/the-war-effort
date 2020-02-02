@@ -10,7 +10,7 @@ const { constants, models } = common;
 // TODO getting a memory leak here when resigning as commander from ONLY funding page, not sure why
 
 const { commanderActions } = api;
-const { Budget, Role } = models;
+const { Budget, GameState, Role } = models;
 const { allRoles } = constants;
 const { store } = state;
 
@@ -18,7 +18,8 @@ const FundingPage = () => {
   const [globalState] = store();
 
   const { gameState } = globalState;
-  const { roles, budget } = gameState;
+  const roles = GameState.getRoles(gameState);
+  const budget = GameState.getBudget(gameState);
 
   const decreaseBudget = roleName => commanderActions.decreaseRoleBudget(roleName);
   const increaseBudget = roleName => commanderActions.increaseRoleBudget(roleName);

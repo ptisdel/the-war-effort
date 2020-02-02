@@ -6,9 +6,10 @@ import * as api from '../../../../api';
 import state from '../../../../state';
 import * as Styles from './resource-sender.styles';
 
-const { models } = common;
+const { helpers, models } = common;
 
 const { logisticsActions } = api;
+const { log } = helpers;
 const { GameState, Location, Resource } = models;
 const { store } = state;
 
@@ -38,7 +39,7 @@ const ResourceSender = ({ originName, destinationName }) => {
   };
 
   const handleSendTransports = () => {
-    console.log(selectedResources);
+    log('logistics', selectedResources);
     logisticsActions.createTravelGroup({
       destinationName,
       originName,

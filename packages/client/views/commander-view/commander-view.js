@@ -3,7 +3,7 @@ import common from '@the-war-effort/common';
 import * as api from '../../api';
 import shared from '../../components';
 import * as Styles from './commander-view.styles';
-import { FundingPage, ParliamentPage } from './pages';
+import { FundingPage, ParliamentPage, RolesPage } from './pages';
 
 const { constants } = common;
 
@@ -22,9 +22,7 @@ export const CommanderView = () => {
       <Swiper>
         <FundingPage/>
         <ParliamentPage/>
-        <div>
-          <p>Third page</p>
-        </div>
+        <RolesPage/>
       </Swiper>
     </Styles.Root>
   );

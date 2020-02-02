@@ -2,9 +2,10 @@ import _ from 'lodash';
 import common from '@the-war-effort/common';
 import { TrainingGroup } from '@the-war-effort/common/models';
 
-const { constants, models } = common;
+const { constants, helpers, models } = common;
 
 const { allUnitTypes } = constants;
+const { log } = helpers;
 
 const {
   GameState,
@@ -23,8 +24,8 @@ const checkLocationsForCombat = ({ globalActions, gameState }) => {
     const combatantsGroupedByFaction = _.groupBy(combatants, u => Unit.getFaction(u));
     if (_.keys(combatantsGroupedByFaction).length < 2) return;
 
-    console.log('Going into battle and here is the lineup:');
-    console.log(combatantsGroupedByFaction);
+    log('battle', 'Going into battle and here is the lineup:');
+    log('battle', combatantsGroupedByFaction);
 
     globalActions.battle({ gameState, location, combatantsGroupedByFaction });
   });
