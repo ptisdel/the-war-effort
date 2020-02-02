@@ -4,7 +4,7 @@ import roleActions from './role-actions';
 import * as helpers from '../helpers';
 
 const { constants, models } = common;
-const { createResources } = helpers;
+const { createResource } = helpers;
 
 const {
   allFactions,
@@ -24,6 +24,7 @@ export const roleAction = (store, { type, payload }) => {
   const { commanderActions, logisticsActions, trainingActions } = roleActions;
   if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
+  if (type === 'commander/requestBudgetIncrease') commanderActions.requestBudgetIncrease(store);
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
   if (type === 'training/createTrainingGroup') trainingActions.createTrainingGroup(store, payload);
 };
@@ -180,10 +181,10 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
       if (!_.has(damageByCombatant, unitId)) return [...acc, u];
 
       const defense = Unit.getStatByName(u, 'defense');
-      const previousCount = Unit.getCount(u);
+      const previousNumber = Unit.getNumber(u);
       const damage = _.get(damageByCombatant, unitId);
-      const newCount = previousCount - _.floor(damage / defense);
-      const wasKilled = newCount < 1;
+      const newNumber = previousNumber - _.floor(damage / defense);
+      const wasKilled = newNumber < 1;
 
       console.log(
         Unit.getFaction(u),
@@ -192,9 +193,9 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
         'took',
         damage,
         'damage, and their unit count drops from',
-        previousCount,
+        previousNumber,
         'to',
-        `${newCount}.`,
+        `${newNumber}.`,
       );
 
       if (wasKilled) {
@@ -209,7 +210,7 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
 
       const newUnit = ({
         ...u,
-        count: newCount,
+        number: newNumber,
       });
 
       return [
@@ -298,7 +299,7 @@ export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => 
     ...location,
     resources: [
       ...Location.getResources(location),
-      ...createResources({
+      ...createResource({
         count: TrainingGroup.getTraineeCount(trainingGroup),
         faction: allFactions.PLAYERS,
         type: TrainingGroup.getGraduateType(trainingGroup),

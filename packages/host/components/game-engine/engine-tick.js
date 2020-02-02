@@ -17,7 +17,7 @@ const checkLocationsForCombat = ({ globalActions, gameState }) => {
   _.forEach(GameState.getLocations(gameState), location => {
     const combatants = _.filter(
       Location.getUnits(location),
-      u => Unit.getType(u) === allUnitTypes.ACTIVE_COMBATANT,
+      u => Unit.getType(u) === allUnitTypes.MILITARY,
     );
 
     const combatantsGroupedByFaction = _.groupBy(combatants, u => Unit.getFaction(u));

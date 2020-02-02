@@ -3,7 +3,7 @@ import common from '@the-war-effort/common';
 import * as api from '../../api';
 import shared from '../../components';
 import * as Styles from './commander-view.styles';
-import { FundingPage } from './pages';
+import { FundingPage, ParliamentPage } from './pages';
 
 const { constants } = common;
 
@@ -21,9 +21,7 @@ export const CommanderView = () => {
       <RoleHeader title = { allRoles.COMMANDER } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <FundingPage/>
-        <div>
-          <p>Second page</p>
-        </div>
+        <ParliamentPage/>
         <div>
           <p>Third page</p>
         </div>

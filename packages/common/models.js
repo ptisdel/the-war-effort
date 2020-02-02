@@ -103,11 +103,17 @@ export const TravelGroup = ({
 });
 
 export const GameState = ({
+  getBudget: gameState => _.get(gameState, 'budget'),
   getLocations: gameState => _.get(gameState, 'locations'),
   getLocationByName: (gameState, locationName) => _.find(
     GameState.getLocations(gameState),
     l => Location.getName(l) === locationName,
   ),
+  getParliament: gameState => _.get(gameState, 'parliament'),
+  getParliamentTotalMemberCount: gameState => _.get(gameState, ['parliament', 'totalMemberCount']),
+  getParliamentSupportingMemberCount: gameState => _.get(gameState, ['parliament', 'supportingMemberCount']),
+  getPublicSupport: gameState => _.get(gameState, 'publicSupport'),
+  getRoles: gameState => _.get(gameState, 'roles'),
   getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
   getTravelGroupAtFeatureId: (gameState, featureId) => _.find(
     GameState.getTravelGroups(gameState),

@@ -26,6 +26,7 @@ export const sendRegistrationRequest = () => {
 export const commanderActions = ({
   decreaseRoleBudget: roleName => socket.emit('role-action', { type: 'commander/decreaseRoleBudget', payload: roleName }),
   increaseRoleBudget: roleName => socket.emit('role-action', { type: 'commander/increaseRoleBudget', payload: roleName }),
+  requestBudgetIncrease: () => socket.emit('role-action', { type: 'commander/requestBudgetIncrease', payload: undefined }),
 });
 
 export const logisticsActions = ({

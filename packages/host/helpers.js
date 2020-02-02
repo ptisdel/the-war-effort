@@ -21,15 +21,16 @@ export const createFeatures = ({
   faction,
 }));
 
-export const createResources = ({
+export const createResource = ({
   count = 1,
   faction,
   type,
-}) => _.times(count, () => ({
+}) => ({
+  count,
   id: uuid(),
   ...type,
   faction,
-}));
+});
 
 export const createUnit = ({ faction, modifiers = {}, type }) => ({
   id: uuid(),

@@ -2,10 +2,8 @@ import _ from 'lodash';
 import common from '@the-war-effort/common';
 
 const { constants, models } = common;
-
-const { Role } = models;
-
-const { budgetIncrementAmount } = constants;
+const { GameState, Role } = models;
+const { budgetIncrementAmount, roleBudgetIncrementAmount } = constants;
 
 export const decreaseRoleBudget = (store, payload) => {
   const { gameState } = store.state;
@@ -17,10 +15,43 @@ export const decreaseRoleBudget = (store, payload) => {
 
   const targetRoleBudget = Role.getBudget(targetRole);
 
-  if (targetRoleBudget < budgetIncrementAmount) return;
+  if (targetRoleBudget < roleBudgetIncrementAmount) return;
 
-  const newBudget = budget + budgetIncrementAmount;
-  const newTargetRoleBudget = targetRoleBudget - budgetIncrementAmount;
+  const newBudget = budget + roleBudgetIncrementAmount;
+  const newTargetRoleBudget = targetRoleBudget - roleBudgetIncrementAmount;
+
+  const newRoles = [
+    ..._.without(roles, targetRole),
+    {
+      ...targetRole,
+      budget: newTargetRoleBudget,
+    },
+  ];
+
+  const newGameState = {
+    ...gameState,
+    budget: newBudget,
+    roles: newRoles,
+  };
+  store.setState({ gameState: newGameState });
+};
+
+export const increaseRoleBudget = (store, payload) => {
+  const { gameState } = store.state;
+
+  const budget = GameState.getBudget(gameState);
+  const roles = GameState.getRoles(gameState);
+
+  const roleName = payload;
+  const targetRole = _.find(roles, r => Role.getName(r) === roleName);
+  if (!targetRole) return;
+
+  const targetRoleBudget = Role.getBudget(targetRole);
+
+  if (budget < roleBudgetIncrementAmount) return;
+
+  const newBudget = budget - roleBudgetIncrementAmount;
+  const newTargetRoleBudget = targetRoleBudget + roleBudgetIncrementAmount;
 
   const newRoles = [
     ..._.without(roles, targetRole),
@@ -39,33 +70,24 @@ export const decreaseRoleBudget = (store, payload) => {
 };
 
 
-export const increaseRoleBudget = (store, payload) => {
+export const requestBudgetIncrease = (store) => {
   const { gameState } = store.state;
-  const { budget, roles } = gameState;
 
-  const roleName = payload;
-  const targetRole = _.find(roles, r => Role.getName(r) === roleName);
-  if (!targetRole) return;
+  const currentBudget = GameState.getBudget(gameState);
+  const newBudget = currentBudget + budgetIncrementAmount;
 
-  const targetRoleBudget = Role.getBudget(targetRole);
+  const currentParliamentSupport = GameState.getParliamentSupportingMemberCount(gameState);
+  const newParliamentSupport = _.max([0, currentParliamentSupport - _.random(5, 15, false)]);
 
-  if (budget < budgetIncrementAmount) return;
-
-  const newBudget = budget - budgetIncrementAmount;
-  const newTargetRoleBudget = targetRoleBudget + budgetIncrementAmount;
-
-  const newRoles = [
-    ..._.without(roles, targetRole),
-    {
-      ...targetRole,
-      budget: newTargetRoleBudget,
-    },
-  ];
+  const newParliament = {
+    ...GameState.getParliament(gameState),
+    supportingMemberCount: newParliamentSupport,
+  };
 
   const newGameState = {
     ...gameState,
     budget: newBudget,
-    roles: newRoles,
+    parliament: newParliament,
   };
   store.setState({ gameState: newGameState });
 };

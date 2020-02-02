@@ -6,13 +6,18 @@ import * as helpers from '../helpers';
 
 const { constants } = common;
 
-const { createUnit, createFeature, createResources } = helpers;
+const { createUnit, createFeature, createResource } = helpers;
 const {
   allFactions, allFeatures, allResources, allUnits, defaultLocations,
 } = constants;
 
 const initialState = {
   gameState: {
+    parliament: {
+      supportingMemberCount: 42,
+      totalMemberCount: 120,
+    },
+    publicSupport: 71,
     players: [],
     roles: [],
     budget: 2000000,
@@ -86,7 +91,7 @@ const initialState = {
           },
         ],
         resources: [
-          ...createResources({
+          createResource({
             count: 10,
             faction: allFactions.PLAYERS,
             type: allResources.MRES,

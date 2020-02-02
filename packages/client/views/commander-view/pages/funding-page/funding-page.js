@@ -46,9 +46,9 @@ const FundingPage = () => {
 
   return (
     <Styles.Root>
-      <ul as = { Styles.FundingTotal }>
-        { Budget.getFormattedTotal(budget) }
-      </ul>
+      <h2 as = { Styles.FundingTotal }>
+        { `Total Budget: ${Budget.getFormattedTotal(budget)}` }
+      </h2>
       <Styles.RoleList>
         { renderRoles() }
       </Styles.RoleList>

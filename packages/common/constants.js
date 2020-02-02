@@ -1,87 +1,76 @@
-export const allFactions = ({
+export const allFactions = {
   PLAYERS: 'Player',
   ENEMY: 'Enemy',
-});
+};
 
-export const allRoles = ({
+export const allRoles = {
   AIR_SUPPORT: 'Air Support Officer',
   AUDIENCE: 'Audience Member',
   COMMANDER: 'Commander',
   LOGISTICS: 'Logistics Officer',
   PUBLIC_AFFAIRS: 'Public Affairs Officer',
   TRAINING: 'Training Officer',
-});
+};
 
-export const allResourceTypes = ({
+export const allResourceTypes = {
   HUMAN_RESOURCE: 'Human Resource',
   AMMUNITION: 'Ammunition',
   FOOD: 'Food',
-});
+};
 
-export const allResources = ({
+export const allResources = {
   MRES: {
-    count: 0,
     name: 'MREs',
     type: allResourceTypes.FOOD,
   },
   RECRUIT: {
-    count: 0,
     name: 'Recruits',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   PRIVATE: {
-    count: 0,
     name: 'Privates',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   RIFLEMAN: {
-    count: 0,
     name: 'Riflemen',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   ARMOR_CREWMAN: {
-    count: 0,
     name: 'Armor Crewmen',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   SPECIAL_OPERATOR: {
-    count: 0,
     name: 'Special Operators',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   CADET: {
-    count: 0,
     name: 'Cadets',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   FIGHTER_PILOT: {
-    count: 0,
     name: 'Fighter Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HEAVY_TRANSPORT_PILOT: {
-    count: 0,
     name: 'Heavy Transport Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HELICOPTER_PILOT: {
-    count: 0,
     name: 'Helicopter Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   UAV_PILOT: {
-    count: 0,
     name: 'UAV Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
-});
+};
 
-export const allUnitTypes = ({
+export const allUnitTypes = {
   MILITARY: 'Military',
   CIVILIAN: 'Civilian',
-});
+};
 
-export const allUnits = ({
+export const allUnits = {
   SQUAD: {
     type: allUnitTypes.MILITARY,
     name: 'Squad',
@@ -104,7 +93,7 @@ export const allUnits = ({
       defense: 5,
     },
   },
-});
+};
 
 export const allTrainingPaths = {
   BASIC_TRAINING: {
@@ -163,13 +152,13 @@ export const allTrainingPaths = {
   },
 };
 
-export const allFeatureTypes = ({
+export const allFeatureTypes = {
   TRAINING: 'Training',
   AIRPORT: 'Airport',
   AIR_DEFENSE: 'Air Defense',
-});
+};
 
-export const allFeatures = ({
+export const allFeatures = {
   AIRPORT: {
     name: 'Airport',
     type: allFeatureTypes.AIRPORT,
@@ -234,11 +223,12 @@ export const allFeatures = ({
     trainingOffered: allTrainingPaths.FIGHTER_PILOT_TRAINING,
     type: allFeatureTypes.TRAINING,
   },
-});
+};
 
-export const defaultLocations = ({
+export const defaultLocations = {
   HOME: 'Home Base',
   FOB: 'FOB',
-});
+};
 
-export const budgetIncrementAmount = 10000;
+export const budgetIncrementAmount = 100000;
+export const roleBudgetIncrementAmount = 10000;
