@@ -54,6 +54,7 @@ const checkTrainingGroups = ({ globalActions, gameState }) => {
 };
 
 export const engineTick = ({ globalActions, gameState }) => {
+  log('gameEngine', 'tick');
   checkTrainingGroups({ globalActions, gameState });
   checkTravelGroups({ globalActions, gameState });
   checkLocationsForCombat({ globalActions, gameState });

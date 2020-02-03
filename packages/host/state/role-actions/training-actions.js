@@ -38,7 +38,7 @@ export const createTrainingGroup = (store, payload) => {
     traineeCount: Feature.getMaxTraineeCount(feature),
   });
 
-  const { trainingGroups } = gameState;
+  const trainingGroups = GameState.getTrainingGroups(gameState);
   const newGameState = {
     ...gameState,
     trainingGroups: [

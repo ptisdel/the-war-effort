@@ -2,53 +2,16 @@ import _ from 'lodash';
 import { useEffect, useRef } from 'react';
 import uuid from 'uuid';
 
-export const createFeature = ({ faction, type, modifiers = {} }) => ({
+export const create = (type, options) => ({
   id: uuid(),
   ...type,
-  ...modifiers,
-  faction,
+  ...options,
 });
 
-export const createFeatures = ({
-  count = 1,
-  faction,
-  modifiers = {},
-  type,
-}) => _.times(count, () => ({
+export const createMultiple = (type, count, options) => _.times(count, () => ({
   id: uuid(),
   ...type,
-  ...modifiers,
-  faction,
-}));
-
-export const createResource = ({
-  count = 1,
-  faction,
-  type,
-}) => ({
-  count,
-  id: uuid(),
-  ...type,
-  faction,
-});
-
-export const createUnit = ({ faction, modifiers = {}, type }) => ({
-  id: uuid(),
-  ...type,
-  ...modifiers,
-  faction,
-});
-
-export const createUnits = ({
-  count = 1,
-  faction,
-  modifiers = {},
-  type,
-}) => _.times(count, () => ({
-  id: uuid(),
-  ...type,
-  ...modifiers,
-  faction,
+  ...options,
 }));
 
 export const useInterval = (callback, delay) => {

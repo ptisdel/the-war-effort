@@ -23,6 +23,10 @@ export const sendRegistrationRequest = () => {
   socket.emit('request-registration');
 };
 
+export const airSupportActions = ({
+  resupplyAircraft: unitId => socket.emit('role-action', { type: 'airSupport/resupplyAircraft', payload: unitId }),
+});
+
 export const commanderActions = ({
   decreaseRoleBudget: roleName => socket.emit('role-action', { type: 'commander/decreaseRoleBudget', payload: roleName }),
   fireRole: roleName => socket.emit('role-action', { type: 'commander/fireRole', payload: roleName }),

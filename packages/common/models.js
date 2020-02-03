@@ -15,15 +15,18 @@ export const Role = ({
 });
 
 export const Resource = ({
-  getType: resource => _.get(resource, 'type'),
+  getAmount: resource => _.get(resource, 'amount'),
   getFaction: resource => _.get(resource, 'faction'),
   getName: resource => _.get(resource, 'name'),
+  getType: resource => _.get(resource, 'type'),
 });
 
 export const Unit = ({
+  getAmmo: unit => _.get(unit, 'ammo'),
   getId: unit => _.get(unit, 'id'),
   getType: unit => _.get(unit, 'type'),
   getFaction: unit => _.get(unit, 'faction'),
+  getMaxAmmo: unit => _.get(unit, 'maxAmmo'),
   getName: unit => _.get(unit, 'name'),
   getNumber: unit => _.get(unit, 'number'),
   getSize: unit => _.get(unit, 'size'),
@@ -36,6 +39,7 @@ export const Feature = ({
   getName: feature => _.get(feature, 'name'),
   getFaction: feature => _.get(feature, 'faction'),
   getType: feature => _.get(feature, 'type'),
+  getUnits: feature => _.get(feature, 'units'),
   getMaxTraineeCount: feature => _.get(feature, 'maxTraineeCount'),
   getTraineeCount: feature => _.get(feature, 'traineeCount'),
   getTrainingOffered: feature => _.get(feature, 'trainingOffered'),
@@ -48,10 +52,6 @@ export const Location = ({
   getFeatureById: (location, featureId) => _.find(
     Location.getFeatures(location),
     f => Feature.getId(f) === featureId,
-  ),
-  getFactionFeaturesByName: (location, factionName, featureName) => _.filter(
-    Location.getFeatures(location),
-    f => Feature.getName(f) === featureName && Feature.getFaction(f) === factionName,
   ),
   getFactionFeaturesByType: (location, factionName, featureType) => _.filter(
     Location.getFeatures(location),
@@ -67,6 +67,10 @@ export const Location = ({
     Location.getUnits(location),
     u => Unit.getFaction(u) === factionName,
   ),
+});
+
+export const ResupplyTask = ({
+  getUnitId: resupplyTask => _.get(resupplyTask, 'unitId'),
 });
 
 export const Transport = ({
@@ -119,6 +123,11 @@ export const GameState = ({
     ),
   ),
   getPublicSupport: gameState => _.get(gameState, 'publicSupport'),
+  getResupplyTasks: gameState => _.get(gameState, 'resupplyTasks'),
+  getResupplyTaskByUnitId: (gameState, unitId) => _.find(
+    GameState.getResupplyTasks(gameState),
+    r => ResupplyTask.getUnitId(r) === unitId,
+  ),
   getRoles: gameState => _.get(gameState, 'roles'),
   getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
   getTravelGroupAtFeatureId: (gameState, featureId) => _.find(

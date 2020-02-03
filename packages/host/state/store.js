@@ -6,9 +6,17 @@ import * as helpers from '../helpers';
 
 const { constants } = common;
 
-const { createUnit, createFeature, createResource } = helpers;
 const {
-  allFactions, allFeatures, allResources, allUnits, defaultLocations,
+  create,
+  createMultiple,
+} = helpers;
+const {
+  allFactions,
+  allFeatures,
+  allHeavyTransports,
+  allResources,
+  allUnits,
+  defaultLocations,
 } = constants;
 
 const initialState = {
@@ -28,99 +36,54 @@ const initialState = {
         features: [],
         resources: [],
         units: [
-          createUnit({
-            faction: allFactions.PLAYERS,
-            type: allUnits.TANK,
-          }),
-          createUnit({
-            faction: allFactions.PLAYERS,
-            type: allUnits.SQUAD,
-          }),
-          createUnit({
-            faction: allFactions.ENEMY,
-            type: allUnits.SQUAD,
-          }),
-          createUnit({
-            faction: allFactions.ENEMY,
-            type: allUnits.SQUAD,
-          }),
-          createUnit({
-            faction: allFactions.ENEMY,
-            type: allUnits.SQUAD,
-          }),
-          createUnit({
-            faction: allFactions.ENEMY,
-            type: allUnits.SQUAD,
-          }),
+          create(allUnits.TANK, { faction: allFactions.PLAYERS }),
+          create(allUnits.SQUAD, { faction: allFactions.PLAYERS }),
+          ...createMultiple(allUnits.SQUAD, 3, { faction: allFactions.ENEMY }),
         ],
       },
       {
         features: [
-          createFeature({
+          create(allFeatures.AIRPORT, {
             faction: allFactions.PLAYERS,
-            type: allFeatures.AIRPORT,
+            name: 'Dobbins Air Force Base',
+            units: [
+              create(allUnits.HELICOPTER, { faction: allFactions.PLAYERS }),
+            ],
           }),
-          createFeature({
-            faction: allFactions.PLAYERS,
-            type: allFeatures.ANTI_AIR_BATTERY,
-          }),
-          createFeature({
-            faction: allFactions.PLAYERS,
-            type: allFeatures.BASIC_TRAINING,
-            modifiers: {
-              id: '142241',
-            },
-          }),
-          createFeature({
-            faction: allFactions.PLAYERS,
-            type: allFeatures.INFANTRY_COMBAT_TRAINING_CENTER,
-          }),
-          createFeature({
-            faction: allFactions.PLAYERS,
-            type: allFeatures.AIR_FORCE_ACADEMY,
-          }),
+          create(allFeatures.ANTI_AIR_BATTERY, { faction: allFactions.PLAYERS }),
+          create(allFeatures.BASIC_TRAINING, { faction: allFactions.PLAYERS }),
+          create(allFeatures.INFANTRY_TRAINING_CENTER, { faction: allFactions.PLAYERS }),
+          create(allFeatures.AIR_FORCE_ACADEMY, { faction: allFactions.PLAYERS }),
         ],
         name: defaultLocations.HOME,
         heavyTransports: [
-          {
-            id: '1234',
-            faction: allFactions.PLAYERS,
-            name: 'C-17 Globemaster III',
-            capacity: 6,
-            cargo: [],
-          },
+          create(allHeavyTransports.C17, { faction: allFactions.PLAYERS }),
         ],
         resources: [
-          createResource({
-            count: 10,
+          create(allResources.MRES, {
+            amount: 10,
             faction: allFactions.PLAYERS,
-            type: allResources.MRES,
           }),
         ],
         units: [
-          createUnit({
-            faction: allFactions.PLAYERS,
-            type: allUnits.TANK,
-          }),
+          create(allUnits.TANK, { faction: allFactions.PLAYERS }),
         ],
       },
       {
         name: defaultLocations.FOB,
         features: [
-          createFeature({
+          create(allFeatures.AIRPORT, {
             faction: allFactions.PLAYERS,
-            type: allFeatures.AIRPORT,
+            name: 'Dallas Airbase',
           }),
-          createFeature({
-            faction: allFactions.PLAYERS,
-            type: allFeatures.ANTI_AIR_BATTERY,
-          }),
+          create(allFeatures.ANTI_AIR_BATTERY, { faction: allFactions.PLAYERS }),
         ],
         heavyTransports: [],
         resources: [],
-        unit: [],
+        units: [],
       },
     ],
+    resupplyTasks: [],
     travelGroups: [],
     trainingGroups: [],
   },

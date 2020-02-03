@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';

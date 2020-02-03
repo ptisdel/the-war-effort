@@ -1,3 +1,12 @@
+export const LOGGING = {
+  airSupport: true,
+  battle: false,
+  commander: true,
+  gameEngine: false,
+  gameStateChange: true,
+  logistics: true,
+};
+
 export const allFactions = {
   PLAYERS: 'Player',
   ENEMY: 'Enemy',
@@ -20,46 +29,57 @@ export const allResourceTypes = {
 
 export const allResources = {
   MRES: {
+    amount: 0,
     name: 'MREs',
     type: allResourceTypes.FOOD,
   },
   RECRUIT: {
+    amount: 0,
     name: 'Recruits',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   PRIVATE: {
+    amount: 0,
     name: 'Privates',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   RIFLEMAN: {
+    amount: 0,
     name: 'Riflemen',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   ARMOR_CREWMAN: {
+    amount: 0,
     name: 'Armor Crewmen',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   SPECIAL_OPERATOR: {
+    amount: 0,
     name: 'Special Operators',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   CADET: {
+    amount: 0,
     name: 'Cadets',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   FIGHTER_PILOT: {
+    amount: 0,
     name: 'Fighter Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HEAVY_TRANSPORT_PILOT: {
+    amount: 0,
     name: 'Heavy Transport Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HELICOPTER_PILOT: {
+    amount: 0,
     name: 'Helicopter Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   UAV_PILOT: {
+    amount: 0,
     name: 'UAV Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
@@ -92,6 +112,31 @@ export const allUnits = {
       attack: 5,
       defense: 5,
     },
+  },
+  HELICOPTER: {
+    crew: 1,
+    crewType: allResourceTypes.HELICOPTER_PILOT,
+    fuel: 5,
+    maxFuel: 15,
+    ammo: 50,
+    maxAmmo: 100,
+    type: allUnitTypes.MILITARY,
+    name: 'Helicopter',
+    number: 1,
+    size: 3,
+    stats: {
+      accuracy: 0.9,
+      attack: 10,
+      defense: 5,
+    },
+  },
+};
+
+export const allHeavyTransports = {
+  C17: {
+    name: 'C-17 Globemaster III',
+    capacity: 6,
+    cargo: [],
   },
 };
 
@@ -162,6 +207,7 @@ export const allFeatures = {
   AIRPORT: {
     name: 'Airport',
     type: allFeatureTypes.AIRPORT,
+    units: [],
   },
   ANTI_AIR_BATTERY: {
     name: 'Anti-air Battery',
@@ -181,7 +227,7 @@ export const allFeatures = {
     trainingOffered: allTrainingPaths.BASIC_TRAINING,
     type: allFeatureTypes.TRAINING,
   },
-  INFANTRY_COMBAT_TRAINING_CENTER: {
+  INFANTRY_TRAINING_CENTER: {
     name: 'Infantry Combat Training Center',
     maxTraineeCount: 20,
     traineeCount: 0,
@@ -232,10 +278,3 @@ export const defaultLocations = {
 
 export const budgetIncrementAmount = 100000;
 export const roleBudgetIncrementAmount = 10000;
-
-export const LOGGING = {
-  battle: false,
-  commander: true,
-  gameStateChange: true,
-  logistics: true,
-};

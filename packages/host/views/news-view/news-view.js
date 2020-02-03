@@ -34,7 +34,7 @@ export const NewsView = () => {
           <Styles.ResourcesList>
             { _.map(Location.getResources(location), (r, rkey) => (
               <Styles.Resource key = { rkey }>
-                { `${Resource.getFaction(r)} ${Resource.getName(r)}` }
+                { `${Resource.getAmount(r)} ${Resource.getFaction(r)} ${Resource.getName(r)}` }
               </Styles.Resource>
             )) }
           </Styles.ResourcesList>

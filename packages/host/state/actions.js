@@ -4,7 +4,7 @@ import roleActions from './role-actions';
 import * as hostHelpers from '../helpers';
 
 const { constants, helpers, models } = common;
-const { createResource } = hostHelpers;
+const { create } = hostHelpers;
 
 const {
   allFactions,
@@ -22,13 +22,19 @@ const {
 } = models;
 
 export const roleAction = (store, { type, payload }) => {
-  const { commanderActions, logisticsActions, trainingActions } = roleActions;
+  const {
+    airSupportActions,
+    commanderActions,
+    logisticsActions,
+    trainingActions,
+  } = roleActions;
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
   if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
   if (type === 'commander/fireRole') commanderActions.fireRole(store, payload);
   if (type === 'commander/requestBudgetIncrease') commanderActions.requestBudgetIncrease(store);
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
   if (type === 'training/createTrainingGroup') trainingActions.createTrainingGroup(store, payload);
+  if (type === 'airSupport/resupplyAircraft') airSupportActions.resupplyAircraft(store, payload);
 };
 
 export const addPlayer = (store, playerId) => {
@@ -104,6 +110,7 @@ export const hireRole = (store, { playerId, roleName }) => {
 export const removePlayerFromRole = (store, roleName) => {
   const { gameState } = store.state;
   const { roles } = gameState;
+  console.log(roleName);
 
   const newGameState = {
     ...gameState,
@@ -304,10 +311,9 @@ export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => 
     ...location,
     resources: [
       ...Location.getResources(location),
-      ...createResource({
-        count: TrainingGroup.getTraineeCount(trainingGroup),
+      ...create(TrainingGroup.getGraduateType(trainingGroup), {
+        amount: TrainingGroup.getTraineeCount(trainingGroup),
         faction: allFactions.PLAYERS,
-        type: TrainingGroup.getGraduateType(trainingGroup),
       }),
     ],
   };
