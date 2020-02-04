@@ -83,7 +83,7 @@ const initialState = {
         units: [],
       },
     ],
-    resupplyTasks: [],
+    resupplyingUnitIds: [],
     travelGroups: [],
     trainingGroups: [],
   },

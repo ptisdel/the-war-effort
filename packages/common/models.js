@@ -123,11 +123,7 @@ export const GameState = ({
     ),
   ),
   getPublicSupport: gameState => _.get(gameState, 'publicSupport'),
-  getResupplyTasks: gameState => _.get(gameState, 'resupplyTasks'),
-  getResupplyTaskByUnitId: (gameState, unitId) => _.find(
-    GameState.getResupplyTasks(gameState),
-    r => ResupplyTask.getUnitId(r) === unitId,
-  ),
+  getResupplyingUnitIds: gameState => _.get(gameState, 'resupplyingUnitIds'),
   getRoles: gameState => _.get(gameState, 'roles'),
   getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
   getTravelGroupAtFeatureId: (gameState, featureId) => _.find(
