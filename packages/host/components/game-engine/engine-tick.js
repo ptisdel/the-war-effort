@@ -4,7 +4,7 @@ import { TrainingGroup } from '@the-war-effort/common/models';
 
 const { constants, helpers, models } = common;
 
-const { allUnitTypes } = constants;
+const { allUnitTypes, ENGINE_TOGGLES } = constants;
 const { log } = helpers;
 
 const {
@@ -55,7 +55,7 @@ const checkTrainingGroups = ({ globalActions, gameState }) => {
 
 export const engineTick = ({ globalActions, gameState }) => {
   log('gameEngine', 'tick');
-  checkTrainingGroups({ globalActions, gameState });
-  checkTravelGroups({ globalActions, gameState });
-  checkLocationsForCombat({ globalActions, gameState });
+  if (ENGINE_TOGGLES.training) checkTrainingGroups({ globalActions, gameState });
+  if (ENGINE_TOGGLES.travel) checkTravelGroups({ globalActions, gameState });
+  if (ENGINE_TOGGLES.battle) checkLocationsForCombat({ globalActions, gameState });
 };

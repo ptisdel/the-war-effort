@@ -5,6 +5,46 @@ export const LOGGING = {
   gameEngine: false,
   gameStateChange: true,
   logistics: true,
+  publicAffairs: true,
+};
+
+export const ENGINE_TOGGLES = {
+  battle: false,
+  training: true,
+  travel: true,
+};
+
+export const allArticleParts = {
+  AUTHORS: [
+    'authorA',
+    'authorB',
+    'authorC',
+    'authorD',
+    'authorE',
+    'authorF',
+    'authorG',
+    'authorH',
+  ],
+  BODIES: [
+    'bodyA',
+    'bodyB',
+    'bodyC',
+    'bodyD',
+    'bodyE',
+    'bodyF',
+    'bodyG',
+    'bodyH',
+  ],
+  TITLES: [
+    'titleA',
+    'titleB',
+    'titleC',
+    'titleD',
+    'titleE',
+    'titleF',
+    'titleG',
+    'titleH',
+  ],
 };
 
 export const allFactions = {

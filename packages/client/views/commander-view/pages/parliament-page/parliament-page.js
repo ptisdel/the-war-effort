@@ -14,7 +14,7 @@ const FundingPage = () => {
   const [globalState] = store();
 
   const { gameState } = globalState;
-  const { budget } = gameState;
+  const budget = GameState.getBudget(gameState);
 
   const requestBudgetIncrease = () => commanderActions.requestBudgetIncrease();
 

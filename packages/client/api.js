@@ -41,6 +41,17 @@ export const logisticsActions = ({
   }),
 });
 
+export const publicAffairsActions = ({
+  censorArticle: articleId => socket.emit('role-action', {
+    type: 'publicAffairs/censorArticle',
+    payload: articleId,
+  }),
+  createPropagandaCampaign: travelInfo => socket.emit('role-action', {
+    type: 'publicAffairs/createPropagandaCampaign',
+    payload: travelInfo,
+  }),
+});
+
 export const trainingActions = ({
   createTrainingGroup: trainingInfo => socket.emit('role-action', {
     type: 'training/createTrainingGroup',

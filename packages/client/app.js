@@ -7,6 +7,7 @@ import {
   CommanderView,
   LogisticsView,
   TrainingView,
+  PublicAffairsView,
 } from './views/index';
 import * as api from './api';
 import components from './components';
@@ -51,6 +52,7 @@ export const App = () => {
     if (playerRoleName === allRoles.AIR_SUPPORT) return <AirSupportView/>;
     if (playerRoleName === allRoles.COMMANDER) return <CommanderView/>;
     if (playerRoleName === allRoles.LOGISTICS) return <LogisticsView/>;
+    if (playerRoleName === allRoles.PUBLIC_AFFAIRS) return <PublicAffairsView/>;
     if (playerRoleName === allRoles.TRAINING) return <TrainingView/>;
     return <AudienceView/>;
   };

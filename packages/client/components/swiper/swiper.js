@@ -5,8 +5,8 @@ import { useSwipeable } from 'react-swipeable';
 import * as Styles from './swiper.styles';
 
 const Swiper = (props) => {
-  const { children } = props;
-  const pageCount = children.length;
+  const children = React.Children.toArray(_.get(props, 'children'));
+  const pageCount = _.get(children, 'length') || 0;
   const [currentPage, setCurrentPage] = useState(0);
 
   const didMountRef = useRef(false);
@@ -49,19 +49,23 @@ const Swiper = (props) => {
     </Styles.PagesContainer>
   );
 
-  const renderPagination = () => (
-    <Styles.Pagination>
-      <Styles.PaginationDotCurrent
-        onAnimationEnd={ resetAnimation }
-        shouldAnimate = { shouldAnimatePagination }
-        xShift = { currentPage} />
-      { _.times(pageCount, n => <Styles.PaginationDot
-        current = { n === currentPage }
-        key = { n }
-        onClick = { () => handlePaginationDotClick(n) }
-      />) }
-    </Styles.Pagination>
-  );
+  const renderPagination = () => {
+    if (pageCount < 2) return null;
+
+    return (
+      <Styles.Pagination>
+        <Styles.PaginationDotCurrent
+          onAnimationEnd={ resetAnimation }
+          shouldAnimate = { shouldAnimatePagination }
+          xShift = { currentPage} />
+        { _.times(pageCount, n => <Styles.PaginationDot
+          current = { n === currentPage }
+          key = { n }
+          onClick = { () => handlePaginationDotClick(n) }
+        />) }
+      </Styles.Pagination>
+    );
+  };
 
   return (
     <Styles.Root>
@@ -72,7 +76,7 @@ const Swiper = (props) => {
 };
 
 Swiper.propTypes = ({
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 });
 
 export default Swiper;

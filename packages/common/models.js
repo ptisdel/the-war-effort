@@ -3,6 +3,17 @@ import * as helpers from './helpers';
 
 const { formatMoney } = helpers;
 
+export const Article = ({
+  getAuthor: article => _.get(article, 'author'),
+  getBody: article => _.get(article, 'body'),
+  getCensorDate: article => _.get(article, 'censorDate'),
+  getId: article => _.get(article, 'id'),
+  getInterestingness: article => _.get(article, 'interestingness'),
+  getPublishDate: article => _.get(article, 'publishDate'),
+  getTitle: article => _.get(article, 'title'),
+  getViews: article => _.get(article, 'views'),
+});
+
 export const Budget = ({
   getFormattedTotal: budget => formatMoney(budget || 0),
 });
@@ -108,6 +119,8 @@ export const TravelGroup = ({
 
 export const GameState = ({
   getBudget: gameState => _.get(gameState, 'budget'),
+  getCensoredArticles: gameState => _.get(gameState, ['articles', 'censored']),
+  getLiveArticles: gameState => _.get(gameState, ['articles', 'live']),
   getLocations: gameState => _.get(gameState, 'locations'),
   getLocationByName: (gameState, locationName) => _.find(
     GameState.getLocations(gameState),

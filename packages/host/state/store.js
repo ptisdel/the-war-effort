@@ -8,6 +8,7 @@ const { constants } = common;
 
 const {
   create,
+  createArticles,
   createMultiple,
 } = helpers;
 const {
@@ -21,6 +22,10 @@ const {
 
 const initialState = {
   gameState: {
+    articles: {
+      live: createArticles(4),
+      censored: [],
+    },
     parliament: {
       supportingMemberCount: 42,
       totalMemberCount: 120,

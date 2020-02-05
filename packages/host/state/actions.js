@@ -26,6 +26,7 @@ export const roleAction = (store, { type, payload }) => {
     airSupportActions,
     commanderActions,
     logisticsActions,
+    publicAffairsActions,
     trainingActions,
   } = roleActions;
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
@@ -35,6 +36,7 @@ export const roleAction = (store, { type, payload }) => {
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
   if (type === 'training/createTrainingGroup') trainingActions.createTrainingGroup(store, payload);
   if (type === 'airSupport/resupplyAircraft') airSupportActions.resupplyAircraft(store, payload);
+  if (type === 'publicAffairs/censorArticle') publicAffairsActions.censorArticle(store, payload);
 };
 
 export const addPlayer = (store, playerId) => {
@@ -110,7 +112,7 @@ export const hireRole = (store, { playerId, roleName }) => {
 export const removePlayerFromRole = (store, roleName) => {
   const { gameState } = store.state;
   const { roles } = gameState;
-  console.log(roleName);
+  log('gameStateChange', 'Player removed from role', roleName);
 
   const newGameState = {
     ...gameState,
