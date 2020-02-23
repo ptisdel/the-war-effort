@@ -10,13 +10,14 @@ export const createTravelGroup = (store, payload) => {
   const { gameState } = store.state;
 
   const {
-    destinationName,
-    originName,
+    destinationId,
+    originId,
     transports,
   } = payload;
 
-  const originResources = Location.getResources(originName) || [];
-  const originHeavyTransports = Location.getHeavyTransports(originName) || [];
+  const origin = GameState.getLocationById(gameState, originId);
+  const originResources = Location.getResources(origin) || [];
+  const originHeavyTransports = Location.getHeavyTransports(origin) || [];
 
   const allSentResources = _.reduce(
     transports,
@@ -36,7 +37,6 @@ export const createTravelGroup = (store, payload) => {
     t => _.includes(allSentHeavyTransports, Transport.getId(t)),
   );
 
-  const origin = GameState.getLocationByName(gameState, originName);
   const newOrigin = {
     ...origin,
     heavyTransports: newOriginHeavyTransports,
@@ -51,9 +51,9 @@ export const createTravelGroup = (store, payload) => {
   const newTravelGroup = ({
     id: uuid(),
     departureTime,
-    destinationName,
+    destinationId,
     ETA,
-    originName,
+    originId,
     transports,
   });
 

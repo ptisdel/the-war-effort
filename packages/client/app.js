@@ -5,8 +5,10 @@ import {
   AirSupportView,
   AudienceView,
   CommanderView,
+  IntelligenceView,
   LogisticsView,
   TrainingView,
+  ProcurementView,
   PublicAffairsView,
 } from './views/index';
 import * as api from './api';
@@ -51,7 +53,9 @@ export const App = () => {
   const getViewFromRole = () => {
     if (playerRoleName === allRoles.AIR_SUPPORT) return <AirSupportView/>;
     if (playerRoleName === allRoles.COMMANDER) return <CommanderView/>;
+    if (playerRoleName === allRoles.INTELLIGENCE) return <IntelligenceView/>;
     if (playerRoleName === allRoles.LOGISTICS) return <LogisticsView/>;
+    if (playerRoleName === allRoles.PROCUREMENT) return <ProcurementView/>;
     if (playerRoleName === allRoles.PUBLIC_AFFAIRS) return <PublicAffairsView/>;
     if (playerRoleName === allRoles.TRAINING) return <TrainingView/>;
     return <AudienceView/>;

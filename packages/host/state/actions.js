@@ -26,6 +26,7 @@ export const roleAction = (store, { type, payload }) => {
     airSupportActions,
     commanderActions,
     logisticsActions,
+    procurementActions,
     publicAffairsActions,
     trainingActions,
   } = roleActions;
@@ -36,6 +37,7 @@ export const roleAction = (store, { type, payload }) => {
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
   if (type === 'training/createTrainingGroup') trainingActions.createTrainingGroup(store, payload);
   if (type === 'airSupport/resupplyAircraft') airSupportActions.resupplyAircraft(store, payload);
+  if (type === 'procurement/startResearchingPrototype') procurementActions.startResearchingPrototype(store, payload);
   if (type === 'publicAffairs/censorArticle') publicAffairsActions.censorArticle(store, payload);
 };
 
@@ -252,8 +254,8 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
 };
 
 export const travelGroupArrival = (store, { gameState, travelGroup }) => {
-  const destinationName = TravelGroup.getDestinationName(travelGroup);
-  const destination = GameState.getLocationByName(gameState, destinationName);
+  const destinationId = TravelGroup.getDestinationId(travelGroup);
+  const destination = GameState.getLocationById(gameState, destinationId);
   const transports = TravelGroup.getTransports(travelGroup);
 
   const allSentResources = _.reduce(
@@ -307,7 +309,7 @@ export const travelGroupArrival = (store, { gameState, travelGroup }) => {
 
 export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => {
   const trainingGroups = GameState.getTrainingGroups(gameState);
-  const location = GameState.getLocationByName(gameState, defaultLocations.HOME);
+  const location = GameState.getLocationById(gameState, Location.getId(defaultLocations.HOME));
 
   const newLocation = {
     ...location,

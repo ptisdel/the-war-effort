@@ -14,7 +14,7 @@ export const createTrainingGroup = (store, payload) => {
   const { featureId } = payload;
 
   const { allFactions, allFeatureTypes, defaultLocations } = constants;
-  const home = GameState.getLocationByName(gameState, defaultLocations.HOME);
+  const home = GameState.getLocationById(gameState, Location.getId(defaultLocations.HOME));
   const feature = Location.getFeatureById(home, featureId);
   if (
     !feature

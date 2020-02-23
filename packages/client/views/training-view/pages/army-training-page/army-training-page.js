@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
 import common from '@the-war-effort/common';
-import { allFeatureTypes } from '@the-war-effort/common/constants';
 import * as api from '../../../../api';
 import state from '../../../../state';
 import * as Styles from './army-training-page.styles';
@@ -9,7 +8,9 @@ import * as Styles from './army-training-page.styles';
 const { constants, models } = common;
 
 const { trainingActions } = api;
-const { allFactions, allRoles, defaultLocations } = constants;
+const {
+  allRoles, allFactions, allFeatureTypes, defaultLocations,
+} = constants;
 const {
   Feature,
   GameState,
@@ -25,7 +26,7 @@ const ArmyTrainingPage = () => {
   const [globalState] = store();
   const { gameState } = globalState;
 
-  const homeLocation = GameState.getLocationByName(gameState, defaultLocations.HOME);
+  const homeLocation = GameState.getLocationById(gameState, Location.getId(defaultLocations.HOME));
 
   const renderTrainingOptions = () => {
     if (!homeLocation) return null;

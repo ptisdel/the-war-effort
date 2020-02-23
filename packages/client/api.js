@@ -41,6 +41,13 @@ export const logisticsActions = ({
   }),
 });
 
+export const procurementActions = ({
+  startResearchingPrototype: prototypeId => socket.emit('role-action', {
+    type: 'procurement/startResearchingPrototype',
+    payload: prototypeId,
+  }),
+});
+
 export const publicAffairsActions = ({
   censorArticle: articleId => socket.emit('role-action', {
     type: 'publicAffairs/censorArticle',

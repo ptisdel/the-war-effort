@@ -8,6 +8,7 @@ const { models } = common;
 
 const {
   GameState,
+  Location,
   Resource,
   Transport,
   TravelGroup,
@@ -34,19 +35,26 @@ const TravelGroupsPage = () => {
   const renderTravelGroups = () => {
     if (travelGroups.length === 0) return 'No active transport missions.';
 
-    return _.map(travelGroups, (tg, i) => (
-      <Styles.TravelGroup key = { i }>
-        <Styles.TravelGroupOrigin>
-          From: { TravelGroup.getOriginName(tg) }
-        </Styles.TravelGroupOrigin>
-        <Styles.TravelGroupDestination>
-          To: { TravelGroup.getDestinationName(tg) }
-        </Styles.TravelGroupDestination>
-        <Styles.TravelGroupTransports>
-          { _.map(TravelGroup.getTransports(tg), (t, ti) => renderTransport(t, ti)) }
-        </Styles.TravelGroupTransports>
-      </Styles.TravelGroup>
-    ));
+    return _.map(travelGroups, (tg, i) => {
+      const destination = GameState.getLocationById(gameState, TravelGroup.getDestinationId(tg));
+      const destinationName = Location.getName(destination);
+      const origin = GameState.getLocationById(gameState, TravelGroup.getOriginId(tg));
+      const originName = Location.getName(origin);
+
+      return (
+        <Styles.TravelGroup key = { i }>
+          <Styles.TravelGroupOrigin>
+            From: { originName }
+          </Styles.TravelGroupOrigin>
+          <Styles.TravelGroupDestination>
+            To: { destinationName }
+          </Styles.TravelGroupDestination>
+          <Styles.TravelGroupTransports>
+            { _.map(TravelGroup.getTransports(tg), (t, ti) => renderTransport(t, ti)) }
+          </Styles.TravelGroupTransports>
+        </Styles.TravelGroup>
+      );
+    });
   };
 
   return (

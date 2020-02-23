@@ -4,7 +4,9 @@ export const LOGGING = {
   commander: true,
   gameEngine: false,
   gameStateChange: true,
+  intelligence: true,
   logistics: true,
+  procurement: true,
   publicAffairs: true,
 };
 
@@ -56,72 +58,90 @@ export const allRoles = {
   AIR_SUPPORT: 'Air Support Officer',
   AUDIENCE: 'Audience Member',
   COMMANDER: 'Commander',
+  INTELLIGENCE: 'Intelligence Officer',
   LOGISTICS: 'Logistics Officer',
+  PROCUREMENT: 'Procurement Officer',
   PUBLIC_AFFAIRS: 'Public Affairs Officer',
   TRAINING: 'Training Officer',
 };
 
 export const allResourceTypes = {
-  HUMAN_RESOURCE: 'Human Resource',
+  AIRCRAFT: 'Aircraft',
   AMMUNITION: 'Ammunition',
   FOOD: 'Food',
+  GROUND_VEHICLE: 'Ground Vehicle',
+  HUMAN_RESOURCE: 'Human Resource',
 };
 
 export const allResources = {
-  MRES: {
-    amount: 0,
-    name: 'MREs',
-    type: allResourceTypes.FOOD,
-  },
   RECRUIT: {
-    amount: 0,
-    name: 'Recruits',
+    name: 'Recruit',
+    pluralName: 'Recruits',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   PRIVATE: {
-    amount: 0,
-    name: 'Privates',
+    name: 'Private',
+    pluralName: 'Privates',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   RIFLEMAN: {
-    amount: 0,
-    name: 'Riflemen',
+    name: 'Rifleman',
+    pluralName: 'Riflemen',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   ARMOR_CREWMAN: {
-    amount: 0,
-    name: 'Armor Crewmen',
+    name: 'Armor Crewman',
+    pluralName: 'Armor Crewmen',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   SPECIAL_OPERATOR: {
-    amount: 0,
-    name: 'Special Operators',
+    name: 'Special Operator',
+    pluralName: 'Special Operators',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   CADET: {
-    amount: 0,
-    name: 'Cadets',
+    name: 'Cadet',
+    pluralName: 'Cadets',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   FIGHTER_PILOT: {
-    amount: 0,
-    name: 'Fighter Pilots',
+    name: 'Fighter Pilot',
+    pluralName: 'Fighter Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HEAVY_TRANSPORT_PILOT: {
-    amount: 0,
-    name: 'Heavy Transport Pilots',
+    name: 'Heavy Transport Pilot',
+    pluralName: 'Heavy Transport Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HELICOPTER_PILOT: {
-    amount: 0,
-    name: 'Helicopter Pilots',
+    name: 'Helicopter Pilot',
+    pluralName: 'Helicopter Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   UAV_PILOT: {
-    amount: 0,
-    name: 'UAV Pilots',
+    name: 'UAV Pilot',
+    pluralName: 'UAV Pilots',
     type: allResourceTypes.HUMAN_RESOURCE,
+  },
+  F16: {
+    cost: 100,
+    name: 'F-16',
+    pluralName: 'F-16s',
+    type: allResourceTypes.AIRCRAFT,
+    stats: {
+      accuracy: 5,
+      attack: 10,
+      defense: 6,
+    },
+  },
+  MRES: {
+    name: 'MRE',
+    pluralName: 'MREs',
+    type: allResourceTypes.FOOD,
+    stats: {
+      nutrition: 5,
+    },
   },
 };
 
@@ -247,6 +267,7 @@ export const allFeatures = {
   AIRPORT: {
     name: 'Airport',
     type: allFeatureTypes.AIRPORT,
+    resupplyTasks: [], // array of unitIds currently undergoing resupply
     units: [],
   },
   ANTI_AIR_BATTERY: {
@@ -312,8 +333,17 @@ export const allFeatures = {
 };
 
 export const defaultLocations = {
-  HOME: 'Home Base',
-  FOB: 'FOB',
+  HOME: {
+    id: '0',
+    name: 'Home Base',
+  },
+  FOB: {
+    id: '1',
+    name: 'Forward Operating Base',
+  },
+  NEW_LOCATION: {
+    name: 'New Location',
+  },
 };
 
 export const budgetIncrementAmount = 100000;
