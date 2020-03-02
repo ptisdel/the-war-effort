@@ -36,15 +36,21 @@ export const Resource = ({
 
 export const Unit = ({
   getAmmo: unit => _.get(unit, 'ammo'),
+  getCapacity: unit => _.get(unit, 'capacity'),
+  getCargo: unit => _.get(unit, 'cargo'),
+  getCrew: unit => _.get(unit, 'crew'),
+  getCrewType: unit => _.get(unit, 'crewType'),
+  getFuel: unit => _.get(unit, 'fuel'),
   getId: unit => _.get(unit, 'id'),
-  getType: unit => _.get(unit, 'type'),
   getFaction: unit => _.get(unit, 'faction'),
   getMaxAmmo: unit => _.get(unit, 'maxAmmo'),
+  getMaxFuel: unit => _.get(unit, 'maxFuel'),
   getName: unit => _.get(unit, 'name'),
   getNumber: unit => _.get(unit, 'number'),
   getSize: unit => _.get(unit, 'size'),
   getStats: unit => _.get(unit, 'stats'),
   getStatByName: (unit, statName) => _.get(Unit.getStats(unit), statName),
+  getType: unit => _.get(unit, 'type'),
 });
 
 export const Feature = ({
@@ -60,7 +66,7 @@ export const Feature = ({
 });
 
 export const Location = ({
-  getHeavyTransports: location => _.get(location, 'heavyTransports'),
+  getAdjacentLocationIds: location => _.get(location, 'adjacentLocationIds'),
   getId: location => _.get(location, 'id'),
   getName: location => _.get(location, 'name'),
   getFeatures: location => _.get(location, 'features'),
@@ -77,6 +83,8 @@ export const Location = ({
     Location.getResources(location),
     r => Resource.getFaction(r) === factionName,
   ),
+  getSize: location => _.get(location, 'size'),
+  getType: location => _.get(location, 'type'),
   getUnits: location => _.get(location, 'units'),
   getUnitsByFaction: (location, factionName) => _.filter(
     Location.getUnits(location),

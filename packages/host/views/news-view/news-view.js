@@ -14,7 +14,6 @@ const {
   Location,
   Resource,
   Role,
-  Transport,
   Unit,
 } = models;
 const { store } = state;
@@ -49,14 +48,6 @@ export const NewsView = () => {
             )) }
           </Styles.UnitsList>
       </Styles.Units>
-      <Styles.Transports>
-        <Styles.TransportsTitle>Transports</Styles.TransportsTitle>
-          <Styles.TransportsList>
-            { _.map(Location.getHeavyTransports(location), (t, tkey) => (
-              <Styles.Transport key = { tkey }>{ Transport.getName(t) }</Styles.Transport>
-            )) }
-          </Styles.TransportsList>
-      </Styles.Transports>
       <Styles.Features>
         <Styles.FeaturesTitle>Features</Styles.FeaturesTitle>
           <Styles.FeaturesList>

@@ -1,6 +1,6 @@
 export const LOGGING = {
   airSupport: true,
-  battle: false,
+  battle: true,
   commander: true,
   gameEngine: false,
   gameStateChange: true,
@@ -11,7 +11,7 @@ export const LOGGING = {
 };
 
 export const ENGINE_TOGGLES = {
-  battle: false,
+  battle: true,
   training: true,
   travel: true,
 };
@@ -52,6 +52,8 @@ export const allArticleParts = {
 export const allFactions = {
   PLAYERS: 'Player',
   ENEMY: 'Enemy',
+  NGO: 'NGO',
+  CIVILIAN: 'Civilian',
 };
 
 export const allRoles = {
@@ -146,13 +148,14 @@ export const allResources = {
 };
 
 export const allUnitTypes = {
-  MILITARY: 'Military',
-  CIVILIAN: 'Civilian',
+  GROUND: 'Ground',
+  AIR: 'Air',
+  SEA: 'Sea',
 };
 
 export const allUnits = {
   SQUAD: {
-    type: allUnitTypes.MILITARY,
+    type: allUnitTypes.GROUND,
     name: 'Squad',
     number: 10,
     size: 1,
@@ -163,7 +166,7 @@ export const allUnits = {
     },
   },
   TANK: {
-    type: allUnitTypes.MILITARY,
+    type: allUnitTypes.GROUND,
     name: 'Tank',
     number: 1,
     size: 2,
@@ -176,11 +179,10 @@ export const allUnits = {
   HELICOPTER: {
     crew: 1,
     crewType: allResourceTypes.HELICOPTER_PILOT,
-    fuel: 5,
+    fuel: 15,
     maxFuel: 15,
     ammo: 50,
     maxAmmo: 100,
-    type: allUnitTypes.MILITARY,
     name: 'Helicopter',
     number: 1,
     size: 3,
@@ -189,14 +191,20 @@ export const allUnits = {
       attack: 10,
       defense: 5,
     },
+    type: allUnitTypes.AIR,
   },
-};
-
-export const allHeavyTransports = {
   C17: {
-    name: 'C-17 Globemaster III',
+    ammo: 0,
     capacity: 6,
     cargo: [],
+    crew: 2,
+    crewType: allResourceTypes.HEAVY_TRANSPORT_PILOT,
+    fuel: 15,
+    maxAmmo: 0,
+    maxFuel: 15,
+    name: 'C-17 Globemaster III',
+    size: 8,
+    type: allUnitTypes.AIR,
   },
 };
 
@@ -332,17 +340,77 @@ export const allFeatures = {
   },
 };
 
+export const allLocationTypes = {
+  BASE: {
+    name: 'Base',
+    size: 1,
+    speed: 4,
+    unallowedUnitTypes: [allUnitTypes.SEA],
+  },
+  CITY: {
+    name: 'City',
+    size: 4,
+    speed: 4,
+    unallowedUnitTypes: [allUnitTypes.SEA],
+  },
+  VILLAGE: {
+    name: 'Village',
+    size: 1,
+    speed: 2,
+    unallowedUnitTypes: [allUnitTypes.SEA],
+  },
+  DIRT_ROAD: {
+    name: 'Dirt road',
+    size: 1,
+    speed: 2,
+    unallowedUnitTypes: [allUnitTypes.SEA],
+  },
+  PAVED_ROAD: {
+    name: 'Paved road',
+    size: 1,
+    speed: 4,
+    unallowedUnitTypes: [allUnitTypes.SEA],
+  },
+  DESERT: {
+    name: 'Desert',
+    size: 5,
+    speed: 1,
+    unallowedUnitTypes: [allUnitTypes.SEA],
+  },
+  OCEAN: {
+    name: 'Ocean',
+    size: 5,
+    speed: 1,
+    unallowedUnitTypes: [allUnitTypes.GROUND],
+  },
+};
+
 export const defaultLocations = {
   HOME: {
+    adjacentLocationIds: [],
+    features: [],
     id: '0',
     name: 'Home Base',
+    resources: [],
+    type: allLocationTypes.BASE,
+    units: [],
   },
   FOB: {
+    adjacentLocationIds: [],
+    features: [],
     id: '1',
     name: 'Forward Operating Base',
+    resources: [],
+    type: allLocationTypes.BASE,
+    units: [],
   },
-  NEW_LOCATION: {
-    name: 'New Location',
+  NEW_LOCATION_TEMPLATE: {
+    adjacentLocationIds: [],
+    features: [],
+    name: 'New Location Template',
+    resources: [],
+    type: allLocationTypes.BASE,
+    units: [],
   },
 };
 

@@ -4,7 +4,12 @@ import common from '@the-war-effort/common';
 
 const { models } = common;
 
-const { GameState, Location, Transport } = models;
+const {
+  GameState,
+  Location,
+  Transport,
+  Unit,
+} = models;
 
 export const createTravelGroup = (store, payload) => {
   const { gameState } = store.state;
@@ -17,7 +22,7 @@ export const createTravelGroup = (store, payload) => {
 
   const origin = GameState.getLocationById(gameState, originId);
   const originResources = Location.getResources(origin) || [];
-  const originHeavyTransports = Location.getHeavyTransports(origin) || [];
+  const originUnits = Location.getUnits(origin) || [];
 
   const allSentResources = _.reduce(
     transports,
@@ -25,21 +30,21 @@ export const createTravelGroup = (store, payload) => {
     [],
   );
 
-  const allSentHeavyTransports = _.reduce(
+  const allSentTransports = _.reduce(
     transports,
     (acc, transport) => [...acc, Transport.getId(transport)],
     [],
   );
 
   const newOriginResources = _.differenceWith(originResources, allSentResources, _.isEqual);
-  const newOriginHeavyTransports = _.reject(
-    originHeavyTransports,
-    t => _.includes(allSentHeavyTransports, Transport.getId(t)),
+  const newOriginUnits = _.reject(
+    originUnits,
+    u => _.includes(allSentTransports, Unit.getId(u)),
   );
 
   const newOrigin = {
     ...origin,
-    heavyTransports: newOriginHeavyTransports,
+    units: newOriginUnits,
     resources: newOriginResources,
   };
 

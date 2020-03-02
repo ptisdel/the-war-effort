@@ -18,7 +18,7 @@ export const PlayerList = styled.div(() => ({
 export const Locations = styled.div(() => ({
   display: 'grid',
   columnGap: '20px',
-  gridTemplateColumns: 'repeat(5, 1fr)',
+  gridTemplateColumns: 'repeat(4, 1fr)',
   gridTemplateRows: 'auto',
   rowGap: '60px',
 }));
@@ -68,25 +68,6 @@ export const UnitName = styled.div(() => ({
 
 }));
 
-export const Transports = styled.div(() => ({
-
-}));
-
-export const TransportsTitle = styled.div(() => ({
-  fontWeight: 'bold',
-}));
-
-export const TransportsList = styled.div(() => ({
-
-}));
-
-export const Transport = styled.div(() => ({
-
-}));
-
-export const TransportName = styled.div(() => ({
-  fontWeight: 'bold',
-}));
 export const Features = styled.div(() => ({
 
 }));

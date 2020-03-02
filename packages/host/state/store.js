@@ -15,7 +15,6 @@ const {
 const {
   allFactions,
   allFeatures,
-  allHeavyTransports,
   allResources,
   allUnits,
   defaultLocations,
@@ -41,10 +40,7 @@ const initialState = {
     locations: [
       create(defaultLocations.NEW_LOCATION,
         {
-          heavyTransports: [],
           name: 'Fightastan',
-          features: [],
-          resources: [],
           units: [
             create(allUnits.TANK, { faction: allFactions.PLAYERS }),
             create(allUnits.SQUAD, { faction: allFactions.PLAYERS }),
@@ -66,9 +62,6 @@ const initialState = {
             create(allFeatures.INFANTRY_TRAINING_CENTER, { faction: allFactions.PLAYERS }),
             create(allFeatures.AIR_FORCE_ACADEMY, { faction: allFactions.PLAYERS }),
           ],
-          heavyTransports: [
-            create(allHeavyTransports.C17, { faction: allFactions.PLAYERS }),
-          ],
           resources: [
             create(allResources.MRES, {
               amount: 10,
@@ -77,6 +70,7 @@ const initialState = {
           ],
           units: [
             create(allUnits.TANK, { faction: allFactions.PLAYERS }),
+            create(allUnits.C17, { faction: allFactions.PLAYERS }),
           ],
         }),
       create(defaultLocations.FOB,
@@ -88,9 +82,6 @@ const initialState = {
             }),
             create(allFeatures.ANTI_AIR_BATTERY, { faction: allFactions.PLAYERS }),
           ],
-          heavyTransports: [],
-          resources: [],
-          units: [],
         }),
     ],
     travelGroups: [],

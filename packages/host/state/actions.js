@@ -270,20 +270,20 @@ export const travelGroupArrival = (store, { gameState, travelGroup }) => {
     ...allSentResources,
   ];
 
-  const allSentHeavyTransports = _.map(transports, t => ({
+  const allSentTransports = _.map(transports, t => ({
     ...t,
     cargo: [],
   }));
 
-  const destinationHeavyTransports = Location.getHeavyTransports(destination);
-  const newDestinationHeavyTransports = [
-    ...destinationHeavyTransports,
-    ...allSentHeavyTransports,
+  const destinationUnits = Location.getUnits(destination);
+  const newDestinationUnits = [
+    ...destinationUnits,
+    ...allSentTransports,
   ];
 
   const newDestination = {
     ...destination,
-    heavyTransports: newDestinationHeavyTransports,
+    units: newDestinationUnits,
     resources: newDestinationResources,
   };
 

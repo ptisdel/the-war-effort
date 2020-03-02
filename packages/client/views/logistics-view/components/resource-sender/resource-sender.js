@@ -6,11 +6,14 @@ import * as api from '../../../../api';
 import state from '../../../../state';
 import * as Styles from './resource-sender.styles';
 
-const { helpers, models } = common;
+const { constants, helpers, models } = common;
 
+const { allFactions } = constants;
 const { logisticsActions } = api;
 const { log } = helpers;
-const { GameState, Location, Resource } = models;
+const {
+  GameState, Location, Resource, Unit,
+} = models;
 const { store } = state;
 
 const ResourceSender = ({ originId, destinationId }) => {
@@ -22,10 +25,12 @@ const ResourceSender = ({ originId, destinationId }) => {
   const origin = GameState.getLocationById(gameState, originId);
   const originName = Location.getName(origin);
   const originResources = Location.getResources(origin) || [];
+  const originUnits = Location.getUnitsByFaction(origin, allFactions.PLAYERS);
 
-  const availableHeavyTransports = Location.getHeavyTransports(origin) || [];
+  const availableTransports = _.filter(originUnits, u => Unit.getCapacity(u) > 0);
+
   const canSendResources = () => (
-    Boolean(availableHeavyTransports.length) && Boolean(selectedResources.length)
+    Boolean(availableTransports.length) && Boolean(selectedResources.length)
   );
 
   const handleAddResource = resource => {
@@ -46,7 +51,7 @@ const ResourceSender = ({ originId, destinationId }) => {
       originId,
       transports: [
         {
-          ...availableHeavyTransports[0],
+          ...availableTransports[0],
           cargo: selectedResources,
         },
       ],
@@ -85,8 +90,8 @@ const ResourceSender = ({ originId, destinationId }) => {
         <p>Tap resources to send.</p>
         { renderUnselectedResources() }
       </Styles.ResourceList>
-      { availableHeavyTransports.length
-        ? `${availableHeavyTransports.length} transports available.`
+      { availableTransports.length
+        ? `${availableTransports.length} transports available.`
         : 'No transports available.'}
       <Styles.CargoSpace>
         { renderSelectedResources() }
