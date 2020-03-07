@@ -29,8 +29,7 @@ export const Resource = ({
   getAmount: resource => _.get(resource, 'amount'),
   getCost: resource => _.get(resource, 'cost'),
   getFaction: resource => _.get(resource, 'faction'),
-  getName: resource => _.get(resource, 'name'),
-  getPluralName: resource => _.get(resource, 'pluralName'),
+  getName: (resource, amount = 1) => _.get(resource, amount > 1 ? 'name.plural' : 'name.singular'),
   getType: resource => _.get(resource, 'type'),
 });
 
@@ -67,6 +66,7 @@ export const Feature = ({
 
 export const Location = ({
   getAdjacentLocationIds: location => _.get(location, 'adjacentLocationIds'),
+  getCallsign: location => _.get(location, 'callsign'),
   getId: location => _.get(location, 'id'),
   getName: location => _.get(location, 'name'),
   getFeatures: location => _.get(location, 'features'),
@@ -78,6 +78,7 @@ export const Location = ({
     Location.getFeatures(location),
     f => Feature.getType(f) === featureType && Feature.getFaction(f) === factionName,
   ),
+  getPosition: location => _.get(location, 'position'),
   getResources: location => _.get(location, 'resources'),
   getResourcesByFaction: (location, factionName) => _.filter(
     Location.getResources(location),
@@ -134,6 +135,7 @@ export const GameState = ({
   getCensoredArticles: gameState => _.get(gameState, ['articles', 'censored']),
   getLiveArticles: gameState => _.get(gameState, ['articles', 'live']),
   getLocations: gameState => _.get(gameState, 'locations'),
+  getMapPosition: gameState => _.get(gameState, 'mapPosition'),
   getLocationById: (gameState, locationId) => _.find(
     GameState.getLocations(gameState),
     l => Location.getId(l) === locationId,
@@ -162,7 +164,7 @@ export const GameState = ({
 export const Prototype = ({
   getCost: prototype => _.get(prototype, 'cost'),
   getId: prototype => _.get(prototype, 'id'),
-  getName: prototype => _.get(prototype, 'name'),
+  getName: (prototype, amount = 1) => _.get(prototype, amount > 1 ? 'name.plural' : 'name.singular'),
   getOriginalResource: prototype => _.get(prototype, 'originalResource'),
   getStats: prototype => _.get(prototype, 'stats'),
 });

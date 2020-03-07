@@ -1,5 +1,5 @@
 import { GameEngine } from './game-engine/game-engine';
 
-export default {
+export {
   GameEngine,
 };

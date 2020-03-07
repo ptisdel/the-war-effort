@@ -4,7 +4,7 @@ import { TrainingGroup } from '@the-war-effort/common/models';
 
 const { constants, helpers, models } = common;
 
-const { allUnitTypes, ENGINE_TOGGLES } = constants;
+const { allFactions, ENGINE_TOGGLES } = constants;
 const { log } = helpers;
 
 const {
@@ -18,7 +18,7 @@ const checkLocationsForCombat = ({ globalActions, gameState }) => {
   _.forEach(GameState.getLocations(gameState), location => {
     const combatants = _.filter(
       Location.getUnits(location),
-      u => Unit.getType(u) === allUnitTypes.MILITARY,
+      u => Unit.getFaction(u) === allFactions.PLAYERS || Unit.getFaction(u) === allFactions.ENEMY,
     );
 
     const combatantsGroupedByFaction = _.groupBy(combatants, u => Unit.getFaction(u));

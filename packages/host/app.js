@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
-import { NewsView } from './index';
-import * as api from '../api';
-import state from '../state';
+import { MapView, NewsView } from './views';
+import * as api from './api';
+import * as constants from './constants';
+import state from './state';
+import { GameEngine } from './components';
+
+const { CHANNELS } = constants;
 
 const {
   subscribeToPlayerAddition,
@@ -17,6 +21,8 @@ const { store } = state;
 export const App = () => {
   const [globalState, globalActions] = store();
 
+  const currentChannel = _.get(globalState, 'currentChannel');
+
   useEffect(() => {
     subscribeToPlayerAddition(playerId => globalActions.addPlayer(playerId));
     subscribeToPlayerDeletion(playerId => globalActions.deletePlayer(playerId));
@@ -29,5 +35,16 @@ export const App = () => {
     sendGameState(globalState.gameState);
   }, [globalState]);
 
-  return <NewsView/>;
+  const renderView = () => {
+    if (currentChannel === CHANNELS.news) { return <NewsView/>; }
+    if (currentChannel === CHANNELS.map) { return <MapView/>; }
+    return <MapView/>;
+  };
+
+  return (
+    <div>
+      <GameEngine/>
+      { renderView() }
+    </div>
+  );
 };

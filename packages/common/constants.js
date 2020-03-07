@@ -11,7 +11,7 @@ export const LOGGING = {
 };
 
 export const ENGINE_TOGGLES = {
-  battle: true,
+  battle: false,
   training: true,
   travel: true,
 };
@@ -77,59 +77,92 @@ export const allResourceTypes = {
 
 export const allResources = {
   RECRUIT: {
-    name: 'Recruit',
-    pluralName: 'Recruits',
+    amount: 1,
+    name: {
+      plural: 'Recruits',
+      singular: 'Recruit',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   PRIVATE: {
-    name: 'Private',
-    pluralName: 'Privates',
+    amount: 1,
+    name: {
+      plural: 'Privates',
+      singular: 'Private',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   RIFLEMAN: {
-    name: 'Rifleman',
-    pluralName: 'Riflemen',
+    amount: 1,
+    name: {
+      plural: 'Riflemen',
+      singular: 'Rifleman',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   ARMOR_CREWMAN: {
-    name: 'Armor Crewman',
-    pluralName: 'Armor Crewmen',
+    amount: 1,
+    name: {
+      plural: 'Armor Crewmen',
+      singular: 'Armor Crewman',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   SPECIAL_OPERATOR: {
-    name: 'Special Operator',
-    pluralName: 'Special Operators',
+    amount: 1,
+    name: {
+      plural: 'Special Operators',
+      singular: 'Special Operator',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   CADET: {
-    name: 'Cadet',
-    pluralName: 'Cadets',
+    amount: 1,
+    name: {
+      plural: 'Cadets',
+      singular: 'Cadet',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   FIGHTER_PILOT: {
-    name: 'Fighter Pilot',
-    pluralName: 'Fighter Pilots',
+    amount: 1,
+    name: {
+      plural: 'Fighter Pilots',
+      singular: 'Fighter Pilot',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HEAVY_TRANSPORT_PILOT: {
-    name: 'Heavy Transport Pilot',
-    pluralName: 'Heavy Transport Pilots',
+    amount: 1,
+    name: {
+      plural: 'Heavy Transport Pilots',
+      singular: 'Heavy Transport Pilot',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   HELICOPTER_PILOT: {
-    name: 'Helicopter Pilot',
-    pluralName: 'Helicopter Pilots',
+    amount: 1,
+    name: {
+      plural: 'Helicopter Pilots',
+      singular: 'Helicopter Pilot',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   UAV_PILOT: {
-    name: 'UAV Pilot',
-    pluralName: 'UAV Pilots',
+    amount: 1,
+    name: {
+      plural: 'UAV Pilots',
+      singular: 'UAV Pilot',
+    },
     type: allResourceTypes.HUMAN_RESOURCE,
   },
   F16: {
+    amount: 1,
     cost: 100,
-    name: 'F-16',
-    pluralName: 'F-16s',
+    name: {
+      plural: 'F-16s',
+      singular: 'F-16',
+    },
     type: allResourceTypes.AIRCRAFT,
     stats: {
       accuracy: 5,
@@ -138,8 +171,11 @@ export const allResources = {
     },
   },
   MRES: {
-    name: 'MRE',
-    pluralName: 'MREs',
+    amount: 1,
+    name: {
+      plural: 'MREs',
+      singular: 'MRE',
+    },
     type: allResourceTypes.FOOD,
     stats: {
       nutrition: 5,
@@ -388,26 +424,38 @@ export const allLocationTypes = {
 export const defaultLocations = {
   HOME: {
     adjacentLocationIds: [],
+    callsign: 'Alpha',
     features: [],
     id: '0',
     name: 'Home Base',
+    position: {
+      lat: 52.4044764,
+      lng: 0.5590789,
+    },
     resources: [],
     type: allLocationTypes.BASE,
     units: [],
   },
   FOB: {
     adjacentLocationIds: [],
+    callsign: 'Baker',
     features: [],
     id: '1',
     name: 'Forward Operating Base',
+    position: {
+      lat: 31.6349554,
+      lng: 65.7151501,
+    },
     resources: [],
     type: allLocationTypes.BASE,
     units: [],
   },
   NEW_LOCATION_TEMPLATE: {
     adjacentLocationIds: [],
+    callSign: 'x',
     features: [],
     name: 'New Location Template',
+    position: null,
     resources: [],
     type: allLocationTypes.BASE,
     units: [],

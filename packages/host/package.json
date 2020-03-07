@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@react-google-maps/api": "^1.8.3",
+    "@the-war-effort/common": "^1.0.0",
     "cross-env": "^5.0.5",
     "lodash": "^4.17.15",
     "react": "^16.12.0",
@@ -12,8 +14,7 @@
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1",
     "use-global-hook": "^0.1.12",
-    "uuid": "^3.3.3",
-    "@the-war-effort/common": "^1.0.0"
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

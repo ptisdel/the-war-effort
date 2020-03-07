@@ -66,7 +66,7 @@ const ResourceSender = ({ originId, destinationId }) => {
     return _.map(unselectedOriginResources, (r, i) => (
       <Styles.Resource as = 'li' key = { i }>
         <Styles.ResourceTitle onClick = { () => handleAddResource(r) }>
-          { Resource.getName(r) }
+          { Resource.getName(r, 1) }
         </Styles.ResourceTitle>
       </Styles.Resource>
     ));
@@ -78,7 +78,7 @@ const ResourceSender = ({ originId, destinationId }) => {
     return _.map(selectedResources, (r, i) => (
       <Styles.Resource as = 'li' key = { i }>
         <Styles.ResourceTitle onClick = { () => handleRemoveResource(r) }>
-          { Resource.getName(r) }
+          { Resource.getName(r, 1) }
         </Styles.ResourceTitle>
       </Styles.Resource>
     ));

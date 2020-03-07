@@ -52,19 +52,22 @@ export const createPrototype = resource => {
   }, stats);
 
   const oldCost = Resource.getCost(resource);
-  const newCost = _.max(
-    oldCost + upgradeRange.length - (shouldCostDecline * 2),
-    1,
-  );
+  const newCost = _.max(1, oldCost + upgradeRange.length - (shouldCostDecline * 2));
 
-  const oldName = Resource.getName(resource);
+  const oldName = Resource.getName(resource, 1);
+  const oldPluralName = Resource.getName(resource, 2);
   const newName = `Starfighter - modified ${oldName}`;
+  const newPluralName = `Starfighter - modified ${oldPluralName}`;
+
 
   return {
     id: uuid(),
     ...resource,
     cost: newCost,
-    name: newName,
+    name: {
+      singular: newName,
+      plural: newPluralName,
+    },
     originalResource: resource,
     stats: newStats,
   };
