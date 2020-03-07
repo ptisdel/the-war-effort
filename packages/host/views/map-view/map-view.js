@@ -76,44 +76,45 @@ export const MapView = () => {
     return <li key = { key }>{ roleName } : { Role.getFormattedBudget(role) || '$0' }</li>;
   });
 
-  const createCircle = ({ position, radius }) => {
-    const distance = radius * 1000; // N kilometers
-    const { lat, lng } = position;
+  // const createCircle = ({ position, radius }) => {
+  //   const distance = radius * 1000; // N kilometers
+  //   const { lat, lng } = position;
 
-    return <Circle
-      options = {{
-        strokeColor: '#000000',
-        strokeOpacity: 0.48,
-        strokeWeight: 0,
-        fillColor: '#000000',
-        fillOpacity: 0.2,
-        center: { lat: -1 * lat, lng: (lng - 180) % 180 },
-        radius: 20037508.34 - distance,
-      }}
-    />;
-  };
+  //   return <Circle
+  //     options = {{
+  //       strokeColor: '#000000',
+  //       strokeOpacity: 0.48,
+  //       strokeWeight: 0,
+  //       fillColor: '#000000',
+  //       fillOpacity: 0.2,
+  //       center: { lat: -1 * lat, lng: (lng - 180) % 180 },
+  //       radius: 20037508.34 - distance,
+  //     }}
+  //   />;
+  // };
 
-
-  const createMarker = ({ color = '#000', abbreviation = 'X', type = 'location' }) => {
+  const createMarker = ({
+    abbreviation = 'X', color = '#000', label = null, type = 'location',
+  }) => {
     if (type !== 'location') return null;
 
     return `data:image/svg+xml;utf-8, ${encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 19 19">
-        <g fill="#fff" stroke="#707070" stroke-width="2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 19 19">
+        <g fill="#fff" stroke="#707070" stroke-width="1">
           <rect width="20" height="20" stroke="none"/>
           <rect x="1" y="1" width="17" height="17" fill="none"/>
         </g>
-        <text x="50%" y ="11" dominant-baseline="middle" font-weight="bold" font-family="Arial Rounded MT" text-anchor="middle" fill="${color}">${abbreviation}</text>
+        <text x="50%" y ="11" dominant-baseline="middle" font-size="13" font-weight="bold" font-family="Bahnschrift" text-anchor="middle" fill="${color}">${abbreviation}</text>
+        <text x="22" y ="11" dominant-baseline="middle" font-size="8" font-weight="bold" font-family="Bahnschrift" text-anchor="left" fill="black">${label}</text>
       </svg>
     `)}`;
   };
 
   const { lat, lng, z } = mapPosition;
   const mapLocations = _.reject(locations, l => Location.getPosition(l) === null);
-  console.log(mapLocations);
 
   const WorldMap = (
-    <LoadScript googleMapsApiKey='AIzaSyC-_Kn_q87taRbgkFcCXD30f-oX9ZAcfYM'>
+    <LoadScript googleMapsApiKey= { process.env.GOOGLE_MAPS_API_KEY }>
       <Styles.Map>
         <GoogleMap
           mapContainerStyle={{
@@ -132,7 +133,14 @@ export const MapView = () => {
           {/* { createCircle({ position: { lat, lng }, radius: 900 }) } */}
           {
             _.map(mapLocations, l => <Marker
-                  icon = { createMarker({ color: 'black', abbreviation: _.first(Location.getCallsign(l)), type: 'location' }) }
+                  icon = {
+                    createMarker({
+                      abbreviation: _.first(Location.getCallsign(l)),
+                      color: 'black',
+                      label: Location.getName(l),
+                      type: 'location',
+                    })
+                  }
                   position = { Location.getPosition(l) }
               />)
           }
