@@ -2,6 +2,8 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 import {
   Circle,
+  DirectionsService,
+  DirectionsRenderer,
   GoogleMap,
   LoadScript,
   Marker,
@@ -113,6 +115,14 @@ export const MapView = () => {
   const { lat, lng, z } = mapPosition;
   const mapLocations = _.reject(locations, l => Location.getPosition(l) === null);
 
+  const [directions, setDirections] = useState(null);
+
+  const directionsCallback = response => {
+    console.log('response', response);
+    if (!response || response.status !== 'OK') return;
+    setDirections(response);
+  };
+
   const WorldMap = (
     <LoadScript googleMapsApiKey= { process.env.GOOGLE_MAPS_API_KEY }>
       <Styles.Map>
@@ -130,6 +140,27 @@ export const MapView = () => {
             styles: mapStyles,
           }}
         >
+          <DirectionsService
+            options={{
+              destination: { lat: 34.533473, lng: 69.1484533 },
+              origin: { lat: 31.6349554, lng: 65.7151501 },
+              travelMode: 'DRIVING',
+            }}
+            callback={ directionsCallback }
+          />
+          <DirectionsRenderer
+            options={{
+              directions,
+              options: {
+                polylineOptions: {
+                  strokeWeight: '2',
+                  strokeColor: 'green',
+                },
+                preserveViewport: true,
+                suppressMarkers: true,
+              },
+            }}
+          />
           {/* { createCircle({ position: { lat, lng }, radius: 900 }) } */}
           {
             _.map(mapLocations, l => <Marker
@@ -153,13 +184,15 @@ export const MapView = () => {
     <Styles.Root>
       { WorldMap }
       <Styles.Information>
-        <Styles.InformationHeader onClick = { () => setIsInformationOpen(!isInformationOpen) }>Stats</Styles.InformationHeader>
+        <Styles.InformationHeader
+          onClick = { () => setIsInformationOpen(!isInformationOpen) }
+        >Stats</Styles.InformationHeader>
         <Styles.InformationContent isOpen = { isInformationOpen }>
           <Styles.PlayerList>
             { renderPlayerList() }
           </Styles.PlayerList>
           <Styles.Locations>
-            {_.map(_.sortBy(locations, l => Location.getName(l)), (l, key) => renderLocation(l, key)) }
+            { _.map(_.sortBy(locations, l => Location.getName(l)), (l, key) => renderLocation(l, key)) }
           </Styles.Locations>
         </Styles.InformationContent>
       </Styles.Information>
