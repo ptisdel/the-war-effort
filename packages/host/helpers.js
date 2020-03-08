@@ -59,7 +59,6 @@ export const createPrototype = resource => {
   const newName = `Starfighter - modified ${oldName}`;
   const newPluralName = `Starfighter - modified ${oldPluralName}`;
 
-
   return {
     id: uuid(),
     ...resource,
@@ -94,3 +93,46 @@ export const useInterval = (callback, delay) => {
     }
   }, [delay]);
 };
+
+const calculateRoute = directionsResults => {
+  if (!directionsResults) return null;
+  const route = _.get(directionsResults, 'routes[0].legs[0]');
+  const routeDuration = _.get(route, 'duration.value');
+  const routeSteps = _.get(route, 'steps');
+  const start = _.get(route, 'start_location');
+  const startingStep = {
+    duration: 0,
+    position: {
+      lat: start.lat(),
+      lng: start.lng(),
+    },
+  };
+
+  const steps = _.reduce(routeSteps, (acc, step) => {
+    const duration = _.get(step, 'duration.value');
+    const endPoint = _.get(step, 'end_point');
+    return [
+      ...acc,
+      {
+        duration,
+        position: {
+          lat: endPoint.lat(),
+          lng: endPoint.lng(),
+        },
+      },
+    ];
+  }, [startingStep]);
+
+  return {
+    duration: routeDuration,
+    steps,
+  };
+};
+
+export const createRoute = async ({ origin, destination, travelMode = 'DRIVING' }) =>
+  // const r = await googleMapsClient.directions({
+  //   destination,
+  //   origin,
+  //   travelMode,
+  // });
+  'route';

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@babel/runtime": "^7.8.7",
     "@react-google-maps/api": "^1.8.3",
     "@the-war-effort/common": "^1.0.0",
     "cross-env": "^5.0.5",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "babel-eslint": "^10.0.3",

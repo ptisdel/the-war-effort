@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { useEffect } from 'react';
 import { MapView, NewsView } from './views';
 import * as api from './api';

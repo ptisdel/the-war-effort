@@ -12,6 +12,7 @@ const {
 } = helpers;
 
 const {
+  allCallsigns,
   allFactions,
   allFeatures,
   allResources,
@@ -43,7 +44,7 @@ export const test = {
   locations: [
     create(defaultLocations.NEW_LOCATION,
       {
-        callsign: 'Charlie',
+        callsign: allCallsigns.CHARLIE,
         name: 'Fightastan',
         position: {
           lat: 34.533473,

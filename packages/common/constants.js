@@ -1,5 +1,6 @@
 export const LOGGING = {
   airSupport: true,
+  army: true,
   battle: true,
   commander: true,
   gameEngine: false,
@@ -47,6 +48,27 @@ export const allArticleParts = {
     'titleG',
     'titleH',
   ],
+};
+
+export const allCallsigns = {
+  ALPHA: 'Alpha',
+  BRAVO: 'Bravo',
+  CHARLIE: 'Charlie',
+  DELTA: 'Delta',
+  ECHO: 'Echo',
+  FOXTROT: 'Foxtrot',
+  HOTEL: 'Hotel',
+  KILO: 'Kilo',
+  LIMA: 'Lima',
+  OSCAR: 'Oscar',
+  PAPA: 'Papa',
+  QUEBEC: 'Quebec',
+  TANGO: 'Tango',
+  VICTOR: 'Victor',
+  WHISKEY: 'Whiskey',
+  XRAY: 'X-ray',
+  YANKEE: 'Yankee',
+  ZULU: 'Zulu',
 };
 
 export const allFactions = {
@@ -424,7 +446,7 @@ export const allLocationTypes = {
 export const defaultLocations = {
   HOME: {
     adjacentLocationIds: [],
-    callsign: 'Alpha',
+    callsign: allCallsigns.ALPHA,
     features: [],
     id: '0',
     name: 'Home Base',
@@ -438,7 +460,7 @@ export const defaultLocations = {
   },
   FOB: {
     adjacentLocationIds: [],
-    callsign: 'Baker',
+    callsign: allCallsigns.BRAVO,
     features: [],
     id: '1',
     name: 'Forward Operating Base',
@@ -452,7 +474,7 @@ export const defaultLocations = {
   },
   NEW_LOCATION_TEMPLATE: {
     adjacentLocationIds: [],
-    callSign: 'x',
+    callSign: allCallsigns.XRAY,
     features: [],
     name: 'New Location Template',
     position: null,

@@ -1,9 +1,6 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import {
-  Circle,
-  DirectionsService,
-  DirectionsRenderer,
   GoogleMap,
   LoadScript,
   Marker,
@@ -11,6 +8,7 @@ import {
 import common from '@the-war-effort/common';
 import * as Styles from './map-view.styles';
 import state from '../../state';
+import * as helpers from '../../helpers';
 import { mapStyles } from './map-styles';
 
 const { constants, models } = common;
@@ -37,6 +35,17 @@ export const MapView = () => {
   } = _.get(globalState, 'gameState');
 
   const getPlayerRole = player => _.find(roles, r => Role.getPlayer(r) === player);
+
+  helpers.createRoute({
+    origin: {
+      lat: 31.6349554,
+      lng: 65.7151501,
+    },
+    destination: {
+      lat: 34.533473,
+      lng: 69.1484533,
+    },
+  }).then(response => console.log(response));
 
   const renderLocation = (location, key) => (
     <React.Fragment key = { key }>
@@ -78,23 +87,6 @@ export const MapView = () => {
     return <li key = { key }>{ roleName } : { Role.getFormattedBudget(role) || '$0' }</li>;
   });
 
-  // const createCircle = ({ position, radius }) => {
-  //   const distance = radius * 1000; // N kilometers
-  //   const { lat, lng } = position;
-
-  //   return <Circle
-  //     options = {{
-  //       strokeColor: '#000000',
-  //       strokeOpacity: 0.48,
-  //       strokeWeight: 0,
-  //       fillColor: '#000000',
-  //       fillOpacity: 0.2,
-  //       center: { lat: -1 * lat, lng: (lng - 180) % 180 },
-  //       radius: 20037508.34 - distance,
-  //     }}
-  //   />;
-  // };
-
   const createMarker = ({
     abbreviation = 'X', color = '#000', label = null, type = 'location',
   }) => {
@@ -115,14 +107,6 @@ export const MapView = () => {
   const { lat, lng, z } = mapPosition;
   const mapLocations = _.reject(locations, l => Location.getPosition(l) === null);
 
-  const [directions, setDirections] = useState(null);
-
-  const directionsCallback = response => {
-    console.log('response', response);
-    if (!response || response.status !== 'OK') return;
-    setDirections(response);
-  };
-
   const WorldMap = (
     <LoadScript googleMapsApiKey= { process.env.GOOGLE_MAPS_API_KEY }>
       <Styles.Map>
@@ -140,28 +124,6 @@ export const MapView = () => {
             styles: mapStyles,
           }}
         >
-          <DirectionsService
-            options={{
-              destination: { lat: 34.533473, lng: 69.1484533 },
-              origin: { lat: 31.6349554, lng: 65.7151501 },
-              travelMode: 'DRIVING',
-            }}
-            callback={ directionsCallback }
-          />
-          <DirectionsRenderer
-            options={{
-              directions,
-              options: {
-                polylineOptions: {
-                  strokeWeight: '2',
-                  strokeColor: 'green',
-                },
-                preserveViewport: true,
-                suppressMarkers: true,
-              },
-            }}
-          />
-          {/* { createCircle({ position: { lat, lng }, radius: 900 }) } */}
           {
             _.map(mapLocations, l => <Marker
                   icon = {
