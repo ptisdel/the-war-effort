@@ -3,16 +3,18 @@ export const LOGGING = {
   army: true,
   battle: true,
   commander: true,
-  gameEngine: false,
+  gameEngine: true,
   gameStateChange: true,
   intelligence: true,
   logistics: true,
+  movement: true,
   procurement: true,
   publicAffairs: true,
 };
 
 export const ENGINE_TOGGLES = {
   battle: false,
+  movement: true,
   training: true,
   travel: true,
 };
@@ -82,6 +84,7 @@ export const allRoles = {
   AIR_SUPPORT: 'Air Support Officer',
   AUDIENCE: 'Audience Member',
   COMMANDER: 'Commander',
+  GROUND_FORCES: 'Ground Forces Commander',
   INTELLIGENCE: 'Intelligence Officer',
   LOGISTICS: 'Logistics Officer',
   PROCUREMENT: 'Procurement Officer',

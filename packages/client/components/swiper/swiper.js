@@ -2,7 +2,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import * as Styles from './swiper.styles';
+import * as Styles from './styles';
 
 const Swiper = (props) => {
   const children = React.Children.toArray(_.get(props, 'children'));

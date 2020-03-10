@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
 import state from '../../../../state';
-import * as Styles from './resource-sender.styles';
+import * as Styles from './styles';
 
 const { constants, helpers, models } = common;
 

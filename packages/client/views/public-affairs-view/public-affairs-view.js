@@ -2,7 +2,7 @@ import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../api';
 import shared from '../../components';
-import * as Styles from './public-affairs-view.styles';
+import * as Styles from './styles';
 import { CensorshipPage, PropagandaPage } from './pages';
 
 const { constants } = common;

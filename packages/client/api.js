@@ -34,6 +34,13 @@ export const commanderActions = ({
   requestBudgetIncrease: () => socket.emit('role-action', { type: 'commander/requestBudgetIncrease', payload: undefined }),
 });
 
+export const groundForcesActions = ({
+  moveUnitGroups: moveInfo => socket.emit('role-action', {
+    type: 'groundForces/moveUnitGroups',
+    payload: moveInfo,
+  }),
+});
+
 export const logisticsActions = ({
   createTravelGroup: travelInfo => socket.emit('role-action', {
     type: 'logistics/createTravelGroup',

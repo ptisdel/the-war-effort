@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import common from '@the-war-effort/common';
 import state from '../../../../state';
-import * as Styles from './travel-groups-page.styles';
+import * as Styles from './styles';
 
 const { models } = common;
 

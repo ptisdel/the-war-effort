@@ -1,6 +1,7 @@
 import { AirSupportView } from './air-support-view/air-support-view';
 import { AudienceView } from './audience-view/audience-view';
 import { CommanderView } from './commander-view/commander-view';
+import { GroundForcesView } from './ground-forces-view/ground-forces-view';
 import { IntelligenceView } from './intelligence-view/intelligence-view';
 import { LogisticsView } from './logistics-view/logistics-view';
 import { ProcurementView } from './procurement-view/procurement-view';
@@ -11,6 +12,7 @@ export {
   AirSupportView,
   AudienceView,
   CommanderView,
+  GroundForcesView,
   IntelligenceView,
   LogisticsView,
   PublicAffairsView,

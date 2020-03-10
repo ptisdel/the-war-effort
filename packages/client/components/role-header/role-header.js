@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Styles from './role-header.styles';
+import * as Styles from './styles';
 
 const RoleHeader = ({
   onResign,

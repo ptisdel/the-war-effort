@@ -2,7 +2,7 @@ import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
 import state from '../../../../state';
-import * as Styles from './parliament-page.styles';
+import * as Styles from './styles';
 
 const { models } = common;
 

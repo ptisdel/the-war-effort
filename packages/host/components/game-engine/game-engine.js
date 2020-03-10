@@ -1,9 +1,9 @@
 import state from '../../state';
 import { engineTick } from './engine-tick';
-import * as helpers from '../../helpers';
+import * as hooks from '../../hooks';
 
 const { store } = state;
-const { useInterval } = helpers;
+const { useInterval } = hooks;
 
 export const GameEngine = () => {
   // eslint-disable-next-line

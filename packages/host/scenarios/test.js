@@ -7,6 +7,7 @@ const { constants } = common;
 const {
   create,
   createArticles,
+  createUnitGroup,
   createMultiple,
   createPrototype,
 } = helpers;
@@ -25,6 +26,20 @@ export const test = {
     live: createArticles(4),
     censored: [],
   },
+  unitGroups: [
+    createUnitGroup(
+      [
+        create(allUnits.SQUAD,
+          {
+            faction: allFactions.PLAYERS,
+          }),
+      ],
+      {
+        faction: allFactions.PLAYERS,
+        position: { lat: 31.6349554, lng: 65.7151501 },
+      },
+    ),
+  ],
   budget: 2000000,
   mapPosition: {
     lat: 33.5,
@@ -45,7 +60,7 @@ export const test = {
     create(defaultLocations.NEW_LOCATION,
       {
         callsign: allCallsigns.CHARLIE,
-        name: 'Fightastan',
+        name: 'Kabul',
         position: {
           lat: 34.533473,
           lng: 69.1484533,

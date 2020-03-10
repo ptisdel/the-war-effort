@@ -5,6 +5,7 @@ import {
   AirSupportView,
   AudienceView,
   CommanderView,
+  GroundForcesView,
   IntelligenceView,
   LogisticsView,
   TrainingView,
@@ -53,6 +54,7 @@ export const App = () => {
   const getViewFromRole = () => {
     if (playerRoleName === allRoles.AIR_SUPPORT) return <AirSupportView/>;
     if (playerRoleName === allRoles.COMMANDER) return <CommanderView/>;
+    if (playerRoleName === allRoles.GROUND_FORCES) return <GroundForcesView/>;
     if (playerRoleName === allRoles.INTELLIGENCE) return <IntelligenceView/>;
     if (playerRoleName === allRoles.LOGISTICS) return <LogisticsView/>;
     if (playerRoleName === allRoles.PROCUREMENT) return <ProcurementView/>;

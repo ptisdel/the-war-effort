@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import * as Styles from './role-selector.styles';
+import * as Styles from './styles';
 
 const RoleSelector = ({
   onSelectRole,

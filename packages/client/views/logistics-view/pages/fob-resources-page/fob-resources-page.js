@@ -1,6 +1,6 @@
 import React from 'react';
 import common from '@the-war-effort/common';
-import * as Styles from './fob-resources-page.styles';
+import * as Styles from './styles';
 import ResourceSender from '../../components/resource-sender/resource-sender';
 
 const { constants, models } = common;

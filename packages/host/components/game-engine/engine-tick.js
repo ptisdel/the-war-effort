@@ -12,7 +12,17 @@ const {
   Location,
   TravelGroup,
   Unit,
+  UnitGroup,
 } = models;
+
+
+const checkUnitGroupsForMovement = ({ globalActions, gameState }) => {
+  _.forEach(GameState.getUnitGroups(gameState), ug => {
+    if (UnitGroup.getRoute(ug)) {
+      globalActions.moveUnitGroup({ gameState, unitGroup: ug });
+    }
+  });
+};
 
 const checkLocationsForCombat = ({ globalActions, gameState }) => {
   _.forEach(GameState.getLocations(gameState), location => {
@@ -58,4 +68,5 @@ export const engineTick = ({ globalActions, gameState }) => {
   if (ENGINE_TOGGLES.training) checkTrainingGroups({ globalActions, gameState });
   if (ENGINE_TOGGLES.travel) checkTravelGroups({ globalActions, gameState });
   if (ENGINE_TOGGLES.battle) checkLocationsForCombat({ globalActions, gameState });
+  if (ENGINE_TOGGLES.movement) checkUnitGroupsForMovement({ globalActions, gameState });
 };

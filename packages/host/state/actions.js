@@ -19,12 +19,14 @@ const {
   Transport,
   TravelGroup,
   Unit,
+  UnitGroup,
 } = models;
 
 export const roleAction = (store, { type, payload }) => {
   const {
     airSupportActions,
     commanderActions,
+    groundForcesActions,
     logisticsActions,
     procurementActions,
     publicAffairsActions,
@@ -36,6 +38,7 @@ export const roleAction = (store, { type, payload }) => {
   if (type === 'commander/requestBudgetIncrease') commanderActions.requestBudgetIncrease(store);
   if (type === 'logistics/createTravelGroup') logisticsActions.createTravelGroup(store, payload);
   if (type === 'training/createTrainingGroup') trainingActions.createTrainingGroup(store, payload);
+  if (type === 'groundForces/moveUnitGroups') groundForcesActions.moveUnitGroups(store, payload);
   if (type === 'airSupport/resupplyAircraft') airSupportActions.resupplyAircraft(store, payload);
   if (type === 'procurement/startResearchingPrototype') procurementActions.startResearchingPrototype(store, payload);
   if (type === 'publicAffairs/censorArticle') publicAffairsActions.censorArticle(store, payload);
@@ -253,6 +256,53 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
   store.setState({ gameState: newGameState });
 };
 
+export const moveUnitGroup = (store, { gameState, unitGroup }) => {
+  const id = UnitGroup.getId(unitGroup);
+  const route = UnitGroup.getRoute(unitGroup);
+  const { destination, origin, steps } = route;
+
+  const destinationString = JSON.stringify(destination);
+  const originString = JSON.stringify(origin);
+
+  // log('movement', `UnitGroup ${id} wants to move along its route from ${originString} to ${destinationString}.`);
+
+  // check for fuel
+  // log('movement', 'The group has enough fuel to move.');
+
+  const curPosition = UnitGroup.getPosition(unitGroup);
+  const nextStep = _.first(steps);
+  const nextPosition = _.get(nextStep, 'position');
+
+  log('movement', `UnitGroup ${id} moves from ${JSON.stringify(curPosition)} to ${JSON.stringify(nextPosition)}.`);
+
+  const newSteps = _.drop(steps, 1);
+  const newRoute = (newSteps.length > 0) ? {
+    ...route,
+    steps: newSteps,
+  } : null;
+  const newCurrentOrder = newRoute ? 'moving' : null;
+
+  const newUnitGroup = {
+    ...unitGroup,
+    currentOrder: newCurrentOrder,
+    position: nextPosition,
+    route: newRoute,
+  };
+
+  const newUnitGroups = [
+    ..._.reject(GameState.getUnitGroups(gameState), ug => UnitGroup.getId(ug) === id),
+    newUnitGroup,
+  ];
+
+  const newGameState = {
+    ...gameState,
+    unitGroups: newUnitGroups,
+  };
+
+  store.setState({ gameState: newGameState });
+};
+
+
 export const travelGroupArrival = (store, { gameState, travelGroup }) => {
   const destinationId = TravelGroup.getDestinationId(travelGroup);
   const destination = GameState.getLocationById(gameState, destinationId);
@@ -305,7 +355,6 @@ export const travelGroupArrival = (store, { gameState, travelGroup }) => {
 
   store.setState({ gameState: newGameState });
 };
-
 
 export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => {
   const trainingGroups = GameState.getTrainingGroups(gameState);

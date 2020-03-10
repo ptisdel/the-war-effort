@@ -120,6 +120,16 @@ export const TrainingGroup = ({
   getTraineeCount: trainingGroup => _.get(trainingGroup, 'traineeCount'),
 });
 
+export const UnitGroup = ({
+  getFaction: unitGroup => _.get(unitGroup, 'faction'),
+  getId: unitGroup => _.get(unitGroup, 'id'),
+  getPosition: unitGroup => _.get(unitGroup, 'position'),
+  getName: unitGroup => _.get(unitGroup, 'name'),
+  getRoute: unitGroup => _.get(unitGroup, 'route'),
+  getUnits: unitGroup => _.get(unitGroup, 'units'),
+  getCurrentOrder: unitGroup => _.get(unitGroup, 'currentOrder'),
+});
+
 export const TravelGroup = ({
   getDepartureTime: travelGroup => _.get(travelGroup, 'departureTime'),
   getDestinationId: travelGroup => _.get(travelGroup, 'destinationId'),
@@ -135,14 +145,15 @@ export const GameState = ({
   getCensoredArticles: gameState => _.get(gameState, ['articles', 'censored']),
   getLiveArticles: gameState => _.get(gameState, ['articles', 'live']),
   getLocations: gameState => _.get(gameState, 'locations'),
-  getMapPosition: gameState => _.get(gameState, 'mapPosition'),
   getLocationById: (gameState, locationId) => _.find(
     GameState.getLocations(gameState),
     l => Location.getId(l) === locationId,
   ),
+  getMapPosition: gameState => _.get(gameState, 'mapPosition'),
   getParliament: gameState => _.get(gameState, 'parliament'),
   getParliamentTotalMemberCount: gameState => _.get(gameState, ['parliament', 'totalMemberCount']),
   getParliamentSupportingMemberCount: gameState => _.get(gameState, ['parliament', 'supportingMemberCount']),
+  getPlayers: gameState => _.get(gameState, 'players'),
   getPlayerByRoleName: (gameState, roleName) => Role.getPlayer(
     _.find(
       GameState.getRoles(gameState),
@@ -159,6 +170,7 @@ export const GameState = ({
     tg => TravelGroup.getFeatureId(tg) === featureId,
   ),
   getTrainingGroups: gameState => _.get(gameState, 'trainingGroups'),
+  getUnitGroups: gameState => _.get(gameState, 'unitGroups'),
 });
 
 export const Prototype = ({

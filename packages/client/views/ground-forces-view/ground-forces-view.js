@@ -9,20 +9,20 @@ import pages from './pages';
 const { constants } = common;
 
 const {
-  OverviewPage,
+  CommandPage,
 } = pages;
 const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const AirSupportView = () => {
-  const handleOnResign = () => resignFromRole(allRoles.AIR_SUPPORT);
+export const GroundForcesView = () => {
+  const handleOnResign = () => resignFromRole(allRoles.GROUND_FORCES);
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.AIR_SUPPORT } onResign = { handleOnResign }/>
+      <RoleHeader title = { allRoles.GROUND_FORCES } onResign = { handleOnResign }/>
       <Swiper>
-        <OverviewPage/>
+        <CommandPage/>
         <div></div>
       </Swiper>
     </Styles.Root>
