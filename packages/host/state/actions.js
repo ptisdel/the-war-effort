@@ -259,33 +259,48 @@ export const battle = (store, { gameState, location, combatantsGroupedByFaction 
 export const moveUnitGroup = (store, { gameState, unitGroup }) => {
   const id = UnitGroup.getId(unitGroup);
   const route = UnitGroup.getRoute(unitGroup);
-  const { destination, origin, steps } = route;
+  const {
+    currentGeometryIndex,
+    destination,
+    duration,
+    geometry,
+    origin,
+    speed,
+  } = route;
 
-  const destinationString = JSON.stringify(destination);
-  const originString = JSON.stringify(origin);
+  // const destinationString = JSON.stringify(destination);
+  // const originString = JSON.stringify(origin);
 
   // log('movement', `UnitGroup ${id} wants to move along its route from ${originString} to ${destinationString}.`);
 
   // check for fuel
   // log('movement', 'The group has enough fuel to move.');
 
-  const curPosition = UnitGroup.getPosition(unitGroup);
-  const nextStep = _.first(steps);
-  const nextPosition = _.get(nextStep, 'position');
+  const nextGeometryIndex = _.min([currentGeometryIndex + speed, geometry.length - 1]);
+  console.log(nextGeometryIndex);
 
-  log('movement', `UnitGroup ${id} moves from ${JSON.stringify(curPosition)} to ${JSON.stringify(nextPosition)}.`);
+  const nextPosition = {
+    lat: _.get(geometry, `${nextGeometryIndex}[0]`),
+    lng: _.get(geometry, `${nextGeometryIndex}[1]`),
+  };
+  const hasArrived = (geometry.length - 1) <= currentGeometryIndex;
 
-  const newSteps = _.drop(steps, 1);
-  const newRoute = (newSteps.length > 0) ? {
-    ...route,
-    steps: newSteps,
-  } : null;
-  const newCurrentOrder = newRoute ? 'moving' : null;
+  log('movement', `UnitGroup ${id} moves from ${JSON.stringify(geometry[currentGeometryIndex])} to ${JSON.stringify(geometry[nextGeometryIndex])}.`);
+
+  const newRoute = hasArrived
+    ? null
+    : {
+      ...route,
+      currentGeometryIndex: nextGeometryIndex,
+    };
+
+  const newCurrentOrder = hasArrived ? null : 'moving';
 
   const newUnitGroup = {
     ...unitGroup,
     currentOrder: newCurrentOrder,
     position: nextPosition,
+    currentGeometryIndex: nextGeometryIndex,
     route: newRoute,
   };
 
@@ -301,7 +316,6 @@ export const moveUnitGroup = (store, { gameState, unitGroup }) => {
 
   store.setState({ gameState: newGameState });
 };
-
 
 export const travelGroupArrival = (store, { gameState, travelGroup }) => {
   const destinationId = TravelGroup.getDestinationId(travelGroup);

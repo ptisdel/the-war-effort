@@ -3,6 +3,7 @@ import common from '@the-war-effort/common';
 import mbxDirections from '@mapbox/mapbox-sdk/services/directions';
 import uuid from 'uuid';
 import { allFactions } from '@the-war-effort/common/constants';
+import { GAME_ENGINE_TIME_MULTIPLIER } from './constants';
 
 const { constants, models } = common;
 const { Resource } = models;
@@ -91,82 +92,39 @@ export const createUnitGroup = (
   ...options,
 });
 
-// TODO: not necessary?
-export const calculateGoogleMapsRoute = directionsResults => {
-  if (!directionsResults) return null;
-  const route = _.get(directionsResults, 'routes[0].legs[0]');
-  const routeDuration = _.get(route, 'duration.value');
-  const routeSteps = _.get(route, 'steps');
-  const start = _.get(route, 'start_location');
-  const startingStep = {
-    duration: 0,
-    position: {
-      lat: start.lat(),
-      lng: start.lng(),
-    },
-  };
-
-  const steps = _.reduce(routeSteps, (acc, step) => {
-    const duration = _.get(step, 'duration.value');
-    const endPoint = _.get(step, 'end_point');
-    return [
-      ...acc,
-      {
-        duration,
-        position: {
-          lat: endPoint.lat(),
-          lng: endPoint.lng(),
-        },
-      },
-    ];
-  }, [startingStep]);
-
-  return {
-    duration: routeDuration,
-    steps,
-  };
-};
-
 const calculateMapboxRoute = MapiResponse => {
-  if (!MapiResponse) return null;
+  if (!MapiResponse || _.get(MapiResponse, 'body.code') !== 'Ok') return null;
 
-  const responseCode = _.get(MapiResponse, 'body.code');
-  if (responseCode !== 'Ok') return { responseCode };
-
+  const geometry = _.get(MapiResponse, 'body.routes[0].geometry.coordinates');
   const route = _.get(MapiResponse, 'body.routes[0].legs[0]');
-  const routeDuration = _.get(route, 'duration'); // in seconds
-  const routeSteps = _.get(route, 'steps');
+  const originWaypoint = _.get(MapiResponse, 'body.waypoints[0]');
+  const origin = {
+    lat: _.get(originWaypoint, 'location[0]'),
+    lng: _.get(originWaypoint, 'location[1]'),
+  };
+  const destinationWaypoint = _.get(MapiResponse, 'body.waypoints[0]');
+  const destination = {
+    lat: _.get(destinationWaypoint, 'location[0]'),
+    lng: _.get(destinationWaypoint, 'location[1]'),
+  };
 
-  const steps = _.reduce(routeSteps, (acc, step) => {
-    const duration = _.get(step, 'duration');
-    const lat = _.get(step, 'maneuver.location[0]');
-    const lng = _.get(step, 'maneuver.location[1]');
-    return [
-      ...acc,
-      {
-        duration,
-        position: {
-          lat,
-          lng,
-        },
-      },
-    ];
-  }, []);
-
-  const origin = _.get(_.first(steps), 'position');
-  const destination = _.get(_.last(steps), 'position');
+  const duration = _.get(route, 'duration'); // in seconds
+  const speed = _.ceil((geometry.length / duration) * GAME_ENGINE_TIME_MULTIPLIER);
 
   return {
-    responseCode,
+    currentGeometryIndex: 0,
     destination,
-    duration: routeDuration,
+    duration,
+    geometry,
     origin,
-    steps,
+    speed,
   };
 };
 
 export const createRoute = async ({ origin, destination, travelMode = 'DRIVING' }) => {
   const request = directionsClient.getDirections({
+    geometries: 'geojson',
+    overview: 'full',
     profile: 'driving-traffic',
     steps: true,
     waypoints: [

@@ -18,18 +18,16 @@ export const moveUnitGroups = (
 
   const unitGroups = GameState.getUnitGroups(gameState);
   const destinationLocation = GameState.getLocationById(gameState, destinationId);
-  const destinationPosition = Location.getPosition(destinationLocation);
-  console.log(destinationLocation);
+  const destination = Location.getPosition(destinationLocation);
 
   _.forEach(unitGroupIds, ugi => {
     const unitGroup = _.find(unitGroups, ug => UnitGroup.getId(ug) === ugi);
-    const originPosition = UnitGroup.getPosition(unitGroup);
+    const origin = UnitGroup.getPosition(unitGroup);
 
-    helpers.createRoute({ origin: originPosition, destination: destinationPosition })
+    helpers.createRoute({ origin, destination })
       .then(route => {
-        console.log('route', route);
-        if (_.get(route, 'responseCode') !== 'Ok') return;
-
+        if (!route) return;
+        console.log(route);
         const newUnitGroup = {
           ...unitGroup,
           currentOrder: 'moving',
