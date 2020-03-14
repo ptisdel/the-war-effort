@@ -7,7 +7,7 @@
     "@babel/runtime": "^7.8.7",
     "@mapbox/mapbox-sdk": "^0.9.0",
     "@react-google-maps/api": "^1.8.3",
-    "@the-war-effort/common": "^1.0.0",
+    "@the-war-effort/common": "file:../common",
     "cross-env": "^5.0.5",
     "dotenv-webpack": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",

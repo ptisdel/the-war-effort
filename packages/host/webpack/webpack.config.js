@@ -44,6 +44,6 @@ module.exports = {
     contentBase: srcDir,
     historyApiFallback: true,
     open: true,
-    port: 8002,
+    port: 8001,
   },
 };
