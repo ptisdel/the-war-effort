@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@the-war-effort/common": "^1.0.0",
     "cross-env": "^5.0.5",
+    "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -12,8 +14,7 @@
     "react-swipeable": "^5.5.0",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1",
-    "use-global-hook": "^0.1.12",
-    "@the-war-effort/common": "^1.0.0"
+    "use-global-hook": "^0.1.12"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
@@ -38,7 +39,8 @@
   "scripts": {
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" {components,state,views}/**/* ",
     "test": "echo \"Error: no test specified\"",
-    "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js"
+    "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.config.js",
+    "build": "webpack --mode production --config ./webpack/webpack.config.js"
   },
   "author": "Patrick Tisdel",
   "license": "UNLICENSED"

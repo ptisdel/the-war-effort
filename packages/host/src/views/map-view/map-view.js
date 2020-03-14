@@ -8,7 +8,7 @@ import {
 import common from '@the-war-effort/common';
 import * as Styles from './map-view.styles';
 import state from '../../state';
-import * as helpers from '../../helpers';
+// import * as helpers from '../../helpers';
 import { mapStyles } from './map-styles';
 
 const { constants, models } = common;
