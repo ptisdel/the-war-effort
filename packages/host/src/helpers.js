@@ -8,7 +8,7 @@ import { GAME_ENGINE_TIME_MULTIPLIER } from './constants';
 const { constants, models } = common;
 const { Resource } = models;
 
-const directionsClient = mbxDirections({ accessToken: process.env.MAPBOX_ACCESS_TOKEN });
+const directionsClient = mbxDirections({ accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN });
 
 export const create = (type, options) => ({
   id: _.get(type, 'id') || uuid(),

@@ -123,7 +123,7 @@ export const MapView = () => {
   const { lat, lng, z } = mapPosition;
 
   const WorldMap = (
-    <LoadScript googleMapsApiKey= { process.env.GOOGLE_MAPS_API_KEY }>
+    <LoadScript googleMapsApiKey= { process.env.REACT_APP_GOOGLE_MAPS_API_KEY }>
       <Styles.Map>
         <GoogleMap
           mapContainerStyle={{
