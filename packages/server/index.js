@@ -14,6 +14,6 @@ app.get('/', (req, res) => {
 
 io.on('connection', api.onboardSocket);
 
-server.listen(8000, () => {
-  console.log('listening on *:8000');
+server.listen(80, () => {
+  console.log('listening on *:80');
 });
