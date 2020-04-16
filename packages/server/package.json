@@ -2,6 +2,9 @@
   "name": "@the-war-effort/server",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.16.1"
+  },
   "main": "entry.js",
   "dependencies": {
     "cross-env": "^5.0.5",
