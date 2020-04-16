@@ -17,7 +17,8 @@
   "scripts": {
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" *.js",
     "test": "echo \"Error: no test specified\"",
-    "dev": "node entry.js"
+    "dev": "node entry.js",
+    "start": "node entry.js"
   },
   "author": "Patrick Tisdel",
   "license": "UNLICENSED"
