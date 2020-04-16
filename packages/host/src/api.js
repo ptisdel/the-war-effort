@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
 // new socket connection to server
-const socket = io('http://localhost:8000?role=host');
+const socket = io('https://the-war-effort-server.herokuapp.com/?role=host');
 
 export const subscribeToPlayerAddition = callback => socket.on('add-player', playerId => callback(playerId));
 export const subscribeToRoleHire = callback => socket.on('hire-for-role', ({ playerId, roleName }) => callback({ playerId, roleName }));

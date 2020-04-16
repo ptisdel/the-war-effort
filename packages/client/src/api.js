@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
 // new socket connection to server
-const socket = io('http://localhost:8000?role=client');
+const socket = io('https://the-war-effort-server.herokuapp.com/?role=client');
 
 export const subscribeToRegistration = cb => {
   socket.on('register-player', playerId => cb(playerId));
