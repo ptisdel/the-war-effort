@@ -8,12 +8,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
+const port = process.env.PORT || 8000;
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 io.on('connection', api.onboardSocket);
 
-server.listen(80, () => {
+server.listen(port, () => {
   console.log('listening on *:80');
 });
