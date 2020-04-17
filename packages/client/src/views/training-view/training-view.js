@@ -11,7 +11,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const TrainingView = () => {
+const TrainingView = () => {
   const handleOnResign = () => {
     resignFromRole(allRoles.TRAINING);
   };
@@ -25,3 +25,5 @@ export const TrainingView = () => {
     </Styles.Root>
   );
 };
+
+export default TrainingView;

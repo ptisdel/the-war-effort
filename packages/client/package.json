@@ -4,17 +4,21 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@the-war-effort/common": "file:../common",
+    "babel-plugin-lodash": "^3.3.4",
     "cross-env": "^5.0.5",
     "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-loadable": "^5.5.0",
     "react-swipeable": "^5.5.0",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.1",
     "use-global-hook": "^0.1.12",
+    "webpack-async-chunk-names-plugin": "^0.1.1",
     "yarn": "^1.22.4"
   },
   "devDependencies": {
@@ -34,6 +38,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "style-loader": "^1.0.1",
     "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.7.0",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   },

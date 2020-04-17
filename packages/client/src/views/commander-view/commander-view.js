@@ -11,7 +11,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const CommanderView = () => {
+const CommanderView = () => {
   const handleOnResign = () => {
     resignFromRole(allRoles.COMMANDER);
   };
@@ -27,3 +27,5 @@ export const CommanderView = () => {
     </Styles.Root>
   );
 };
+
+export default CommanderView;

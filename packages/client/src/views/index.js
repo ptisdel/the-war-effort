@@ -1,14 +1,22 @@
-import { AirSupportView } from './air-support-view/air-support-view';
-import { AudienceView } from './audience-view/audience-view';
-import { CommanderView } from './commander-view/commander-view';
-import { GroundForcesView } from './ground-forces-view/ground-forces-view';
-import { IntelligenceView } from './intelligence-view/intelligence-view';
-import { LogisticsView } from './logistics-view/logistics-view';
-import { ProcurementView } from './procurement-view/procurement-view';
-import { PublicAffairsView } from './public-affairs-view/public-affairs-view';
-import { TrainingView } from './training-view/training-view';
+import loadable from 'react-loadable';
+import LoadingView from './loading-view/loading-view';
 
-export {
+const dynamicallyImport = importFunction => loadable({
+  loader: importFunction,
+  loading: LoadingView,
+});
+
+const AirSupportView = dynamicallyImport(() => import('./air-support-view/air-support-view'));
+const AudienceView = dynamicallyImport(() => import('./audience-view/audience-view'));
+const CommanderView = dynamicallyImport(() => import('./commander-view/commander-view'));
+const GroundForcesView = dynamicallyImport(() => import('./ground-forces-view/ground-forces-view'));
+const IntelligenceView = dynamicallyImport(() => import('./intelligence-view/intelligence-view'));
+const LogisticsView = dynamicallyImport(() => import('./logistics-view/logistics-view'));
+const ProcurementView = dynamicallyImport(() => import('./procurement-view/procurement-view'));
+const PublicAffairsView = dynamicallyImport(() => import('./public-affairs-view/public-affairs-view'));
+const TrainingView = dynamicallyImport(() => import('./training-view/training-view'));
+
+export default {
   AirSupportView,
   AudienceView,
   CommanderView,

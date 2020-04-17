@@ -17,7 +17,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const LogisticsView = () => {
+const LogisticsView = () => {
   const handleOnResign = () => resignFromRole(allRoles.LOGISTICS);
 
   return (
@@ -31,3 +31,5 @@ export const LogisticsView = () => {
     </Styles.Root>
   );
 };
+
+export default LogisticsView;

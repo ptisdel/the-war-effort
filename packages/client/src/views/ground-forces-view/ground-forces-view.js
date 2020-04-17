@@ -15,7 +15,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const GroundForcesView = () => {
+const GroundForcesView = () => {
   const handleOnResign = () => resignFromRole(allRoles.GROUND_FORCES);
 
   return (
@@ -28,3 +28,5 @@ export const GroundForcesView = () => {
     </Styles.Root>
   );
 };
+
+export default GroundForcesView;

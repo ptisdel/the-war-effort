@@ -15,7 +15,7 @@ const { RoleHeader } = shared;
 const { RoleSelector } = components;
 const { store } = state;
 
-export const AudienceView = () => {
+const AudienceView = () => {
   const [globalState] = store();
   const { roles } = globalState.gameState;
 
@@ -39,3 +39,5 @@ export const AudienceView = () => {
       </Styles.Root>
   );
 };
+
+export default AudienceView;

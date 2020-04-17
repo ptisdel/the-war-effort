@@ -13,7 +13,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const IntelligenceView = () => {
+const IntelligenceView = () => {
   const handleOnResign = () => resignFromRole(allRoles.INTELLIGENCE);
 
   return (
@@ -25,3 +25,5 @@ export const IntelligenceView = () => {
     </Styles.Root>
   );
 };
+
+export default IntelligenceView;

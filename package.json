@@ -39,6 +39,5 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "lerna": "^3.19.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

@@ -11,7 +11,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const PublicAffairsView = () => {
+const PublicAffairsView = () => {
   const handleOnResign = () => {
     resignFromRole(allRoles.PUBLIC_AFFAIRS);
   };
@@ -26,3 +26,5 @@ export const PublicAffairsView = () => {
     </Styles.Root>
   );
 };
+
+export default PublicAffairsView;

@@ -16,7 +16,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const ProcurementView = () => {
+const ProcurementView = () => {
   const handleOnResign = () => resignFromRole(allRoles.PROCUREMENT);
 
   return (
@@ -29,3 +29,5 @@ export const ProcurementView = () => {
     </Styles.Root>
   );
 };
+
+export default ProcurementView;

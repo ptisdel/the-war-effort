@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../api';
@@ -15,7 +14,7 @@ const { allRoles } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
-export const AirSupportView = () => {
+const AirSupportView = () => {
   const handleOnResign = () => resignFromRole(allRoles.AIR_SUPPORT);
 
   return (
@@ -28,3 +27,5 @@ export const AirSupportView = () => {
     </Styles.Root>
   );
 };
+
+export default AirSupportView;

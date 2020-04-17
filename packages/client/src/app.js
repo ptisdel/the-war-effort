@@ -1,7 +1,12 @@
 import _ from 'lodash';
 import React, { useEffect } from 'react';
 import common from '@the-war-effort/common';
-import {
+import * as api from './api';
+import components from './components';
+import state from './state';
+import views from './views';
+
+const {
   AirSupportView,
   AudienceView,
   CommanderView,
@@ -11,11 +16,7 @@ import {
   TrainingView,
   ProcurementView,
   PublicAffairsView,
-} from './views/index';
-import * as api from './api';
-import components from './components';
-import state from './state';
-
+} = views;
 const { constants, helpers, models } = common;
 
 const { Layout } = components;
@@ -47,7 +48,6 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line
     log('gameStateChange', 'Game State:', globalState.gameState);
   }, [globalState]);
 
