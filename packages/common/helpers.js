@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import * as constants from './constants';
 
 const { LOGGING } = constants;

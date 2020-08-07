@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
@@ -21,7 +21,10 @@ const ResearchPage = () => {
   const { gameState } = globalState;
 
   const availablePrototypes = GameState.getPrototypes(gameState);
-  const prototypesGroupedByOriginalResource = _.groupBy(availablePrototypes, r => Resource.getName(Prototype.getOriginalResource(r)));
+  const prototypesGroupedByOriginalResource = _.groupBy(
+    availablePrototypes,
+    r => Resource.getName(Prototype.getOriginalResource(r)),
+  );
 
   const handlePrototypeClick = prototypeId => {
     procurementActions.startResearchingPrototype({ prototypeId });
@@ -48,14 +51,17 @@ const ResearchPage = () => {
     );
   };
 
-  const renderLists = () => _.map(prototypesGroupedByOriginalResource, (prototypeGroup, originalResourceName) => (
+  const renderLists = () => _.map(
+    prototypesGroupedByOriginalResource,
+    (prototypeGroup, originalResourceName) => (
         <Styles.Group key = { originalResourceName }>
           <Styles.GroupName>{ originalResourceName }</Styles.GroupName>
           <Styles.List>
             { _.map(prototypeGroup, p => renderPrototype(p)) }
           </Styles.List>
         </Styles.Group>
-  ));
+    ),
+  );
 
   return (
     <Styles.Root>

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
@@ -49,7 +49,6 @@ const CensorshipPage = () => {
         </Styles.Article>
     );
   });
-
 
   const renderCensoredArticles = () => _.map(censoredArticles, a => {
     const author = Article.getAuthor(a);

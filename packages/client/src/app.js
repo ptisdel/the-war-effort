@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import React, { useEffect } from 'react';
 import common from '@the-war-effort/common';
 import * as api from './api';
