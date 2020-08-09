@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import common from '@the-war-effort/common';
 import roleActions from './role-actions';
 import * as hostHelpers from '../helpers';

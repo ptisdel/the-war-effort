@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import uuid from 'uuid';
 import common from '@the-war-effort/common';
 

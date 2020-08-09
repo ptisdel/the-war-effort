@@ -65,10 +65,11 @@ const OverviewPage = () => {
     );
   });
 
-
-  return <Styles.Root>
-    { renderAirbases() }
-  </Styles.Root>;
+  return (
+    <Styles.Root>
+      { renderAirbases() }
+    </Styles.Root>
+  );
 };
 
 export default OverviewPage;

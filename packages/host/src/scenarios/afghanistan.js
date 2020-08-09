@@ -21,7 +21,7 @@ const {
   defaultLocations,
 } = constants;
 
-export const test = {
+export const afghanistanScenario = {
   articles: {
     live: createArticles(4),
     censored: [],

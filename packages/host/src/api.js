@@ -8,4 +8,5 @@ export const subscribeToRoleHire = callback => socket.on('hire-for-role', ({ pla
 export const subscribeToRemovePlayerFromRole = callback => socket.on('remove-player-from-role', roleName => callback(roleName));
 export const subscribeToPlayerDeletion = callback => socket.on('delete-player', playerId => callback(playerId));
 export const subscribeToRoleAction = callback => socket.on('role-action', ({ type, payload }) => callback(({ type, payload })));
+
 export const sendGameState = gameState => socket.emit('game-state', gameState);

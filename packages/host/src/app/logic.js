@@ -1,12 +1,7 @@
-import _ from 'lodash';
-import React, { useEffect } from 'react';
-import { MapView, NewsView } from './views';
-import * as api from './api';
-import * as constants from './constants';
-import state from './state';
-import { GameEngine } from './components';
-
-const { CHANNELS } = constants;
+import _ from 'lodash-es';
+import { useEffect } from 'react';
+import state from '../state';
+import * as api from '../api';
 
 const {
   subscribeToPlayerAddition,
@@ -17,10 +12,8 @@ const {
   sendGameState,
 } = api;
 
-const { store } = state;
-
-export const App = () => {
-  const [globalState, globalActions] = store();
+export const useApp = () => {
+  const [globalState, globalActions] = state.store();
 
   const currentChannel = _.get(globalState, 'currentChannel');
 
@@ -36,16 +29,7 @@ export const App = () => {
     sendGameState(globalState.gameState);
   }, [globalState]);
 
-  const renderView = () => {
-    if (currentChannel === CHANNELS.news) { return <NewsView/>; }
-    if (currentChannel === CHANNELS.map) { return <MapView/>; }
-    return <MapView/>;
+  return {
+    currentChannel,
   };
-
-  return (
-    <div>
-      <GameEngine/>
-      { renderView() }
-    </div>
-  );
 };

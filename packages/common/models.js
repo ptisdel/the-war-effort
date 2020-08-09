@@ -66,7 +66,7 @@ export const Feature = ({
 
 export const Location = ({
   getAdjacentLocationIds: location => _.get(location, 'adjacentLocationIds'),
-  getCallsign: location => _.get(location, 'callsign'),
+  getCallsign: location => _.get(location, 'callsign', 'X'),
   getId: location => _.get(location, 'id'),
   getName: location => _.get(location, 'name'),
   getFeatures: location => _.get(location, 'features'),

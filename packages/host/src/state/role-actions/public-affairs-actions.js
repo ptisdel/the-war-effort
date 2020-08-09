@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import common from '@the-war-effort/common';
 import { Article } from '@the-war-effort/common/models';
 

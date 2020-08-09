@@ -1,4 +1,11 @@
 import { useEffect, useRef } from 'react';
+import state from './state';
+
+export const useGameState = () => {
+  const [globalState] = state.store();
+  const { gameState } = globalState;
+  return { gameState };
+};
 
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();

@@ -6,7 +6,6 @@ const { store } = state;
 const { useInterval } = hooks;
 
 export const GameEngine = () => {
-  // eslint-disable-next-line
   const [globalState, globalActions] = store();
   const { gameState } = globalState;
 

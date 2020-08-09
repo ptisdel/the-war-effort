@@ -36,6 +36,7 @@ module.exports = {
     'arrow-parens': 0,
     'import/prefer-default-export': 0,
     'no-console': 0,
+    'no-use-before-define': ['error', { functions: false, classes: true }],
     quotes: ['error', 'single'],
     'jsx-quotes': ['error', 'prefer-single'],
     'react/jsx-filename-extension': 'off',
