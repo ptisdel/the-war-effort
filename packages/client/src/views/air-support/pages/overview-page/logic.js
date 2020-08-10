@@ -1,0 +1,54 @@
+import _ from 'lodash-es';
+import common from '@the-war-effort/common';
+import { airSupportActions } from '../../../../api';
+import state from '../../../../state';
+
+const { constants, models } = common;
+
+const { allFactions, allFeatureTypes } = constants;
+const {
+  Feature,
+  GameState,
+  Location,
+  Unit,
+} = models;
+
+export const useOverviewPage = () => {
+  const [{ gameState }] = state.store();
+
+  const playerAirbases = _.reduce(GameState.getLocations(gameState),
+    (acc, l) => [
+      ...acc,
+      ...Location.getFactionFeaturesByType(l, allFactions.PLAYERS, allFeatureTypes.AIRPORT),
+    ], []);
+
+  const airBases = _.map(playerAirbases, ab => {
+    const id = Feature.getId(ab);
+    const name = Feature.getName(ab);
+    const aircraft = Feature.getUnits(ab);
+
+    const formattedAircraft = _.map(aircraft, a => {
+      const aircraftId = Unit.getId(a);
+      const aircraftName = Unit.getName(a);
+      const type = Unit.getType(a);
+      const ammo = Unit.getAmmo(a);
+      const maxAmmo = Unit.getMaxAmmo(a);
+
+      return {
+        id: aircraftId,
+        name: `${aircraftName}: ${type}`,
+        ammoRatio: `${ammo}/${maxAmmo}`,
+      };
+    });
+
+    return {
+      id,
+      name,
+      aircraft: formattedAircraft,
+    };
+  });
+
+  const resupplyAircraft = id => airSupportActions.resupplyAircraft(id);
+
+  return [{ airBases }, { resupplyAircraft }];
+};

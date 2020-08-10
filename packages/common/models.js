@@ -21,7 +21,7 @@ export const Budget = ({
 export const Role = ({
   getBudget: role => _.get(role, 'budget'),
   getFormattedBudget: role => Budget.getFormattedTotal(Role.getBudget(role)),
-  getPlayer: role => _.get(role, 'player'),
+  getPlayerId: role => _.get(role, 'playerId'),
   getName: role => _.get(role, 'name'),
 });
 
@@ -154,7 +154,7 @@ export const GameState = ({
   getParliamentTotalMemberCount: gameState => _.get(gameState, ['parliament', 'totalMemberCount']),
   getParliamentSupportingMemberCount: gameState => _.get(gameState, ['parliament', 'supportingMemberCount']),
   getPlayers: gameState => _.get(gameState, 'players'),
-  getPlayerByRoleName: (gameState, roleName) => Role.getPlayer(
+  getPlayerByRoleName: (gameState, roleName) => Role.getPlayerId(
     _.find(
       GameState.getRoles(gameState),
       r => Role.getName(r) === roleName,
