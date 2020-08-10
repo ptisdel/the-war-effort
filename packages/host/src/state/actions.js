@@ -69,7 +69,7 @@ export const deletePlayer = (store, playerId) => {
   const { roles } = gameState;
 
   const newPlayers = _.without(gameState.players, playerId);
-  const newRoles = _.filter(roles, r => Role.getPlayer(r) === playerId);
+  const newRoles = _.filter(roles, r => Role.getPlayerId(r) === playerId);
 
   const newGameState = {
     ...gameState,
@@ -92,10 +92,10 @@ export const hireRole = (store, { playerId, roleName }) => {
 
   const newRoles = [
     // if player occupies other role, remove him from previous role
-    ..._.filter(roles, r => Role.getPlayer(r) !== playerId),
+    ..._.filter(roles, r => Role.getPlayerId(r) !== playerId),
     {
       name: roleName,
-      player: playerId,
+      playerId,
       budget: 0,
     },
   ];

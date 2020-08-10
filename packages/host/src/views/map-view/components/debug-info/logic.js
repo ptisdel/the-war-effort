@@ -33,7 +33,7 @@ export const useDebugInfo = () => {
   }));
 
   const playersFormatted = _.map(players, p => {
-    const role = _.find(roles, r => Role.getPlayer(r) === p);
+    const role = _.find(roles, r => Role.getPlayerId(r) === p);
     const roleName = Role.getName(role) || allRoles.AUDIENCE;
     const budget = Role.getFormattedBudget(role) || '$0';
 
