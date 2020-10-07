@@ -3,31 +3,31 @@ import { useEffect } from 'react';
 import state from '../state';
 import * as api from '../api';
 
-const {
-  subscribeToPlayerAddition,
-  subscribeToPlayerDeletion,
-  subscribeToRoleAction,
-  subscribeToRoleHire,
-  subscribeToRemovePlayerFromRole,
-  sendGameState,
-} = api;
-
 export const useApp = () => {
   const [globalState, globalActions] = state.store();
+  const { gameState } = globalState;
 
-  const currentChannel = _.get(globalState, 'currentChannel');
+  const currentChannel = _.get(state, 'currentChannel');
 
+  const onPlayerAdded = playerId => globalActions.addPlayer(playerId);
+  const onPlayerDeleted = playerId => globalActions.deletePlayer(playerId);
+  const onPlayerHired = ({ playerId, roleName }) => globalActions.hireRole({ playerId, roleName });
+  const onPlayerRemoved = ({ roleName }) => globalActions.removePlayerFromRole(roleName);
+  const onRoleAction = ({ type, payload }) => globalActions.roleAction(({ type, payload }));
+
+  // handle websocket actions
   useEffect(() => {
-    subscribeToPlayerAddition(playerId => globalActions.addPlayer(playerId));
-    subscribeToPlayerDeletion(playerId => globalActions.deletePlayer(playerId));
-    subscribeToRoleHire(({ playerId, roleName }) => globalActions.hireRole({ playerId, roleName }));
-    subscribeToRemovePlayerFromRole(({ roleName }) => globalActions.removePlayerFromRole(roleName));
-    subscribeToRoleAction(({ type, payload }) => globalActions.roleAction(({ type, payload })));
+    api.subscribeToPlayerAddition(onPlayerAdded);
+    api.subscribeToPlayerDeletion(onPlayerDeleted);
+    api.subscribeToRoleHire(onPlayerHired);
+    api.subscribeToRemovePlayerFromRole(onPlayerRemoved);
+    api.subscribeToRoleAction(onRoleAction);
   }, []);
 
+  // broadcast any state updates
   useEffect(() => {
-    sendGameState(globalState.gameState);
-  }, [globalState]);
+    api.sendGameState(gameState);
+  }, [gameState]);
 
   return {
     currentChannel,

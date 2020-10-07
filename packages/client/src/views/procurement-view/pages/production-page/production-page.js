@@ -7,8 +7,8 @@ import * as Styles from './styles';
 const { constants, models } = common;
 
 const {
-  allResources,
-  allResourceTypes,
+  ALL_RESOURCES,
+  ALL_RESOURCE_TYPES,
 } = constants;
 const {
   GameState,
@@ -18,11 +18,11 @@ const {
 const { store } = state;
 
 const researchableResourceTypes = [
-  allResourceTypes.AIRCRAFT,
-  allResourceTypes.AMMUNITION,
-  allResourceTypes.GROUND_VEHICLE,
+  ALL_RESOURCE_TYPES.AIRCRAFT,
+  ALL_RESOURCE_TYPES.AMMUNITION,
+  ALL_RESOURCE_TYPES.GROUND_VEHICLE,
 ];
-const resourcesGroupedByType = _.groupBy(allResources, r => Resource.getType(r));
+const resourcesGroupedByType = _.groupBy(ALL_RESOURCES, r => Resource.getType(r));
 
 const ProductionPage = () => {
   const [globalState] = store();

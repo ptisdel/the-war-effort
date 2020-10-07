@@ -3,7 +3,7 @@ import { useState } from 'react';
 import common from '@the-war-effort/common';
 import state from '../../../../state';
 
-const { allRoles } = common.constants;
+const { ALL_ROLES } = common.constants;
 const {
   Feature,
   GameState,
@@ -34,7 +34,7 @@ export const useDebugInfo = () => {
 
   const playersFormatted = _.map(players, p => {
     const role = _.find(roles, r => Role.getPlayerId(r) === p);
-    const roleName = Role.getName(role) || allRoles.AUDIENCE;
+    const roleName = Role.getName(role) || ALL_ROLES.AUDIENCE;
     const budget = Role.getFormattedBudget(role) || '$0';
 
     return {
@@ -42,7 +42,6 @@ export const useDebugInfo = () => {
       roleName,
     };
   });
-
 
   return [
     {

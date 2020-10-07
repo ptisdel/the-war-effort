@@ -24,7 +24,7 @@ const FundingPage = () => {
         { `Parliament Sentiment: ${GameState.getParliamentSupportingMemberCount(gameState)} out of ${GameState.getParliamentTotalMemberCount(gameState)}` }
       </h2>
       <h3 as = { Styles.Budget }>
-        { `Current Budget: ${Budget.getFormattedTotal(budget)}` }
+        { `Current Budget: ${Budget.getFormatted(budget)}` }
       </h3>
       <button
         as = { Styles.RequestButton }

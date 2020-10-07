@@ -10,7 +10,7 @@ const {
 } = common;
 
 const {
-  allFactions,
+  ALL_FACTIONS,
 } = constants;
 
 const {
@@ -50,7 +50,7 @@ const AnalyticsPage = () => {
   );
 
   const renderLocation = ({ name, features, units }) => {
-    const everythingByFaction = _.reduce(allFactions, (acc, factionName) => ({
+    const everythingByFaction = _.reduce(ALL_FACTIONS, (acc, factionName) => ({
       ...acc,
       [factionName]: {
         units: _.filter(units, u => Unit.getFaction(u) === factionName),

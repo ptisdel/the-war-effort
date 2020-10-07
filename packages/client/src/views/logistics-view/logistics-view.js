@@ -12,16 +12,16 @@ const {
   HomeResourcesPage,
   TravelGroupsPage,
 } = pages;
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const LogisticsView = () => {
-  const handleOnResign = () => resignFromRole(allRoles.LOGISTICS);
+  const handleOnResign = () => resignFromRole(ALL_ROLES.LOGISTICS);
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.LOGISTICS } onResign = { handleOnResign }></RoleHeader>
+      <RoleHeader title = { ALL_ROLES.LOGISTICS } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <HomeResourcesPage/>
         <FobResourcesPage/>

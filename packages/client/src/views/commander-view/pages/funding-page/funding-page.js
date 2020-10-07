@@ -11,7 +11,7 @@ const { constants, models } = common;
 
 const { commanderActions } = api;
 const { Budget, GameState, Role } = models;
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { store } = state;
 
 const FundingPage = () => {
@@ -25,7 +25,7 @@ const FundingPage = () => {
   const increaseBudget = roleName => commanderActions.increaseRoleBudget(roleName);
 
   const renderRoles = () => {
-    const filteredRoles = _.filter(roles, r => Role.getName(r) !== allRoles.COMMANDER);
+    const filteredRoles = _.filter(roles, r => Role.getName(r) !== ALL_ROLES.COMMANDER);
 
     if (filteredRoles.length === 0) return 'No roles available to fund';
 
@@ -48,7 +48,7 @@ const FundingPage = () => {
   return (
     <Styles.Root>
       <h2 as = { Styles.FundingTotal }>
-        { `Total Budget: ${Budget.getFormattedTotal(budget)}` }
+        { `Total Budget: ${Budget.getFormatted(budget)}` }
       </h2>
       <Styles.RoleList>
         { renderRoles() }

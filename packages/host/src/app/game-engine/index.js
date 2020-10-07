@@ -1,5 +1,5 @@
 import state from '../../state';
-import { engineTick } from './engine-tick';
+import { engineTick } from './logic';
 import * as hooks from '../../hooks';
 
 const { store } = state;

@@ -7,18 +7,18 @@ import { CensorshipPage, PropagandaPage } from './pages';
 
 const { constants } = common;
 
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const PublicAffairsView = () => {
   const handleOnResign = () => {
-    resignFromRole(allRoles.PUBLIC_AFFAIRS);
+    resignFromRole(ALL_ROLES.PUBLIC_AFFAIRS);
   };
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.PUBLIC_AFFAIRS } onResign = { handleOnResign }></RoleHeader>
+      <RoleHeader title = { ALL_ROLES.PUBLIC_AFFAIRS } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <PropagandaPage/>
         <CensorshipPage/>

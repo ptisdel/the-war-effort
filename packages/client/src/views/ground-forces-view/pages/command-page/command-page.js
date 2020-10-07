@@ -8,7 +8,7 @@ import * as Styles from './styles';
 const { constants, models } = common;
 
 const { groundForcesActions } = api;
-const { allFactions, allFeatureTypes } = constants;
+const { ALL_FACTIONS, ALL_FEATURE_TYPES } = constants;
 const {
   Feature,
   GameState,

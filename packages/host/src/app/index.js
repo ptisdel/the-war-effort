@@ -1,8 +1,7 @@
 import React from 'react';
 import { MapView, NewsView } from '../views';
 import * as constants from '../constants';
-import { GameEngine } from '../components';
-
+import { GameEngine } from './game-engine';
 import { useApp } from './logic';
 
 const { CHANNELS } = constants;

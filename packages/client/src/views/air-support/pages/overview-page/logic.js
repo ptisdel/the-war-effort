@@ -5,7 +5,7 @@ import state from '../../../../state';
 
 const { constants, models } = common;
 
-const { allFactions, allFeatureTypes } = constants;
+const { ALL_FACTIONS, ALL_FEATURE_TYPES } = constants;
 const {
   Feature,
   GameState,
@@ -19,7 +19,7 @@ export const useOverviewPage = () => {
   const playerAirbases = _.reduce(GameState.getLocations(gameState),
     (acc, l) => [
       ...acc,
-      ...Location.getFactionFeaturesByType(l, allFactions.PLAYERS, allFeatureTypes.AIRPORT),
+      ...Location.getFactionFeaturesByType(l, ALL_FACTIONS.PLAYERS, ALL_FEATURE_TYPES.AIRPORT),
     ], []);
 
   const airBases = _.map(playerAirbases, ab => {

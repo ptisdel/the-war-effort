@@ -1,11 +1,11 @@
 import common from '@the-war-effort/common';
 import { resignFromRole } from '../../api';
 
-const { allRoles } = common.constants;
+const { ALL_ROLES } = common.constants;
 
 export const useAirSupport = () => {
   const onResign = () => {
-    resignFromRole(allRoles.AIR_SUPPORT);
+    resignFromRole(ALL_ROLES.AIR_SUPPORT);
   };
 
   return { onResign };

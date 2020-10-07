@@ -13,13 +13,13 @@ export const createTrainingGroup = (store, payload) => {
   const { gameState } = store.state;
   const { featureId } = payload;
 
-  const { allFactions, allFeatureTypes, defaultLocations } = constants;
-  const home = GameState.getLocationById(gameState, Location.getId(defaultLocations.HOME));
+  const { ALL_FACTIONS, ALL_FEATURE_TYPES, DEFAULT_LOCATIONS } = constants;
+  const home = GameState.getLocationById(gameState, Location.getId(DEFAULT_LOCATIONS.HOME));
   const feature = Location.getFeatureById(home, featureId);
   if (
     !feature
-    || Feature.getType(feature) !== allFeatureTypes.TRAINING
-    || Feature.getFaction(feature) !== allFactions.PLAYERS
+    || Feature.getType(feature) !== ALL_FEATURE_TYPES.TRAINING
+    || Feature.getFaction(feature) !== ALL_FACTIONS.PLAYERS
   ) return;
 
   const travelGroupAlreadyExists = Boolean(GameState.getTravelGroupAtFeatureId(

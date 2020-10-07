@@ -8,7 +8,7 @@ import * as Styles from './styles';
 
 const { constants, helpers, models } = common;
 
-const { allFactions } = constants;
+const { ALL_FACTIONS } = constants;
 const { logisticsActions } = api;
 const { log } = helpers;
 const {
@@ -25,7 +25,7 @@ const ResourceSender = ({ originId, destinationId }) => {
   const origin = GameState.getLocationById(gameState, originId);
   const originName = Location.getName(origin);
   const originResources = Location.getResources(origin) || [];
-  const originUnits = Location.getUnitsByFaction(origin, allFactions.PLAYERS);
+  const originUnits = Location.getUnitsByFaction(origin, ALL_FACTIONS.PLAYERS);
 
   const availableTransports = _.filter(originUnits, u => Unit.getCapacity(u) > 0);
 

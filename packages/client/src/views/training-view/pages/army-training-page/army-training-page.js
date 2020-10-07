@@ -9,7 +9,7 @@ const { constants, models } = common;
 
 const { trainingActions } = api;
 const {
-  allRoles, allFactions, allFeatureTypes, defaultLocations,
+  ALL_ROLES, ALL_FACTIONS, ALL_FEATURE_TYPES, DEFAULT_LOCATIONS,
 } = constants;
 const {
   Feature,
@@ -26,15 +26,15 @@ const ArmyTrainingPage = () => {
   const [globalState] = store();
   const { gameState } = globalState;
 
-  const homeLocation = GameState.getLocationById(gameState, Location.getId(defaultLocations.HOME));
+  const homeLocation = GameState.getLocationById(gameState, Location.getId(DEFAULT_LOCATIONS.HOME));
 
   const renderTrainingOptions = () => {
     if (!homeLocation) return null;
 
     const availableTrainingFeatures = Location.getFactionFeaturesByType(
       homeLocation,
-      allFactions.PLAYERS,
-      allFeatureTypes.TRAINING,
+      ALL_FACTIONS.PLAYERS,
+      ALL_FEATURE_TYPES.TRAINING,
     );
 
     return _.map(availableTrainingFeatures, feature => {
@@ -97,7 +97,7 @@ const ArmyTrainingPage = () => {
   };
 
   const { roles } = gameState;
-  const trainingRole = _.find(roles, r => Role.getName(r) === allRoles.TRAINING);
+  const trainingRole = _.find(roles, r => Role.getName(r) === ALL_ROLES.TRAINING);
   const trainingFormattedBudget = Role.getFormattedBudget(trainingRole);
 
   return (

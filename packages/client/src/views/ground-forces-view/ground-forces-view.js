@@ -10,16 +10,16 @@ const { constants } = common;
 const {
   CommandPage,
 } = pages;
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const GroundForcesView = () => {
-  const handleOnResign = () => resignFromRole(allRoles.GROUND_FORCES);
+  const handleOnResign = () => resignFromRole(ALL_ROLES.GROUND_FORCES);
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.GROUND_FORCES } onResign = { handleOnResign }/>
+      <RoleHeader title = { ALL_ROLES.GROUND_FORCES } onResign = { handleOnResign }/>
       <Swiper>
         <CommandPage/>
         <div></div>

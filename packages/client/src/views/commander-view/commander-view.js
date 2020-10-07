@@ -7,18 +7,18 @@ import { FundingPage, ParliamentPage, RolesPage } from './pages';
 
 const { constants } = common;
 
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const CommanderView = () => {
   const handleOnResign = () => {
-    resignFromRole(allRoles.COMMANDER);
+    resignFromRole(ALL_ROLES.COMMANDER);
   };
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.COMMANDER } onResign = { handleOnResign }></RoleHeader>
+      <RoleHeader title = { ALL_ROLES.COMMANDER } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <FundingPage/>
         <ParliamentPage/>

@@ -6,7 +6,7 @@ import state from '../../state';
 
 const { constants, models } = common;
 
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const {
   Feature,
   Location,

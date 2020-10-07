@@ -1,10 +1,8 @@
 import React from 'react';
-import common from '@the-war-effort/common';
 import shared from '../../components';
 import { OverviewPage } from './pages';
 import { useAirSupport } from './logic';
 
-const { allRoles } = common.constants;
 const { RoleHeader, Swiper } = shared;
 
 const AirSupport = () => {
@@ -12,7 +10,7 @@ const AirSupport = () => {
 
   return (
     <React.Fragment>
-      <RoleHeader title = { allRoles.AIR_SUPPORT } onResign = { onResign }/>
+      <RoleHeader title = { 'Air Support' } onResign = { onResign }/>
       <Swiper>
         <OverviewPage/>
         <div></div>

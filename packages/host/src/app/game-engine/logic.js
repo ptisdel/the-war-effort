@@ -4,31 +4,36 @@ import { TrainingGroup } from '@the-war-effort/common/models';
 
 const { constants, helpers, models } = common;
 
-const { allFactions, ENGINE_TOGGLES } = constants;
+const { ALL_FACTIONS, ENGINE_TOGGLES } = constants;
 const { log } = helpers;
 
 const {
   GameState,
   Location,
-  TravelGroup,
   Unit,
   UnitGroup,
 } = models;
 
+export const engineTick = ({ globalActions, gameState }) => {
+  log('gameEngine', 'tick');
+  if (ENGINE_TOGGLES.training) trainUnits({ globalActions, gameState });
+  if (ENGINE_TOGGLES.battle) battle({ globalActions, gameState });
+  if (ENGINE_TOGGLES.movement) moveUnits({ globalActions, gameState });
+};
 
-const checkUnitGroupsForMovement = ({ globalActions, gameState }) => {
+function moveUnits({ globalActions, gameState }) {
   _.forEach(GameState.getUnitGroups(gameState), ug => {
     if (UnitGroup.getRoute(ug)) {
       globalActions.moveUnitGroup({ gameState, unitGroup: ug });
     }
   });
-};
+}
 
-const checkLocationsForCombat = ({ globalActions, gameState }) => {
+function battle({ globalActions, gameState }) {
   _.forEach(GameState.getLocations(gameState), location => {
     const combatants = _.filter(
       Location.getUnits(location),
-      u => Unit.getFaction(u) === allFactions.PLAYERS || Unit.getFaction(u) === allFactions.ENEMY,
+      u => Unit.getFaction(u) === ALL_FACTIONS.PLAYERS || Unit.getFaction(u) === ALL_FACTIONS.ENEMY,
     );
 
     const combatantsGroupedByFaction = _.groupBy(combatants, u => Unit.getFaction(u));
@@ -39,20 +44,9 @@ const checkLocationsForCombat = ({ globalActions, gameState }) => {
 
     globalActions.battle({ gameState, location, combatantsGroupedByFaction });
   });
-};
+}
 
-const checkTravelGroups = ({ globalActions, gameState }) => {
-  const travelGroups = GameState.getTravelGroups(gameState);
-  const now = new Date();
-
-  _.forEach(travelGroups, tg => {
-    if (TravelGroup.getETA(tg) < now) {
-      globalActions.travelGroupArrival({ gameState, travelGroup: tg });
-    }
-  });
-};
-
-const checkTrainingGroups = ({ globalActions, gameState }) => {
+function trainUnits({ globalActions, gameState }) {
   const trainingGroups = GameState.getTrainingGroups(gameState);
   const now = new Date();
 
@@ -61,12 +55,4 @@ const checkTrainingGroups = ({ globalActions, gameState }) => {
       globalActions.trainingGroupGraduation({ gameState, trainingGroup: tg });
     }
   });
-};
-
-export const engineTick = ({ globalActions, gameState }) => {
-  log('gameEngine', 'tick');
-  if (ENGINE_TOGGLES.training) checkTrainingGroups({ globalActions, gameState });
-  if (ENGINE_TOGGLES.travel) checkTravelGroups({ globalActions, gameState });
-  if (ENGINE_TOGGLES.battle) checkLocationsForCombat({ globalActions, gameState });
-  if (ENGINE_TOGGLES.movement) checkUnitGroupsForMovement({ globalActions, gameState });
-};
+}

@@ -8,7 +8,7 @@ import * as Styles from './styles';
 const { constants, models } = common;
 
 const { commanderActions } = api;
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { GameState } = models;
 const { store } = state;
 
@@ -19,7 +19,7 @@ const RolesPage = () => {
   const fireRole = roleName => commanderActions.fireRole(roleName);
 
   const renderRoles = () => {
-    const allOtherRoles = _.filter(allRoles, r => r !== allRoles.COMMANDER);
+    const allOtherRoles = _.filter(ALL_ROLES, r => r !== ALL_ROLES.COMMANDER);
 
     if (allOtherRoles.length === 0) return 'No roles available to manage';
 

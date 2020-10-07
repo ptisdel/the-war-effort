@@ -19,7 +19,7 @@ export const ENGINE_TOGGLES = {
   travel: true,
 };
 
-export const allArticleParts = {
+export const ALL_ARTICLE_PARTS = {
   AUTHORS: [
     'authorA',
     'authorB',
@@ -52,7 +52,7 @@ export const allArticleParts = {
   ],
 };
 
-export const allCallsigns = {
+export const ALL_CALLSIGNS = {
   ALPHA: 'Alpha',
   BRAVO: 'Bravo',
   CHARLIE: 'Charlie',
@@ -73,14 +73,14 @@ export const allCallsigns = {
   ZULU: 'Zulu',
 };
 
-export const allFactions = {
+export const ALL_FACTIONS = {
   PLAYERS: 'Player',
   ENEMY: 'Enemy',
   NGO: 'NGO',
   CIVILIAN: 'Civilian',
 };
 
-export const allRoles = {
+export const ALL_ROLES = {
   AIR_SUPPORT: 'Air Support Officer',
   AUDIENCE: 'Audience Member',
   COMMANDER: 'Commander',
@@ -92,7 +92,7 @@ export const allRoles = {
   TRAINING: 'Training Officer',
 };
 
-export const allResourceTypes = {
+export const ALL_RESOURCE_TYPES = {
   AIRCRAFT: 'Aircraft',
   AMMUNITION: 'Ammunition',
   FOOD: 'Food',
@@ -100,95 +100,84 @@ export const allResourceTypes = {
   HUMAN_RESOURCE: 'Human Resource',
 };
 
-export const allResources = {
+export const ALL_RESOURCES = {
   RECRUIT: {
-    amount: 1,
     name: {
       plural: 'Recruits',
       singular: 'Recruit',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   PRIVATE: {
-    amount: 1,
     name: {
       plural: 'Privates',
       singular: 'Private',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   RIFLEMAN: {
-    amount: 1,
     name: {
       plural: 'Riflemen',
       singular: 'Rifleman',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   ARMOR_CREWMAN: {
-    amount: 1,
     name: {
       plural: 'Armor Crewmen',
       singular: 'Armor Crewman',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   SPECIAL_OPERATOR: {
-    amount: 1,
     name: {
       plural: 'Special Operators',
       singular: 'Special Operator',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   CADET: {
-    amount: 1,
     name: {
       plural: 'Cadets',
       singular: 'Cadet',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   FIGHTER_PILOT: {
-    amount: 1,
     name: {
       plural: 'Fighter Pilots',
       singular: 'Fighter Pilot',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   HEAVY_TRANSPORT_PILOT: {
-    amount: 1,
     name: {
       plural: 'Heavy Transport Pilots',
       singular: 'Heavy Transport Pilot',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   HELICOPTER_PILOT: {
-    amount: 1,
     name: {
       plural: 'Helicopter Pilots',
       singular: 'Helicopter Pilot',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   UAV_PILOT: {
-    amount: 1,
     name: {
       plural: 'UAV Pilots',
       singular: 'UAV Pilot',
     },
-    type: allResourceTypes.HUMAN_RESOURCE,
+    type: ALL_RESOURCE_TYPES.HUMAN_RESOURCE,
   },
   F16: {
-    amount: 1,
     cost: 100,
     name: {
       plural: 'F-16s',
       singular: 'F-16',
     },
-    type: allResourceTypes.AIRCRAFT,
+    type: ALL_RESOURCE_TYPES.AIRCRAFT,
     stats: {
       accuracy: 5,
       attack: 10,
@@ -196,27 +185,26 @@ export const allResources = {
     },
   },
   MRES: {
-    amount: 1,
     name: {
       plural: 'MREs',
       singular: 'MRE',
     },
-    type: allResourceTypes.FOOD,
+    type: ALL_RESOURCE_TYPES.FOOD,
     stats: {
       nutrition: 5,
     },
   },
 };
 
-export const allUnitTypes = {
+export const ALL_UNIT_TYPES = {
   GROUND: 'Ground',
   AIR: 'Air',
   SEA: 'Sea',
 };
 
-export const allUnits = {
+export const ALL_UNITS = {
   SQUAD: {
-    type: allUnitTypes.GROUND,
+    type: ALL_UNIT_TYPES.GROUND,
     name: 'Squad',
     number: 10,
     size: 1,
@@ -227,7 +215,7 @@ export const allUnits = {
     },
   },
   TANK: {
-    type: allUnitTypes.GROUND,
+    type: ALL_UNIT_TYPES.GROUND,
     name: 'Tank',
     number: 1,
     size: 2,
@@ -239,7 +227,7 @@ export const allUnits = {
   },
   HELICOPTER: {
     crew: 1,
-    crewType: allResourceTypes.HELICOPTER_PILOT,
+    crewType: ALL_RESOURCE_TYPES.HELICOPTER_PILOT,
     fuel: 15,
     maxFuel: 15,
     ammo: 50,
@@ -252,204 +240,204 @@ export const allUnits = {
       attack: 10,
       defense: 5,
     },
-    type: allUnitTypes.AIR,
+    type: ALL_UNIT_TYPES.AIR,
   },
   C17: {
     ammo: 0,
     capacity: 6,
     cargo: [],
     crew: 2,
-    crewType: allResourceTypes.HEAVY_TRANSPORT_PILOT,
+    crewType: ALL_RESOURCE_TYPES.HEAVY_TRANSPORT_PILOT,
     fuel: 15,
     maxAmmo: 0,
     maxFuel: 15,
     name: 'C-17 Globemaster III',
     size: 8,
-    type: allUnitTypes.AIR,
+    type: ALL_UNIT_TYPES.AIR,
   },
 };
 
-export const allTrainingPaths = {
+export const ALL_TRAINING_PATHS = {
   BASIC_TRAINING: {
     name: 'Basic Training',
-    traineeType: allResources.RECRUIT,
-    graduateType: allResources.PRIVATE,
+    traineeType: ALL_RESOURCES.RECRUIT,
+    graduateType: ALL_RESOURCES.PRIVATE,
     length: 10,
   },
   COMBAT_TRAINING: {
     name: 'Combat Training',
-    traineeType: allResources.PRIVATE,
-    graduateType: allResources.RIFLEMAN,
+    traineeType: ALL_RESOURCES.PRIVATE,
+    graduateType: ALL_RESOURCES.RIFLEMAN,
     length: 10,
   },
   ARMOR_TRAINING: {
     name: 'Armor Training',
-    traineeType: allResources.PRIVATE,
-    graduateType: allResources.ARMOR_CREWMAN,
+    traineeType: ALL_RESOURCES.PRIVATE,
+    graduateType: ALL_RESOURCES.ARMOR_CREWMAN,
     length: 20,
   },
   SPECIAL_FORCES_TRAINING: {
     name: 'Special Forces Training',
-    traineeType: allResources.RIFLEMAN,
-    graduateType: allResources.SPECIAL_OPERATOR,
+    traineeType: ALL_RESOURCES.RIFLEMAN,
+    graduateType: ALL_RESOURCES.SPECIAL_OPERATOR,
     length: 30,
   },
   CADET_TRAINING: {
     name: 'Air Force Academy',
-    traineeType: allResources.RECRUIT,
-    graduateType: allResources.CADET,
+    traineeType: ALL_RESOURCES.RECRUIT,
+    graduateType: ALL_RESOURCES.CADET,
     length: 10,
   },
   FIGHTER_PILOT_TRAINING: {
     name: 'Fighter Pilot Training',
-    traineeType: allResources.CADET,
-    graduateType: allResources.FIGHTER_PILOT,
+    traineeType: ALL_RESOURCES.CADET,
+    graduateType: ALL_RESOURCES.FIGHTER_PILOT,
     length: 30,
   },
   HEAVY_TRANSPORT_PILOT_TRAINING: {
     name: 'Heavy Transport Pilot Training',
-    traineeType: allResources.CADET,
-    graduateType: allResources.HEAVY_TRANSPORT_PILOT,
+    traineeType: ALL_RESOURCES.CADET,
+    graduateType: ALL_RESOURCES.HEAVY_TRANSPORT_PILOT,
     length: 30,
   },
   HELICOPTER_PILOT_TRAINING: {
     name: 'Helicopter Pilot Training',
-    traineeType: allResources.CADET,
-    graduateType: allResources.HELICOPTER_PILOT,
+    traineeType: ALL_RESOURCES.CADET,
+    graduateType: ALL_RESOURCES.HELICOPTER_PILOT,
     length: 30,
   },
   UAV_PILOT_TRAINING: {
     name: 'UAV Pilot Training',
-    traineeType: allResources.CADET,
-    graduateType: allResources.UAV_PILOT,
+    traineeType: ALL_RESOURCES.CADET,
+    graduateType: ALL_RESOURCES.UAV_PILOT,
     length: 30,
   },
 };
 
-export const allFeatureTypes = {
+export const ALL_FEATURE_TYPES = {
   TRAINING: 'Training',
   AIRPORT: 'Airport',
   AIR_DEFENSE: 'Air Defense',
 };
 
-export const allFeatures = {
+export const ALL_FEATURES = {
   AIRPORT: {
     name: 'Airport',
-    type: allFeatureTypes.AIRPORT,
+    type: ALL_FEATURE_TYPES.AIRPORT,
     resupplyTasks: [], // array of unitIds currently undergoing resupply
     units: [],
   },
   ANTI_AIR_BATTERY: {
     name: 'Anti-air Battery',
-    type: allFeatureTypes.AIR_DEFENSE,
+    type: ALL_FEATURE_TYPES.AIR_DEFENSE,
   },
   AIR_FORCE_ACADEMY: {
     name: 'Air Force Academy',
     maxTraineeCount: 20,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.CADET_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.CADET_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
   BASIC_TRAINING: {
     name: 'Basic Training',
     maxTraineeCount: 40,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.BASIC_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.BASIC_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
   INFANTRY_TRAINING_CENTER: {
     name: 'Infantry Combat Training Center',
     maxTraineeCount: 20,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.COMBAT_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.COMBAT_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
   ARMOR_SCHOOL: {
     name: 'Armor School',
     maxTraineeCount: 5,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.ARMOR_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.ARMOR_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
   SPECIAL_FORCES_TRAINING_CENTER: {
     name: 'Special Forces Training Center',
     maxTraineeCount: 5,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.SPECIAL_FORCES_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.SPECIAL_FORCES_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
   UAV_FLIGHT_SCHOOL: {
     name: 'UAV Flight School',
     maxTraineeCount: 15,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.UAV_PILOT_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.UAV_PILOT_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
   HEAVY_TRANSPORT_FLIGHT_SCHOOL: {
     name: 'Heavy Transport Flight School',
     maxTraineeCount: 15,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.HEAVY_TRANSPORT_PILOT_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.HEAVY_TRANSPORT_PILOT_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
   FIGHTER_JET_FLIGHT_SCHOOL: {
     name: 'Fighter Jet Flight School',
     maxTraineeCount: 15,
     traineeCount: 0,
-    trainingOffered: allTrainingPaths.FIGHTER_PILOT_TRAINING,
-    type: allFeatureTypes.TRAINING,
+    trainingOffered: ALL_TRAINING_PATHS.FIGHTER_PILOT_TRAINING,
+    type: ALL_FEATURE_TYPES.TRAINING,
   },
 };
 
-export const allLocationTypes = {
+export const ALL_LOCATION_TYPES = {
   BASE: {
     name: 'Base',
     size: 1,
     speed: 4,
-    unallowedUnitTypes: [allUnitTypes.SEA],
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   CITY: {
     name: 'City',
     size: 4,
     speed: 4,
-    unallowedUnitTypes: [allUnitTypes.SEA],
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   VILLAGE: {
     name: 'Village',
     size: 1,
     speed: 2,
-    unallowedUnitTypes: [allUnitTypes.SEA],
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   DIRT_ROAD: {
     name: 'Dirt road',
     size: 1,
     speed: 2,
-    unallowedUnitTypes: [allUnitTypes.SEA],
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   PAVED_ROAD: {
     name: 'Paved road',
     size: 1,
     speed: 4,
-    unallowedUnitTypes: [allUnitTypes.SEA],
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   DESERT: {
     name: 'Desert',
     size: 5,
     speed: 1,
-    unallowedUnitTypes: [allUnitTypes.SEA],
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   OCEAN: {
     name: 'Ocean',
     size: 5,
     speed: 1,
-    unallowedUnitTypes: [allUnitTypes.GROUND],
+    unallowedUnitTypes: [ALL_UNIT_TYPES.GROUND],
   },
 };
 
-export const defaultLocations = {
+export const DEFAULT_LOCATIONS = {
   HOME: {
     adjacentLocationIds: [],
-    callsign: allCallsigns.ALPHA,
+    callsign: ALL_CALLSIGNS.ALPHA,
     features: [],
     id: '0',
     name: 'Home Base',
@@ -458,12 +446,12 @@ export const defaultLocations = {
       lng: 0.5590789,
     },
     resources: [],
-    type: allLocationTypes.BASE,
+    type: ALL_LOCATION_TYPES.BASE,
     units: [],
   },
   FOB: {
     adjacentLocationIds: [],
-    callsign: allCallsigns.BRAVO,
+    callsign: ALL_CALLSIGNS.BRAVO,
     features: [],
     id: '1',
     name: 'Forward Operating Base',
@@ -472,20 +460,23 @@ export const defaultLocations = {
       lng: 65.7151501,
     },
     resources: [],
-    type: allLocationTypes.BASE,
+    type: ALL_LOCATION_TYPES.BASE,
     units: [],
   },
   NEW_LOCATION_TEMPLATE: {
     adjacentLocationIds: [],
-    callSign: allCallsigns.XRAY,
+    callSign: ALL_CALLSIGNS.XRAY,
     features: [],
     name: 'New Location Template',
     position: null,
     resources: [],
-    type: allLocationTypes.BASE,
+    type: ALL_LOCATION_TYPES.BASE,
     units: [],
   },
 };
 
-export const budgetIncrementAmount = 100000;
-export const roleBudgetIncrementAmount = 10000;
+// increment total budget by
+export const BUDGET_INCREMENT_AMOUNT = 100000;
+
+// increment a role's budget by
+export const ROLE_BUDGET_INCREMENT_AMOUNT = 10000;

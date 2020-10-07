@@ -2,11 +2,10 @@ import _ from 'lodash-es';
 import common from '@the-war-effort/common';
 import mbxDirections from '@mapbox/mapbox-sdk/services/directions';
 import uuid from 'uuid';
-import { allFactions } from '@the-war-effort/common/constants';
 import { GAME_ENGINE_TIME_MULTIPLIER } from './constants';
 
-const { constants, models } = common;
-const { Resource } = models;
+const { Resource } = common.models;
+const { ALL_ARTICLE_PARTS, ALL_FACTIONS } = common.constants;
 
 const directionsClient = mbxDirections({ accessToken: process.env.MAPBOX_ACCESS_TOKEN });
 
@@ -22,20 +21,16 @@ export const createMultiple = (type, count, options) => _.times(count, () => ({
   ...options,
 }));
 
-export const createArticles = count => {
-  const { allArticleParts } = constants;
-
-  return _.times(count, () => ({
-    author: _.sample(allArticleParts.AUTHORS),
-    body: _.sample(allArticleParts.BODIES),
-    id: uuid(),
-    interestingness: 4, // on a 1-10 scale
-    censorDate: null,
-    publishDate: Date.now(),
-    title: _.sample(allArticleParts.TITLES),
-    views: _.random(300, false),
-  }));
-};
+export const createArticles = count => _.times(count, () => ({
+  author: _.sample(ALL_ARTICLE_PARTS.AUTHORS),
+  body: _.sample(ALL_ARTICLE_PARTS.BODIES),
+  id: uuid(),
+  interestingness: 4, // on a 1-10 scale
+  censorDate: null,
+  publishDate: Date.now(),
+  title: _.sample(ALL_ARTICLE_PARTS.TITLES),
+  views: _.random(300, false),
+}));
 
 export const createPrototype = resource => {
   // 1 in 5 chance of a cost reduction
@@ -78,7 +73,7 @@ export const createPrototype = resource => {
 
 export const createUnitGroup = (
   units,
-  options = { faction: allFactions.PLAYERS, position: { lat: 0, lng: 0 } },
+  options = { faction: ALL_FACTIONS.PLAYERS, position: { lat: 0, lng: 0 } },
 ) => ({
   id: uuid(),
   currentOrder: null,

@@ -7,8 +7,8 @@ const { constants, helpers, models } = common;
 const { create } = hostHelpers;
 
 const {
-  allFactions,
-  defaultLocations,
+  ALL_FACTIONS,
+  DEFAULT_LOCATIONS,
 } = constants;
 const { log } = helpers;
 const {
@@ -372,7 +372,7 @@ export const travelGroupArrival = (store, { gameState, travelGroup }) => {
 
 export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => {
   const trainingGroups = GameState.getTrainingGroups(gameState);
-  const location = GameState.getLocationById(gameState, Location.getId(defaultLocations.HOME));
+  const location = GameState.getLocationById(gameState, Location.getId(DEFAULT_LOCATIONS.HOME));
 
   const newLocation = {
     ...location,
@@ -380,7 +380,7 @@ export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => 
       ...Location.getResources(location),
       ...create(TrainingGroup.getGraduateType(trainingGroup), {
         amount: TrainingGroup.getTraineeCount(trainingGroup),
-        faction: allFactions.PLAYERS,
+        faction: ALL_FACTIONS.PLAYERS,
       }),
     ],
   };

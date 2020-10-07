@@ -9,7 +9,7 @@ import * as Styles from './styles';
 
 const { constants, models } = common;
 
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { Role } = models;
 const { RoleHeader } = shared;
 const { RoleSelector } = components;
@@ -19,7 +19,7 @@ const AudienceView = () => {
   const [globalState] = store();
   const { roles } = globalState.gameState;
 
-  const allRolesExceptAudience = _.filter(allRoles, ar => ar !== allRoles.AUDIENCE);
+  const allRolesExceptAudience = _.filter(ALL_ROLES, ar => ar !== ALL_ROLES.AUDIENCE);
   const roleData = _.map(allRolesExceptAudience, ar => ({
     name: ar,
     isAvailable: !_.some(roles, r => Role.getName(r) === ar),

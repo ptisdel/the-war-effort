@@ -4,7 +4,7 @@ import common from '@the-war-effort/common';
 const { constants, helpers, models } = common;
 const { log } = helpers;
 const { GameState, Role } = models;
-const { budgetIncrementAmount, roleBudgetIncrementAmount } = constants;
+const { BUDGET_INCREMENT_AMOUNT, ROLE_BUDGET_INCREMENT_AMOUNT } = constants;
 
 export const decreaseRoleBudget = (store, payload) => {
   const { gameState } = store.state;
@@ -16,10 +16,10 @@ export const decreaseRoleBudget = (store, payload) => {
 
   const targetRoleBudget = Role.getBudget(targetRole);
 
-  if (targetRoleBudget < roleBudgetIncrementAmount) return;
+  if (targetRoleBudget < ROLE_BUDGET_INCREMENT_AMOUNT) return;
 
-  const newBudget = budget + roleBudgetIncrementAmount;
-  const newTargetRoleBudget = targetRoleBudget - roleBudgetIncrementAmount;
+  const newBudget = budget + ROLE_BUDGET_INCREMENT_AMOUNT;
+  const newTargetRoleBudget = targetRoleBudget - ROLE_BUDGET_INCREMENT_AMOUNT;
 
   const newRoles = [
     ..._.without(roles, targetRole),
@@ -49,10 +49,10 @@ export const increaseRoleBudget = (store, payload) => {
 
   const targetRoleBudget = Role.getBudget(targetRole);
 
-  if (budget < roleBudgetIncrementAmount) return;
+  if (budget < ROLE_BUDGET_INCREMENT_AMOUNT) return;
 
-  const newBudget = budget - roleBudgetIncrementAmount;
-  const newTargetRoleBudget = targetRoleBudget + roleBudgetIncrementAmount;
+  const newBudget = budget - ROLE_BUDGET_INCREMENT_AMOUNT;
+  const newTargetRoleBudget = targetRoleBudget + ROLE_BUDGET_INCREMENT_AMOUNT;
 
   const newRoles = [
     ..._.without(roles, targetRole),
@@ -75,7 +75,7 @@ export const requestBudgetIncrease = store => {
   const { gameState } = store.state;
 
   const currentBudget = GameState.getBudget(gameState);
-  const newBudget = currentBudget + budgetIncrementAmount;
+  const newBudget = currentBudget + BUDGET_INCREMENT_AMOUNT;
 
   const currentParliamentSupport = GameState.getParliamentSupportingMemberCount(gameState);
   const newParliamentSupport = _.max([0, currentParliamentSupport - _.random(5, 15, false)]);

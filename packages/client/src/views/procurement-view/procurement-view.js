@@ -11,16 +11,16 @@ const {
   ProductionPage,
   ResearchPage,
 } = pages;
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const ProcurementView = () => {
-  const handleOnResign = () => resignFromRole(allRoles.PROCUREMENT);
+  const handleOnResign = () => resignFromRole(ALL_ROLES.PROCUREMENT);
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.PROCUREMENT } onResign = { handleOnResign }></RoleHeader>
+      <RoleHeader title = { ALL_ROLES.PROCUREMENT } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <ProductionPage/>
         <ResearchPage/>

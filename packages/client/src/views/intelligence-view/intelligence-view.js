@@ -9,16 +9,16 @@ import pages from './pages';
 const { constants } = common;
 
 const { AnalyticsPage } = pages;
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const IntelligenceView = () => {
-  const handleOnResign = () => resignFromRole(allRoles.INTELLIGENCE);
+  const handleOnResign = () => resignFromRole(ALL_ROLES.INTELLIGENCE);
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.INTELLIGENCE } onResign = { handleOnResign }></RoleHeader>
+      <RoleHeader title = { ALL_ROLES.INTELLIGENCE } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <AnalyticsPage/>
       </Swiper>

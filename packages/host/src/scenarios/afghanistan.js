@@ -1,4 +1,3 @@
-
 import common from '@the-war-effort/common';
 import * as helpers from '../helpers';
 
@@ -13,12 +12,12 @@ const {
 } = helpers;
 
 const {
-  allCallsigns,
-  allFactions,
-  allFeatures,
-  allResources,
-  allUnits,
-  defaultLocations,
+  ALL_CALLSIGNS,
+  ALL_FACTIONS,
+  ALL_FEATURES,
+  ALL_RESOURCES,
+  ALL_UNITS,
+  DEFAULT_LOCATIONS,
 } = constants;
 
 export const afghanistanScenario = {
@@ -29,13 +28,13 @@ export const afghanistanScenario = {
   unitGroups: [
     createUnitGroup(
       [
-        create(allUnits.SQUAD,
+        create(ALL_UNITS.SQUAD,
           {
-            faction: allFactions.PLAYERS,
+            faction: ALL_FACTIONS.PLAYERS,
           }),
       ],
       {
-        faction: allFactions.PLAYERS,
+        faction: ALL_FACTIONS.PLAYERS,
         position: { lat: 31.6349554, lng: 65.7151501 },
       },
     ),
@@ -53,62 +52,62 @@ export const afghanistanScenario = {
   publicSupport: 71,
   players: [],
   prototypes: [
-    createPrototype(allResources.F16),
+    createPrototype(ALL_RESOURCES.F16),
   ],
   roles: [],
   locations: [
-    create(defaultLocations.NEW_LOCATION,
+    create(DEFAULT_LOCATIONS.NEW_LOCATION_TEMPLATE,
       {
-        callsign: allCallsigns.CHARLIE,
+        callsign: ALL_CALLSIGNS.CHARLIE,
         name: 'Kabul',
         position: {
           lat: 34.533473,
           lng: 69.1484533,
         },
         units: [
-          create(allUnits.TANK, { faction: allFactions.PLAYERS }),
-          create(allUnits.SQUAD, { faction: allFactions.PLAYERS }),
-          ...createMultiple(allUnits.SQUAD, 3, { faction: allFactions.ENEMY }),
+          create(ALL_UNITS.TANK, { faction: ALL_FACTIONS.PLAYERS }),
+          create(ALL_UNITS.SQUAD, { faction: ALL_FACTIONS.PLAYERS }),
+          ...createMultiple(ALL_UNITS.SQUAD, 3, { faction: ALL_FACTIONS.ENEMY }),
         ],
       }),
-    create(defaultLocations.HOME,
+    create(DEFAULT_LOCATIONS.HOME,
       {
         features: [
-          create(allFeatures.AIRPORT, {
-            faction: allFactions.PLAYERS,
+          create(ALL_FEATURES.AIRPORT, {
+            faction: ALL_FACTIONS.PLAYERS,
             name: 'Dobbins Air Force Base',
             units: [
-              create(allUnits.HELICOPTER, { faction: allFactions.PLAYERS }),
+              create(ALL_UNITS.HELICOPTER, { faction: ALL_FACTIONS.PLAYERS }),
             ],
           }),
-          create(allFeatures.ANTI_AIR_BATTERY, { faction: allFactions.PLAYERS }),
-          create(allFeatures.BASIC_TRAINING, { faction: allFactions.PLAYERS }),
-          create(allFeatures.INFANTRY_TRAINING_CENTER, { faction: allFactions.PLAYERS }),
-          create(allFeatures.AIR_FORCE_ACADEMY, { faction: allFactions.PLAYERS }),
+          create(ALL_FEATURES.ANTI_AIR_BATTERY, { faction: ALL_FACTIONS.PLAYERS }),
+          create(ALL_FEATURES.BASIC_TRAINING, { faction: ALL_FACTIONS.PLAYERS }),
+          create(ALL_FEATURES.INFANTRY_TRAINING_CENTER, { faction: ALL_FACTIONS.PLAYERS }),
+          create(ALL_FEATURES.AIR_FORCE_ACADEMY, { faction: ALL_FACTIONS.PLAYERS }),
         ],
         resources: [
-          create(allResources.MRES, {
+          create(ALL_RESOURCES.MRES, {
             amount: 10,
-            faction: allFactions.PLAYERS,
+            faction: ALL_FACTIONS.PLAYERS,
           }),
-          create(allResources.F16, {
+          create(ALL_RESOURCES.F16, {
             amount: 3,
-            faction: allFactions.PLAYERS,
+            faction: ALL_FACTIONS.PLAYERS,
           }),
         ],
         units: [
-          create(allUnits.TANK, { faction: allFactions.PLAYERS }),
-          create(allUnits.C17, { faction: allFactions.PLAYERS }),
+          create(ALL_UNITS.TANK, { faction: ALL_FACTIONS.PLAYERS }),
+          create(ALL_UNITS.C17, { faction: ALL_FACTIONS.PLAYERS }),
         ],
       }),
-    create(defaultLocations.FOB,
+    create(DEFAULT_LOCATIONS.FOB,
       {
         features: [
-          create(allFeatures.AIRPORT, {
-            faction: allFactions.PLAYERS,
+          create(ALL_FEATURES.AIRPORT, {
+            faction: ALL_FACTIONS.PLAYERS,
             name: 'Dallas Airbase',
           }),
-          create(allFeatures.ANTI_AIR_BATTERY, { faction: allFactions.PLAYERS }),
+          create(ALL_FEATURES.ANTI_AIR_BATTERY, { faction: ALL_FACTIONS.PLAYERS }),
         ],
       }),
   ],

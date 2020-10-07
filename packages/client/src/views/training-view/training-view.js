@@ -7,18 +7,18 @@ import { ArmyTrainingPage } from './pages';
 
 const { constants } = common;
 
-const { allRoles } = constants;
+const { ALL_ROLES } = constants;
 const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const TrainingView = () => {
   const handleOnResign = () => {
-    resignFromRole(allRoles.TRAINING);
+    resignFromRole(ALL_ROLES.TRAINING);
   };
 
   return (
     <Styles.Root>
-      <RoleHeader title = { allRoles.TRAINING } onResign = { handleOnResign }></RoleHeader>
+      <RoleHeader title = { ALL_ROLES.TRAINING } onResign = { handleOnResign }></RoleHeader>
       <Swiper>
         <ArmyTrainingPage/>
       </Swiper>
