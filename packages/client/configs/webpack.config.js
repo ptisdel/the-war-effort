@@ -1,10 +1,10 @@
 const path = require('path');
-const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const buildDir = path.join(__dirname, '../build');
-const srcDir = path.join(__dirname, '../src');
+const srcDir = path.join(__dirname, 'src');
+const srcIndex = path.join(__dirname, '../src/index.html');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -44,19 +44,20 @@ module.exports = {
   },
   output: {
     path: buildDir,
-    filename: 'bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: '[name].js',
+    chunkFilename: '[name].[chunkhash].js',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(srcDir, 'index.html'),
+      template: srcIndex,
     }),
-    new AsyncChunkNames(),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   devServer: {
+    compress: true,
     contentBase: srcDir,
     historyApiFallback: true,
+    hot: true,
     open: true,
     port: 8002,
   },
