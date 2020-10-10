@@ -1,16 +1,8 @@
 import _ from 'lodash-es';
 import common from '@the-war-effort/common';
 import roleActions from './role-actions';
-import * as hostHelpers from '../helpers';
 
-const { constants, helpers, models } = common;
-const { create } = hostHelpers;
-
-const {
-  ALL_FACTIONS,
-  DEFAULT_LOCATIONS,
-} = constants;
-const { log } = helpers;
+const { log } = common.helpers;
 const {
   GameState,
   Location,
@@ -20,18 +12,19 @@ const {
   TravelGroup,
   Unit,
   UnitGroup,
-} = models;
+} = common.models;
+
+const {
+  airSupportActions,
+  commanderActions,
+  groundForcesActions,
+  logisticsActions,
+  procurementActions,
+  publicAffairsActions,
+  trainingActions,
+} = roleActions;
 
 export const roleAction = (store, { type, payload }) => {
-  const {
-    airSupportActions,
-    commanderActions,
-    groundForcesActions,
-    logisticsActions,
-    procurementActions,
-    publicAffairsActions,
-    trainingActions,
-  } = roleActions;
   if (type === 'commander/decreaseRoleBudget') commanderActions.decreaseRoleBudget(store, payload);
   if (type === 'commander/increaseRoleBudget') commanderActions.increaseRoleBudget(store, payload);
   if (type === 'commander/fireRole') commanderActions.fireRole(store, payload);
@@ -371,29 +364,29 @@ export const travelGroupArrival = (store, { gameState, travelGroup }) => {
 };
 
 export const trainingGroupGraduation = (store, { gameState, trainingGroup }) => {
-  const trainingGroups = GameState.getTrainingGroups(gameState);
-  const location = GameState.getLocationById(gameState, Location.getId(DEFAULT_LOCATIONS.HOME));
+  // const trainingGroups = GameState.getTrainingGroups(gameState);
+  // const location = GameState.getLocationById(gameState, Location.getId(DEFAULT_LOCATIONS.HOME));
 
-  const newLocation = {
-    ...location,
-    resources: [
-      ...Location.getResources(location),
-      ...create(TrainingGroup.getGraduateType(trainingGroup), {
-        amount: TrainingGroup.getTraineeCount(trainingGroup),
-        faction: ALL_FACTIONS.PLAYERS,
-      }),
-    ],
-  };
+  // const newLocation = {
+  //   ...location,
+  //   resources: [
+  //     ...Location.getResources(location),
+  //     ...create(TrainingGroup.getGraduateType(trainingGroup), {
+  //       amount: TrainingGroup.getTraineeCount(trainingGroup),
+  //       faction: ALL_FACTIONS.PLAYERS,
+  //     }),
+  //   ],
+  // };
 
-  const locations = GameState.getLocations(gameState);
-  const newGameState = {
-    ...gameState,
-    trainingGroups: _.without(trainingGroups, trainingGroup),
-    locations: [
-      ..._.differenceWith(locations, [location], _.isEqual),
-      newLocation,
-    ],
-  };
+  // const locations = GameState.getLocations(gameState);
+  // const newGameState = {
+  //   ...gameState,
+  //   trainingGroups: _.without(trainingGroups, trainingGroup),
+  //   locations: [
+  //     ..._.differenceWith(locations, [location], _.isEqual),
+  //     newLocation,
+  //   ],
+  // };
 
-  store.setState({ gameState: newGameState });
+  // store.setState({ gameState: newGameState });
 };

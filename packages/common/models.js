@@ -1,75 +1,147 @@
 import _ from 'lodash-es';
+import { v4 as uuid } from 'uuid';
+import * as constants from './constants';
 import * as helpers from './helpers';
 
 const { formatMoney } = helpers;
+const { ALL_ARTICLE_PARTS } = constants;
 
-export const Article = ({
-  getAuthor: article => _.get(article, 'author'),
-  getBody: article => _.get(article, 'body'),
-  getCensorDate: article => _.get(article, 'censorDate'),
-  getId: article => _.get(article, 'id'),
-  getInterestingness: article => _.get(article, 'interestingness'),
-  getPublishDate: article => _.get(article, 'publishDate'),
-  getTitle: article => _.get(article, 'title'),
-  getViews: article => _.get(article, 'views'),
-});
+export const Article = {
+  create: createArticles,
+  getAuthor: article => article?.author,
+  getBody: article => article?.body,
+  getIsCensored: article => Article.getCensorDate(article) !== null,
+  getCensorDate: article => article?.censorDate,
+  getId: article => article?.id,
+  getInterestingness: article => article?.interestingness,
+  getPublishDate: article => article?.publishDate,
+  getTitle: article => article?.title,
+  getViews: article => article?.views,
+};
 
-export const Budget = ({
-  getFormattedTotal: budget => formatMoney(budget || 0),
-});
+/**
+    * Creates an array of randomly generated Articles
+    * @param {number} amount - number of Articles to generate
+    * @returns {Array} - [...articles]
+  */
+function createArticles(amount) {
+  return _.times(amount, () => ({
+    author: _.sample(ALL_ARTICLE_PARTS.AUTHORS),
+    body: _.sample(ALL_ARTICLE_PARTS.BODIES),
+    id: uuid(),
+    interestingness: 4, // on a 1-10 scale
+    censorDate: null,
+    publishDate: Date.now(),
+    title: _.sample(ALL_ARTICLE_PARTS.TITLES),
+    views: _.random(300, false),
+  }));
+}
 
-export const Role = ({
-  getBudget: role => _.get(role, 'budget'),
-  getFormattedBudget: role => Budget.getFormattedTotal(Role.getBudget(role)),
-  getPlayerId: role => _.get(role, 'playerId'),
-  getName: role => _.get(role, 'name'),
-});
+export const Budget = {
+  getFormatted: budget => formatMoney(budget || 0),
+};
 
-export const Resource = ({
-  getAmount: resource => _.get(resource, 'amount'),
-  getCost: resource => _.get(resource, 'cost'),
-  getFaction: resource => _.get(resource, 'faction'),
-  getName: (resource, amount = 1) => _.get(resource, amount > 1 ? 'name.plural' : 'name.singular'),
-  getType: resource => _.get(resource, 'type'),
-});
+export const Role = {
+  getBudget: role => role?.budget,
+  getFormattedBudget: role => Budget.getFormatted(Role.getBudget(role)),
+  getPlayerId: role => role?.playerId,
+  getName: role => role?.name,
+};
 
-export const Unit = ({
-  getAmmo: unit => _.get(unit, 'ammo'),
-  getCapacity: unit => _.get(unit, 'capacity'),
-  getCargo: unit => _.get(unit, 'cargo'),
-  getCrew: unit => _.get(unit, 'crew'),
-  getCrewType: unit => _.get(unit, 'crewType'),
-  getFuel: unit => _.get(unit, 'fuel'),
-  getId: unit => _.get(unit, 'id'),
-  getFaction: unit => _.get(unit, 'faction'),
-  getMaxAmmo: unit => _.get(unit, 'maxAmmo'),
-  getMaxFuel: unit => _.get(unit, 'maxFuel'),
-  getName: unit => _.get(unit, 'name'),
-  getNumber: unit => _.get(unit, 'number'),
-  getSize: unit => _.get(unit, 'size'),
-  getStats: unit => _.get(unit, 'stats'),
+export const Resource = {
+  create: createResources,
+  getAmount: resource => resource?.amount,
+  getCost: resource => resource?.cost,
+  getName: (resource, amount = 1) => (amount > 1 ? resource?.name.plural : resource?.name.singular),
+  getType: resource => resource?.type,
+};
+  /**
+    * Creates an array of Resources
+    * @param {number} amount - number of Resources to generate
+    * @param {object} type - the definition of the Resource to generate
+    * @returns {Array} - [...resources]
+  */
+function createResources(amount, type) {
+  return _.times(amount, () => ({
+    amount,
+    id: uuid(),
+    ...type,
+  }));
+}
+
+export const Unit = {
+  create: createUnit,
+  getAmmo: unit => unit?.ammo,
+  getGroup: unit => unit?.group,
+  getCapacity: unit => unit?.capacity,
+  getCargo: unit => unit?.cargo,
+  getCrew: unit => unit?.crew,
+  getCrewType: unit => unit?.crewType,
+  getFuel: unit => unit?.fuel,
+  getId: unit => unit?.id,
+  getFaction: unit => unit?.faction,
+  getLocation: unit => unit?.location,
+  getMaxAmmo: unit => unit?.maxAmmo,
+  getMaxFuel: unit => unit?.maxFuel,
+  getName: unit => unit?.name,
+  getNumber: unit => unit?.number,
+  getSize: unit => unit?.size,
+  getStats: unit => unit?.stats,
   getStatByName: (unit, statName) => _.get(Unit.getStats(unit), statName),
-  getType: unit => _.get(unit, 'type'),
-});
+  getType: unit => unit?.type,
+};
+  /**
+    * Creates an array of Units
+    * @param {number} amount - number of Units to generate
+    * @param {object} type - the definition of the Unit to generate
+    * @param {string} type - the faction who owns the Unit
+    * @param {object} type - an object containing any stats to override
+    * @returns {Array} - [...units]
+  */
+function createUnit(amount, type, overrides) {
+  return _.times(amount, () => ({
+    id: uuid(),
+    ...type,
+    ...overrides,
+  }));
+}
 
-export const Feature = ({
-  getId: feature => _.get(feature, 'id'),
-  getName: feature => _.get(feature, 'name'),
-  getFaction: feature => _.get(feature, 'faction'),
-  getType: feature => _.get(feature, 'type'),
-  getUnits: feature => _.get(feature, 'units'),
-  getMaxTraineeCount: feature => _.get(feature, 'maxTraineeCount'),
-  getResupplyTasks: feature => _.get(feature, 'resupplyTasks'),
-  getTraineeCount: feature => _.get(feature, 'traineeCount'),
-  getTrainingOffered: feature => _.get(feature, 'trainingOffered'),
-});
+export const Feature = {
+  create: createFeature,
+  getId: feature => feature?.id,
+  getName: feature => feature?.name,
+  getFaction: feature => feature?.faction,
+  getType: feature => feature?.type,
+  getUnits: feature => feature?.units,
+  getMaxTraineeCount: feature => feature?.maxTraineeCount,
+  getResupplyTasks: feature => feature?.resupplyTasks,
+  getTraineeCount: feature => feature?.traineeCount,
+  getTrainingOffered: feature => feature?.trainingOffered,
+};
 
-export const Location = ({
-  getAdjacentLocationIds: location => _.get(location, 'adjacentLocationIds'),
-  getCallsign: location => _.get(location, 'callsign', 'X'),
-  getId: location => _.get(location, 'id'),
-  getName: location => _.get(location, 'name'),
-  getFeatures: location => _.get(location, 'features'),
+/**
+    * Creates a Feature
+    * @param {object} type - the definition of the Feature to generate
+    * @param {string} faction - the faction the Feature should belong to
+    * @param {object} options - an object containing any variables to override (eg., name)
+    * @returns {object} - the created Feature
+  */
+function createFeature(type, faction, overrides = {}) {
+  return {
+    id: uuid(),
+    faction,
+    ...type,
+    ...overrides,
+  };
+}
+
+export const Location = {
+  create: createLocation,
+  getNeighborInfo: location => location?.neighborInfo,
+  getCallsign: location => location?.callsign || 'X',
+  getId: location => location?.id,
+  getName: location => location?.name,
+  getFeatures: location => location?.features,
   getFeatureById: (location, featureId) => _.find(
     Location.getFeatures(location),
     f => Feature.getId(f) === featureId,
@@ -78,109 +150,154 @@ export const Location = ({
     Location.getFeatures(location),
     f => Feature.getType(f) === featureType && Feature.getFaction(f) === factionName,
   ),
-  getPosition: location => _.get(location, 'position'),
-  getResources: location => _.get(location, 'resources'),
-  getResourcesByFaction: (location, factionName) => _.filter(
-    Location.getResources(location),
-    r => Resource.getFaction(r) === factionName,
+  getPosition: location => location?.position,
+  getResources: location => location?.resources,
+  getSize: location => location?.size,
+  getType: location => location?.type,
+  getUnallowedUnitTypes: location => location?.unallowedUnitTypes,
+};
+
+/**
+    * Creates a Location
+    * @param {object} type - the definition of the Feature to generate
+    * @param {object} options - an object containing any variables to override
+    * @returns {object} - the created Location
+  */
+function createLocation(type, overrides = {}) {
+  return {
+    features: [],
+    id: uuid(),
+    neighborInfo: [],
+    position: { lat: 0, lng: 0 },
+    resources: [],
+    ...type,
+    ...overrides,
+  };
+}
+
+export const ResupplyTask = {
+  getUnitId: resupplyTask => resupplyTask?.unitId,
+};
+
+export const Transport = {
+  getCapacity: transport => transport?.capacity,
+  getCargo: transport => transport?.cargo,
+  getId: transport => transport?.id,
+  getFaction: transport => transport?.faction,
+  getName: transport => transport?.name,
+};
+
+export const TrainingPath = {
+  getGraduateType: trainingPath => trainingPath?.graduateType,
+  getLength: trainingPath => trainingPath?.length,
+  getName: trainingPath => trainingPath?.name,
+  getTraineeType: trainingPath => trainingPath?.traineeType,
+};
+
+export const TrainingGroup = {
+  getEnd: trainingGroup => trainingGroup?.end,
+  getFeatureId: trainingGroup => trainingGroup?.featureId,
+  getGraduateType: trainingGroup => trainingGroup?.graduateType,
+  getStart: trainingGroup => trainingGroup?.start,
+  getTraineeCount: trainingGroup => trainingGroup?.traineeCount,
+};
+
+export const GameState = {
+  getBudget: gameState => gameState?.budget,
+  getCensoredArticles: gameState => _.filter(
+    gameState?.articles,
+    a => Article.getCensorDate(a) !== null,
   ),
-  getSize: location => _.get(location, 'size'),
-  getType: location => _.get(location, 'type'),
-  getUnits: location => _.get(location, 'units'),
-  getUnitsByFaction: (location, factionName) => _.filter(
-    Location.getUnits(location),
-    u => Unit.getFaction(u) === factionName,
-  ),
-});
-
-export const ResupplyTask = ({
-  getUnitId: resupplyTask => _.get(resupplyTask, 'unitId'),
-});
-
-export const Transport = ({
-  getCapacity: transport => _.get(transport, 'capacity'),
-  getCargo: transport => _.get(transport, 'cargo'),
-  getId: transport => _.get(transport, 'id'),
-  getFaction: transport => _.get(transport, 'faction'),
-  getName: transport => _.get(transport, 'name'),
-});
-
-export const TrainingPath = ({
-  getGraduateType: trainingPath => _.get(trainingPath, 'graduateType'),
-  getLength: trainingPath => _.get(trainingPath, 'length'),
-  getName: trainingPath => _.get(trainingPath, 'name'),
-  getTraineeType: trainingPath => _.get(trainingPath, 'traineeType'),
-});
-
-export const TrainingGroup = ({
-  getEnd: trainingGroup => _.get(trainingGroup, 'end'),
-  getFeatureId: trainingGroup => _.get(trainingGroup, 'featureId'),
-  getGraduateType: trainingGroup => _.get(trainingGroup, 'graduateType'),
-  getStart: trainingGroup => _.get(trainingGroup, 'start'),
-  getTraineeCount: trainingGroup => _.get(trainingGroup, 'traineeCount'),
-});
-
-export const UnitGroup = ({
-  getFaction: unitGroup => _.get(unitGroup, 'faction'),
-  getId: unitGroup => _.get(unitGroup, 'id'),
-  getPosition: unitGroup => _.get(unitGroup, 'position'),
-  getName: unitGroup => _.get(unitGroup, 'name'),
-  getRoute: unitGroup => _.get(unitGroup, 'route'),
-  getUnits: unitGroup => _.get(unitGroup, 'units'),
-  getCurrentOrder: unitGroup => _.get(unitGroup, 'currentOrder'),
-});
-
-export const TravelGroup = ({
-  getDepartureTime: travelGroup => _.get(travelGroup, 'departureTime'),
-  getDestinationId: travelGroup => _.get(travelGroup, 'destinationId'),
-  getEscorts: travelGroup => _.get(travelGroup, 'escorts'),
-  getETA: travelGroup => _.get(travelGroup, 'ETA'),
-  getFaction: travelGroup => _.get(travelGroup, 'faction'),
-  getOriginId: travelGroup => _.get(travelGroup, 'originId'),
-  getTransports: travelGroup => _.get(travelGroup, 'transports'),
-});
-
-export const GameState = ({
-  getBudget: gameState => _.get(gameState, 'budget'),
-  getCensoredArticles: gameState => _.get(gameState, ['articles', 'censored']),
-  getLiveArticles: gameState => _.get(gameState, ['articles', 'live']),
-  getLocations: gameState => _.get(gameState, 'locations'),
+  getLiveArticles: gameState => gameState?.articles?.live,
+  getLocations: gameState => gameState?.locations,
   getLocationById: (gameState, locationId) => _.find(
     GameState.getLocations(gameState),
     l => Location.getId(l) === locationId,
   ),
-  getMapPosition: gameState => _.get(gameState, 'mapPosition'),
-  getParliament: gameState => _.get(gameState, 'parliament'),
-  getParliamentTotalMemberCount: gameState => _.get(gameState, ['parliament', 'totalMemberCount']),
-  getParliamentSupportingMemberCount: gameState => _.get(gameState, ['parliament', 'supportingMemberCount']),
-  getPlayers: gameState => _.get(gameState, 'players'),
+  getMapPosition: gameState => gameState?.mapPosition,
+  getParliament: gameState => gameState?.parliament,
+  getParliamentTotalMemberCount: gameState => gameState?.parliament?.totalMemberCount,
+  getParliamentSupportingMemberCount: gameState => gameState?.parliament?.supportingMemberCount,
+  getPlayers: gameState => gameState?.players,
   getPlayerByRoleName: (gameState, roleName) => Role.getPlayerId(
     _.find(
       GameState.getRoles(gameState),
       r => Role.getName(r) === roleName,
     ),
   ),
-  getPrototypes: gameState => _.get(gameState, 'prototypes'),
-  getPublicSupport: gameState => _.get(gameState, 'publicSupport'),
-  getResupplyingUnitIds: gameState => _.get(gameState, 'resupplyingUnitIds'),
-  getRoles: gameState => _.get(gameState, 'roles'),
-  getTravelGroups: gameState => _.get(gameState, 'travelGroups'),
-  getTravelGroupAtFeatureId: (gameState, featureId) => _.find(
-    GameState.getTravelGroups(gameState),
-    tg => TravelGroup.getFeatureId(tg) === featureId,
+  getPrototypes: gameState => gameState?.prototypes,
+  getPublicSupport: gameState => gameState?.publicSupport,
+  getResupplyingUnitIds: gameState => gameState?.resupplyingUnitIds,
+  getRoles: gameState => gameState?.roles,
+  getTrainingGroups: gameState => gameState?.trainingGroups,
+  getUnits: gameState => gameState?.units,
+  getUnitsByLocation: (gameState, location) => _.filter(
+    GameState.getUnits(gameState),
+    u => Unit.getLocation(u) === Location.getId(location),
   ),
-  getTrainingGroups: gameState => _.get(gameState, 'trainingGroups'),
-  getUnitGroups: gameState => _.get(gameState, 'unitGroups'),
-});
+  getUnitGroups: gameState => gameState?.unitGroups,
+};
 
-export const Prototype = ({
-  getCost: prototype => _.get(prototype, 'cost'),
-  getId: prototype => _.get(prototype, 'id'),
-  getName: (prototype, amount = 1) => _.get(prototype, amount > 1 ? 'name.plural' : 'name.singular'),
-  getOriginalResource: prototype => _.get(prototype, 'originalResource'),
-  getStats: prototype => _.get(prototype, 'stats'),
-});
+export const PrototypeResource = {
+  create: createPrototypeResource,
+  getCost: prototype => prototype?.cost,
+  getId: prototype => prototype?.id,
+  getName: (prototype, amount = 1) => (amount > 1
+    ? prototype?.name?.plural
+    : prototype?.name.singular
+  ),
+  getOriginalResource: prototype => prototype?.originalResource,
+  getStats: prototype => prototype?.stats,
+};
 
-export const Theme = ({
+/**
+  * Creates a PrototypeResource
+  * @param {object} resource - the definition of the Resource to modify
+  * @param {string} name - an object containing any variables to override
+  * @returns {object} - the created Prototype
+*/
+function createPrototypeResource(resource) {
+  // 1 in 5 chance of a cost reduction
+  const shouldCostDecline = (_.random(0, 4, false) === 0);
+
+  const stats = _.get(resource, 'stats') || {};
+  const statsCount = _.size(stats) || 0;
+  const statKeys = _.keys(stats);
+  const upgradeRange = _.range(_.random(1, statsCount, false));
+  const newStats = _.reduce(upgradeRange, acc => {
+    const statName = _.sample(statKeys);
+    const newStatValue = _.get(acc, statName) + 1;
+
+    return {
+      ...acc,
+      [statName]: newStatValue,
+    };
+  }, stats);
+
+  const oldCost = Resource.getCost(resource);
+  const newCost = _.max(1, oldCost + upgradeRange.length - (shouldCostDecline * 2));
+
+  const oldName = Resource.getName(resource, 1);
+  const oldPluralName = Resource.getName(resource, 2);
+  const newName = `Starfighter - modified ${oldName}`;
+  const newPluralName = `Starfighter - modified ${oldPluralName}`;
+
+  // useful to compare origin resource with nth prototype
+  const oldOriginalResource = PrototypeResource.getOriginalResource(resource);
+
+  return {
+    id: uuid(),
+    ...resource,
+    cost: newCost,
+    name: {
+      singular: newName,
+      plural: newPluralName,
+    },
+    originalResource: oldOriginalResource || resource,
+    stats: newStats,
+  };
+}
+
+export const Theme = {
   getColor: (theme, shade) => _.get(theme, ['colors', shade]),
-});
+};

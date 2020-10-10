@@ -2,12 +2,14 @@ import styled from 'styled-components';
 
 export const Information = styled.div(() => ({
   alignItems: 'flex-start',
-  pointerEvents: 'none',
+  // pointerEvents: 'none',
   position: 'absolute',
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
+  top: '0',
   width: '100%',
+  zIndex: '5',
 }));
 
 export const InformationHeader = styled.div(() => ({

@@ -4,16 +4,14 @@ import common from '@the-war-effort/common';
 import * as Styles from './news-view.styles';
 import state from '../../state';
 
-const { constants, models } = common;
-
-const { ALL_ROLES } = constants;
+const { ALL_ROLES } = common.constants;
 const {
   Feature,
   Location,
   Resource,
   Role,
   Unit,
-} = models;
+} = common.models;
 const { store } = state;
 
 export const NewsView = () => {

@@ -1,91 +1,8 @@
 import _ from 'lodash-es';
-import common from '@the-war-effort/common';
 import mbxDirections from '@mapbox/mapbox-sdk/services/directions';
-import uuid from 'uuid';
 import { GAME_ENGINE_TIME_MULTIPLIER } from './constants';
 
-const { Resource } = common.models;
-const { ALL_ARTICLE_PARTS, ALL_FACTIONS } = common.constants;
-
 const directionsClient = mbxDirections({ accessToken: process.env.MAPBOX_ACCESS_TOKEN });
-
-export const create = (type, options) => ({
-  id: _.get(type, 'id') || uuid(),
-  ...type,
-  ...options,
-});
-
-export const createMultiple = (type, count, options) => _.times(count, () => ({
-  id: uuid(),
-  ...type,
-  ...options,
-}));
-
-export const createArticles = count => _.times(count, () => ({
-  author: _.sample(ALL_ARTICLE_PARTS.AUTHORS),
-  body: _.sample(ALL_ARTICLE_PARTS.BODIES),
-  id: uuid(),
-  interestingness: 4, // on a 1-10 scale
-  censorDate: null,
-  publishDate: Date.now(),
-  title: _.sample(ALL_ARTICLE_PARTS.TITLES),
-  views: _.random(300, false),
-}));
-
-export const createPrototype = resource => {
-  // 1 in 5 chance of a cost reduction
-  const shouldCostDecline = (_.random(0, 4, false) === 0);
-
-  const stats = _.get(resource, 'stats') || {};
-  const statsCount = _.size(stats) || 0;
-  const statKeys = _.keys(stats);
-  const upgradeRange = _.range(_.random(1, statsCount, false));
-  const newStats = _.reduce(upgradeRange, acc => {
-    const statName = _.sample(statKeys);
-    const newStatValue = _.get(acc, statName) + 1;
-
-    return {
-      ...acc,
-      [statName]: newStatValue,
-    };
-  }, stats);
-
-  const oldCost = Resource.getCost(resource);
-  const newCost = _.max(1, oldCost + upgradeRange.length - (shouldCostDecline * 2));
-
-  const oldName = Resource.getName(resource, 1);
-  const oldPluralName = Resource.getName(resource, 2);
-  const newName = `Starfighter - modified ${oldName}`;
-  const newPluralName = `Starfighter - modified ${oldPluralName}`;
-
-  return {
-    id: uuid(),
-    ...resource,
-    cost: newCost,
-    name: {
-      singular: newName,
-      plural: newPluralName,
-    },
-    originalResource: resource,
-    stats: newStats,
-  };
-};
-
-export const createUnitGroup = (
-  units,
-  options = { faction: ALL_FACTIONS.PLAYERS, position: { lat: 0, lng: 0 } },
-) => ({
-  id: uuid(),
-  currentOrder: null,
-  name: uuid(),
-  position: {
-    lat: 0,
-    lng: 0,
-  },
-  route: null,
-  units,
-  ...options,
-});
 
 const calculateMapboxRoute = MapiResponse => {
   if (!MapiResponse || _.get(MapiResponse, 'body.code') !== 'Ok') return null;
@@ -116,7 +33,7 @@ const calculateMapboxRoute = MapiResponse => {
   };
 };
 
-export const createRoute = async ({ origin, destination, travelMode = 'DRIVING' }) => {
+export const createRoute = async ({ origin, destination }) => {
   const request = directionsClient.getDirections({
     geometries: 'geojson',
     overview: 'full',

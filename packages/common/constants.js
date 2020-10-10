@@ -434,47 +434,6 @@ export const ALL_LOCATION_TYPES = {
   },
 };
 
-export const DEFAULT_LOCATIONS = {
-  HOME: {
-    adjacentLocationIds: [],
-    callsign: ALL_CALLSIGNS.ALPHA,
-    features: [],
-    id: '0',
-    name: 'Home Base',
-    position: {
-      lat: 52.4044764,
-      lng: 0.5590789,
-    },
-    resources: [],
-    type: ALL_LOCATION_TYPES.BASE,
-    units: [],
-  },
-  FOB: {
-    adjacentLocationIds: [],
-    callsign: ALL_CALLSIGNS.BRAVO,
-    features: [],
-    id: '1',
-    name: 'Forward Operating Base',
-    position: {
-      lat: 31.6349554,
-      lng: 65.7151501,
-    },
-    resources: [],
-    type: ALL_LOCATION_TYPES.BASE,
-    units: [],
-  },
-  NEW_LOCATION_TEMPLATE: {
-    adjacentLocationIds: [],
-    callSign: ALL_CALLSIGNS.XRAY,
-    features: [],
-    name: 'New Location Template',
-    position: null,
-    resources: [],
-    type: ALL_LOCATION_TYPES.BASE,
-    units: [],
-  },
-};
-
 // increment total budget by
 export const BUDGET_INCREMENT_AMOUNT = 100000;
 

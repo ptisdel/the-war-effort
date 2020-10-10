@@ -25,12 +25,20 @@ export const useDebugInfo = () => {
   const roles = GameState.getRoles(gameState);
 
   const sortedLocations = _.sortBy(locations, l => Location.getName(l));
-  const locationsFormatted = _.map(sortedLocations, l => ({
-    features: _.map(Location.getFeatures(l), f => Feature.getName(f)),
-    name: Location.getName(l),
-    resources: _.map(Location.getResources(l), r => `${Resource.getAmount(r)} ${Resource.getFaction(r)} ${Resource.getName(r, Resource.getAmount(r))}`),
-    units: _.map(Location.getUnits(l), u => `${Unit.getFaction(u)} ${Unit.getName(u)}`),
-  }));
+  const locationsFormatted = _.map(sortedLocations, l => {
+    const id = Location.getId(l);
+    const features = Location.getFeatures(l);
+    const name = Location.getName(l);
+    const resources = Location.getResources(l);
+    const units = GameState.getUnitsByLocation(gameState, id);
+
+    return {
+      features: _.map(features, f => Feature.getName(f)),
+      name,
+      resources: _.map(resources, r => `${Resource.getAmount(r)} ${Resource.getName(r, Resource.getAmount(r))}`),
+      units: _.map(units, u => `${Unit.getFaction(u)} ${Unit.getName(u)}`),
+    };
+  });
 
   const playersFormatted = _.map(players, p => {
     const role = _.find(roles, r => Role.getPlayerId(r) === p);
