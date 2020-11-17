@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import common from '@the-war-effort/common';
 import { airSupportActions } from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 
 const { constants, models } = common;
 
@@ -14,7 +14,7 @@ const {
 } = models;
 
 export const useOverviewPage = () => {
-  const [{ gameState }] = state.store();
+  const { gameState } = useStore();
 
   const playerAirbases = _.reduce(GameState.getLocations(gameState),
     (acc, l) => [

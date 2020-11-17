@@ -1,12 +1,12 @@
 import _ from 'lodash-es';
 import { useState, useEffect } from 'react';
 import common from '@the-war-effort/common';
-import { useGameState } from '../../hooks';
+import { useStore } from '../../hooks';
 
 const { GameState, Location } = common.models;
 
 export const useMapView = () => {
-  const { gameState } = useGameState();
+  const { gameState } = useStore();
 
   const [googleMapsInfo, setGoogleMapsInfo] = useState(null);
 

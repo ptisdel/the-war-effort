@@ -1,19 +1,17 @@
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { models } = common;
 
 const { commanderActions } = api;
 const { Budget, GameState } = models;
-const { store } = state;
 
 const FundingPage = () => {
-  const [globalState] = store();
+  const { gameState } = useStore();
 
-  const { gameState } = globalState;
   const budget = GameState.getBudget(gameState);
 
   const requestBudgetIncrease = () => commanderActions.requestBudgetIncrease();

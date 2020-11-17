@@ -1,7 +1,6 @@
-import _ from 'lodash-es';
-import * as constants from './constants';
+import * as featureFlags from './feature-flags';
 
-const { LOGGING } = constants;
+const { LOGGING } = featureFlags;
 
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -12,5 +11,5 @@ const formatter = new Intl.NumberFormat('en-US', {
 export const formatMoney = amount => formatter.format(amount);
 
 export const log = (tag, ...message) => {
-  if (_.get(LOGGING, tag)) console.log(...message);
+  if (LOGGING[tag]) console.log(...message);
 };

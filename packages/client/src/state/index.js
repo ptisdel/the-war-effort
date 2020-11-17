@@ -1,7 +1,10 @@
-import store from './store';
+import React from 'react';
+import useGlobalHook from 'use-global-hook';
 import actions from './actions';
 
-export default {
-  actions,
-  store,
+const initialState = {
+  playerId: null,
+  gameState: {},
 };
+
+export const store = useGlobalHook(React, initialState, actions);

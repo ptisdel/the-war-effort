@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { constants, models } = common;
@@ -10,11 +10,9 @@ const { constants, models } = common;
 const { commanderActions } = api;
 const { ALL_ROLES } = constants;
 const { GameState } = models;
-const { store } = state;
 
 const RolesPage = () => {
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const fireRole = roleName => commanderActions.fireRole(roleName);
 

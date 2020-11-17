@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import { useState } from 'react';
 import common from '@the-war-effort/common';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 
 const { ALL_ROLES } = common.constants;
 const {
@@ -17,8 +17,7 @@ export const useDebugInfo = () => {
   const [isDebugInfoOpen, setIsDebugInfoOpen] = useState(false);
 
   // state info
-  const [globalState] = state.store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const locations = GameState.getLocations(gameState);
   const players = GameState.getPlayers(gameState);

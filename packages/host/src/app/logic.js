@@ -1,19 +1,18 @@
 import _ from 'lodash-es';
 import { useEffect } from 'react';
-import state from '../state';
 import * as api from '../api';
+import { useStore } from '../hooks';
 
 export const useApp = () => {
-  const [globalState, globalActions] = state.store();
-  const { gameState } = globalState;
+  const { gameActions, gameState } = useStore();
 
-  const currentChannel = _.get(state, 'currentChannel');
+  const currentChannel = _.get(gameState, 'currentChannel');
 
-  const onPlayerAdded = playerId => globalActions.addPlayer(playerId);
-  const onPlayerDeleted = playerId => globalActions.deletePlayer(playerId);
-  const onPlayerHired = ({ playerId, roleName }) => globalActions.hireRole({ playerId, roleName });
-  const onPlayerRemoved = ({ roleName }) => globalActions.removePlayerFromRole(roleName);
-  const onRoleAction = ({ type, payload }) => globalActions.roleAction(({ type, payload }));
+  const onPlayerAdded = playerId => gameActions.addPlayer(playerId);
+  const onPlayerDeleted = playerId => gameActions.deletePlayer(playerId);
+  const onPlayerHired = ({ playerId, roleName }) => gameActions.hireRole({ playerId, roleName });
+  const onPlayerRemoved = ({ roleName }) => gameActions.removePlayerFromRole(roleName);
+  const onRoleAction = ({ type, payload }) => gameActions.roleAction(({ type, payload }));
 
   // handle websocket actions
   useEffect(() => {

@@ -14,7 +14,7 @@ export const moveUnitGroups = (
 ) => {
   if (!destinationId || unitGroupIds.length === 0) return;
 
-  const { gameState } = store.state;
+  const gameState = store.state;
 
   const unitGroups = GameState.getUnitGroups(gameState);
   const destinationLocation = GameState.getLocationById(gameState, destinationId);
@@ -42,7 +42,7 @@ export const moveUnitGroups = (
           ],
         };
 
-        store.setState({ gameState: newGameState });
+        store.setState(newGameState);
       });
   });
 };

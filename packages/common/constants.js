@@ -1,24 +1,3 @@
-export const LOGGING = {
-  airSupport: true,
-  army: true,
-  battle: true,
-  commander: true,
-  gameEngine: true,
-  gameStateChange: true,
-  intelligence: true,
-  logistics: true,
-  movement: true,
-  procurement: true,
-  publicAffairs: true,
-};
-
-export const ENGINE_TOGGLES = {
-  battle: false,
-  movement: true,
-  training: true,
-  travel: true,
-};
-
 export const ALL_ARTICLE_PARTS = {
   AUTHORS: [
     'authorA',
@@ -71,6 +50,12 @@ export const ALL_CALLSIGNS = {
   XRAY: 'X-ray',
   YANKEE: 'Yankee',
   ZULU: 'Zulu',
+};
+
+export const ALL_CHANNELS = {
+  news: 'news',
+  map: 'map',
+  politics: 'politics',
 };
 
 export const ALL_FACTIONS = {

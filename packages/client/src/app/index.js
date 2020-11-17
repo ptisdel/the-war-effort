@@ -5,36 +5,21 @@ import views from '../views';
 import { useApp } from './logic';
 
 const { ALL_ROLES } = common.constants;
-
-const {
-  AirSupportView,
-  AudienceView,
-  CommanderView,
-  GroundForcesView,
-  IntelligenceView,
-  LogisticsView,
-  TrainingView,
-  ProcurementView,
-  PublicAffairsView,
-} = views;
-
 const { Layout } = components;
 
 export const App = () => {
   const { role } = useApp();
 
-  console.log(role);
-
   const getViewFromRole = () => {
-    if (role === ALL_ROLES.AIR_SUPPORT) return <AirSupportView/>;
-    if (role === ALL_ROLES.COMMANDER) return <CommanderView/>;
-    if (role === ALL_ROLES.GROUND_FORCES) return <GroundForcesView/>;
-    if (role === ALL_ROLES.INTELLIGENCE) return <IntelligenceView/>;
-    if (role === ALL_ROLES.LOGISTICS) return <LogisticsView/>;
-    if (role === ALL_ROLES.PROCUREMENT) return <ProcurementView/>;
-    if (role === ALL_ROLES.PUBLIC_AFFAIRS) return <PublicAffairsView/>;
-    if (role === ALL_ROLES.TRAINING) return <TrainingView/>;
-    return <AudienceView/>;
+    if (role === ALL_ROLES.AIR_SUPPORT) return <views.AirSupportView/>;
+    if (role === ALL_ROLES.COMMANDER) return <views.CommanderView/>;
+    if (role === ALL_ROLES.GROUND_FORCES) return <views.GroundForcesView/>;
+    if (role === ALL_ROLES.INTELLIGENCE) return <views.IntelligenceView/>;
+    if (role === ALL_ROLES.LOGISTICS) return <views.LogisticsView/>;
+    if (role === ALL_ROLES.PROCUREMENT) return <views.ProcurementView/>;
+    if (role === ALL_ROLES.PUBLIC_AFFAIRS) return <views.PublicAffairsView/>;
+    if (role === ALL_ROLES.TRAINING) return <views.TrainingView/>;
+    return <views.AudienceView/>;
   };
 
   return (

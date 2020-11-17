@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { models } = common;
@@ -13,11 +13,9 @@ const {
   Transport,
   TravelGroup,
 } = models;
-const { store } = state;
 
 const TravelGroupsPage = () => {
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const travelGroups = GameState.getTravelGroups(gameState) || [];
 

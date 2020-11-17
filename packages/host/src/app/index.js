@@ -1,10 +1,10 @@
 import React from 'react';
+import common from '@the-war-effort/common';
 import { MapView, NewsView } from '../views';
-import * as constants from '../constants';
 import { GameEngine } from './game-engine';
 import { useApp } from './logic';
 
-const { CHANNELS } = constants;
+const { ALL_CHANNELS } = common.constants;
 
 export const App = () => {
   const { currentChannel } = useApp();
@@ -18,7 +18,7 @@ export const App = () => {
 };
 
 function getCurrentView(currentChannel) {
-  if (currentChannel === CHANNELS.news) return <NewsView/>;
-  if (currentChannel === CHANNELS.map) return <MapView/>;
+  if (currentChannel === ALL_CHANNELS.news) return <NewsView/>;
+  if (currentChannel === ALL_CHANNELS.map) return <MapView/>;
   return <MapView/>;
 }

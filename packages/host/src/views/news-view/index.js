@@ -1,32 +1,8 @@
-import _ from 'lodash-es';
 import React from 'react';
-import common from '@the-war-effort/common';
 import * as Styles from './news-view.styles';
-import state from '../../state';
 
-const { ALL_ROLES } = common.constants;
-const {
-  Feature,
-  Location,
-  Resource,
-  Role,
-  Unit,
-} = common.models;
-const { store } = state;
-
-export const NewsView = () => {
-  const [globalState] = store();
-
-  const {
-    players,
-    locations,
-    mapPosition,
-    roles,
-  } = _.get(globalState, 'gameState');
-
-  return (
+export const NewsView = () => (
     <Styles.Root>
       <div>News</div>
     </Styles.Root>
-  );
-};
+);

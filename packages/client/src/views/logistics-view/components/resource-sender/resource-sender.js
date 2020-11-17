@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { constants, helpers, models } = common;
@@ -14,13 +14,11 @@ const { log } = helpers;
 const {
   GameState, Location, Resource, Unit,
 } = models;
-const { store } = state;
 
 const ResourceSender = ({ originId, destinationId }) => {
   const [selectedResources, setSelectedResources] = useState([]);
 
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const origin = GameState.getLocationById(gameState, originId);
   const originName = Location.getName(origin);

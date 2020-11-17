@@ -10,7 +10,7 @@ const {
 } = models;
 
 export const createTrainingGroup = (store, payload) => {
-  const { gameState } = store.state;
+  const gameState = store.state;
   const { featureId } = payload;
 
   const { ALL_FACTIONS, ALL_FEATURE_TYPES, DEFAULT_LOCATIONS } = constants;
@@ -47,5 +47,5 @@ export const createTrainingGroup = (store, payload) => {
     ],
   };
 
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };

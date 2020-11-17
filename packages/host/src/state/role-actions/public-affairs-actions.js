@@ -7,7 +7,7 @@ const { log } = helpers;
 const { GameState } = models;
 
 export const censorArticle = (store, articleId) => {
-  const { gameState } = store.state;
+  const gameState = store.state;
 
   const liveArticles = GameState.getLiveArticles(gameState);
   const censoredArticles = GameState.getCensoredArticles(gameState);
@@ -26,5 +26,5 @@ export const censorArticle = (store, articleId) => {
   };
   log('publicAffairs', `Censoring article ${articleId}.`);
 
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };

@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { constants, models } = common;
@@ -12,12 +12,10 @@ const { constants, models } = common;
 const { commanderActions } = api;
 const { Budget, GameState, Role } = models;
 const { ALL_ROLES } = constants;
-const { store } = state;
 
 const FundingPage = () => {
-  const [globalState] = store();
+  const { gameState } = useStore();
 
-  const { gameState } = globalState;
   const roles = GameState.getRoles(gameState);
   const budget = GameState.getBudget(gameState);
 

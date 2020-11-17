@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { models } = common;
@@ -13,12 +13,10 @@ const {
   Resource,
 } = models;
 
-const { store } = state;
 const { procurementActions } = api;
 
 const ResearchPage = () => {
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const availablePrototypes = GameState.getPrototypes(gameState);
   const prototypesGroupedByOriginalResource = _.groupBy(

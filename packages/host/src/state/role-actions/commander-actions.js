@@ -7,7 +7,7 @@ const { GameState, Role } = models;
 const { BUDGET_INCREMENT_AMOUNT, ROLE_BUDGET_INCREMENT_AMOUNT } = constants;
 
 export const decreaseRoleBudget = (store, payload) => {
-  const { gameState } = store.state;
+  const gameState = store.state;
   const { budget, roles } = gameState;
 
   const roleName = payload;
@@ -34,11 +34,11 @@ export const decreaseRoleBudget = (store, payload) => {
     budget: newBudget,
     roles: newRoles,
   };
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };
 
 export const increaseRoleBudget = (store, payload) => {
-  const { gameState } = store.state;
+  const gameState = store.state;
 
   const budget = GameState.getBudget(gameState);
   const roles = GameState.getRoles(gameState);
@@ -67,12 +67,11 @@ export const increaseRoleBudget = (store, payload) => {
     budget: newBudget,
     roles: newRoles,
   };
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };
 
-
 export const requestBudgetIncrease = store => {
-  const { gameState } = store.state;
+  const gameState = store.state;
 
   const currentBudget = GameState.getBudget(gameState);
   const newBudget = currentBudget + BUDGET_INCREMENT_AMOUNT;
@@ -90,14 +89,14 @@ export const requestBudgetIncrease = store => {
     budget: newBudget,
     parliament: newParliament,
   };
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };
 
 export const fireRole = (store, payload) => {
   const roleName = payload;
   log('commander', 'firing', roleName);
 
-  const { gameState } = store.state;
+  const gameState = store.state;
   const roles = GameState.getRoles(gameState);
 
   const newGameState = {
@@ -105,5 +104,5 @@ export const fireRole = (store, payload) => {
     roles: _.reject(roles, r => Role.getName(r) === roleName),
   };
 
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };

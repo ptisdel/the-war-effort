@@ -3,6 +3,7 @@ import { PrototypeResource } from '../../../common/models';
 
 const {
   ALL_CALLSIGNS,
+  ALL_CHANNELS,
   ALL_FACTIONS,
   ALL_FEATURES,
   ALL_LOCATION_TYPES,
@@ -19,6 +20,11 @@ export const afghanistanScenario = {
     ...Article.create(3),
   ],
   budget: 2000000,
+  channels: [
+    ALL_CHANNELS.news,
+    ALL_CHANNELS.map,
+  ],
+  currentChannel: ALL_CHANNELS.map,
   mapPosition: {
     lat: 33.5,
     lng: 66,

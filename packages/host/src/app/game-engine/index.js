@@ -1,15 +1,7 @@
-import state from '../../state';
-import { engineTick } from './logic';
-import * as hooks from '../../hooks';
-
-const { store } = state;
-const { useInterval } = hooks;
+import { useGameEngine } from './logic';
 
 export const GameEngine = () => {
-  const [globalState, globalActions] = store();
-  const { gameState } = globalState;
-
-  useInterval(() => engineTick({ globalActions, gameState }), 1000);
-
+  useGameEngine();
+  // this component should only run game engine logic; no rendering needed
   return null;
 };

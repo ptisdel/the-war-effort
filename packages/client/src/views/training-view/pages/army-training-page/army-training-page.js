@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './army-training-page.styles';
 
 const { constants, models } = common;
@@ -20,11 +20,9 @@ const {
   TrainingGroup,
   TrainingPath,
 } = models;
-const { store } = state;
 
 const ArmyTrainingPage = () => {
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const homeLocation = GameState.getLocationById(gameState, Location.getId(DEFAULT_LOCATIONS.HOME));
 

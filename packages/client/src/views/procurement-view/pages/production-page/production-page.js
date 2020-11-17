@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { constants, models } = common;
@@ -11,11 +11,8 @@ const {
   ALL_RESOURCE_TYPES,
 } = constants;
 const {
-  GameState,
   Resource,
 } = models;
-
-const { store } = state;
 
 const researchableResourceTypes = [
   ALL_RESOURCE_TYPES.AIRCRAFT,
@@ -25,8 +22,7 @@ const researchableResourceTypes = [
 const resourcesGroupedByType = _.groupBy(ALL_RESOURCES, r => Resource.getType(r));
 
 const ProductionPage = () => {
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const renderResearchItems = resourceGroup => _.map(resourceGroup, r => {
     const name = Resource.getName(r);

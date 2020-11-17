@@ -6,7 +6,7 @@ const { log } = helpers;
 const { GameState } = models;
 
 export const resupplyAircraft = (store, unitId) => {
-  const { gameState } = store.state;
+  const gameState = store.state;
 
   const resupplyingUnitIds = GameState.getResupplyingUnitIds(gameState);
   const resupplyTaskAlreadyExists = _.includes(resupplyingUnitIds, unitId);
@@ -22,5 +22,5 @@ export const resupplyAircraft = (store, unitId) => {
   };
   log('airSupport', `Starting resupply mission for unit ${unitId}.`);
 
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };

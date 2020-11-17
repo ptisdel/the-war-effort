@@ -2,25 +2,20 @@ import _ from 'lodash-es';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../../../api';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
-const { constants, models } = common;
+const { models } = common;
 
 const { groundForcesActions } = api;
-const { ALL_FACTIONS, ALL_FEATURE_TYPES } = constants;
 const {
-  Feature,
   GameState,
   Location,
-  Unit,
   UnitGroup,
 } = models;
-const { store } = state;
 
 const CommandPage = () => {
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const [selectedUnitGroupIds, setSelectedUnitGroupIds] = useState([]);
 

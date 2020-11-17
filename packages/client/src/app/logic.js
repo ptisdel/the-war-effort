@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import { useEffect } from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../api';
-import state from '../state';
+import { useStore } from '../hooks';
 
 const { constants, helpers, models } = common;
 const { log } = helpers;
@@ -16,15 +16,14 @@ const {
 } = api;
 
 export const useApp = () => {
-  const [globalState, globalActions] = state.store();
-  const { gameState, playerId } = globalState;
+  const { gameActions, gameState, playerId } = useStore();
 
   const playerRole = _.find(gameState.roles, r => Role.getPlayerId(r) === playerId);
   const playerRoleName = Role.getName(playerRole) || ALL_ROLES.AUDIENCE;
 
   useEffect(() => {
-    subscribeToGameState(gs => globalActions.updateGameState(gs));
-    subscribeToRegistration(pi => globalActions.setPlayerId(pi));
+    subscribeToGameState(gs => gameActions.updateGameState(gs));
+    subscribeToRegistration(pi => gameActions.setPlayerId(pi));
     sendRegistrationRequest();
   }, []);
 

@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
-import state from './state';
+import { store } from './state';
 
-export const useGameState = () => {
-  const [globalState] = state.store();
-  const { gameState } = globalState;
-  return { gameState };
+export const useStore = () => {
+  const [globalState, globalActions] = store();
+  const gameState = globalState;
+  const gameActions = globalActions;
+
+  return { gameActions, gameState };
 };
 
 export const useInterval = (callback, delay) => {

@@ -7,12 +7,12 @@ const { log } = helpers;
 const { GameState } = models;
 
 export const startResearchingPrototype = (store, prototypeId) => {
-  const { gameState } = store.state;
+  const gameState = store.state;
 
   const newGameState = {
     ...gameState,
   };
   log('procurement', `Researching prototype ${prototypeId}.`);
 
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };

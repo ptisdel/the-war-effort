@@ -12,7 +12,7 @@ const {
 } = models;
 
 export const createTravelGroup = (store, payload) => {
-  const { gameState } = store.state;
+  const gameState = store.state;
 
   const {
     destinationId,
@@ -75,5 +75,5 @@ export const createTravelGroup = (store, payload) => {
     ],
   };
 
-  store.setState({ gameState: newGameState });
+  store.setState(newGameState);
 };

@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import state from '../../../../state';
+import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const {
@@ -20,11 +20,8 @@ const {
   Unit,
 } = models;
 
-const { store } = state;
-
 const AnalyticsPage = () => {
-  const [globalState] = store();
-  const { gameState } = globalState;
+  const { gameState } = useStore();
 
   const renderFeatures = features => (
     <Styles.LocationFeatures>

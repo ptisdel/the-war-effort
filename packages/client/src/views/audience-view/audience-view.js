@@ -4,7 +4,7 @@ import common from '@the-war-effort/common';
 import components from './components';
 import shared from '../../components';
 import * as api from '../../api';
-import state from '../../state';
+import { useStore } from '../../hooks';
 import * as Styles from './styles';
 
 const { constants, models } = common;
@@ -13,11 +13,10 @@ const { ALL_ROLES } = constants;
 const { Role } = models;
 const { RoleHeader } = shared;
 const { RoleSelector } = components;
-const { store } = state;
 
 const AudienceView = () => {
-  const [globalState] = store();
-  const { roles } = globalState.gameState;
+  const { gameState } = useStore();
+  const { roles } = gameState;
 
   const allRolesExceptAudience = _.filter(ALL_ROLES, ar => ar !== ALL_ROLES.AUDIENCE);
   const roleData = _.map(allRolesExceptAudience, ar => ({

@@ -1,9 +1,8 @@
+import React from 'react';
+import useGlobalHook from 'use-global-hook';
 import * as actions from './actions';
-import roleActions from './role-actions';
-import store from './store';
+import * as scenarios from '../scenarios';
 
-export default {
-  actions,
-  roleActions,
-  store,
-};
+const initialState = scenarios.afghanistanScenario;
+
+export const store = useGlobalHook(React, initialState, actions);
