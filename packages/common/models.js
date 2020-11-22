@@ -137,7 +137,6 @@ function createFeature(type, faction, overrides = {}) {
 
 export const Location = {
   create: createLocation,
-  getNeighborInfo: location => location?.neighborInfo,
   getCallsign: location => location?.callsign || 'X',
   getId: location => location?.id,
   getName: location => location?.name,
@@ -159,7 +158,7 @@ export const Location = {
 
 /**
     * Creates a Location
-    * @param {object} type - the definition of the Feature to generate
+    * @param {object} type - the definition of the Location to generate
     * @param {object} options - an object containing any variables to override
     * @returns {object} - the created Location
   */
@@ -167,9 +166,31 @@ function createLocation(type, overrides = {}) {
   return {
     features: [],
     id: uuid(),
-    neighborInfo: [],
+    paths: [],
     position: { lat: 0, lng: 0 },
     resources: [],
+    ...type,
+    ...overrides,
+  };
+}
+
+export const Path = {
+  create: createPath,
+  getSpeedLimit: path => path?.speedLimit,
+  getLocationA: path => path?.locationA,
+  getLocationB: path => path?.locationB,
+  getUnallowedUnitTypes: path => path?.unallowedUnitTypes,
+  name: path => path?.name,
+};
+/**
+    * Creates a Path
+    * @param {object} type - the definition of the Path to generate
+    * @param {object} options - an object containing any variables to override
+    * @returns {object} - the created Path
+  */
+function createPath(type, overrides = {}) {
+  return {
+    id: uuid(),
     ...type,
     ...overrides,
   };
@@ -218,6 +239,7 @@ export const GameState = {
   getParliament: gameState => gameState?.parliament,
   getParliamentTotalMemberCount: gameState => gameState?.parliament?.totalMemberCount,
   getParliamentSupportingMemberCount: gameState => gameState?.parliament?.supportingMemberCount,
+  getPaths: gameState => gameState?.paths,
   getPlayers: gameState => gameState?.players,
   getPlayerByRoleName: (gameState, roleName) => Role.getPlayerId(
     _.find(

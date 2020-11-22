@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 
-export const Marker = styled.div(({ lat, lng }) => ({
+export const Marker = styled.div(() => ({
   alignItems: 'flex-start',
   display: 'flex',
   pointerEvents: 'none',
-  position: 'absolute',
   transform: 'translateX(-10px) translateY(-10px)',
-  left: `${lat}%`,
-  top: `${lng}%`,
 }));
 
 export const Icon = styled.div(() => ({

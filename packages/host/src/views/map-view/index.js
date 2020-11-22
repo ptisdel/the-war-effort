@@ -1,39 +1,23 @@
 import _ from 'lodash-es';
-import GoogleMapReact from 'google-map-react';
 import React from 'react';
 import { useMapView } from './logic';
-import { mapStyles } from './map-styles';
 import { DebugInfo } from './components/debug-info';
-import { LocationMarker } from './components/markers';
+import { LocationMarker, PathLine } from './components/markers';
 
 export const MapView = () => {
   const [
-    { apiKey, cameraPosition, locations },
-    { onGoogleMapsLoaded },
+    { locations, paths },
   ] = useMapView();
 
   return (
     <div style={{
+      background: 'lightgrey',
       top: 0,
       bottom: 0,
       right: 0,
       left: 0,
       position: 'fixed',
     }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: apiKey }}
-        defaultCenter={{ lat: cameraPosition.lat, lng: cameraPosition.lng }}
-        defaultZoom={ cameraPosition.z }
-        onGoogleApiLoaded={ onGoogleMapsLoaded }
-        options = {{
-          disableDefaultUI: 'true',
-          heading: 30,
-          // mapTypeId: 'terrain',
-          styles: mapStyles,
-          tilt: 45,
-        }}
-        yesIWantToUseGoogleMapApiInternals
-      >
         {
           _.map(locations, (l, i) => <LocationMarker
             abbreviation = { l.abbreviation }
@@ -43,7 +27,13 @@ export const MapView = () => {
             lng = { l.lng }
           />)
         }
-      </GoogleMapReact>
+        {
+          _.map(paths, (p, i) => <PathLine
+            key = { i }
+            locationA = {p.locationA}
+            locationB = {p.locationB}
+          />)
+        }
       <DebugInfo/>
     </div>
   );

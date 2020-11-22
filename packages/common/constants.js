@@ -55,6 +55,7 @@ export const ALL_CALLSIGNS = {
 export const ALL_CHANNELS = {
   news: 'news',
   map: 'map',
+  realisticMap: 'realistic-map',
   politics: 'politics',
 };
 
@@ -374,47 +375,53 @@ export const ALL_FEATURES = {
   },
 };
 
+export const ALL_PATHS = {
+  DIRT_ROAD: {
+    name: 'Dirt road',
+    speedLimit: 2,
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
+  },
+  PAVED_ROAD: {
+    name: 'Paved road',
+    speedLimit: 4,
+    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
+  },
+  AIR_CORRIDOR: {
+    name: 'Air Corridor',
+    speedLimit: null,
+    unallowedUnitTypes: [ALL_UNIT_TYPES.GROUND, ALL_UNIT_TYPES.SEA],
+  },
+  SEA_CORRIDOR: {
+    name: 'Sea Corridor',
+    speedLimit: null,
+    unallowedUnitTypes: [ALL_UNIT_TYPES.GROUND],
+  },
+};
+
 export const ALL_LOCATION_TYPES = {
   BASE: {
     name: 'Base',
     size: 1,
-    speed: 4,
     unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   CITY: {
     name: 'City',
     size: 4,
-    speed: 4,
     unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   VILLAGE: {
     name: 'Village',
     size: 1,
-    speed: 2,
-    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
-  },
-  DIRT_ROAD: {
-    name: 'Dirt road',
-    size: 1,
-    speed: 2,
-    unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
-  },
-  PAVED_ROAD: {
-    name: 'Paved road',
-    size: 1,
-    speed: 4,
     unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   DESERT: {
     name: 'Desert',
     size: 5,
-    speed: 1,
     unallowedUnitTypes: [ALL_UNIT_TYPES.SEA],
   },
   OCEAN: {
     name: 'Ocean',
     size: 5,
-    speed: 1,
     unallowedUnitTypes: [ALL_UNIT_TYPES.GROUND],
   },
 };

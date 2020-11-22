@@ -15,7 +15,7 @@ const {
   Article, Feature, Location, Resource, Unit,
 } = common.models;
 
-export const afghanistanScenario = {
+export const scenario = {
   articles: [
     ...Article.create(3),
   ],

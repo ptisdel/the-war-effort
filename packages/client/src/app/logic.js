@@ -9,11 +9,6 @@ const { log } = helpers;
 const { Role } = models;
 
 const { ALL_ROLES } = constants;
-const {
-  subscribeToGameState,
-  subscribeToRegistration,
-  sendRegistrationRequest,
-} = api;
 
 export const useApp = () => {
   const { gameActions, gameState, playerId } = useStore();
@@ -22,9 +17,9 @@ export const useApp = () => {
   const playerRoleName = Role.getName(playerRole) || ALL_ROLES.AUDIENCE;
 
   useEffect(() => {
-    subscribeToGameState(gs => gameActions.updateGameState(gs));
-    subscribeToRegistration(pi => gameActions.setPlayerId(pi));
-    sendRegistrationRequest();
+    api.subscribeToGameState(gs => gameActions.updateGameState(gs));
+    api.subscribeToRegistration(pi => gameActions.setPlayerId(pi));
+    api.sendRegistrationRequest();
   }, []);
 
   useEffect(() => {
