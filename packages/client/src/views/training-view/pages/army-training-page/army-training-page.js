@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../../../api';
+import { createTrainingGroup } from '../../api';
 import { useStore } from '../../../../hooks';
 import * as Styles from './army-training-page.styles';
 
@@ -71,7 +71,7 @@ const ArmyTrainingPage = () => {
       };
 
       const handlePathClick = featureId => {
-        trainingActions.createTrainingGroup({ featureId });
+        createTrainingGroup({ featureId });
       };
 
       return (

@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../../../api';
+import { createTravelGroup } from '../../api';
 import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
@@ -44,7 +44,7 @@ const ResourceSender = ({ originId, destinationId }) => {
 
   const handleSendTransports = () => {
     log('logistics', selectedResources);
-    logisticsActions.createTravelGroup({
+    createTravelGroup({
       destinationId,
       originId,
       transports: [

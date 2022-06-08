@@ -77,22 +77,22 @@ const AnalyticsPage = () => {
     );
   };
 
-  const renderLocations = () => {
-    const locations = GameState.getLocations(gameState);
+  // const renderLocations = () => {
+  //   const locations = GameState.getLocations(gameState);
 
-    return _.map(locations, l => {
-      const name = Location.getName(l);
-      const features = Location.getFeatures(l);
-      const units = Location.getUnits(l);
+  //   return _.map(locations, l => {
+  //     const name = Location.getName(l);
+  //     const features = Location.getFeatures(l);
+  //     const units = Location.getUnits(l);
 
-      return renderLocation({ name, features, units });
-    });
-  };
+  //     return renderLocation({ name, features, units });
+  //   });
+  // };
 
   return (
     <Styles.Root>
       <h2>Analytics</h2>
-      { renderLocations() }
+      {/* { renderLocations() } */}
     </Styles.Root>
   );
 };

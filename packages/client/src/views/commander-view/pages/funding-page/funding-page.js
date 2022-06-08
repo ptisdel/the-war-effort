@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../../../api';
+import * as api from '../../api';
 import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
@@ -9,7 +9,7 @@ const { constants, models } = common;
 
 // TODO getting a memory leak here when resigning as commander from ONLY funding page, not sure why
 
-const { commanderActions } = api;
+const { decreaseRoleBudget, increaseRoleBudget } = api;
 const { Budget, GameState, Role } = models;
 const { ALL_ROLES } = constants;
 
@@ -18,9 +18,6 @@ const FundingPage = () => {
 
   const roles = GameState.getRoles(gameState);
   const budget = GameState.getBudget(gameState);
-
-  const decreaseBudget = roleName => commanderActions.decreaseRoleBudget(roleName);
-  const increaseBudget = roleName => commanderActions.increaseRoleBudget(roleName);
 
   const renderRoles = () => {
     const filteredRoles = _.filter(roles, r => Role.getName(r) !== ALL_ROLES.COMMANDER);
@@ -31,11 +28,11 @@ const FundingPage = () => {
       <Styles.Role as = 'li' key = { i }>
         <Styles.RoleTitle>{ Role.getName(r) }</Styles.RoleTitle>
         <Styles.RoleBudget>
-          <Styles.RoleBudgetButton onClick = { () => decreaseBudget(Role.getName(r)) }>
+          <Styles.RoleBudgetButton onClick = { () => decreaseRoleBudget(Role.getName(r)) }>
             -
           </Styles.RoleBudgetButton>
           <Styles.RoleBudgetTotal>{Role.getFormattedBudget(r)}</Styles.RoleBudgetTotal>
-          <Styles.RoleBudgetButton onClick = { () => increaseBudget(Role.getName(r)) }>
+          <Styles.RoleBudgetButton onClick = { () => increaseRoleBudget(Role.getName(r)) }>
             +
           </Styles.RoleBudgetButton>
         </Styles.RoleBudget>

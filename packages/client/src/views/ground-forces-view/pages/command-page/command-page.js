@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../../../api';
+import { moveUnitGroups } from '../../api';
 import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
@@ -52,7 +52,7 @@ const CommandPage = () => {
   const selectLocation = id => {
     if (selectedUnitGroupIds.length === 0) return;
 
-    groundForcesActions.moveUnitGroups({
+    moveUnitGroups({
       unitGroupIds: selectedUnitGroupIds,
       destinationId: id,
     });

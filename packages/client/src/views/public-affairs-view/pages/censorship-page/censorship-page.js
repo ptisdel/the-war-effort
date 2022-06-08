@@ -1,13 +1,12 @@
 import _ from 'lodash-es';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../../../api';
+import { censorArticle } from '../../api';
 import { useStore } from '../../../../hooks';
 import * as Styles from './censorship-page.styles';
 
 const { models } = common;
 
-const { publicAffairsActions } = api;
 const { Article, GameState } = models;
 
 const CensorshipPage = () => {
@@ -18,8 +17,8 @@ const CensorshipPage = () => {
 
   const [openArticleId, setOpenArticleId] = useState(null);
 
-  const censorArticle = articleId => {
-    publicAffairsActions.censorArticle(articleId);
+  const handleCensor = articleId => {
+    censorArticle(articleId);
     if (openArticleId === articleId) setOpenArticleId(null);
   };
 
@@ -42,7 +41,7 @@ const CensorshipPage = () => {
           <Styles.Expanded isOpen = { isOpen }>
             <Styles.Body>{ body }</Styles.Body>
             <Styles.Author>{ author }</Styles.Author>
-            <button as = { Styles.Censor } onClick = { () => censorArticle(id) }>Censor</button>
+            <button as = { Styles.Censor } onClick = { () => handleCensor(id) }>Censor</button>
           </Styles.Expanded>
         </Styles.Article>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../api';
+import { resignFromRole } from '@/api';
 import shared from '../../components';
 import * as Styles from './styles';
 import pages from './pages';
@@ -13,7 +13,6 @@ const {
   TravelGroupsPage,
 } = pages;
 const { ALL_ROLES } = constants;
-const { resignFromRole } = api;
 const { RoleHeader, Swiper } = shared;
 
 const LogisticsView = () => {

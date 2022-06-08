@@ -1,20 +1,18 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../../../api';
+import * as api from '../../api';
 import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { constants, models } = common;
 
-const { commanderActions } = api;
+const { fireRole } = api;
 const { ALL_ROLES } = constants;
 const { GameState } = models;
 
 const RolesPage = () => {
   const { gameState } = useStore();
-
-  const fireRole = roleName => commanderActions.fireRole(roleName);
 
   const renderRoles = () => {
     const allOtherRoles = _.filter(ALL_ROLES, r => r !== ALL_ROLES.COMMANDER);

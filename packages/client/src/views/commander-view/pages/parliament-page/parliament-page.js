@@ -1,20 +1,18 @@
 import React from 'react';
 import common from '@the-war-effort/common';
-import * as api from '../../../../api';
+import * as api from '../../api';
 import { useStore } from '../../../../hooks';
 import * as Styles from './styles';
 
 const { models } = common;
 
-const { commanderActions } = api;
+const { requestBudgetIncrease } = api;
 const { Budget, GameState } = models;
 
 const FundingPage = () => {
   const { gameState } = useStore();
 
   const budget = GameState.getBudget(gameState);
-
-  const requestBudgetIncrease = () => commanderActions.requestBudgetIncrease();
 
   return (
     <Styles.Root>
@@ -26,7 +24,7 @@ const FundingPage = () => {
       </h3>
       <button
         as = { Styles.RequestButton }
-        onClick = { requestBudgetIncrease }
+        onClick = { () => requestBudgetIncrease(50) }
       >Request Additional Appropriations</button>
     </Styles.Root>
   );

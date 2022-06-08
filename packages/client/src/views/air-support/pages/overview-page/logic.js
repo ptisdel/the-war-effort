@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 import common from '@the-war-effort/common';
-import { airSupportActions } from '../../../../api';
+import { resupplyAircraft } from '../../api';
 import { useStore } from '../../../../hooks';
 
 const { constants, models } = common;
@@ -47,8 +47,6 @@ export const useOverviewPage = () => {
       aircraft: formattedAircraft,
     };
   });
-
-  const resupplyAircraft = id => airSupportActions.resupplyAircraft(id);
 
   return [{ airBases }, { resupplyAircraft }];
 };

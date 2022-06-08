@@ -1,9 +1,9 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
+import { chooseRole } from './api';
 import components from './components';
 import shared from '../../components';
-import * as api from '../../api';
 import { useStore } from '../../hooks';
 import * as Styles from './styles';
 
@@ -24,15 +24,11 @@ const AudienceView = () => {
     isAvailable: !_.some(roles, r => Role.getName(r) === ar),
   }));
 
-  const handleSelectRole = roleName => {
-    api.chooseRole(roleName);
-  };
-
   return (
       <Styles.Root>
         <RoleHeader title = 'Select your role.'></RoleHeader>
         <RoleSelector
-          onSelectRole = { handleSelectRole }
+          onSelectRole = { chooseRole }
           roles = { roleData }
         />
       </Styles.Root>
