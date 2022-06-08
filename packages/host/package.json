@@ -8,7 +8,7 @@
     "@react-google-maps/api": "1.8.3",
     "@the-war-effort/common": "link:../common",
     "google-map-react": "2.0.8",
-    "lodash-es": "4.17.15",
+    "lodash-es": "4.17.21",
     "mapbox-gl": "1.11.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
