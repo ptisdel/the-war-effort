@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import common from '@the-war-effort/common';
 import { resupplyAircraft } from '../../api';
-import { useStore } from '../../../../hooks';
+import { useStore } from '@/hooks';
 
 const { constants, models } = common;
 

@@ -1,17 +1,16 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import { chooseRole } from './api';
+import { requestRole } from './api';
 import components from './components';
 import shared from '../../components';
-import { useStore } from '../../hooks';
+import { useStore } from '@/hooks';
 import * as Styles from './styles';
 
 const { constants, models } = common;
 
 const { ALL_ROLES } = constants;
 const { Role } = models;
-const { RoleHeader } = shared;
 const { RoleSelector } = components;
 
 const AudienceView = () => {
@@ -26,9 +25,8 @@ const AudienceView = () => {
 
   return (
       <Styles.Root>
-        <RoleHeader title = 'Select your role.'></RoleHeader>
         <RoleSelector
-          onSelectRole = { chooseRole }
+          onSelectRole = { requestRole }
           roles = { roleData }
         />
       </Styles.Root>

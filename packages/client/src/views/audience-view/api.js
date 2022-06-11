@@ -1,3 +1,3 @@
 import { sendMessage } from '@/api';
 
-export const chooseRole = roleName => sendMessage('choose-role', roleName);
+export const requestRole = roleName => sendMessage('role-requested', roleName);

@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
 import { censorArticle } from '../../api';
-import { useStore } from '../../../../hooks';
+import { useStore } from '@/hooks';
 import * as Styles from './censorship-page.styles';
 
 const { models } = common;

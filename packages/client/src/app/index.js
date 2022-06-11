@@ -1,30 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import common from '@the-war-effort/common';
-import components from '../components';
-import views from '../views';
-import { useApp } from './logic';
+import { sendMessage } from '@/api';
+import components from '@/components';
+import { useStore } from '@/hooks';
+import views from '@/views';
 
 const { ALL_ROLES } = common.constants;
-const { Layout } = components;
+const { log } = common.helpers;
+const { Layout, RoleHeader } = components;
+
+const viewsByRole = {
+  [ALL_ROLES.AIR_SUPPORT]: <views.AirSupportView/>,
+  [ALL_ROLES.COMMANDER]: <views.CommanderView/>,
+  [ALL_ROLES.GROUND_FORCES]: <views.GroundForcesView/>,
+  [ALL_ROLES.INTELLIGENCE]: <views.IntelligenceView/>,
+  [ALL_ROLES.LOGISTICS]: <views.LogisticsView/>,
+  [ALL_ROLES.PROCUREMENT]: <views.ProcurementView/>,
+  [ALL_ROLES.PUBLIC_AFFAIRS]: <views.PublicAffairsView/>,
+  [ALL_ROLES.TRAINING]: <views.TrainingView/>,
+};
 
 export const App = () => {
-  const { role } = useApp();
+  const { gameState, playerId, playerRole } = useStore();
 
-  const getViewFromRole = () => {
-    if (role === ALL_ROLES.AIR_SUPPORT) return <views.AirSupportView/>;
-    if (role === ALL_ROLES.COMMANDER) return <views.CommanderView/>;
-    if (role === ALL_ROLES.GROUND_FORCES) return <views.GroundForcesView/>;
-    if (role === ALL_ROLES.INTELLIGENCE) return <views.IntelligenceView/>;
-    if (role === ALL_ROLES.LOGISTICS) return <views.LogisticsView/>;
-    if (role === ALL_ROLES.PROCUREMENT) return <views.ProcurementView/>;
-    if (role === ALL_ROLES.PUBLIC_AFFAIRS) return <views.PublicAffairsView/>;
-    if (role === ALL_ROLES.TRAINING) return <views.TrainingView/>;
-    return <views.AudienceView/>;
-  };
+  const handleResign = playerId => sendMessage('player-resigned', playerId);
+
+  useEffect(() => {
+    log('gameStateChange', 'Game State:', gameState);
+  }, [gameState]);
 
   return (
     <Layout>
-      { getViewFromRole() }
+      <RoleHeader title = { playerRole || 'Please select your role.' } onResign={() => handleResign(playerId)} />
+      { viewsByRole?.[playerRole] || <views.AudienceView/> }
     </Layout>
   );
 };

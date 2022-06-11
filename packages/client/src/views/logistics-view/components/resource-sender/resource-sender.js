@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
 import { createTravelGroup } from '../../api';
-import { useStore } from '../../../../hooks';
+import { useStore } from '@/hooks';
 import * as Styles from './styles';
 
 const { constants, helpers, models } = common;
 
 const { ALL_FACTIONS } = constants;
-const { logisticsActions } = api;
 const { log } = helpers;
 const {
   GameState, Location, Resource, Unit,

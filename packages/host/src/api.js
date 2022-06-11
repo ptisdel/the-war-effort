@@ -1,12 +1,10 @@
 import io from 'socket.io-client';
 
 // new socket connection to server
-const socket = io('https://the-war-effort-server.herokuapp.com/?role=host');
+// https://the-war-effort-server.herokuapp.com/?role=host
+const socket = io(`${process.env.SERVER_URL}?role=host`);
 
-export const subscribeToPlayerAddition = callback => socket.on('add-player', playerId => callback(playerId));
-export const subscribeToRoleHire = callback => socket.on('hire-for-role', ({ playerId, roleName }) => callback({ playerId, roleName }));
-export const subscribeToRemovePlayerFromRole = callback => socket.on('remove-player-from-role', roleName => callback(roleName));
-export const subscribeToPlayerDeletion = callback => socket.on('delete-player', playerId => callback(playerId));
-export const subscribeToRoleAction = callback => socket.on('role-action', ({ type, payload }) => callback(({ type, payload })));
-
-export const sendGameState = gameState => socket.emit('game-state', gameState);
+// helpers
+export const subscribe = (event, callback) => socket.on(event, callback);
+export const unsubscribe = (event, callback) => socket.removeEventListener(event, callback);
+export const sendMessage = (message, data) => socket.emit(message, data);

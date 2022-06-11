@@ -6,7 +6,7 @@ import * as training from './training';
 const { ENGINE_TOGGLES } = common.featureFlags;
 
 export const runModules = ({ gameActions, gameState }) => {
-  if (ENGINE_TOGGLES.battle) battle.tick({ gameActions, gameState });
-  if (ENGINE_TOGGLES.movement) movement.tick({ gameActions, gameState });
-  if (ENGINE_TOGGLES.training) training.tick({ gameActions, gameState });
+  // if (ENGINE_TOGGLES.battle) battle.tick({ gameActions, gameState });
+  // if (ENGINE_TOGGLES.movement) movement.tick({ gameActions, gameState });
+  // if (ENGINE_TOGGLES.training) training.tick({ gameActions, gameState });
 };

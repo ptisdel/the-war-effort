@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
 import { startResearchingPrototype } from '../../api';
-import { useStore } from '../../../../hooks';
+import { useStore } from '@/hooks';
 import * as Styles from './styles';
 
 const { models } = common;

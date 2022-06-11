@@ -103,14 +103,19 @@ export const hireRole = (store, { playerId, roleName }) => {
   store.setState(newGameState);
 };
 
-export const removePlayerFromRole = (store, roleName) => {
+export const removePlayerFromRole = (store, playerId) => {
   const gameState = store.state;
   const { roles } = gameState;
-  log('gameStateChange', 'Player removed from role', roleName);
+
+  const role = _.find(roles, r => Role.getPlayerId(r) === playerId);
+  if (!role) return;
+
+  const roleName = Role.getName(role);
+  log('gameStateChange', `Player ${playerId} removed from ${roleName}`);
 
   const newGameState = {
     ...gameState,
-    roles: _.reject(roles, r => Role.getName(r) === roleName),
+    roles: _.reject(roles, r => r === role),
   };
 
   store.setState(newGameState);

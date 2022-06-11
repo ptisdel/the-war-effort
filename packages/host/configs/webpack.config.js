@@ -50,4 +50,9 @@ module.exports = {
     open: true,
     port: 8001,
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 };

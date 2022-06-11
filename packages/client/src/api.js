@@ -1,12 +1,11 @@
 import io from 'socket.io-client';
 
 // new socket connection to server
-const socket = io('https://the-war-effort-server.herokuapp.com/?role=client');
+// https://the-war-effort-server.herokuapp.com/
+const socket = io(`${process.env.SERVER_URL}?role=client`);
 
-export const subscribe = (message, callback) => socket.on(message, callback);
+// helpers
+export const subscribe = (event, callback) => socket.on(event, callback);
+export const unsubscribe = (event, callback) => socket.removeEventListener(event, callback);
 export const sendMessage = (message, data) => socket.emit(message, data);
 
-export const subscribeToRegistration = cb => subscribe('register-player', playerId => cb(playerId));
-export const subscribeToGameState = cb => subscribe('game-state', gameState => cb(gameState));
-export const resignFromRole = roleName => sendMessage('resign-from-role', roleName);
-export const sendRegistrationRequest = () => sendMessage('request-registration');

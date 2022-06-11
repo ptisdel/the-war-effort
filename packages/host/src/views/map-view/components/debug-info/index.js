@@ -14,6 +14,7 @@ export const DebugInfo = () => {
       <s.InformationHeader onClick = { onToggle }>Stats</s.InformationHeader>
       <s.InformationContent isOpen = { isOpen }>
         <s.PlayerList>
+          // use roles, not players
           { _.map(players, (p, i) => <li key = {i}>{ p.rolename } : { p.budget }</li>) }
         </s.PlayerList>
         <s.Locations>

@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "12.16.1"
+    "node": "16.0.0"
   },
   "main": "entry.js",
   "dependencies": {
-    "cross-env": "5.0.5",
-    "esm": "3.2.25",
-    "express": "4.17.1",
-    "socket.io": "2.3.0",
-    "yarn": "1.22.4"
+    "cross-env": "^5.0.5",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {},
   "scripts": {
