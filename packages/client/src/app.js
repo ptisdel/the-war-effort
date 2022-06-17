@@ -22,7 +22,9 @@ const roleViews = {
 export const App = () => {
   const { playerRole } = useStore();
 
-  const handleResign = () => sendMessage('player-resigned');
+  const handleResign = playerRole === ALL_ROLES.AUDIENCE
+      ? () => sendMessage('player-resigned')
+      : null;
 
   if (!playerRole) return (
     <Layout>
