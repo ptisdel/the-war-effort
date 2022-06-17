@@ -431,3 +431,48 @@ export const BUDGET_INCREMENT_AMOUNT = 100000;
 
 // increment a role's budget by
 export const ROLE_BUDGET_INCREMENT_AMOUNT = 10000;
+
+export const ROOM_CODES = {
+  adjectives: [
+    'Golden',
+    'Angry',
+    'Black',
+    'Urban',
+    'Silent',
+    'Patient',
+    'Hunting',
+    'Burning',
+    'Desert',
+    'Forest',
+    'Lurking',
+    'Bitter',
+    'Daring',
+    'Willing',
+    'Dread',
+    'Forceful',
+    'Grave',
+  ],
+  nouns: [
+    'Fury',
+    'Goliath',
+    'Scorpion',
+    'Redemption',
+    'Fantasy',
+    'Thunder',
+    'Scorn',
+    'Whisper',
+    'Hornet',
+    'Bear',
+    'Falcon',
+    'Willow',
+    'Rabbit',
+    'Lion',
+    'Tiger',
+    'Resolve',
+    'Education',
+    'Flame',
+    'River',
+    'Storm',
+    'Shadow',
+  ],
+};

@@ -4,8 +4,8 @@ import io from 'socket.io-client';
 // https://the-war-effort-server.herokuapp.com/
 const socket = io(`${process.env.SERVER_URL}?role=client`);
 
-// helpers
+export const getPlayerId = () => socket.id;
+
+export const sendMessage = (message, data) => socket.emit(message, data);
 export const subscribe = (event, callback) => socket.on(event, callback);
 export const unsubscribe = (event, callback) => socket.removeEventListener(event, callback);
-export const sendMessage = (message, data) => socket.emit(message, data);
-

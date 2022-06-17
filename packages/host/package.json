@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@babel/eslint-parser": "^7.18.2",
     "@mapbox/mapbox-sdk": "^0.9.0",
     "@react-google-maps/api": "^1.8.3",
     "@the-war-effort/common": "link:../common",
@@ -27,7 +28,6 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.9.2",
-    "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "cross-env": "^7.0.2",

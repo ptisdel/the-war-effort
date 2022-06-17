@@ -1,13 +1,12 @@
 import loadable from 'react-loadable';
 import LoadingView from './loading-view/loading-view';
 
-// import AirSupportView from './air-support';
-
 const dynamicallyImport = importFunction => loadable({
   loader: importFunction,
   loading: LoadingView,
 });
-const AirSupportView = dynamicallyImport(() => import('./air-support'));
+const JoinRoomView = dynamicallyImport(() => import('./join-room-view'));
+const AirSupportView = dynamicallyImport(() => import('./air-support-view'));
 const AudienceView = dynamicallyImport(() => import('./audience-view/audience-view'));
 const CommanderView = dynamicallyImport(() => import('./commander-view/commander-view'));
 const GroundForcesView = dynamicallyImport(() => import('./ground-forces-view/ground-forces-view'));
@@ -23,6 +22,7 @@ export default {
   CommanderView,
   GroundForcesView,
   IntelligenceView,
+  JoinRoomView,
   LogisticsView,
   PublicAffairsView,
   ProcurementView,

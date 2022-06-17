@@ -4,7 +4,7 @@ import common from '@the-war-effort/common';
 import { requestRole } from './api';
 import components from './components';
 import shared from '../../components';
-import { useStore } from '@/hooks';
+import { useStore } from '@/store';
 import * as Styles from './styles';
 
 const { constants, models } = common;

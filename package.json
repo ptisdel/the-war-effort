@@ -25,9 +25,9 @@
   "homepage": "https://github.com/ptisdel/war-office#readme",
   "devDependencies": {
     "@babel/core": "^7.18.2",
+    "@babel/eslint-parser": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
-    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.2.5",
     "eslint": "^8.17.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -38,6 +38,5 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "lerna": "^5.1.0"
-  },
-  "dependencies": {}
+  }
 }

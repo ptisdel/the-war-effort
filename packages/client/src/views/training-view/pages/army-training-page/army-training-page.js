@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
 import { createTrainingGroup } from '../../api';
-import { useStore } from '@/hooks';
+import { useStore } from '@/store';
 import * as Styles from './army-training-page.styles';
 
 const { constants, models } = common;

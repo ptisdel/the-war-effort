@@ -8,33 +8,23 @@ export const useApp = () => {
 
   const currentChannel = _.get(gameState, 'currentChannel');
 
-  const onPlayerAdded = playerId => gameActions.addPlayer(playerId);
-  const onRoleRequested = ({ playerId, roleName }) => gameActions.hireRole({ playerId, roleName });
-  const onPlayerResigned = playerId => gameActions.removePlayerFromRole(playerId);
-  const onPlayerDeleted = playerId => gameActions.deletePlayer(playerId);
-  const onRoleAction = ({ type, payload }) => gameActions.roleAction(({ type, payload }));
+  const onRoleAction = ({ type, data }) => gameActions.roleAction(({ type, data }));
+  const onRoomUpdated = room => gameActions.updateRoom(room);
 
   // handle websocket actions
   useEffect(() => {
-
-    subscribe('add-player', onPlayerAdded);
-    subscribe('role-requested', onRoleRequested);
-    subscribe('player-resigned', onPlayerResigned);
-    subscribe('delete-player', onPlayerDeleted);
     subscribe('role-action', onRoleAction);
+    subscribe('room-updated', onRoomUpdated);
 
     return () => {
-      unsubscribe('add-player', onPlayerAdded);
-      unsubscribe('role-requested', onRoleRequested);
-      unsubscribe('player-resigned', onPlayerResigned);
-      unsubscribe('delete-player', onPlayerDeleted);
       unsubscribe('role-action', onRoleAction);
+      unsubscribe('room-updated', onRoomUpdated);
     };
   }, []);
 
   // broadcast any state updates
   useEffect(() => {
-    console.log('gamestate updated');
+    console.log('gamestate updated', gameState);
     sendMessage('game-state-updated', gameState);
   }, [gameState]);
 

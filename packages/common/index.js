@@ -1,8 +1,8 @@
-import * as constants from './constants';
-import * as featureFlags from './feature-flags';
-import * as helpers from './helpers';
-import * as models from './models';
-import theme from './theme';
+import * as constants from './constants.js';
+import * as featureFlags from './feature-flags.js';
+import * as helpers from './helpers.js';
+import * as models from './models.js';
+import theme from './theme.js';
 
 export default {
   constants,

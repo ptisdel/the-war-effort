@@ -5,7 +5,7 @@ import * as s from './styles';
 
 export const DebugInfo = () => {
   const [
-    { isOpen, locations, players },
+    { isOpen, locations, players, roomName},
     { onToggle },
   ] = useDebugInfo();
 
@@ -13,8 +13,9 @@ export const DebugInfo = () => {
     <s.Information>
       <s.InformationHeader onClick = { onToggle }>Stats</s.InformationHeader>
       <s.InformationContent isOpen = { isOpen }>
+        <span>{ `Room Name: ${roomName}` }</span>
         <s.PlayerList>
-          // use roles, not players
+          // TODO: use roles, not players
           { _.map(players, (p, i) => <li key = {i}>{ p.rolename } : { p.budget }</li>) }
         </s.PlayerList>
         <s.Locations>

@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import { v4 as uuid } from 'uuid';
-import * as constants from './constants';
-import * as helpers from './helpers';
+import * as constants from './constants.js';
+import * as helpers from './helpers.js';
 
 const { formatMoney } = helpers;
 const { ALL_ARTICLE_PARTS } = constants;
@@ -251,6 +251,7 @@ export const GameState = {
   getPublicSupport: gameState => gameState?.publicSupport,
   getResupplyingUnitIds: gameState => gameState?.resupplyingUnitIds,
   getRoles: gameState => gameState?.roles,
+  getRoomName: gameState => gameState?.roomName,
   getTrainingGroups: gameState => gameState?.trainingGroups,
   getUnits: gameState => gameState?.units,
   getUnitsByLocation: (gameState, location) => _.filter(

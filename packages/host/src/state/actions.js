@@ -11,6 +11,19 @@ const {
   TravelGroup,
 } = common.models;
 
+export const updateRoom = (store, room) => {
+  
+  const gameState = store.state;
+  
+  const newGameState = {
+    ...gameState,
+    room,
+  };
+
+  store.setState(newGameState);
+}
+
+// TODO: move this to constants so server can enforce?
 const roleActionMap = {
   'airSupport/resupplyAircraft': roleActions.airSupportActions.resupplyAircraft,
   'commander/decreaseRoleBudget': roleActions.commanderActions.decreaseRoleBudget,
@@ -24,102 +37,17 @@ const roleActionMap = {
   'training/createTrainingGroup': roleActions.trainingActions.createTrainingGroup,
 };
 
-export const roleAction = (store, { type, payload }) => {
+export const roleAction = (store, { type, data }) => {
   const action = _.get(roleActionMap, type);
-  if (action) action(store, payload);
+  if (action) action(store, data);
 };
 
 export const triggerMechanic = (store, { action, parameters }) => {
   action(store, parameters);
 };
 
-export const addPlayer = (store, playerId) => {
-  const gameState = store.state;
-  const { players } = gameState;
 
-  const playerAlreadyExists = playerId && _.includes(players, playerId);
-  if (!playerId || playerAlreadyExists) return;
 
-  const newPlayers = [
-    ...gameState.players,
-    playerId,
-  ];
-
-  const newGameState = {
-    ...gameState,
-    players: newPlayers,
-  };
-
-  store.setState(newGameState);
-};
-
-export const deletePlayer = (store, playerId) => {
-  const gameState = store.state;
-  const { roles } = gameState;
-
-  const newPlayers = _.without(gameState.players, playerId);
-  const newRoles = _.filter(roles, r => Role.getPlayerId(r) === playerId);
-
-  const newGameState = {
-    ...gameState,
-    players: newPlayers,
-    roles: newRoles,
-  };
-
-  store.setState(newGameState);
-};
-
-export const hireRole = (store, { playerId, roleName }) => {
-  const gameState = store.state;
-  const { players, roles } = gameState;
-
-  if (!roleName) return;
-
-  // if role is already occupied, player cannot be hired for that role
-  const roleAlreadyOccupied = _.some(roles, r => Role.getName(r) === roleName);
-  if (roleAlreadyOccupied) return;
-
-  const newRoles = [
-    // if player occupies other role, remove him from previous role
-    ..._.filter(roles, r => Role.getPlayerId(r) !== playerId),
-    {
-      name: roleName,
-      playerId,
-      budget: 0,
-    },
-  ];
-
-  const playerExists = _.some(players, p => p === playerId);
-  const newPlayers = [
-    ...(playerExists ? players : [...players, playerId]),
-  ];
-
-  const newGameState = {
-    ...gameState,
-    roles: newRoles,
-    players: newPlayers,
-  };
-
-  store.setState(newGameState);
-};
-
-export const removePlayerFromRole = (store, playerId) => {
-  const gameState = store.state;
-  const { roles } = gameState;
-
-  const role = _.find(roles, r => Role.getPlayerId(r) === playerId);
-  if (!role) return;
-
-  const roleName = Role.getName(role);
-  log('gameStateChange', `Player ${playerId} removed from ${roleName}`);
-
-  const newGameState = {
-    ...gameState,
-    roles: _.reject(roles, r => r === role),
-  };
-
-  store.setState(newGameState);
-};
 
 export const travelGroupArrival = (store, { gameState, travelGroup }) => {
   const destinationId = TravelGroup.getDestinationId(travelGroup);

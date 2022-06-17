@@ -5,11 +5,12 @@
   "engines": {
     "node": "16.0.0"
   },
-  "main": "entry.js",
   "dependencies": {
+    "@the-war-effort/common": "link:../common",
     "cross-env": "^5.0.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "lodash-es": "^4.17.21",
     "socket.io": "^2.3.0",
     "yarn": "^1.22.4"
   },
@@ -17,9 +18,10 @@
   "scripts": {
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" *.js",
     "test": "echo \"Error: no test specified\"",
-    "dev": "node entry.js",
-    "start": "node entry.js"
+    "dev": "node index.js",
+    "start": "node index.js"
   },
+  "type": "module",
   "author": "Patrick Tisdel",
   "license": "UNLICENSED"
 }

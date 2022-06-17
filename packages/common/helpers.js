@@ -1,4 +1,4 @@
-import * as featureFlags from './feature-flags';
+import * as featureFlags from './feature-flags.js';
 
 const { LOGGING } = featureFlags;
 

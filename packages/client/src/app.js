@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import common from '@the-war-effort/common';
 import { sendMessage } from '@/api';
 import components from '@/components';
-import { useStore } from '@/hooks';
+import { useStore } from '@/store';
 import views from '@/views';
 
 const { ALL_ROLES } = common.constants;
-const { log } = common.helpers;
 const { Layout, RoleHeader } = components;
 
-const viewsByRole = {
+const roleViews = {
   [ALL_ROLES.AIR_SUPPORT]: <views.AirSupportView/>,
   [ALL_ROLES.COMMANDER]: <views.CommanderView/>,
   [ALL_ROLES.GROUND_FORCES]: <views.GroundForcesView/>,
@@ -21,18 +20,20 @@ const viewsByRole = {
 };
 
 export const App = () => {
-  const { gameState, playerId, playerRole } = useStore();
+  const { playerRole } = useStore();
 
-  const handleResign = playerId => sendMessage('player-resigned', playerId);
+  const handleResign = () => sendMessage('player-resigned');
 
-  useEffect(() => {
-    log('gameStateChange', 'Game State:', gameState);
-  }, [gameState]);
+  if (!playerRole) return (
+    <Layout>
+      <views.JoinRoomView/>
+    </Layout>
+  );
 
   return (
     <Layout>
-      <RoleHeader title = { playerRole || 'Please select your role.' } onResign={() => handleResign(playerId)} />
-      { viewsByRole?.[playerRole] || <views.AudienceView/> }
+      <RoleHeader title = { playerRole || 'Please select your role.' } onResign={ handleResign } />
+      { roleViews?.[playerRole] || <views.AudienceView/> }
     </Layout>
   );
 };

@@ -84,6 +84,7 @@ export const scenario = {
     }),
   ],
   roles: [],
+  room: null,
   trainingGroups: [],
   units: [
     ...Unit.create(2, ALL_UNITS.SQUAD, {

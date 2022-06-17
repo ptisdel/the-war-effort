@@ -1,7 +1,7 @@
 import React from 'react';
 import common from '@the-war-effort/common';
 import * as api from '../../api';
-import { useStore } from '@/hooks';
+import { useStore } from '@/store';
 import * as Styles from './styles';
 
 const { models } = common;
