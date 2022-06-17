@@ -9,6 +9,7 @@ const srcIndex = path.join(__dirname, '../src/index.html');
 
 module.exports = {
   devtool: 'inline-source-map',
+  mode: 'production',
   module: {
     rules: [
       {
@@ -57,11 +58,11 @@ module.exports = {
   ],
   devServer: {
     compress: true,
-    contentBase: srcDir,
     historyApiFallback: true,
     hot: true,
     open: true,
     port: 8002,
+    static: srcDir,
   },
   resolve: {
     alias: {

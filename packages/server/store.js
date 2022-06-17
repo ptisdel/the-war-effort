@@ -92,14 +92,12 @@ export const addClientToRoom = ({ socket, roomCode }) => {
   const clientId = socket.id;
   console.log(`${clientId} joining room `, roomCode);
   socket.join(roomCode);
-console.log('joined');
+
   const oldClients = _.get(store.rooms[roomCode], 'clients');
-console.log('oldClients');
   store.rooms[roomCode].clients = {
     ...oldClients,
     [clientId]: ALL_ROLES.AUDIENCE,
   };
-  console.log('set clients');
 
   io.to(roomCode).emit('room-updated', _.get(store.rooms, roomCode));
 };
