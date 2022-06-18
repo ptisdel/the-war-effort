@@ -32,8 +32,8 @@
     "cross-env": "^7.0.2",
     "css-loader": "^3.2.0",
     "dotenv-webpack": "^1.7.0",
-    "eslint": "^6.7.1",
-    "eslint-config-airbnb": "^18.0.1",
+    "eslint": "8.18.0",
+    "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-flowtype": "^4.5.2",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -52,7 +52,7 @@
     "extends": "./configs/.babelrc"
   },
   "scripts": {
-    "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" {components,state,views}/**/* ",
+    "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" src/**/* ",
     "test": "echo \"Error: no test specified\"",
     "dev": "webpack-dev-server --config ./configs/webpack.config.js",
     "build": "webpack --mode production --config ./configs/webpack.config.js"

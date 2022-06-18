@@ -7,6 +7,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb-base',
+    'plugin:cypress/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -21,16 +22,10 @@ module.exports = {
     sourceType: 'module',
   },
   parser: '@babel/eslint-parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
   plugins: [
     'react',
   ],
+  root: true,
   rules: {
     'linebreak-style': 0,
     'arrow-parens': 0,
@@ -41,5 +36,10 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-single'],
     'react/jsx-filename-extension': 'off',
     'react/react-in-jsx-scope': 'off',
+  },
+  settings: {
+    'import/parsers': {
+      '@babel/eslint-parser': ['.js'],
+    },
   },
 };

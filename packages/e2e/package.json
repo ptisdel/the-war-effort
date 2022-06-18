@@ -1,0 +1,17 @@
+{
+  "name": "@the-war-effort/e2e",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "14.17.0"
+  },
+  "scripts": {
+    "cypress": "cypress open"
+  },
+  "type": "module",
+  "author": "Patrick Tisdel",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "cypress": "10.1.0"
+  }
+}

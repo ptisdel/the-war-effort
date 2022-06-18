@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" *.js",
     "test": "echo \"Error: no test specified\""
   },
   "author": "Patrick Tisdel",
   "license": "UNLICENSED",
   "dependencies": {
-    "lodash-es": "^4.17.15",
-    "uuid": "^8.3.1"
+    "lodash-es": "4.17.15",
+    "uuid": "8.3.1"
   },
   "type": "module"
 }
