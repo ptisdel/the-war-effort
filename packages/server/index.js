@@ -10,14 +10,12 @@ const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
-  console.log('listening on *:80');
+  console.log(`listening on ${port}`);
 });
-console.log('>>>>>>>> env', process.env);
-export const io = new IoServer(server, {
+const io = new IoServer(server, {
   cors: {
     origin: [process.env.CLIENT_URL, process.env.HOST_URL],
-    methods: ["GET", "POST"]
+    methods: ['GET', 'POST'],
   },
 });
-io.on('connection', onboardSocket);
-
+io.on('connection', socket => onboardSocket({ io, socket }));
