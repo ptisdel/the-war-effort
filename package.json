@@ -2,12 +2,12 @@
   "name": "war-office",
   "version": "1.0.0",
   "description": "A warmaking cooperative party game for 4-8 players.",
-  "main": "index.js",
   "scripts": {
     "commit": "npx git-cz",
     "dev": "lerna run dev",
     "lint": "lerna run lint",
-    "test": "lerna run test --scope={@the-war-effort/server,@the-war-effort/client,@the-war-effort/host}"
+    "test": "lerna run test --scope={@the-war-effort/server,@the-war-effort/client,@the-war-effort/host}",
+    "cypress": "concurrently \"lerna run dev\"  \"wait-on http://localhost:8001 http://localhost:8002 && lerna run cypress:run --scope=@the-war-effort/e2e\""
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,12 @@
   "homepage": "https://github.com/ptisdel/war-office#readme",
   "devDependencies": {
     "@babel/eslint-parser": "7.18.2",
-    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-module-resolver": "4.1.0",
+    "concurrently": "7.2.2",
     "eslint-config-airbnb": "19.0.4",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-import": "2.26.0",
-    "lerna": "5.1.4"
-  },
-  "dependencies": {}
+    "lerna": "5.1.4",
+    "wait-on": "6.0.1"
+  }
 }

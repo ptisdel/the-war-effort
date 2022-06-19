@@ -1,5 +1,5 @@
-describe('empty spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
-  })
-})
+describe('Client works as expected', () => {
+  it('visits the client site', () => {
+    cy.visit(Cypress.env('CLIENT_URL'));
+  });
+});

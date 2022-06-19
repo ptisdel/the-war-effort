@@ -6,13 +6,16 @@
     "node": "16.15.1"
   },
   "scripts": {
-    "cypress": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "type": "module",
   "author": "Patrick Tisdel",
   "license": "UNLICENSED",
+  "dependencies": {
+    "cypress": "10.1.0"
+  },
   "devDependencies": {
-    "cypress": "10.1.0",
     "eslint-plugin-cypress": "2.12.1"
   }
 }
