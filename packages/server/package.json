@@ -3,17 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "14.17.0"
+    "node": "16.15.1"
   },
   "dependencies": {
     "@the-war-effort/common": "link:../common",
-    "cross-env": "^5.0.5",
-    "dotenv": "^16.0.1",
-    "esm": "^3.2.25",
-    "express": "^4.17.1",
-    "lodash-es": "^4.17.21",
-    "socket.io": "4.5.1",
-    "yarn": "^1.22.4"
+    "dotenv": "16.0.1",
+    "esm": "3.2.25",
+    "express": "4.17.1",
+    "lodash-es": "4.17.20",
+    "socket.io": "4.5.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -22,7 +20,7 @@
     "dev": "node index.js",
     "start": "node index.js"
   },
-  "type": "module",
   "author": "Patrick Tisdel",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "type": "module"
 }

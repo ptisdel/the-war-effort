@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "14.17.0"
+    "node": "16.15.1"
   },
   "scripts": {
     "cypress": "cypress open"
@@ -12,6 +12,7 @@
   "author": "Patrick Tisdel",
   "license": "UNLICENSED",
   "devDependencies": {
-    "cypress": "10.1.0"
+    "cypress": "10.1.0",
+    "eslint-plugin-cypress": "2.12.1"
   }
 }

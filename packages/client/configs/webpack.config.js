@@ -1,6 +1,5 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const buildDir = path.join(__dirname, '../build');
@@ -8,7 +7,7 @@ const srcDir = path.join(__dirname, 'src');
 const srcIndex = path.join(__dirname, '../src/index.html');
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   mode: 'production',
   module: {
     rules: [
@@ -17,6 +16,9 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            rootMode: 'upward',
+          },
         },
       },
       {

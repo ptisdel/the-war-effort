@@ -1,20 +1,14 @@
 {
-  "env": {
-    "development": {
-      "presets": [
-        "@babel/preset-env", 
-        "@babel/preset-react"
-      ],
-      "plugins": [
-        "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-proposal-optional-chaining",
-        [
-          "babel-plugin-styled-components",
-          {
-            "fileName": true
-          }
-        ]
-      ]
-    }
-  }
+  "presets": [
+    "@babel/preset-env", // enables ES2015+ transforms
+    "@babel/preset-react" // jsx transforms
+  ],
+  "plugins": [
+    // permits aliasing for all packages
+    ["module-resolver", {
+      "alias": {
+        "@": "./src"
+      }
+    }]
+  ]
 }

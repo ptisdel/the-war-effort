@@ -1,31 +1,13 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-  },
   extends: [
-    'plugin:react/recommended',
     'airbnb-base',
-    'plugin:cypress/recommended',
+    'plugin:import/recommended',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
   parserOptions: {
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: 'module',
+    ecmaVersion: 2020,
+    requireConfigFile: false,
+    parser: '@babel/eslint-parser',
   },
-  parser: '@babel/eslint-parser',
-  plugins: [
-    'react',
-  ],
-  root: true,
   rules: {
     'linebreak-style': 0,
     'arrow-parens': 0,
@@ -38,8 +20,13 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
   },
   settings: {
-    'import/parsers': {
-      '@babel/eslint-parser': ['.js'],
+    'import/resolver': {
+      alias: {
+        map: [
+          ['@', './src'],
+        ],
+        extensions: ['.ts', '.js', '.jsx'],
+      },
     },
   },
 };

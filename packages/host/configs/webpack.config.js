@@ -7,7 +7,7 @@ const srcDir = path.join(__dirname, '../src');
 const srcIndex = path.join(__dirname, '../src/index.html');
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   mode: 'production',
   module: {
     rules: [
@@ -16,6 +16,9 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            rootMode: 'upward',
+          },
         },
       },
       {

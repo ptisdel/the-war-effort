@@ -44,7 +44,8 @@ export const initialize = ({ io, socket }) => {
   // RESIGNS FROM ROLE
   socket.on('player-resigned', () => {
     try {
-      changeClientRole({ socket, roleName: ALL_ROLES.AUDIENCE });
+      const { room, roomCode } = changeClientRole({ socket, roleName: ALL_ROLES.AUDIENCE });
+      io.to(roomCode).emit('room-updated', room);
     } catch (err) {
       // TODO: handle error
       console.log('player resign error');
