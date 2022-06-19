@@ -2,9 +2,9 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const buildDir = path.join(__dirname, '../build');
-const srcDir = path.join(__dirname, 'src');
-const srcIndex = path.join(__dirname, '../src/index.html');
+const buildDir = path.join(__dirname, './build');
+const srcDir = path.join(__dirname, './src');
+const srcIndex = path.join(__dirname, './src/index.html');
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -35,35 +35,23 @@ module.exports = {
       },
     ],
   },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
-  },
   output: {
     path: buildDir,
-    filename: '[name].js',
-    chunkFilename: '[name].[chunkhash].js',
+    filename: 'bundle.js',
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: srcIndex,
     }),
-    // new BundleAnalyzerPlugin(),
-    new Dotenv(),
   ],
+  // settings used by webpack-dev-server
   devServer: {
     compress: true,
     historyApiFallback: true,
     hot: true,
     open: true,
-    port: 8002,
+    port: 8001,
     static: srcDir,
   },
   resolve: {

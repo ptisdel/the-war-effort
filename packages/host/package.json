@@ -36,8 +36,8 @@
   "scripts": {
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" src/**/* ",
     "test": "echo \"Error: no test specified\"",
-    "dev": "webpack-dev-server --config ./configs/webpack.config.js",
-    "build": "webpack --mode production --config ./configs/webpack.config.js"
+    "dev": "webpack-dev-server --config ./webpack.config.js",
+    "build": "webpack --mode production --config ./webpack.config.js"
   },
   "author": "Patrick Tisdel",
   "license": "UNLICENSED"
