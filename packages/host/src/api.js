@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
 
 // new socket connection to server
-// https://the-war-effort-server.herokuapp.com/?role=host
 const socket = io(`${process.env.SERVER_URL}?role=host`);
 
 // helpers

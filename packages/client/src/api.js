@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
 
 // new socket connection to server
-// https://the-war-effort-server.herokuapp.com/
 const socket = io(`${process.env.SERVER_URL}?role=client`);
 
 export const getPlayerId = () => socket.id;
