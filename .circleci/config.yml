@@ -37,4 +37,6 @@ workflows:
           type: approval
           requires: 
               - say-hello
-      - client-build-and-deploy
+      - client-build-and-deploy:
+          requires:
+              - hold
