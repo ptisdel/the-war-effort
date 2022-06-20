@@ -24,7 +24,7 @@ jobs:
     steps:
       - run:
           name: "Deploy Client via Netlify"
-          command: curl -X POST -d {} ${CLIENT_NETLIFY_BUILD_HOOK}
+          command: curl -X POST -d {} $CLIENT_NETLIFY_BUILD_HOOK
         
 
 # Invoke jobs via workflows
