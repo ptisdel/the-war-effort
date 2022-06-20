@@ -1,10 +1,13 @@
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 const buildDir = path.join(__dirname, './build');
 const srcDir = path.join(__dirname, './src');
 const srcIndex = path.join(__dirname, './src/index.html');
+
+const dotEnvFile = dotenv.config().parsed;
 
 module.exports = (env, argv) => {
   const shouldOpenAutomatically = (env.open === 'true');
@@ -77,11 +80,17 @@ module.exports = (env, argv) => {
       chunkFilename: '[name].[chunkhash].js',
     },
     plugins: [
+      // pull environment variables either from pipeline's env variables or from .env file
+      new webpack.DefinePlugin({
+        'process.env': {
+          SERVER_URL: JSON.stringify(
+            dotEnvFile.SERVER_URL || process.env.SERVER_URL,
+          ),
+        },
+      }),
       new HtmlWebpackPlugin({
         template: srcIndex,
       }),
-      // new BundleAnalyzerPlugin(),
-      new Dotenv(),
     ],
     resolve: {
       alias: {

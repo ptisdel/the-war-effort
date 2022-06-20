@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@the-war-effort/common": "link:../common",
+    "dotenv": "16.0.1",
     "lodash-es": "4.17.20",
     "prop-types": "15.7.2",
     "react": "16.12.0",
@@ -22,7 +23,6 @@
     "babel-loader": "8.2.5",
     "cross-env": "5.0.5",
     "css-loader": "3.2.0",
-    "dotenv-webpack": "7.1.0",
     "eslint": "8.18.0",
     "eslint-plugin-react": "7.30.0",
     "html-webpack-plugin": "5.5.0",

@@ -1,5 +1,5 @@
 const path = require('path');
-const dotenv = require('dotenv-webpack');
+const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -7,7 +7,7 @@ const buildDir = path.join(__dirname, './build');
 const srcDir = path.join(__dirname, './src');
 const srcIndex = path.join(__dirname, './src/index.html');
 
-const myenv = dotenv.config().parsed;
+const dotEnvFile = dotenv.config().parsed;
 
 module.exports = (env, argv) => {
   const shouldOpenAutomatically = (env.open === 'true');
@@ -70,10 +70,19 @@ module.exports = (env, argv) => {
       filename: 'bundle.js',
     },
     plugins: [
+      // pull environment variables either from pipeline's env variables or from .env file
       new webpack.DefinePlugin({
-        GOOGLE_MAPS_API_KEY: myenv.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY,
-        MAPBOX_ACCESS_TOKEN: myenv.MAPBOX_ACCESS_TOKEN || process.env.MAPBOX_ACCESS_TOKEN,
-        SERVER_URL: myenv.SERVER_URL || process.env.SERVER_URL,
+        'process.env': {
+          GOOGLE_MAPS_API_KEY: JSON.stringify(
+            dotEnvFile.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY,
+          ),
+          MAPBOX_ACCESS_TOKEN: JSON.stringify(
+            dotEnvFile.MAPBOX_ACCESS_TOKEN || process.env.MAPBOX_ACCESS_TOKEN,
+          ),
+          SERVER_URL: JSON.stringify(
+            dotEnvFile.SERVER_URL || process.env.SERVER_URL,
+          ),
+        },
       }),
       new HtmlWebpackPlugin({
         template: srcIndex,
