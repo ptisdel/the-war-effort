@@ -24,8 +24,7 @@ jobs:
     steps:
       - run:
           name: "Deploy Client via Netlify"
-          command: curl -X POST \
-               --url "$CLIENT_NETLIFY_BUILD_HOOK"
+          command: curl -X POST $CLIENT_NETLIFY_BUILD_HOOK
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
