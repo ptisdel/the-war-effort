@@ -84,7 +84,7 @@ module.exports = (env, argv) => {
       new webpack.DefinePlugin({
         'process.env': {
           SERVER_URL: JSON.stringify(
-            dotEnvFile.SERVER_URL || process.env.SERVER_URL,
+            dotEnvFile?.SERVER_URL || process.env.SERVER_URL,
           ),
         },
       }),

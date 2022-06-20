@@ -74,13 +74,13 @@ module.exports = (env, argv) => {
       new webpack.DefinePlugin({
         'process.env': {
           GOOGLE_MAPS_API_KEY: JSON.stringify(
-            dotEnvFile.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY,
+            dotEnvFile?.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY,
           ),
           MAPBOX_ACCESS_TOKEN: JSON.stringify(
-            dotEnvFile.MAPBOX_ACCESS_TOKEN || process.env.MAPBOX_ACCESS_TOKEN,
+            dotEnvFile?.MAPBOX_ACCESS_TOKEN || process.env.MAPBOX_ACCESS_TOKEN,
           ),
           SERVER_URL: JSON.stringify(
-            dotEnvFile.SERVER_URL || process.env.SERVER_URL,
+            dotEnvFile?.SERVER_URL || process.env.SERVER_URL,
           ),
         },
       }),
