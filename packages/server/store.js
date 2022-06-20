@@ -6,6 +6,7 @@ const { ROOM_CODES, ALL_ROLES } = common.constants;
 /*   ROOM EXAMPLE
  *
  *   'Solitary Scorpion': {
+ *      code: 'Solitary Scorpion',
  *      hostId: '14124125-9853895-102874124',
  *      roles: [
  *        '89325403-018749135-9872535': 'Air Force Officer',
@@ -34,6 +35,7 @@ export const createRoom = hostSocket => {
   const roomCode = generateRoomCode();
   console.log('room created ', roomCode);
   const newRoom = {
+    code: roomCode,
     hostId: hostSocket.id,
     clients: {},
   };
@@ -48,11 +50,9 @@ export const createRoom = hostSocket => {
   return { room: newRoom, roomCode };
 };
 
-export const closeRoom = hostSocket => {
-  const roomCode = getRoomCodeFromSocket(hostSocket);
-
+export const closeRoom = roomCode => {
   // error
-  if (!roomCode) throw new Error('No room code found on host.');
+  if (!roomCode) throw new Error('No room code found.');
 
   const room = _.get(store.rooms, roomCode);
   if (!room) throw new Error('No room found to close.');
@@ -154,3 +154,5 @@ export function getRoomCodeFromSocket(socket) {
   // all sockets have a default private room containing just themselves
   return _.find(Array.from(socket.rooms), roomCode => roomCode !== socket.id);
 }
+
+export const getRoomCodesAvailable = () => Object.keys(store.rooms);

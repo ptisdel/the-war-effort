@@ -12,16 +12,15 @@ const {
 } = common.models;
 
 export const updateRoom = (store, room) => {
-  
   const gameState = store.state;
-  
+
   const newGameState = {
     ...gameState,
     room,
   };
 
   store.setState(newGameState);
-}
+};
 
 // TODO: move this to constants so server can enforce?
 const roleActionMap = {
@@ -45,9 +44,6 @@ export const roleAction = (store, { type, data }) => {
 export const triggerMechanic = (store, { action, parameters }) => {
   action(store, parameters);
 };
-
-
-
 
 export const travelGroupArrival = (store, { gameState, travelGroup }) => {
   const destinationId = TravelGroup.getDestinationId(travelGroup);

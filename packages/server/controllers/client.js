@@ -1,12 +1,21 @@
+import _ from 'lodash-es';
 import { ALL_ROLES } from '@the-war-effort/common/constants.js';
 import {
   addClientToRoom,
   changeClientRole,
   forwardRoleAction,
   removeClientFromRoom,
+  getRoomCodesAvailable,
 } from '../store.js';
 
 export const initialize = ({ io, socket }) => {
+  // when testing, tell client what rooms are available for connection
+  if (process.env.TEST_MODE) {
+    const availableRooms = getRoomCodesAvailable();
+    console.log('availableRooms', availableRooms);
+    socket.emit('test-room-available', _.first(availableRooms));
+  }
+
   // JOINS ROOM
   socket.on('room-code-submitted', submittedRoomCode => {
     try {

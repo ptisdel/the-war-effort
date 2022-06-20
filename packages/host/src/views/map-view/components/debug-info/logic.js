@@ -19,7 +19,7 @@ export const useDebugInfo = () => {
   // state info
   const { gameState } = useStore();
 
-  const roomName = GameState.getRoomName(gameState);
+  const roomCode = GameState.getRoomCode(gameState);
   const locations = GameState.getLocations(gameState);
   const players = GameState.getPlayers(gameState);
   const roles = GameState.getRoles(gameState);
@@ -56,7 +56,7 @@ export const useDebugInfo = () => {
       isOpen: isDebugInfoOpen,
       locations: locationsFormatted,
       players: playersFormatted,
-      roomName,
+      roomCode,
     },
     {
       onToggle: () => setIsDebugInfoOpen(!isDebugInfoOpen),

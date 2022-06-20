@@ -7,7 +7,8 @@
     "dev": "lerna run dev",
     "lint": "lerna run lint",
     "test": "lerna run test --scope={@the-war-effort/server,@the-war-effort/client,@the-war-effort/host}",
-    "cypress": "concurrently \"lerna run dev\"  \"wait-on http://localhost:8001 http://localhost:8002 && lerna run cypress:run --scope=@the-war-effort/e2e\""
+    "cypress:open": "concurrently \"lerna run dev:test\"  \"wait-on http://localhost:8001 http://localhost:8002 && lerna run cypress:open --scope=@the-war-effort/e2e\"",
+    "cypress:run": "concurrently \"lerna run dev:test\"  \"wait-on http://localhost:8001 http://localhost:8002 && lerna run cypress:run --scope=@the-war-effort/e2e\""
   },
   "repository": {
     "type": "git",

@@ -4,22 +4,20 @@ import { useDebugInfo } from './logic';
 import * as s from './styles';
 
 export const DebugInfo = () => {
-  const [
-    { isOpen, locations, players, roomName},
-    { onToggle },
-  ] = useDebugInfo();
+  const [data, handlers] = useDebugInfo();
 
   return (
     <s.Information>
-      <s.InformationHeader onClick = { onToggle }>Stats</s.InformationHeader>
-      <s.InformationContent isOpen = { isOpen }>
-        <span>{ `Room Name: ${roomName}` }</span>
+      { data.roomCode && <div data-test-id='room-code'>{data.roomCode}</div> }
+      <s.InformationHeader onClick = { handlers.onToggle }>Stats</s.InformationHeader>
+      <s.InformationContent isOpen = { data.isOpen }>
+        <span>{ `Operation: ${data.roomCode}` }</span>
         <s.PlayerList>
-          // TODO: use roles, not players
-          { _.map(players, (p, i) => <li key = {i}>{ p.rolename } : { p.budget }</li>) }
+          { /* TODO: use roles, not players */ }
+          { _.map(data.players, (p, i) => <li key = {i}>{ p.rolename } : { p.budget }</li>) }
         </s.PlayerList>
         <s.Locations>
-          { _.map(locations, (l, i) => renderLocation(l, i)) }
+          { _.map(data.locations, (l, i) => renderLocation(l, i)) }
         </s.Locations>
       </s.InformationContent>
     </s.Information>

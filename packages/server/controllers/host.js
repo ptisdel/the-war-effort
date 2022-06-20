@@ -10,11 +10,16 @@ export const initialize = ({ io, socket }) => {
 
   // DISCONNECTS
   socket.on('disconnect', () => {
+    // when testing, we do not want a room to close when the host disconnects
+    if (process.env.TEST_MODE) return;
+
     try {
-      closeRoom(socket);
+      console.log('closing');
+      closeRoom(roomCode);
       io.to(roomCode).emit('room-updated', null);
     } catch (err) {
       // TODO: handle error
+      console.log('error', err);
     }
   });
 

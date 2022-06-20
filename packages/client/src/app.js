@@ -23,14 +23,16 @@ export const App = () => {
   const { playerRole } = useStore();
 
   const handleResign = playerRole === ALL_ROLES.AUDIENCE
-      ? null
-      : () => sendMessage('player-resigned');
+    ? null
+    : () => sendMessage('player-resigned');
 
-  if (!playerRole) return (
+  if (!playerRole) {
+    return (
     <Layout>
       <views.JoinRoomView/>
     </Layout>
-  );
+    );
+  }
 
   return (
     <Layout>
