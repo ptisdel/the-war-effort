@@ -8,11 +8,21 @@ orbs:
 executors:
   base-executor:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:16.15.1-browsers
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  e2e:
+    executor: base-executor
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: yarn install
+      - run:
+          name: "Run e2e tests"
+          command: yarn e2e
   server-deploy:
     executor: base-executor
     steps:
@@ -39,12 +49,11 @@ jobs:
 workflows:
   deployment:
     jobs:
-      # - hold:
-      #     type: approval
-      #     requires: 
-      #         - e2e
-      - server-deploy
-      - client-build-and-deploy
+      - e2e
+      - server-deploy:
+          requires:
+            - e2e
+      - client-build-and-deploy:
           requires:
             - server-deploy
       - host-build-and-deploy:
