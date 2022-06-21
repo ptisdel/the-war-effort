@@ -16,6 +16,7 @@ module.exports = (env, argv) => {
 
   console.log('CLIENT SERVER_URL', process.env.SERVER_URL);
   console.log('CLIENT shouldOpenAutomatically', shouldOpenAutomatically);
+  console.log('CLIENT mode', argv.mode);
 
   return {
     // DEVELOPER MODE CONFIG
