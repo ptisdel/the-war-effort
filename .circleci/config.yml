@@ -22,7 +22,7 @@ jobs:
           command: yarn install
       - run:
           name: "test"
-          command: echo $TEST_SERVER_URL $TEST_HOST_URL $TEST_CLIENT_URL $TEST_GOOGLE_MAPS_API_KEY $TEST_MAPBOX_ACCESS_TOKEN $PORT
+          command: echo $TEST_SERVER_URL $TEST_HOST_URL $TEST_CLIENT_URL $TEST_GOOGLE_MAPS_API_KEY $TEST_MAPBOX_ACCESS_TOKEN
       - run:
           name: "Run e2e tests with required environment variables"
           command: yarn run cross-env SERVER_URL=$TEST_SERVER_URL HOST_URL=$TEST_HOST_URL CLIENT_URL=$TEST_CLIENT_URL GOOGLE_MAPS_API_KEY=$TEST_GOOGLE_MAPS_API_KEY MAPBOX_ACCESS_TOKEN=$TEST_MAPBOX_ACCESS_TOKEN PORT=$PORT yarn e2e
