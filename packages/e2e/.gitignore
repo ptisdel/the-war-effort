@@ -2,6 +2,3 @@
 
 # cypress logs and videos
 /cypress/videos
-
-# env variables
-cypress.env.json
