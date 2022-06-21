@@ -9,14 +9,15 @@ const srcIndex = path.join(__dirname, './src/index.html');
 
 const dotEnvFile = dotenv.config({ path: '../../.env' }).parsed;
 
-console.log('HOST SERVER_URL', process.env.SERVER_URL);
-console.log('HOST MAPBOX_ACCESS_TOKEN', process.env.MAPBOX_ACCESS_TOKEN);
-console.log('HOST GOOGLE_MAPS_API_KEY', process.env.GOOGLE_MAPS_API_KEY);
-
 module.exports = (env, argv) => {
   const shouldOpenAutomatically = (env.open === 'true');
   const isDevelopment = argv.mode === 'development';
   const isProduction = argv.mode === 'production';
+
+  console.log('HOST SERVER_URL', process.env.SERVER_URL);
+  console.log('HOST MAPBOX_ACCESS_TOKEN', process.env.MAPBOX_ACCESS_TOKEN);
+  console.log('HOST GOOGLE_MAPS_API_KEY', process.env.GOOGLE_MAPS_API_KEY);
+  console.log('HOST shouldOpenAutomatically', shouldOpenAutomatically);
 
   return {
     // DEVELOPER MODE CONFIG

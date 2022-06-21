@@ -14,6 +14,9 @@ module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
   const isProduction = argv.mode === 'production';
 
+  console.log('CLIENT SERVER_URL', process.env.SERVER_URL);
+  console.log('CLIENT shouldOpenAutomatically', shouldOpenAutomatically);
+
   return {
     // DEVELOPER MODE CONFIG
     ...(isDevelopment && {
