@@ -19,7 +19,7 @@
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" *.js",
     "test": "echo \"Error: no test specified\"",
     "dev": "node index.js",
-    "dev:test": "cross-env TEST_MODE=true node index.js ",
+    "dev:test": "cross-env TEST_MODE=true CLIENT_URL=http://localhost:8002 HOST_URL=http://localhost:8001 node index.js ",
     "start": "node index.js"
   },
   "author": "Patrick Tisdel",
