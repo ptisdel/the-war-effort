@@ -35,7 +35,7 @@
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" src/**/* ",
     "test": "echo \"Error: no test specified\"",
     "dev": "webpack-dev-server --mode development --env open=true --config ./webpack.config.js",
-    "dev:test": "webpack-dev-server --mode development --env open=false --config ./webpack.config.js",
+    "dev:test": "webpack-dev-server --mode development --env open=false --env SERVER_URL=http://localhost:8000 --config ./webpack.config.js",
     "build": "webpack --mode production --config ./webpack.config.js"
   },
   "author": "Patrick Tisdel",
