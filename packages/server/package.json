@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "@the-war-effort/common": "link:../common",
-    "cors": "^2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "16.0.1",
     "esm": "3.2.25",
@@ -19,7 +18,7 @@
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" *.js",
     "test": "echo \"Error: no test specified\"",
     "dev": "node index.js",
-    "dev:test": "cross-env TEST_MODE=true node index.js ",
+    "dev:test": "cross-env DEBUG=\"socket.io:*\" TEST_MODE=true node index.js ",
     "start": "node index.js"
   },
   "author": "Patrick Tisdel",
