@@ -7,7 +7,7 @@ const buildDir = path.join(__dirname, './build');
 const srcDir = path.join(__dirname, './src');
 const srcIndex = path.join(__dirname, './src/index.html');
 
-const dotEnvFile = dotenv.config().parsed;
+const dotEnvFile = dotenv.config({ path: '../../.env' }).parsed;
 
 module.exports = (env, argv) => {
   const shouldOpenAutomatically = (env.open === 'true');

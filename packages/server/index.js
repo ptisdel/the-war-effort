@@ -4,7 +4,7 @@ import http from 'http';
 import { Server as IoServer } from 'socket.io';
 import { onboardSocket } from './controllers/index.js';
 
-dotenv.config();
+dotenv.config({ path: '../../.env' });
 
 const app = express();
 const server = http.createServer(app);
