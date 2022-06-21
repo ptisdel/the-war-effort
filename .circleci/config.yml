@@ -21,14 +21,8 @@ jobs:
           name: "Install dependencies"
           command: yarn install
       - run:
-          name: "Update PATH and Define Environment Variable at Runtime"
-          command: |
-                    echo "export SERVER_URL=${TEST_SERVER_URL}" >> ${BASH_ENV}
-                    echo "export HOST_URL=${TEST_HOST_URL}" >> ${BASH_ENV}
-                    echo "export CLIENT_URL=${TEST_CLIENT_URL}" >> ${BASH_ENV}
-      - run:
-          name: "Run e2e tests"
-          command: yarn e2e
+          name: "Run e2e tests with required environment variables"
+          command: cross-env SERVER_URL=$TEST_SERVER_URL HOST_URL=$TEST_HOST_URL CLIENT_URL=$TEST_CLIENT_URL yarn e2e
   server-deploy:
     executor: base-executor
     steps:
