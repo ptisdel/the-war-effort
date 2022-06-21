@@ -44,7 +44,9 @@ workflows:
       #     requires: 
       #         - e2e
       - server-deploy
-      # - client-build-and-deploy
-      # - host-build-and-deploy:
-      #     requires:
-      #       - client-build-and-deploy
+      - client-build-and-deploy
+          requires:
+            - server-deploy
+      - host-build-and-deploy:
+          requires:
+            - client-build-and-deploy
