@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  heroku: circleci/heroku@1.2.6
+
 executors:
   base-executor:
     docker:
@@ -10,6 +13,14 @@ executors:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  server-deploy:
+    executor: base-executor
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git:
+          api-key: HEROKU_API_KEY
+          app-name: $HEROKU_APP_NAME
   client-build-and-deploy:
     executor: base-executor
     steps:
@@ -32,7 +43,8 @@ workflows:
       #     type: approval
       #     requires: 
       #         - e2e
-      - client-build-and-deploy
-      - host-build-and-deploy:
-          requires:
-            - client-build-and-deploy
+      - server-deploy
+      # - client-build-and-deploy
+      # - host-build-and-deploy:
+      #     requires:
+      #       - client-build-and-deploy
