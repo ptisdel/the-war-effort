@@ -3015,6 +3015,7 @@ __metadata:
   resolution: "@the-war-effort/server@workspace:packages/server"
   dependencies:
     "@the-war-effort/common": "link:../common"
+    cors: ^2.8.5
     cross-env: 7.0.3
     dotenv: 16.0.1
     esm: 3.2.25
@@ -5025,7 +5026,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cors@npm:~2.8.5":
+"cors@npm:^2.8.5, cors@npm:~2.8.5":
   version: 2.8.5
   resolution: "cors@npm:2.8.5"
   dependencies:
