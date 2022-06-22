@@ -36,7 +36,7 @@
   "scripts": {
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" src/**/* ",
     "dev": "webpack-dev-server --mode development --env open=true",
-    "e2e": "cross-env DEBUG=\"socket.io:*\" webpack-dev-server --mode development --env open=true",
+    "e2e": "cross-env DEBUG=\"socket.io:*\" webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
   "author": "Patrick Tisdel",

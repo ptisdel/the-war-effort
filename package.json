@@ -6,9 +6,9 @@
     "commit": "npx git-cz",
     "dev": "lerna run dev",
     "lint": "lerna run lint",
-    "e2e": "start-server-and-test e2e:serve \"http://localhost:8001|http://localhost:8002\" \"lerna run cypress:run\"",
+    "e2e": "start-server-and-test e2e:serve \"http://localhost:8001|http://localhost:8002\" \"start http://localhost:8001 && lerna run cypress:run\"",
     "e2e:serve": "lerna run e2e",
-    "e2e:interactive": "start-server-and-test dev:test \"http://localhost:8001|http://localhost:8002\" \"lerna run cypress:open\""
+    "e2e:interactive": "start-server-and-test dev:test \"http://localhost:8001|http://localhost:8002\" \"start http://localhost:8001 && lerna run cypress:open\""
   },
   "repository": {
     "type": "git",
