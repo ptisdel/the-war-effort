@@ -25,6 +25,13 @@ jobs:
       - run:
           name: "Run e2e tests with required environment variables"
           command: yarn run cross-env SERVER_URL=$TEST_SERVER_URL HOST_URL=$TEST_HOST_URL CLIENT_URL=$TEST_CLIENT_URL GOOGLE_MAPS_API_KEY=$TEST_GOOGLE_MAPS_API_KEY MAPBOX_ACCESS_TOKEN=$TEST_MAPBOX_ACCESS_TOKEN yarn e2e
+  # We only deploy tags, not branches
+  check-deployment-requirements:
+    filters: 
+      tags: 
+        only: /^v\d+\.\d+\.\d+$/
+      branches:
+        ignore: /.*/
   server-deploy:
     executor: base-executor
     steps:
@@ -52,9 +59,12 @@ workflows:
   deployment:
     jobs:
       - e2e
-      - server-deploy:
+      - check-deployment-requirements:
           requires:
             - e2e
+      - server-deploy:
+          requires:
+            - check-deployment-requirements
       - client-build-and-deploy:
           requires:
             - server-deploy
