@@ -32,6 +32,10 @@ jobs:
         only: /^v\d+\.\d+\.\d+$/
       branches:
         ignore: /.*/
+    steps:
+      -run:
+        name: "Report on requirements check"
+        command: echo "Tag detected: << pipeline.git.tag >>"
   server-deploy:
     executor: base-executor
     steps:
