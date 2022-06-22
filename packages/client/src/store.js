@@ -21,7 +21,7 @@ export function StoreProvider({ children }) {
   console.log('playerRole', playerRole);
 
   const onGameStateChanged = newGameState => {
-    console.log('gameStateChange', 'Game State:', newGameState);
+    // console.log('gameStateChange', 'Game State:', newGameState);
     setGameState(newGameState);
   };
 
