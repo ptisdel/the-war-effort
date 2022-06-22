@@ -21,9 +21,6 @@ jobs:
           name: "Install dependencies"
           command: yarn install
       - run:
-          name: "demo"
-          command: google-chrome –headless –disable-gpu http://localhost:8001
-      - run:
           name: "Run e2e tests with required environment variables"
           command: yarn run cross-env SERVER_URL=$TEST_SERVER_URL HOST_URL=$TEST_HOST_URL CLIENT_URL=$TEST_CLIENT_URL GOOGLE_MAPS_API_KEY=$TEST_GOOGLE_MAPS_API_KEY MAPBOX_ACCESS_TOKEN=$TEST_MAPBOX_ACCESS_TOKEN yarn e2e
   server-deploy:
