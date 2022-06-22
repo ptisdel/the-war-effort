@@ -27,6 +27,7 @@ jobs:
           command: yarn run cross-env SERVER_URL=$TEST_SERVER_URL HOST_URL=$TEST_HOST_URL CLIENT_URL=$TEST_CLIENT_URL GOOGLE_MAPS_API_KEY=$TEST_GOOGLE_MAPS_API_KEY MAPBOX_ACCESS_TOKEN=$TEST_MAPBOX_ACCESS_TOKEN yarn e2e
   # We only deploy tags, not branches
   check-deployment-requirements:
+    executor: base-executor
     filters: 
       tags: 
         only: /^v\d+\.\d+\.\d+$/
@@ -35,7 +36,7 @@ jobs:
     steps:
       -run:
         name: "Report on requirements check"
-        command: echo "Tag detected: << pipeline.git.tag >>"
+        command: echo "Tag detected:" << pipeline.git.tag >>
   server-deploy:
     executor: base-executor
     steps:
