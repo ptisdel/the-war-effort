@@ -38,12 +38,13 @@ jobs:
           command: yarn create-tag
 
 
-  check-deployment-requirements:
+  log-tag-to-deploy:
     executor: base-executor
     steps:
       - run:
           name: "Report on requirements check"
-          command: echo "Tag detected:" << pipeline.git.tag >>
+          command: echo "Tag detected:" << pipeline.git.tag >>, "Commit" << pipeline.git.revision >>
+          # TODO: choose deployment tool that lets you build a certain commit, not just a branch
   
   server-deploy:
     executor: base-executor
@@ -73,6 +74,7 @@ jobs:
 workflows:
   test-and-request-new-tag:
     jobs:
+      # We only test branch updates, not tags
       - e2e:
           filters: 
               tags: 
@@ -90,20 +92,12 @@ workflows:
   deploy-tag:
     jobs:
       # We only deploy tags, not branches
-      - check-deployment-requirements:
+      - log-tag-to-deploy:
           filters: 
             tags: 
               only: /^v\d+\.\d+\.\d+$/
             branches:
               ignore: /.*/
-      - e2e:
-          filters: 
-            tags: 
-              only: /^v\d+\.\d+\.\d+$/
-            branches:
-              ignore: /.*/
-          requires:
-            - check-deployment-requirements
       - server-deploy:
           filters: 
             tags: 
@@ -111,7 +105,7 @@ workflows:
             branches:
               ignore: /.*/
           requires:
-            - e2e
+            - log-tag-to-deploy
       - client-build-and-deploy:
           filters: 
             tags: 
