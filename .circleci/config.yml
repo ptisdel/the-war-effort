@@ -97,14 +97,34 @@ workflows:
             branches:
               ignore: /.*/
       - e2e:
+          filters: 
+            tags: 
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
           requires:
             - check-deployment-requirements
       - server-deploy:
+          filters: 
+            tags: 
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
           requires:
             - e2e
       - client-build-and-deploy:
+          filters: 
+            tags: 
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
           requires:
             - server-deploy
       - host-build-and-deploy:
+          filters: 
+            tags: 
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
           requires:
             - client-build-and-deploy
