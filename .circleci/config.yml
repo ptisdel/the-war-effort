@@ -73,7 +73,12 @@ jobs:
 workflows:
   test-and-request-new-tag:
     jobs:
-      - e2e
+      - e2e:
+          filters: 
+              tags: 
+                ignore: /.*/
+              branches:
+                only: master 
       - approve-a-release: 
           type: approval 
           requires:
