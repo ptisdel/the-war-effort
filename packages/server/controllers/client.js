@@ -28,6 +28,18 @@ export const initialize = ({ io, socket }) => {
     }
   });
 
+  // LEAVES ROOM
+  socket.on('left-room', () => {
+    try {
+      const { room, roomCode } = removeClientFromRoom({ socket });
+      socket.emit('room-updated', null);
+      io.to(roomCode).emit('room-updated', room);
+    } catch (err) {
+      // TODO: handle error
+      console.log('remove client from room error');
+    }
+  });
+
   // DISCONNECTS
   socket.on('disconnect', () => {
     try {

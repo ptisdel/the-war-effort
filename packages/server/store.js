@@ -76,10 +76,13 @@ export const removeClientFromRoom = ({ socket }) => {
   // success
   console.log(`Removing ${clientId} from room `, roomCode);
   socket.leave(roomCode);
+  console.log('socket left room');
   const room = store.rooms[roomCode];
   const oldClients = room.clients;
   const newClients = _.omit(oldClients, clientId);
+  console.log('clients modified', oldClients, newClients);
   room.clients = newClients;
+  console.log('room modified', room);
   return { room, roomCode };
 };
 

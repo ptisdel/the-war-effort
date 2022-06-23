@@ -17,14 +17,16 @@ const roleViews = {
   [ALL_ROLES.PROCUREMENT]: <views.ProcurementView/>,
   [ALL_ROLES.PUBLIC_AFFAIRS]: <views.PublicAffairsView/>,
   [ALL_ROLES.TRAINING]: <views.TrainingView/>,
+  [ALL_ROLES.AUDIENCE]: <views.AudienceView/>,
 };
 
 export const App = () => {
   const { playerRole } = useStore();
 
-  const handleResign = playerRole === ALL_ROLES.AUDIENCE
-    ? null
-    : () => sendMessage('player-resigned');
+  const isAudienceMember = playerRole === ALL_ROLES.AUDIENCE;
+
+  const handleResign = () => sendMessage('player-resigned');
+  const handleLeaveRoom = () => sendMessage('left-room');
 
   if (!playerRole) {
     return (
@@ -36,8 +38,12 @@ export const App = () => {
 
   return (
     <Layout>
-      <RoleHeader title = { playerRole || 'Please select your role.' } onResign={ handleResign } />
-      { roleViews?.[playerRole] || <views.AudienceView/> }
+      {
+        isAudienceMember
+          ? <RoleHeader title = { 'Please select your role' } onResign={ handleLeaveRoom } />
+          : <RoleHeader title = { playerRole } onResign={ handleResign } />
+      }
+      { roleViews?.[playerRole] }
     </Layout>
   );
 };
