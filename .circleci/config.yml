@@ -25,13 +25,26 @@ jobs:
       - run:
           name: "Run e2e tests with required environment variables"
           command: yarn run cross-env SERVER_URL=$TEST_SERVER_URL HOST_URL=$TEST_HOST_URL CLIENT_URL=$TEST_CLIENT_URL GOOGLE_MAPS_API_KEY=$TEST_GOOGLE_MAPS_API_KEY MAPBOX_ACCESS_TOKEN=$TEST_MAPBOX_ACCESS_TOKEN yarn e2e
-  # We only deploy tags, not branches
+  
+  create-tag:
+    executor: base-executor
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: yarn install
+      - run:
+          name: "Create Tag"
+          command: yarn create-tag
+
+
   check-deployment-requirements:
     executor: base-executor
     steps:
       - run:
           name: "Report on requirements check"
           command: echo "Tag detected:" << pipeline.git.tag >>
+  
   server-deploy:
     executor: base-executor
     steps:
@@ -40,12 +53,14 @@ jobs:
       - heroku/deploy-via-git:
           api-key: HEROKU_API_KEY
           app-name: $HEROKU_APP_NAME
+
   client-build-and-deploy:
     executor: base-executor
     steps:
       - run:
           name: "Deploy Client via Netlify"
           command: curl -X POST $CLIENT_NETLIFY_BUILD_HOOK
+
   host-build-and-deploy:
     executor: base-executor
     steps:
@@ -56,20 +71,32 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  deployment:
+  test-and-request-new-tag:
     jobs:
       - e2e
+      - approve-a-release: 
+          type: approval 
+          requires:
+            - e2e
+      - create-tag:
+          requires:
+            - approve-a-release
+  
+  deploy-tag:
+    jobs:
+      # We only deploy tags, not branches
       - check-deployment-requirements:
           filters: 
             tags: 
               only: /^v\d+\.\d+\.\d+$/
             branches:
               ignore: /.*/
-          requires:
-            - e2e
-      - server-deploy:
+      - e2e:
           requires:
             - check-deployment-requirements
+      - server-deploy:
+          requires:
+            - e2e
       - client-build-and-deploy:
           requires:
             - server-deploy
