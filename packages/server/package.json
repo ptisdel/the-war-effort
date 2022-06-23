@@ -18,7 +18,7 @@
     "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" *.js",
     "test": "echo \"Error: no test specified\"",
     "dev": "node index.js",
-    "e2e": "cross-env DEBUG=\"socket.io:*\" TEST_MODE=true node index.js ",
+    "e2e": "cross-env TEST_MODE=true node index.js ",
     "start": "node index.js"
   },
   "author": "Patrick Tisdel",

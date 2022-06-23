@@ -6,8 +6,8 @@
     "commit": "npx git-cz",
     "dev": "lerna run dev",
     "lint": "lerna run lint",
-    "e2e": "start-server-and-test \"lerna run e2e\" \"http://localhost:8000|http://localhost:8001|http://localhost:8002\" \"lerna run cypress:run\"",
-    "e2e:interactive": "start-server-and-test dev \"http://localhost:8000|http://localhost:8001|http://localhost:8002\" \"yarn run open-cli http://localhost:8001 && lerna run cypress:open\"",
+    "e2e": "start-server-and-test \"lerna run e2e\" \"http://localhost:8001|http://localhost:8002\" \"lerna run cypress:run\"",
+    "e2e:interactive": "start-server-and-test dev \"http://localhost:8001|http://localhost:8002\" \"yarn run open-cli http://localhost:8001 && lerna run cypress:open\"",
     "create-tag": "semantic-release"
   },
   "repository": {
