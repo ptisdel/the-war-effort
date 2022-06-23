@@ -28,15 +28,10 @@ jobs:
   # We only deploy tags, not branches
   check-deployment-requirements:
     executor: base-executor
-    filters: 
-      tags: 
-        only: /^v\d+\.\d+\.\d+$/
-      branches:
-        ignore: /.*/
     steps:
-      -run:
-        name: "Report on requirements check"
-        command: echo "Tag detected:" << pipeline.git.tag >>
+      - run:
+          name: "Report on requirements check"
+          command: echo "Tag detected:" << pipeline.git.tag >>
   server-deploy:
     executor: base-executor
     steps:
@@ -65,6 +60,11 @@ workflows:
     jobs:
       - e2e
       - check-deployment-requirements:
+          filters: 
+            tags: 
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
           requires:
             - e2e
       - server-deploy:
