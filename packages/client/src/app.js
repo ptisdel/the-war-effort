@@ -40,7 +40,7 @@ export const App = () => {
     <Layout>
       {
         isAudienceMember
-          ? <RoleHeader title = { 'Please select your role' } onResign={ handleLeaveRoom } />
+          ? <RoleHeader title = { playerRole } onResign={ handleLeaveRoom } />
           : <RoleHeader title = { playerRole } onResign={ handleResign } />
       }
       { roleViews?.[playerRole] }
