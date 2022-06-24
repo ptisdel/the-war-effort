@@ -15,9 +15,6 @@ module.exports = {
     'no-console': 0,
     'no-use-before-define': ['error', { functions: false, classes: true }],
     quotes: ['error', 'single'],
-    'jsx-quotes': ['error', 'prefer-single'],
-    'react/jsx-filename-extension': 'off',
-    'react/react-in-jsx-scope': 'off',
   },
   settings: {
     'import/resolver': {

@@ -1,0 +1,17 @@
+{
+  "name": "@the-war-effort/feature-flags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "flagsmith": "3.1.2",
+    "flagsmith-nodejs": "2.0.2",
+    "lodash-es": "4.17.21",
+    "node-cache": "5.1.2",
+    "react": "16.12.0",
+    "uuid": "8.3.2"
+  },
+  "author": "Patrick Tisdel",
+  "license": "UNLICENSED",
+  "type": "module"
+}

@@ -4,6 +4,7 @@
         "packages/client",
         "packages/e2e",
         "packages/host",
+        "packages/feature-flags",
         "packages/server",
         "./"
     ]

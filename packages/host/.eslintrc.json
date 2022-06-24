@@ -1,5 +1,14 @@
 {
-    "extends": [
-        "plugin:react/recommended"
-    ]
+  "extends": [
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
+    "react/jsx-filename-extension": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0
+  }
 }

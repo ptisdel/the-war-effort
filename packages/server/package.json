@@ -6,7 +6,8 @@
     "node": "16.15.1"
   },
   "dependencies": {
-    "@the-war-effort/common": "link:../common",
+    "@the-war-effort/common": "*",
+    "@the-war-effort/feature-flags": "*",
     "cross-env": "7.0.3",
     "dotenv": "16.0.1",
     "esm": "3.2.25",

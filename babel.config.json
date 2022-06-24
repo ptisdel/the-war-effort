@@ -5,10 +5,13 @@
   ],
   "plugins": [
     // permits aliasing for all packages
-    ["module-resolver", {
-      "alias": {
-        "@": "./src"
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src"
+        }
       }
-    }]
+    ]
   ]
 }

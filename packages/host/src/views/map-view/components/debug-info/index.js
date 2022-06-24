@@ -1,14 +1,18 @@
 import _ from 'lodash-es';
 import React from 'react';
+import { useFeatureFlags } from '@the-war-effort/feature-flags/react';
 import { useDebugInfo } from './logic';
 import * as s from './styles';
 
 export const DebugInfo = () => {
   const [data, handlers] = useDebugInfo();
 
+  const { flags } = useFeatureFlags();
+  const showRoomCode = _.get(flags, 'host-room-code-visible');
+
   return (
     <s.Information>
-      { data.roomCode && <div data-test-id='room-code'>{data.roomCode}</div> }
+      { showRoomCode && data.roomCode && <div data-test-id='room-code'>{data.roomCode}</div> }
       <s.InformationHeader onClick = { handlers.onToggle }>Stats</s.InformationHeader>
       <s.InformationContent isOpen = { data.isOpen }>
         <span>{ `Operation: ${data.roomCode}` }</span>

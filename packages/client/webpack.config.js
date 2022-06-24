@@ -83,6 +83,9 @@ module.exports = (env, argv) => {
       // pull environment variables either from pipeline's env variables or from .env file
       new webpack.DefinePlugin({
         'process.env': {
+          FEATURE_FLAGS_API_KEY: JSON.stringify(
+            dotEnvFile?.FEATURE_FLAGS_API_KEY || process.env.FEATURE_FLAGS_API_KEY,
+          ),
           SERVER_URL: JSON.stringify(
             dotEnvFile?.SERVER_URL || process.env.SERVER_URL,
           ),

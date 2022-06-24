@@ -3105,7 +3105,8 @@ __metadata:
     "@babel/core": 7.18.5
     "@babel/preset-env": 7.18.2
     "@babel/preset-react": 7.17.12
-    "@the-war-effort/common": "link:../common"
+    "@the-war-effort/common": "*"
+    "@the-war-effort/feature-flags": "*"
     babel-loader: 8.2.5
     cross-env: 5.0.5
     css-loader: 3.2.0
@@ -3129,25 +3130,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@the-war-effort/common@link:../common::locator=%40the-war-effort%2Fclient%40workspace%3Apackages%2Fclient":
-  version: 0.0.0-use.local
-  resolution: "@the-war-effort/common@link:../common::locator=%40the-war-effort%2Fclient%40workspace%3Apackages%2Fclient"
-  languageName: node
-  linkType: soft
-
-"@the-war-effort/common@link:../common::locator=%40the-war-effort%2Fhost%40workspace%3Apackages%2Fhost":
-  version: 0.0.0-use.local
-  resolution: "@the-war-effort/common@link:../common::locator=%40the-war-effort%2Fhost%40workspace%3Apackages%2Fhost"
-  languageName: node
-  linkType: soft
-
-"@the-war-effort/common@link:../common::locator=%40the-war-effort%2Fserver%40workspace%3Apackages%2Fserver":
-  version: 0.0.0-use.local
-  resolution: "@the-war-effort/common@link:../common::locator=%40the-war-effort%2Fserver%40workspace%3Apackages%2Fserver"
-  languageName: node
-  linkType: soft
-
-"@the-war-effort/common@workspace:packages/common":
+"@the-war-effort/common@*, @the-war-effort/common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "@the-war-effort/common@workspace:packages/common"
   dependencies:
@@ -3165,6 +3148,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@the-war-effort/feature-flags@*, @the-war-effort/feature-flags@workspace:packages/feature-flags":
+  version: 0.0.0-use.local
+  resolution: "@the-war-effort/feature-flags@workspace:packages/feature-flags"
+  dependencies:
+    flagsmith: 3.1.2
+    flagsmith-nodejs: ^2.0.2
+    lodash-es: 4.17.21
+    node-cache: ^5.1.2
+    react: 16.12.0
+    uuid: 8.3.2
+  languageName: unknown
+  linkType: soft
+
 "@the-war-effort/host@workspace:packages/host":
   version: 0.0.0-use.local
   resolution: "@the-war-effort/host@workspace:packages/host"
@@ -3174,7 +3170,8 @@ __metadata:
     "@babel/preset-react": 7.17.12
     "@mapbox/mapbox-sdk": 0.9.0
     "@react-google-maps/api": 1.8.3
-    "@the-war-effort/common": "link:../common"
+    "@the-war-effort/common": "*"
+    "@the-war-effort/feature-flags": "*"
     babel-loader: 8.2.5
     cross-env: 7.0.2
     css-loader: 3.2.0
@@ -3204,7 +3201,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@the-war-effort/server@workspace:packages/server"
   dependencies:
-    "@the-war-effort/common": "link:../common"
+    "@the-war-effort/common": "*"
+    "@the-war-effort/feature-flags": "*"
     cross-env: 7.0.3
     dotenv: 16.0.1
     esm: 3.2.25
@@ -4307,6 +4305,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"big-integer@npm:^1.6.51":
+  version: 1.6.51
+  resolution: "big-integer@npm:1.6.51"
+  checksum: 3d444173d1b2e20747e2c175568bedeebd8315b0637ea95d75fd27830d3b8e8ba36c6af40374f36bdaea7b5de376dcada1b07587cb2a79a928fccdb6e6e3c518
+  languageName: node
+  linkType: hard
+
 "big.js@npm:^5.2.2":
   version: 5.2.2
   resolution: "big.js@npm:5.2.2"
@@ -4722,6 +4727,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"charenc@npm:0.0.2":
+  version: 0.0.2
+  resolution: "charenc@npm:0.0.2"
+  checksum: 81dcadbe57e861d527faf6dd3855dc857395a1c4d6781f4847288ab23cffb7b3ee80d57c15bba7252ffe3e5e8019db767757ee7975663ad2ca0939bb8fcaf2e5
+  languageName: node
+  linkType: hard
+
 "check-more-types@npm:2.24.0, check-more-types@npm:^2.24.0":
   version: 2.24.0
   resolution: "check-more-types@npm:2.24.0"
@@ -4885,6 +4897,13 @@ __metadata:
   dependencies:
     mimic-response: ^1.0.0
   checksum: 2d0e61547fc66276e0903be9654ada422515f5a15741691352000d47e8c00c226061221074ce2c0064d12e975e84a8687cfd35d8b405750cb4e772f87b256eda
+  languageName: node
+  linkType: hard
+
+"clone@npm:2.x":
+  version: 2.1.2
+  resolution: "clone@npm:2.1.2"
+  checksum: aaf106e9bc025b21333e2f4c12da539b568db4925c0501a1bf4070836c9e848c892fa22c35548ce0d1132b08bbbfa17a00144fe58fccdab6fa900fec4250f67d
   languageName: node
   linkType: hard
 
@@ -5409,6 +5428,13 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 671cc7c7288c3a8406f3c69a3ae2fc85555c04169e9d611def9a675635472614f1c0ed0ef80955d5b6d4e724f6ced67f0ad1bb006c2ea643488fcfef994d7f52
+  languageName: node
+  linkType: hard
+
+"crypt@npm:0.0.2":
+  version: 0.0.2
+  resolution: "crypt@npm:0.0.2"
+  checksum: baf4c7bbe05df656ec230018af8cf7dbe8c14b36b98726939cef008d473f6fe7a4fad906cfea4062c93af516f1550a3f43ceb4d6615329612c6511378ed9fe34
   languageName: node
   linkType: hard
 
@@ -6930,6 +6956,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flagsmith-nodejs@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "flagsmith-nodejs@npm:2.0.2"
+  dependencies:
+    big-integer: ^1.6.51
+    md5: ^2.3.0
+    node-fetch: ^2.1.2
+    semver: ^7.3.7
+    uuid: ^8.3.2
+  checksum: 84a6a496fab9429e7ca8946a455e4ce4e35c57502af3166c76688fc3fc52e612fef48f593c628042c0b326507f935c89a5c1b864d70b14fda0554959c1fa7f02
+  languageName: node
+  linkType: hard
+
+"flagsmith@npm:3.1.2":
+  version: 3.1.2
+  resolution: "flagsmith@npm:3.1.2"
+  checksum: aefb9b92bfcf020392168b890433233ffa7d7d9f83158816d27869fff8a5b985a59d07bcca950c90e0b020fd9f9b7f506f2813141ffb5b438e4c07ea5445f2dc
+  languageName: node
+  linkType: hard
+
 "flat-cache@npm:^3.0.4":
   version: 3.0.4
   resolution: "flat-cache@npm:3.0.4"
@@ -8195,6 +8241,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-buffer@npm:~1.1.6":
+  version: 1.1.6
+  resolution: "is-buffer@npm:1.1.6"
+  checksum: 4a186d995d8bbf9153b4bd9ff9fd04ae75068fe695d29025d25e592d9488911eeece84eefbd8fa41b8ddcc0711058a71d4c466dcf6f1f6e1d83830052d8ca707
+  languageName: node
+  linkType: hard
+
 "is-callable@npm:^1.1.4, is-callable@npm:^1.2.4":
   version: 1.2.4
   resolution: "is-callable@npm:1.2.4"
@@ -9126,6 +9179,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash-es@npm:4.17.21":
+  version: 4.17.21
+  resolution: "lodash-es@npm:4.17.21"
+  checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
+  languageName: node
+  linkType: hard
+
 "lodash.capitalize@npm:^4.2.1":
   version: 4.2.1
   resolution: "lodash.capitalize@npm:4.2.1"
@@ -9466,6 +9526,17 @@ __metadata:
   bin:
     marked: bin/marked.js
   checksum: 33a3c43a20b47bddaf045a59bfc7c3d41cc321931cc663ed231ca3b5b3b195fb2ac2973e687c2afd65b79539c14619baa07d19793f70130160f0af80c06d9b3a
+  languageName: node
+  linkType: hard
+
+"md5@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "md5@npm:2.3.0"
+  dependencies:
+    charenc: 0.0.2
+    crypt: 0.0.2
+    is-buffer: ~1.1.6
+  checksum: a63cacf4018dc9dee08c36e6f924a64ced735b37826116c905717c41cebeb41a522f7a526ba6ad578f9c80f02cb365033ccd67fe186ffbcc1a1faeb75daa9b6e
   languageName: node
   linkType: hard
 
@@ -9936,6 +10007,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-cache@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "node-cache@npm:5.1.2"
+  dependencies:
+    clone: 2.x
+  checksum: b0bdd81a6fee4754fb984a05246b510bb35dc54721116d465899bf4229ee3287fdafb47da526900ee9924fb402ed5c7d8050049d37d8bf2d26dbafc23a2c3205
+  languageName: node
+  linkType: hard
+
 "node-emoji@npm:^1.11.0":
   version: 1.11.0
   resolution: "node-emoji@npm:1.11.0"
@@ -9945,7 +10025,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.7, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
+"node-fetch@npm:2.6.7, node-fetch@npm:^2.1.2, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
@@ -13869,7 +13949,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.3.2":
+"uuid@npm:8.3.2, uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
