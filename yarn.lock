@@ -3153,9 +3153,9 @@ __metadata:
   resolution: "@the-war-effort/feature-flags@workspace:packages/feature-flags"
   dependencies:
     flagsmith: 3.1.2
-    flagsmith-nodejs: ^2.0.2
+    flagsmith-nodejs: 2.0.2
     lodash-es: 4.17.21
-    node-cache: ^5.1.2
+    node-cache: 5.1.2
     react: 16.12.0
     uuid: 8.3.2
   languageName: unknown
@@ -6956,7 +6956,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flagsmith-nodejs@npm:^2.0.2":
+"flagsmith-nodejs@npm:2.0.2":
   version: 2.0.2
   resolution: "flagsmith-nodejs@npm:2.0.2"
   dependencies:
@@ -10007,7 +10007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-cache@npm:^5.1.2":
+"node-cache@npm:5.1.2":
   version: 5.1.2
   resolution: "node-cache@npm:5.1.2"
   dependencies:
