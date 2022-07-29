@@ -3627,7 +3627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash-es@npm:^4.17.6":
+"@types/lodash-es@npm:4.17.6":
   version: 4.17.6
   resolution: "@types/lodash-es@npm:4.17.6"
   dependencies:
@@ -3720,7 +3720,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.0.15":
+"@types/react@npm:18.0.15":
   version: 18.0.15
   resolution: "@types/react@npm:18.0.15"
   dependencies:
@@ -3814,7 +3814,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.31.0":
+"@typescript-eslint/eslint-plugin@npm:5.31.0":
   version: 5.31.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.31.0"
   dependencies:
@@ -3837,7 +3837,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.31.0":
+"@typescript-eslint/parser@npm:5.31.0":
   version: 5.31.0
   resolution: "@typescript-eslint/parser@npm:5.31.0"
   dependencies:
