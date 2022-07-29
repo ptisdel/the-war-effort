@@ -2,8 +2,8 @@ import _ from 'lodash-es';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
-import { createTravelGroup } from '../../api';
 import { useStore } from '@/store';
+import { createTravelGroup } from '../../api';
 import * as Styles from './styles';
 
 const { constants, helpers, models } = common;

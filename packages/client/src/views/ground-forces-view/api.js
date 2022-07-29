@@ -1,6 +1,6 @@
 import { sendMessage } from '@/api';
 
 export const moveUnitGroups = moveInfo => sendMessage('role-action', {
-    type: 'groundForces/moveUnitGroups',
-    data: moveInfo,
+  type: 'groundForces/moveUnitGroups',
+  data: moveInfo,
 });

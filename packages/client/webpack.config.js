@@ -61,6 +61,11 @@ module.exports = (env, argv) => {
             },
           ],
         },
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          loader: 'ts-loader',
+        },
       ],
     },
     optimization: {
@@ -99,6 +104,7 @@ module.exports = (env, argv) => {
       alias: {
         '@': path.resolve(__dirname, 'src'),
       },
+      extensions: ['.ts', '.tsx', '...'], // the default extensions, plus .ts/.tsx
     },
   };
 };

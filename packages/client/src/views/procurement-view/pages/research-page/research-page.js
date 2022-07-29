@@ -1,8 +1,8 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import { startResearchingPrototype } from '../../api';
 import { useStore } from '@/store';
+import { startResearchingPrototype } from '../../api';
 import * as Styles from './styles';
 
 const { models } = common;
@@ -12,8 +12,6 @@ const {
   Prototype,
   Resource,
 } = models;
-
-const { procurementActions } = api;
 
 const ResearchPage = () => {
   const { gameState } = useStore();

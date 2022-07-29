@@ -5,9 +5,7 @@ import { FundingPage, ParliamentPage, RolesPage } from './pages';
 
 const { Swiper } = shared;
 
-const CommanderView = () => {
-
-  return (
+const CommanderView = () => (
     <Styles.Root>
       <Swiper>
         <FundingPage/>
@@ -15,7 +13,6 @@ const CommanderView = () => {
         <RolesPage/>
       </Swiper>
     </Styles.Root>
-  );
-};
+);
 
 export default CommanderView;

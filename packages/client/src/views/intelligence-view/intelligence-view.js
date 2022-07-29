@@ -7,15 +7,12 @@ const { Swiper } = shared;
 
 const { AnalyticsPage } = pages;
 
-const IntelligenceView = () => {
-
-  return (
+const IntelligenceView = () => (
     <Styles.Root>
       <Swiper>
         <AnalyticsPage/>
       </Swiper>
     </Styles.Root>
-  );
-};
+);
 
 export default IntelligenceView;

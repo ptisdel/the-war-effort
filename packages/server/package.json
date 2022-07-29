@@ -16,7 +16,7 @@
     "socket.io": "4.5.1"
   },
   "scripts": {
-    "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" *.js",
+    "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" \"*.js\"",
     "test": "echo \"Error: no test specified\"",
     "dev": "node index.js",
     "e2e": "cross-env TEST_MODE=true node index.js ",

@@ -5,15 +5,12 @@ import { ArmyTrainingPage } from './pages';
 
 const { Swiper } = shared;
 
-const TrainingView = () => {
-
-  return (
+const TrainingView = () => (
     <Styles.Root>
       <Swiper>
         <ArmyTrainingPage/>
       </Swiper>
     </Styles.Root>
-  );
-};
+);
 
 export default TrainingView;

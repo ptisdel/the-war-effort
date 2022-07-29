@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react",
+        "module": "es6",
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "strict": true,
+        "target": "es2015",
+    },
+    "files": [],
+    "references": [
+        {
+            "path": "./packages/client/",
+        },
+    ]
+}

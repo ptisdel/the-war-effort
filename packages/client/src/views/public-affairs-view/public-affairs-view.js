@@ -5,16 +5,13 @@ import { CensorshipPage, PropagandaPage } from './pages';
 
 const { Swiper } = shared;
 
-const PublicAffairsView = () => {
-
-  return (
+const PublicAffairsView = () => (
     <Styles.Root>
       <Swiper>
         <PropagandaPage/>
         <CensorshipPage/>
       </Swiper>
     </Styles.Root>
-  );
-};
+);
 
 export default PublicAffairsView;

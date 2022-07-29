@@ -1,8 +1,8 @@
 import _ from 'lodash-es';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
-import { censorArticle } from '../../api';
 import { useStore } from '@/store';
+import { censorArticle } from '../../api';
 import * as Styles from './censorship-page.styles';
 
 const { models } = common;

@@ -9,15 +9,13 @@ const {
 } = pages;
 const { Swiper } = shared;
 
-const ProcurementView = () => {
-  return (
+const ProcurementView = () => (
     <Styles.Root>
       <Swiper>
         <ProductionPage/>
         <ResearchPage/>
       </Swiper>
     </Styles.Root>
-  );
-};
+);
 
 export default ProcurementView;

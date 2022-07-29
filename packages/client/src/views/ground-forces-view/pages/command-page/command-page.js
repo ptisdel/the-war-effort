@@ -1,13 +1,12 @@
 import _ from 'lodash-es';
 import React, { useState } from 'react';
 import common from '@the-war-effort/common';
-import { moveUnitGroups } from '../../api';
 import { useStore } from '@/store';
+import { moveUnitGroups } from '../../api';
 import * as Styles from './styles';
 
 const { models } = common;
 
-const { groundForcesActions } = api;
 const {
   GameState,
   Location,

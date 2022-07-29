@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import common from '@the-war-effort/common';
-import { resupplyAircraft } from '../../api';
 import { useStore } from '@/store';
+import { resupplyAircraft } from '../../api';
 
 const { constants, models } = common;
 
@@ -16,11 +16,14 @@ const {
 export const useOverviewPage = () => {
   const { gameState } = useStore();
 
-  const playerAirbases = _.reduce(GameState.getLocations(gameState),
+  const playerAirbases = _.reduce(
+    GameState.getLocations(gameState),
     (acc, l) => [
       ...acc,
       ...Location.getFactionFeaturesByType(l, ALL_FACTIONS.PLAYERS, ALL_FEATURE_TYPES.AIRPORT),
-    ], []);
+    ],
+    [],
+  );
 
   const airBases = _.map(playerAirbases, ab => {
     const id = Feature.getId(ab);

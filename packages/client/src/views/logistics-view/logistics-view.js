@@ -10,9 +10,7 @@ const {
 } = pages;
 const { Swiper } = shared;
 
-const LogisticsView = () => {
-
-  return (
+const LogisticsView = () => (
     <Styles.Root>
       <Swiper>
         <HomeResourcesPage/>
@@ -20,7 +18,6 @@ const LogisticsView = () => {
         <TravelGroupsPage/>
       </Swiper>
     </Styles.Root>
-  );
-};
+);
 
 export default LogisticsView;

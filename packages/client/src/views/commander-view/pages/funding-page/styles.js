@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Root = styled.div(() => ({
 }));
 
-
 export const FundingTotal = styled.div(() => ({
 
 }));
@@ -11,7 +10,6 @@ export const FundingTotal = styled.div(() => ({
 export const RoleList = styled.div(() => ({
 
 }));
-
 
 export const Role = styled.div(() => ({
   display: 'flex',

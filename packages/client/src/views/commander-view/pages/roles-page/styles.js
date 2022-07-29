@@ -31,7 +31,6 @@ export const RolePlayer = styled.div(({ unoccupied }) => ({
 export const RoleButtons = styled.div(() => ({
 }));
 
-
 export const RoleButton = styled.button(({ unoccupied }) => ({
   ...(unoccupied && {
     display: 'none',

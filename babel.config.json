@@ -1,7 +1,8 @@
 {
   "presets": [
     "@babel/preset-env", // enables ES2015+ transforms
-    "@babel/preset-react" // jsx transforms
+    "@babel/preset-react", // jsx transforms
+    "@babel/preset-typescript" // typescript transforms
   ],
   "plugins": [
     // permits aliasing for all packages

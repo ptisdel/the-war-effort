@@ -7,5 +7,6 @@
         "packages/feature-flags",
         "packages/server",
         "./"
-    ]
+    ],
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }

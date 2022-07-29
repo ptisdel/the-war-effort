@@ -1,10 +1,9 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
+import { useStore } from '@/store';
 import { requestRole } from './api';
 import components from './components';
-import shared from '../../components';
-import { useStore } from '@/store';
 import * as Styles from './styles';
 
 const { constants, models } = common;

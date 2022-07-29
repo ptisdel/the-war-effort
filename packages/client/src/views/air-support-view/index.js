@@ -4,15 +4,13 @@ import { OverviewPage } from './pages';
 
 const { Swiper } = shared;
 
-const AirSupport = () => {
-  return (
+const AirSupport = () => (
     <React.Fragment>
       <Swiper>
         <OverviewPage/>
         <div></div>
       </Swiper>
     </React.Fragment>
-  );
-};
+);
 
 export default AirSupport;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Root = styled.div(() => ({
 }));
 
-
 export const TravelGroupList = styled.div(() => ({
 
 }));
@@ -15,7 +14,6 @@ export const TravelGroup = styled.div(() => ({
 export const TravelGroupOrigin = styled.div(() => ({
 
 }));
-
 
 export const TravelGroupDestination = styled.div(() => ({
 

@@ -5,7 +5,6 @@
   "scripts": {
     "commit": "npx git-cz",
     "dev": "lerna run dev",
-    "lint": "lerna run lint",
     "e2e": "start-server-and-test \"lerna run e2e\" \"http://localhost:8001|http://localhost:8002\" \"lerna run cypress:run\"",
     "e2e:interactive": "start-server-and-test dev \"http://localhost:8001|http://localhost:8002\" \"yarn run open-cli http://localhost:8001 && lerna run cypress:open\"",
     "create-tag": "semantic-release"
@@ -26,6 +25,7 @@
   "homepage": "https://github.com/ptisdel/war-office#readme",
   "devDependencies": {
     "@babel/eslint-parser": "7.18.2",
+    "@babel/preset-typescript": "7.18.6",
     "babel-plugin-module-resolver": "4.1.0",
     "cross-env": "7.0.3",
     "eslint-config-airbnb": "19.0.4",

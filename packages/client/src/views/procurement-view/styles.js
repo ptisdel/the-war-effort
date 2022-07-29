@@ -5,7 +5,6 @@ export const Root = styled.div(() => ({
   width: '100%',
 }));
 
-
 export const FundingTotal = styled.div(() => ({
 
 }));
@@ -13,7 +12,6 @@ export const FundingTotal = styled.div(() => ({
 export const RoleList = styled.div(() => ({
 
 }));
-
 
 export const Role = styled.div(() => ({
   display: 'flex',

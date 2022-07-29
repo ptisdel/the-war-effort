@@ -1,8 +1,21 @@
 {
+    "env": {
+        "browser": true
+    },
     "extends": [
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "ignorePatterns": [
+        "build/**/*"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-var-requires": "off",
         "jsx-quotes": [
             "error",
             "prefer-single"
@@ -10,5 +23,10 @@
         "react/jsx-filename-extension": "off",
         "react/react-in-jsx-scope": "off",
         "react/prop-types": 0
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

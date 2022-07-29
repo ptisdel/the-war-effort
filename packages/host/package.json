@@ -37,7 +37,7 @@
     "webpack-dev-server": "4.9.2"
   },
   "scripts": {
-    "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" src/**/* ",
+    "lint": "eslint --ext .js --ignore-pattern \"**/*.test.js\" \"src/**/*\"",
     "dev": "webpack-dev-server --mode development --env open=true",
     "e2e": "start-server-and-test \"webpack-dev-server --mode development\" \"http://localhost:8001\" \"node e2e-serve-host.js\"",
     "build": "webpack --mode production"

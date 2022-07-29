@@ -4,7 +4,9 @@ import React, {
 } from 'react';
 import { getPlayerId, subscribe, unsubscribe } from '@/api';
 
-const StoreContext = createContext({});
+const StoreContext = createContext({
+  playerRole: null,
+});
 
 export const useStore = () => useContext(StoreContext);
 
@@ -21,7 +23,6 @@ export function StoreProvider({ children }) {
   console.log('playerRole', playerRole);
 
   const onGameStateChanged = newGameState => {
-    // console.log('gameStateChange', 'Game State:', newGameState);
     setGameState(newGameState);
   };
 
@@ -46,13 +47,14 @@ export function StoreProvider({ children }) {
   }, []);
 
   return (
-      <StoreContext.Provider value={{
-        gameState,
-        playerRole,
-        room,
-        testRoom,
-      }}>
-        {children}
-      </StoreContext.Provider>
+    <StoreContext.Provider value= {{
+      gameState,
+      playerRole,
+      room,
+      testRoom,
+    }
+}>
+  { children }
+  </StoreContext.Provider>
   );
 }

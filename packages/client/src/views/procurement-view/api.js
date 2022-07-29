@@ -3,6 +3,6 @@ import { sendMessage } from '@/api';
 const namespace = 'procurement';
 
 export const startResearchingPrototype = prototypeId => sendMessage('role-action', {
-    type: `${namespace}/startResearchingPrototype`,
-    data: prototypeId,
+  type: `${namespace}/startResearchingPrototype`,
+  data: prototypeId,
 });

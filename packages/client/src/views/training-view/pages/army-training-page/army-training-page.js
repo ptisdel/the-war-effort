@@ -1,13 +1,12 @@
 import _ from 'lodash-es';
 import React from 'react';
 import common from '@the-war-effort/common';
-import { createTrainingGroup } from '../../api';
 import { useStore } from '@/store';
+import { createTrainingGroup } from '../../api';
 import * as Styles from './army-training-page.styles';
 
 const { constants, models } = common;
 
-const { trainingActions } = api;
 const {
   ALL_ROLES, ALL_FACTIONS, ALL_FEATURE_TYPES, DEFAULT_LOCATIONS,
 } = constants;

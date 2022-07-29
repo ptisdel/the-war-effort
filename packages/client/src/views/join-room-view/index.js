@@ -11,19 +11,19 @@ const JoinRoomView = () => {
   const adjectivesSorted = ROOM_CODES.adjectives.sort();
   const nounsSorted = ROOM_CODES.nouns.sort();
 
-  const [adjective, setAdjective] = useState(_.first(adjectivesSorted));
-  const [noun, setNoun] = useState(_.first(nounsSorted));
+  const [selectedAdjective, setSelectedAdjective] = useState(_.first(adjectivesSorted));
+  const [selectedNoun, setSelectedNoun] = useState(_.first(nounsSorted));
 
   const onSubmit = () => {
-    sendMessage('room-code-submitted', `${adjective} ${noun}`);
+    sendMessage('room-code-submitted', `${selectedAdjective} ${selectedNoun}`);
   };
 
   const onSelectAdjective = e => {
-    setAdjective(e.target.value);
+    setSelectedAdjective(e.target.value);
   };
 
   const onSelectNoun = e => {
-    setNoun(e.target.value);
+    setSelectedNoun(e.target.value);
   };
 
   return (
@@ -34,12 +34,18 @@ const JoinRoomView = () => {
             <div style={{ display: 'flex' }}>
                 <span>Operation</span>
 
-                <select id='adjective' onChange={onSelectAdjective} value={adjective}>
-                    { _.map(adjectivesSorted, (adjective, i) => <option key={i} value={adjective}>{adjective}</option>) }
+                <select id='adjective' onChange={onSelectAdjective} value={selectedAdjective}>
+                    {
+                      _.map(adjectivesSorted, (adjective, i) =>
+                        <option key={i} value={adjective}>{adjective}</option>)
+                    }
                 </select>
 
-                <select id='noun' onChange={onSelectNoun} value={noun}>
-                    { _.map(nounsSorted, (noun, i) => <option key={i} value={noun}>{noun}</option>) }
+                <select id='noun' onChange={onSelectNoun} value={selectedNoun}>
+                    {
+                      _.map(nounsSorted, (noun, i) =>
+                        <option key={i} value={noun}>{noun}</option>)
+                    }
                 </select>
             </div>
 

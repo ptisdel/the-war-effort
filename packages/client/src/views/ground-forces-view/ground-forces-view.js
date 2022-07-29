@@ -8,16 +8,13 @@ const {
 } = pages;
 const { Swiper } = shared;
 
-const GroundForcesView = () => {
-
-  return (
+const GroundForcesView = () => (
     <Styles.Root>
       <Swiper>
         <CommandPage/>
         <div></div>
       </Swiper>
     </Styles.Root>
-  );
-};
+);
 
 export default GroundForcesView;
