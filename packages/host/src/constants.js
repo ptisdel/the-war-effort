@@ -1,1 +1,0 @@
-export const GAME_ENGINE_TIME_MULTIPLIER = 50;
