@@ -8,11 +8,11 @@ const { ROOM_CODES, ALL_ROLES } = common.constants;
  *   'Solitary Scorpion': {
  *      code: 'Solitary Scorpion',
  *      hostId: '14124125-9853895-102874124',
- *      roles: [
+ *      clients: {
  *        '89325403-018749135-9872535': 'Air Force Officer',
  *        '89325403-018749135-9872535': 'Audience',
  *        '89325403-018749135-9872535': 'Audience',
- *      ],
+ *      },
  *    }
  *
  */
