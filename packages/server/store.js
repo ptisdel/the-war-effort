@@ -33,7 +33,7 @@ export const createRoom = hostSocket => {
   };
 
   const roomCode = generateRoomCode();
-  console.log('room created ', roomCode);
+  console.log('room created: ', roomCode);
   const newRoom = {
     code: roomCode,
     hostId: hostSocket.id,

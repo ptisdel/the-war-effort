@@ -10,6 +10,7 @@ public class SocketIOScript : MonoBehaviour
 {
     public SocketIOCommunicator sioCom;
     public TextMeshProUGUI statusText;
+    [SerializeField] GameState gameState;
 
     struct RoomData {
         public string code;
@@ -27,11 +28,7 @@ public class SocketIOScript : MonoBehaviour
 
         sioCom.Instance.On("room-updated", (string payload) => {
             var room = JsonConvert.DeserializeObject<RoomData>(payload);
-            Debug.Log("ROOM INFO");        
-            Debug.Log("- Code: " + room.code);        
-            foreach (KeyValuePair<string, string> client in room.clients) {
-                Debug.Log("- Client: " + client.Key + ", " + client.Value);
-            }
+            gameState.UpdateRoomInfo(room.code, room.hostId, room.clients);
         });
 
         sioCom.Instance.On("disconnect", (string payload) => {
