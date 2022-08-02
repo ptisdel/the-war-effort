@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RegionsScript : MonoBehaviour
+public class RegionsController : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject region;
+    private RegionScript region;
 
-    string[] names = {
+    private readonly string[] _names = {
         "Poop",
         "in",
         "a",
@@ -17,7 +17,7 @@ public class RegionsScript : MonoBehaviour
 
     public void CreateRegion() {
         var newRegion = Instantiate(region, gameObject.transform);
-        string randomName = names[Random.Range(0, names.Length)];
+        var randomName = _names[Random.Range(0, _names.Length)];
         newRegion.name = randomName;
     }
 }

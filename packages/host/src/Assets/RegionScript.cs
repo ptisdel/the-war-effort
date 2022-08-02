@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class RegionScript : MonoBehaviour
 {
-    private TextMeshProUGUI _textMeshProGUI;
-    public string regionName = ""; 
-
-    private void Awake()
-    {
-        // _textMeshProGUI = gameObject.GetComponent<TextMeshProUGUI>();
-    }
-
+    [SerializeField]
+    private TextMeshPro textMeshPro;
+    
     // Start is called before the first frame update
     void Start()
     {
-        // _textMeshProGUI.text = regionName;
+        textMeshPro.text = gameObject.name;
     }
 }

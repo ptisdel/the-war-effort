@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Test
+  m_text: '[Region Name]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d652c2f7c4925f40864068697b5d2ea, type: 2}
   m_sharedMaterial: {fileID: -4349759094222158387, guid: 0d652c2f7c4925f40864068697b5d2ea, type: 2}
@@ -270,3 +270,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bd29d01b270564f8f014b133d4660c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 9016403614706222393}
+  regionName: 
