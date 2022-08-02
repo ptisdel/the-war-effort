@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class FrameCount : MonoBehaviour
 {
 
-    public TextMeshProUGUI TextComponent;
+    private TextMeshProUGUI _textMeshProGUI;
     int count;
+
+    private void Awake()
+    {
+        _textMeshProGUI = gameObject.GetComponent<TextMeshProUGUI>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,6 @@ public class FrameCount : MonoBehaviour
     void Update()
     {
         count++;
-        TextComponent.text = count.ToString();
+        _textMeshProGUI.text = count.ToString();
     }
 }
