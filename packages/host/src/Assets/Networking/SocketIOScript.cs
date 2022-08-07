@@ -2,39 +2,44 @@ using Firesplash.UnityAssets.SocketIO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Map;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SocketIOScript : MonoBehaviour
+namespace Networking
 {
-    public SocketIOCommunicator sioCom;
-    public TextMeshProUGUI statusText;
-    [SerializeField] GameState gameState;
-
-    struct RoomData {
-        public string code;
-        public string hostId;
-        public Dictionary<string, string> clients;
-    }
-
-    void Start()
+    public class SocketIOScript : MonoBehaviour
     {
-        statusText.text = "Connecting...";
+        public SocketIOCommunicator sioCom;
+        public TextMeshProUGUI statusText;
+        [SerializeField] GameState gameState;
 
-        sioCom.Instance.On("connect", (string data) => {
-            statusText.text = "Connected!";
-        });
+        struct RoomData {
+            public string code;
+            public string hostId;
+            public Dictionary<string, string> clients;
+        }
 
-        sioCom.Instance.On("room-updated", (string payload) => {
-            var room = JsonConvert.DeserializeObject<RoomData>(payload);
-            gameState.UpdateRoomInfo(room.code, room.hostId, room.clients);
-        });
+        void Start()
+        {
+            statusText.text = "Connecting...";
 
-        sioCom.Instance.On("disconnect", (string payload) => {
-            statusText.text = "Disconnected.";
-        });
-        
-        sioCom.Instance.Connect();
+            sioCom.Instance.On("connect", (string data) => {
+                statusText.text = "Connected!";
+            });
+
+            sioCom.Instance.On("room-updated", (string payload) => {
+                var room = JsonConvert.DeserializeObject<RoomData>(payload);
+                gameState.UpdateRoomInfo(room.code, room.hostId, room.clients);
+            });
+
+            sioCom.Instance.On("disconnect", (string payload) => {
+                statusText.text = "Disconnected.";
+            });
+            
+            sioCom.Instance.Connect();
+        }
     }
+    
 }
